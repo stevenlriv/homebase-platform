@@ -15,8 +15,7 @@
 
 ## MVP LAUNCH
  1) Submit Property:
-    - If user is not logged in ask if they are a realtor o landlord
-    - Also below include the option for them to login to an existing account
+    - all that relates to adding a property
 
  2) SEO:
     - social seo images banner of homebase; upload to external img server
@@ -30,10 +29,14 @@
  4) LISTING.php
     - Book Now (save booking details when user is trying to log-in, use cookies)
     - Book now is redirecting to contact us
+    - Date picker not working on mobile
 
  5) User Account Ready
     - FOR-LANDLORDS.php - Get started should redirect them to create an account
     - FOR-REALTORS.php - Get started should redirect them to create an account
+
+ 6) ACCOUNT.php 
+    - Allow user registration
 
 ## NOTES
     Find My Homebase
@@ -46,7 +49,8 @@
 
     SOFTWARE
         - Send grid
-        - Digital ocean Mysql & Spaces for uploads
+        - Digital ocean Mysql 
+        - Digital Ocean Spaces for uploads
         - Panda Docs
 
     OTHER

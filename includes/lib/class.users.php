@@ -8,71 +8,39 @@
 	 * @license    http://creativecommons.org/licenses/by-nc-nd/4.0/
 	 * @version    1.0.0
 	 * @since      File available since 1.0.0
+	 * 
+	 * @resource https://paragonie.com/blog/2016/05/solve-all-your-cryptography-problems-in-three-easy-steps-with-halite
 	 */
 
 	use \ParagonIE\Halite\{
 		KeyFactory,
 		Password
 	};
-	
-	function check_perm_user($page = '') {
-		if ( !is_login_user() ) {
-			return false;
-		}
-
-		if ( empty($page) ) {
-			$page = basename ($_SERVER['PHP_SELF']);
-		}
-
-		$role = is_login_user()['privilege'];
-
-		if ( $role == 2657 ) {
-			return true;
-		}
-		elseif ( $role == 3) {
-			$access = array ( 'project', 'contact', 'service', 'apps', 'image', 'translate' );
-		}
-		elseif ( $role == 1) {
-			$access = array ( 'project', 'contact', 'apps', 'image', 'translate' );
-		}
-		elseif ( $role == 2) {
-			$access = array ( 'project', 'apps', 'image', 'translate' );
-		}
-
-		foreach ( $access as $name ) {
-			if ( substr_count($page, $name) > 0) {
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 	function is_login_user() {
 		global $db;
-		//$crypt = new CryptoLib();
 
-		if( get_cookie ( 'VOS_USREM' ) && get_cookie ( 'VOS_USRS' ) ) {
-			$email = get_cookie ( 'VOS_USREM' );
+		if( get_cookie ( 'USM' ) && get_cookie ( 'USP' ) ) {
+			$email = get_cookie ( 'USM' );
 
-			$q = $db->prepare ( "SELECT * FROM vos_gen_users WHERE email = ?" );
+			$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ? LIMIT 1" );
 			$q->bind_param ( 's', $email );
 			$q->execute();
 			$result = $q->get_result();
 
 			while ( $o = $result->fetch_array(MYSQLI_ASSOC) ) {
-				if ( get_cookie ( 'VOS_USREM' ) == $o['email'] && get_cookie ( 'VOS_USRS' ) == $o['password'] ) {
+				if ( get_cookie ( 'USM' ) == $o['email'] && get_cookie ( 'USP' ) == $o['password'] ) {
 					return $o;
 				}
 			}
-			$q->close();
+
 		}
 		return false;
 	}
 
 	function logout_user() {
 		if ( is_login_user() ) {
-			if ( delete_cookie ( 'VOS_USREM' ) && delete_cookie ( 'VOS_USRS' ) ) {
+			if ( delete_cookie ( 'USM' ) && delete_cookie ( 'USP' ) ) {
 				return true;
 			}
 		}
@@ -91,18 +59,26 @@
 			$expire = time()+60*60*24*45;//45 days
 		}
 
-		$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ?" );
+		$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ? LIMIT 1" );
 		$q->bind_param ( 's', $email );
 		$q->execute();
 		$result = $q->get_result();
 
+		$key = KeyFactory::loadEncryptionKey('includes/lib/key-pkjhgfde/encryption59-pw.key');
+
 		while ( $o = $result->fetch_array ( MYSQLI_ASSOC ) ) {
-			//if ( $email == $o['email'] && $crypt->validateHash($o['password'], $password) && $o['status'] == 'PUBLISHED' ) {
-              if ( $email == $o['email'] && md5($password) === $o['password'] && $o['status'] == 'active' ) {
-				if ( new_cookie ( 'USRM', $o['email'], $expire ) && new_cookie ( 'USRP', $o['password'], $expire ) ) {
+			if ($email == $o['email'] && Password::verify($password, $o['password'], $key) && $o['status'] == 'active') {
+
+				/*
+				// Login successful, but first, check that our hash is still good (i.e. in case Halite updates):
+				if (Password::needsRehash($hash, $key, KeyFactory::INTERACTIVE)) {
+					$replaceStoredHash = Password::hash($password, $key);
+				}
+				*/
+				if ( new_cookie ( 'USM', $o['email'], $expire ) && new_cookie ( 'USP', $o['password'], $expire ) ) {
 					return true;
 				}
-			}
+			} 
 		}
 		$q->close();
 
@@ -113,14 +89,14 @@
 		global $db;
 
 		if ( $var == 'all' or $var == 'count' ) {
-			$q = $db->prepare ( "SELECT * FROM vos_gen_users $specific" );
+			$q = $db->prepare ( "SELECT * FROM xvls_users $specific" );
 		}
 		elseif ( is_email ($var) ) {
-			$q = $db->prepare ( "SELECT * FROM vos_gen_users WHERE email = ?" );
+			$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ? LIMIT 1" );
 			$q->bind_param ( 's', $var );
 		}
 		elseif( is_numeric ($var) ) {
-			$q = $db->prepare ( "SELECT * FROM vos_gen_users WHERE id_user = ?" );
+			$q = $db->prepare ( "SELECT * FROM xvls_users WHERE id_user = ? LIMIT 1" );
 			$q->bind_param ( 'i', $var );
 		}
 

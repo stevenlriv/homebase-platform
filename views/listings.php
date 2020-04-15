@@ -58,7 +58,10 @@
 
 			<!-- Show only on small devices -->
 			<div class="hidden-md hidden-lg">
-				<?php require('listings-booking-component.php'); ?>
+				<?php 
+					$date_picker = 'date-picker-mobile';
+					require('listings-booking-component.php'); 
+				?>
 			</div>
 
 			<div class="property-description">
@@ -228,7 +231,10 @@
 		<!-- Sidebar / Only show on desktop -->
 		<div class="col-lg-4 col-md-5 hidden-xs hidden-sm">
 			<div class="sidebar sticky right">
-					<?php require('listings-booking-component.php'); ?>
+				<?php 
+					$date_picker = 'date-picker-desktop';
+					require('listings-booking-component.php'); 
+				?>
 			</div>
 		</div>
 		<!-- Sidebar / End -->

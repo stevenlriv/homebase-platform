@@ -8,7 +8,7 @@
 if($request != '/find-a-homebase') {
 
 	// Space required if not index page
-	if($request != '/') {
+	if($request != '/' && $request != '/submit-property') {
 		echo '<div class="margin-top-55"></div>'; 
 	}
 ?>
@@ -93,7 +93,7 @@ if($request != '/find-a-homebase') {
 
 <!-- Maps -->
 <?php
-	if( substr_count(get_domain(), "localhost") ) {
+	if( get_host() == "localhost" ) {
 		//development enviroment
 		$google_key = get_setting(10);
 	}
@@ -102,7 +102,7 @@ if($request != '/find-a-homebase') {
 		$google_key = get_setting(11);
 	}
 ?>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=<?php echo $google_key; ?>&language=en"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo $google_key; ?>&language=en"></script>
 <script type="text/javascript" src="/views/assets/scripts/infobox.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/markerclusterer.js"></script>
 
@@ -146,9 +146,10 @@ if($request != '/find-a-homebase') {
 <script src="/views/assets/scripts/moment.min.js"></script>
 <script src="/views/assets/scripts/daterangepicker.js"></script>
 <script>
-// Calendar Init
+///////////////////////////////
+// Calendar Init DESKTOP
 $(function() {
-	$('#date-picker').daterangepicker({
+	$('#date-picker-desktop').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
 
@@ -192,30 +193,75 @@ $(function() {
 });
 
 // Calendar animation
-$('#date-picker').on('showCalendar.daterangepicker', function(ev, picker) {
+$('#date-picker-desktop').on('showCalendar.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-animated');
 });
-$('#date-picker').on('show.daterangepicker', function(ev, picker) {
+$('#date-picker-desktop').on('show.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-visible');
 	$('.daterangepicker').removeClass('calendar-hidden');
 });
-$('#date-picker').on('hide.daterangepicker', function(ev, picker) {
+$('#date-picker-desktop').on('hide.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').removeClass('calendar-visible');
 	$('.daterangepicker').addClass('calendar-hidden');
 });
-</script>
 
+//////////////////////////////////
+// Calendar Init MOBILE
+$(function() {
+	$('#date-picker-mobile').daterangepicker({
+		"opens": "center",
+		singleDatePicker: true,
 
-<!-- Replacing dropdown placeholder with selected time slot -->
-<script>
-$(".time-slot").each(function() {
-	var timeSlot = $(this);
-	$(this).find('input').on('change',function() {
-		var timeSlotVal = timeSlot.find('strong').text();
+		// Disabling Date Ranges
+		isInvalidDate: function(date) {
+		// Disabling Date Range
+		var disabled_start = moment('09/02/2015', 'MM/DD/YYYY');
 
-		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
-		$('.panel-dropdown').removeClass('active');
+		<?php
+			//If the $listing var is not empty, that means that we are on a listing and we will be limiting
+			//The dates based on that listing data
+			$date = date("m/d/Y");
+
+			if(!empty($listing)) {
+				if($listing['available'] > date("m/d/Y")) {
+					$date = $listing['available'];
+				}
+			}
+
+			echo "var disabled_end = moment('".$date."', 'MM/DD/YYYY')";
+		?>
+	
+		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+
+		// Disabling Single Day
+		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
+		//     return true; 
+		// }
+		},
+
+		<?php 
+			//If he is looking for a specific date and is not on a listing show it
+			//Or if the listing date is <= that session date show session date as the selected one
+			if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && $listing['available']<=$_SESSION['search-date']) { 
+				$date = $_SESSION['search-date'];
+			 } 
+		?>
+
+		"startDate": "<?php echo sanitize_xss($date); ?>",
 	});
+});
+
+// Calendar animation
+$('#date-picker-mobile').on('showCalendar.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-animated');
+});
+$('#date-picker-mobile').on('show.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-visible');
+	$('.daterangepicker').removeClass('calendar-hidden');
+});
+$('#date-picker-mobile').on('hide.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').removeClass('calendar-visible');
+	$('.daterangepicker').addClass('calendar-hidden');
 });
 </script>
 

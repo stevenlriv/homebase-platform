@@ -127,7 +127,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 			}
 		}
 		else {
-			$q = $db->prepare ( "SELECT * FROM xvls_listings WHERE id_listing = ?" );
+			$q = $db->prepare ( "SELECT * FROM xvls_listings WHERE id_listing = ? LIMIT 1" );
 			$q->bind_param ( 'i', $query );			
 		}
 

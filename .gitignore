@@ -1,5 +1,5 @@
 composer.phar
 .DS_STORE
 vendor/
-includes/configuration.php
 */.DS_STORE
+*.key

@@ -2,7 +2,7 @@
 #Options -Indexes
 
 # Restrict Access to Files
-<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql)$">
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|key)$">
 	order allow,deny
 	deny from all
 </FilesMatch>

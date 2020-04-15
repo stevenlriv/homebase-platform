@@ -28,7 +28,7 @@
 
 							<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
 							<div class="col-lg-12">
-								<input name="date" type="text" id="date-picker" placeholder="Date" readonly="readonly">
+								<input name="date" type="text" id="<?php echo $date_picker; ?>" placeholder="Date" readonly="readonly">
 							</div>
 
 							<!-- Panel Dropdown -->

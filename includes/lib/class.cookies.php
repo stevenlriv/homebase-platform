@@ -19,12 +19,14 @@
 	};
 
 	function get_cookie($name) {
-		$cookieStorage = new Cookie(COOK_KEY);
+		$key = KeyFactory::loadEncryptionKey('includes/lib/key-pkjhgfde/encryption56-cs.key');
+		$cookieStorage = new Cookie($key);
+
 		return $cookieStorage->fetch($name);
 	}
 
 	function delete_cookie($name) {
-		if( new_cookie($name, 'pokls') ) {
+		if( new_cookie($name, 'delt') ) {
 			return true;
 		}
 		return false;
@@ -43,8 +45,8 @@
 	 * @return: true or false
 	 */
 	function new_cookie($name, $value, $expire = '') {
-
-		$cookieStorage = new Cookie(COOK_KEY);
+		$key = KeyFactory::loadEncryptionKey('includes/lib/key-pkjhgfde/encryption56-cs.key');
+		$cookieStorage = new Cookie($key);
 
 		if ( empty($expire) ) {
 			$expire = time()+60*60*24;
@@ -53,7 +55,7 @@
 		$path = '/';
 		$domain = get_host();
 
-		if( substr_count(get_domain(), "localhost") ) {
+		if( get_host() == "localhost" ) {
 			$secure = false; //localhost mostly works whithout ssl
 		}
 		else {

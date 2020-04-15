@@ -68,7 +68,7 @@
             array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "available", "command" => "<=", "value" => $date));	
         }
 		else {
-			$_SESSION['search-date'] = ''; //to reset for fields if left empty
+			//$_SESSION['search-date'] = ''; //to reset for fields if left empty; do not reset
 		}
 
         //Bedroom

@@ -105,7 +105,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 			}
 		}
 		else {
-			$q = $db->prepare ( "SELECT * FROM xvls_cities WHERE id_city = ?" );
+			$q = $db->prepare ( "SELECT * FROM xvls_cities WHERE id_city = ? LIMIT 1" );
 			$q->bind_param ( 'i', $query );			
 		}
 

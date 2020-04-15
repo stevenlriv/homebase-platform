@@ -20,11 +20,11 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		global $db;
 
 		if ( $specific == true ) {
-			$q = $db->prepare ( "SELECT * FROM xvls_settings WHERE id_setting = ?" );
+			$q = $db->prepare ( "SELECT * FROM xvls_settings WHERE id_setting = ? LIMIT 1" );
 			$q->bind_param ( 'i', $var );
 		}
 		else {
-			$q = $db->prepare ( "SELECT value FROM xvls_settings WHERE id_setting = ?" );
+			$q = $db->prepare ( "SELECT value FROM xvls_settings WHERE id_setting = ? LIMIT 1" );
 			$q->bind_param ( 'i', $var );
 		}
 

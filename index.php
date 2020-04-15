@@ -38,7 +38,7 @@ switch ($request) {
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
-        //echo 'your account';
+        require_once __DIR__ . '/views/account.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/find-a-homebase' :
@@ -78,7 +78,7 @@ switch ($request) {
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
-        //echo 'Submit Property';
+        require_once __DIR__ . '/views/submit-property.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/privacy' :
