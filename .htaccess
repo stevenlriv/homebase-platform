@@ -1,0 +1,36 @@
+# Don't list directories
+#Options -Indexes
+
+# Restrict Access to Files
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql)$">
+	order allow,deny
+	deny from all
+</FilesMatch>
+
+# Error Documents
+ErrorDocument 404 /not-found
+  
+# Avoiding the user to know is a 403 error
+ErrorDocument 403 /not-found
+
+# Optimize Bandwith use; Dreamhost already compress pages
+#php_value output_handler ob_gzhandler
+
+# REWRITES
+RewriteEngine On
+
+# Remove WWW - SEO Purposes
+#RewriteCond %{HTTP_HOST} ^www.renthomebase.com$ [NC]
+#RewriteRule ^(.*)$ https://renthomebase.com/$1 [R=301,L]
+
+# Only Secure Connection
+#We do this after the "WWW" removal, so its only one redirrection
+#Due that the "WWW" removal, already establish a secure connection
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^(.*)$ https://renthomebase.com%{REQUEST_URI} [L,R=301,NE]
+
+# Routing Control
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php [QSA,L]
