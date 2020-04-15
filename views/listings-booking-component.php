@@ -1,8 +1,10 @@
 <?php 
-    if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
+	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
+	
+	function print_booking($listing, $jquery_id) {
     
-					if($listing['calendly_link'] != '') {
-				?>
+		if($listing['calendly_link'] != '') {
+?>
 				<!-- Tour Widget -->
 				<div class="widget">
 					<div id="booking-widget-anchor" class="boxed-widget booking-widget">
@@ -28,7 +30,7 @@
 
 							<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
 							<div class="col-lg-12">
-								<input name="date" type="text" id="<?php echo $date_picker; ?>" placeholder="Date" readonly="readonly">
+								<input name="date" type="text" id="<?php echo $jquery_id; ?>" placeholder="Date" readonly="readonly">
 							</div>
 
 							<!-- Panel Dropdown -->
@@ -66,3 +68,7 @@
 
 				</div>
 				<!-- Booking Widget / End -->
+
+<?php
+	}
+?>

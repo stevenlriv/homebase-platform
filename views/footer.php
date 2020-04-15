@@ -147,9 +147,9 @@ if($request != '/find-a-homebase') {
 <script src="/views/assets/scripts/daterangepicker.js"></script>
 <script>
 ///////////////////////////////
-// Calendar Init DESKTOP
+// Calendar Init
 $(function() {
-	$('#date-picker-desktop').daterangepicker({
+	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
 
@@ -193,14 +193,14 @@ $(function() {
 });
 
 // Calendar animation
-$('#date-picker-desktop').on('showCalendar.daterangepicker', function(ev, picker) {
+$('#date-picker').on('showCalendar.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-animated');
 });
-$('#date-picker-desktop').on('show.daterangepicker', function(ev, picker) {
+$('#date-picker').on('show.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-visible');
 	$('.daterangepicker').removeClass('calendar-hidden');
 });
-$('#date-picker-desktop').on('hide.daterangepicker', function(ev, picker) {
+$('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').removeClass('calendar-visible');
 	$('.daterangepicker').addClass('calendar-hidden');
 });

@@ -9,8 +9,6 @@
 	 * @version    1.0.0
 	 * @since      File available since 1.0.0
 	 * 
-	 * @resource https://paragonie.com/blog/2015/05/using-encryption-and-authentication-correctly
-	 * @resource https://paragonie.com/blog/2016/05/solve-all-your-cryptography-problems-in-three-easy-steps-with-halite
 	 */
 
 	use \ParagonIE\Halite\{
@@ -19,7 +17,7 @@
 	};
 
 	function get_cookie($name) {
-		$key = KeyFactory::loadEncryptionKey('includes/lib/key-pkjhgfde/encryption56-cs.key');
+		$key = KeyFactory::loadEncryptionKey(CKKEY);
 		$cookieStorage = new Cookie($key);
 
 		return $cookieStorage->fetch($name);
@@ -45,7 +43,7 @@
 	 * @return: true or false
 	 */
 	function new_cookie($name, $value, $expire = '') {
-		$key = KeyFactory::loadEncryptionKey('includes/lib/key-pkjhgfde/encryption56-cs.key');
+		$key = KeyFactory::loadEncryptionKey(CKKEY);
 		$cookieStorage = new Cookie($key);
 
 		if ( empty($expire) ) {

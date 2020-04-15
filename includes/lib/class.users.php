@@ -9,7 +9,6 @@
 	 * @version    1.0.0
 	 * @since      File available since 1.0.0
 	 * 
-	 * @resource https://paragonie.com/blog/2016/05/solve-all-your-cryptography-problems-in-three-easy-steps-with-halite
 	 */
 
 	use \ParagonIE\Halite\{
@@ -64,7 +63,7 @@
 		$q->execute();
 		$result = $q->get_result();
 
-		$key = KeyFactory::loadEncryptionKey('includes/lib/key-pkjhgfde/encryption59-pw.key');
+		$key = KeyFactory::loadEncryptionKey(PWKEY);
 
 		while ( $o = $result->fetch_array ( MYSQLI_ASSOC ) ) {
 			if ($email == $o['email'] && Password::verify($password, $o['password'], $key) && $o['status'] == 'active') {
