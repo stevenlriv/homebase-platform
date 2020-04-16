@@ -93,7 +93,7 @@ if($request != '/find-a-homebase') {
 
 <!-- Maps -->
 <?php
-	if( get_host() == "localhost" ) {
+	if( get_host() == "localhost" || substr_count(get_host(), '.host') > 0  ) {
 		//development enviroment
 		$google_key = get_setting(10);
 		$google_analytics = 'n/a';

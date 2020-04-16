@@ -1,12 +1,20 @@
 # Homebase PHP Site
 
 ## INSTALLATION
- 1) Export database details to server mysql database
- 2) Add database configuration to "includes/configuration.php"
- 3) Upload files to php server
- 4) Run composer install
- 5) Most likely you will need to generate new keys for security purposes, look in "includes/configuration.php" for more information
- 5) You're done!
+ 1) Git Clone To dir
+ 2) Install Composer (user terminal on cd to folder dir)
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+ 3) Install Dependencies (run)
+    - php composer.phar install
+ 4) Installation (run)
+    - On your browser go to your website and follow the steps
+    - If installation file has not been deleted, on your terminal run
+        - php -r "unlink('/includes/install.php');"
+ 5) Export database details to server mysql database
+ 6) You're done!
 
 ## WHEN LIVE
  - Move database to Managed Mysql digital ocean

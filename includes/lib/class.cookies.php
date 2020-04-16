@@ -53,12 +53,7 @@
 		$path = '/';
 		$domain = get_host();
 
-		if( get_host() == "localhost" ) {
-			$secure = false; //localhost mostly works whithout ssl
-		}
-		else {
-			$secure = true; //SSL Required for true
-		}
+		$secure = true; //SSL Required for true
 		
 		$http = true;
         

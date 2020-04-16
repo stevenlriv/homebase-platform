@@ -3,6 +3,10 @@
 define('SCRIP_LOAD', true);
 define('THEME_LOAD', true);
 
+if(is_file(__DIR__ . '/includes/install.php')) {
+    die( header('Location: /includes/install.php') );
+}
+
 require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
 
