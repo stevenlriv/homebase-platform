@@ -24,14 +24,36 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		return false;
 	}
 
-	function get_json ($string, $var = '') {
+	function get_json ($string, $position) {
 		$array = json_decode($string, true);
 
-		if($var === 'all') {
+		if($position === 'all') {
 			return $array;
 		}
 		
-		return $array[$var];
+		return $array[$position];
+	}
+
+
+	function update_views($uri) {
+		global $db;
+
+		//We only count +1 per 24h per listing 
+		if ( !empty($_SESSION['LTVWS']) && substr_count($_SESSION['LTVWS'], $uri) > 0 ) {
+			return;
+		}
+
+		$_SESSION['LTVWS'] = $_SESSION['LTVWS']."-".$uri;
+		
+		$q = $db->prepare ( "UPDATE xvls_listings SET views_count = views_count + 1 WHERE uri = ?" );
+		$q->bind_param ( 's', $uri );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
 	}
 
 	/***

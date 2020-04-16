@@ -52,7 +52,7 @@
 <!-- Fullwidth Section / End -->
 
 <!-- Flip banner -->
-<a href="/find-a-homebase" class="flip-banner parallax" data-background="/views/assets/images/intro-minimized.jpg" data-color="#274abb" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
+<a href="/find-a-homebase" class="flip-banner parallax" data-background="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/intro-minimized.jpg" data-color="#274abb" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
 	<div class="flip-banner-content">
 		<h2 class="flip-visible">We help people and homes find each other</h2>
 		<h2 class="flip-hidden">Browse Properties <i class="sl sl-icon-arrow-right"></i></h2>

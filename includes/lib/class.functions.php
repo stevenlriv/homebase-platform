@@ -19,7 +19,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
         return false;
 	}
 
-	function get_actual_url($array) {
+	function get_actual_url($array = '') {
 		$url = get_domain();
 	
 		//$request have an extra "/" at the start

@@ -18,7 +18,7 @@ if($request != '/find-a-homebase') {
     <div class="container">
 		<div class="row">
 			<div class="col-md-5 col-sm-6">
-				<img class="footer-logo" src="/views/assets/images/homebase-logo-2.png" alt="Homebase">
+				<img class="footer-logo" src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/homebase-logo-2.png" alt="Homebase">
 				<br><br>
 				<p>Homebase is a marketplace where you can find your next home. It's easy, just take a tour and sign your lease, all online and in a few minutes.</p>
 			</div>
@@ -96,15 +96,30 @@ if($request != '/find-a-homebase') {
 	if( get_host() == "localhost" ) {
 		//development enviroment
 		$google_key = get_setting(10);
+		$google_analytics = 'n/a';
 	}
 	else {
 		//production enviroment
 		$google_key = get_setting(11);
+		$google_analytics = get_setting(15);
 	}
 ?>
+
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo $google_key; ?>&language=en"></script>
 <script type="text/javascript" src="/views/assets/scripts/infobox.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/markerclusterer.js"></script>
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-<?php echo $google_analytics; ?>', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
 <script type="text/javascript">
 

@@ -1,6 +1,10 @@
 <?php
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
 
+	// Add +1 view to the listing table
+	// Used to sort popular recommended listings
+	update_views($listing['uri']);
+
 	require_once('listings-booking-component.php'); 
 
 	$city = get_cities('one', $listing['id_city']);	
@@ -152,7 +156,7 @@
 						0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
 						1 => array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_city", "command" => "=", "value" => $listing['id_city']),
 						2 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "!=", "value" => $listing['id_listing']),
-					), "ORDER BY id_listing DESC LIMIT 3");	
+					), "ORDER BY views_count DESC LIMIT 3");	
 
 					foreach ( $query_related_listings as $id => $value ) {
 				?>
@@ -162,6 +166,11 @@
 						<a href="/<?php echo $value['uri']; ?>" class="listing-img-container">
 
 							<div class="listing-badges">
+                            	<?php
+							    	if($value['featured']) {
+							        	echo '<span class="featured">Featured</span>';
+							    	}
+								?>
 								<span>For Rent</span>
 							</div>
 

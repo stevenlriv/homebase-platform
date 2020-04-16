@@ -35,13 +35,12 @@ function social_tags($array) {
 
     //Twitter Summary card images must be at least 120x120px
     if(!empty($array['image'])) {
-        // If its not a full url, we add the rest
-        if (!filter_var($array['image'], FILTER_VALIDATE_URL)) {
-            $array['image'] = get_domain().$array['image'];
-        }
-
         echo '<meta name="twitter:image" content="'.$array['image'].'">'."\n";
         echo '<meta property="og:image" content="'.$array['image'].'" />'."\n";
+    }
+    else {
+        echo '<meta name="twitter:image" content="https://renthomebase.nyc3.digitaloceanspaces.com/general/social/social-default.jpg">'."\n";
+        echo '<meta property="og:image" content="https://renthomebase.nyc3.digitaloceanspaces.com/general/social/social-default.jpg" />'."\n";
     }
 
     //Url 

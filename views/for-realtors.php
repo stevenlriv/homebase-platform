@@ -4,7 +4,7 @@
 
 <!-- Parallax -->
 <div class="parallax margin-bottom-70"
-	data-background="/views/assets/images/realtor-with-family.jpg"
+	data-background="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/realtor-with-family.jpg"
 	data-color="#36383e"
 	data-color-opacity="0.45"
 	data-img-width="800"
@@ -83,7 +83,7 @@
 				<div class="testimonial-box">
 					<div class="testimonial">It has been great partnering with Homebase. They communicate effectively, are passionate about what they do, and deeply understand the local market. Love working with them!</div>
 					<div class="testimonial-author">
-						<img src="/views/assets/images/livia-realtor.png" alt="Livia G. - Real Estate Broker">
+						<img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/livia-realtor.png" alt="Livia G. - Real Estate Broker">
 						<h4>Livia G. <span>Real Estate Broker</span></h4>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 				<div class="testimonial-box">
 					<div class="testimonial">Nice, patient, and open to compromise. They’ll do well with their unique culture and innovative approach!</div>
 					<div class="testimonial-author">
-						<img src="/views/assets/images/cynthia-realtor.jpeg" alt="Cynthia R. - Property Manager">
+						<img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/cynthia-realtor.jpeg" alt="Cynthia R. - Property Manager">
 						<h4>Cynthia R. <span>Property Manager</span></h4>
 					</div>
 				</div>

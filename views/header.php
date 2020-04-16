@@ -29,14 +29,14 @@
 
 <!-- FAVICON
 ================================================== -->
-<link rel="apple-touch-icon" sizes="180x180" href="/views/assets/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/views/assets/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/views/assets/favicon/favicon-16x16.png">
-<link rel="manifest" href="/views/assets/favicon/site.webmanifest">
-<link rel="mask-icon" href="/views/assets/favicon/safari-pinned-tab.svg" color="#274abb">
-<link rel="shortcut icon" href="/views/assets/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/favicon-16x16.png">
+<link rel="manifest" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/site.webmanifest">
+<link rel="mask-icon" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/safari-pinned-tab.svg" color="#274abb">
+<link rel="shortcut icon" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/favicon.ico">
 <meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="/views/assets/favicon/browserconfig.xml">
+<meta name="msapplication-config" content="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 
 </head>
@@ -90,7 +90,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="/"><img src="/views/assets/images/homebase-logo-2.png" alt="Homebase"></a>
+					<a href="/"><img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/homebase-logo-2.png" alt="Homebase"></a>
 				</div>
 
 

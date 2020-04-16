@@ -3,7 +3,7 @@
 ?>
 <!-- Banner
 ================================================== -->
-<div class="parallax" data-background="/views/assets/images/home-parallax-1.jpg" data-color="#36383e" data-color-opacity="0.45" data-img-width="2500" data-img-height="1600">
+<div class="parallax" data-background="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/home-parallax-1.jpg" data-color="#36383e" data-color-opacity="0.45" data-img-width="2500" data-img-height="1600">
 	<div class="parallax-content">
 
 		<div class="container">
@@ -105,11 +105,10 @@
 						<a href="/<?php echo $value['uri']; ?>" class="listing-img-container">
 
 							<div class="listing-badges">
-								<?php
-									//We randomly add the featured tab to "odd" "id_listing
-									if($value['id_listing'] % 2 != 0) {
-										echo '<span class="featured">Featured</span>';
-									}
+                            	<?php
+							    	if($value['featured']) {
+							        	echo '<span class="featured">Featured</span>';
+							    	}
 								?>
 								<span>For Rent</span>
 							</div>
@@ -287,7 +286,7 @@
 
 
 <!-- Flip banner -->
-<a href="/find-a-homebase" class="flip-banner parallax" data-background="/views/assets/images/intro-minimized.jpg" data-color="#274abb" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
+<a href="/find-a-homebase" class="flip-banner parallax" data-background="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/intro-minimized.jpg" data-color="#274abb" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
 	<div class="flip-banner-content">
 		<h2 class="flip-visible">We help people and homes find each other</h2>
 		<h2 class="flip-hidden">Browse Properties <i class="sl sl-icon-arrow-right"></i></h2>

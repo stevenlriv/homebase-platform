@@ -4,7 +4,7 @@
 
 <!-- Parallax -->
 <div class="parallax margin-bottom-70"
-	data-background="/views/assets/images/big-space-room.jpg"
+	data-background="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/big-space-room.jpg"
 	data-color="#36383e"
 	data-color-opacity="0.45"
 	data-img-width="800"

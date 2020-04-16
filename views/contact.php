@@ -3,14 +3,9 @@
 
 	// Featured use so people can contact us about the house they are interested in renting out, while
 	// We build the payment platform
-	if( !empty($_GET['property']) && is_numeric($_GET['property']) && !empty($_GET['date']) ) {
+	if( !empty($_GET['property']) && is_uri($_GET['property']) && !empty($_GET['date']) ) {
 
-		$contact_query = array(
-			0 => array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "=", "value" => $_GET['property']),
-			1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active")
-		);
-
-		$listing = get_listings('one', $contact_query);
+		$listing = is_uri($_GET['property']);
 
 		if($listing) {
 			$date = sanitize_xss($_GET['date']);

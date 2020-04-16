@@ -21,7 +21,7 @@
 
 					<form action="/contact" type="GET">
 
-					<input type="hidden" name="property" value="<?php echo $listing['id_listing']; ?>">
+					<input type="hidden" name="property" value="<?php echo $listing['uri']; ?>">
 
 					<!-- Book Now -->
 					<div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35 margin-bottom-35">

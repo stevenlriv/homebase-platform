@@ -5,6 +5,7 @@
  2) Add database configuration to "includes/configuration.php"
  3) Upload files to php server
  4) Run composer install
+ 5) Most likely you will need to generate new keys for security purposes, look in "includes/configuration.php" for more information
  5) You're done!
 
 ## WHEN LIVE
@@ -18,7 +19,6 @@
     - all that relates to adding a property
 
  2) SEO:
-    - social seo images banner of homebase; upload to external img server
     - canonical url for find-a-homebase.php searchs
 
  3) RENT.php

@@ -302,8 +302,7 @@
 
 						<div class="listing-badges">
                             <?php
-							    //We randomly add the featured tab to "odd" "id_listing
-							    if($value['id_listing'] % 2 != 0) {
+							    if($value['featured']) {
 							        echo '<span class="featured">Featured</span>';
 							    }
 							?>

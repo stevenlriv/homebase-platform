@@ -1263,7 +1263,7 @@ $(document).ready(function(){
                 $('#contact-message').slideDown();
                 $('#contactform img.loader').fadeOut('slow',function(){$(this).remove()});
                 // $('#contactform #submit').removeAttr('disabled');
-                if(data.match('success') != null) $('#contactform').slideUp('slow');
+                if(data.match('submitted') != null) { $('#contactform').slideUp('slow'); }
 
             }
         );

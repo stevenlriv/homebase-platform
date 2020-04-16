@@ -80,40 +80,32 @@ if(!empty($important)) {
 // End verification.
 ///////////////////////////////////////////////////////////////////////////
 
-
 if (!empty($error)) {
 	echo '<div class="notification error">' . $error . '</div>';
 	exit;
 }
 
- // Configuration option.
- // i.e. The standard $subject will appear as, "You've been contacted by John Doe."
+//////////////////////////////////////////////////////////////////////////
 
- // Example, $e_subject = $name . ' has contacted you via Your Website.';
- $e_subject = "$subject - $name ";
 
- // Configuration option.
- // You can change $this if you feel that you need to.
- // Developers, you may wish to add more fields to the form, in which case you must be sure to add them here.
+////////////////////////
+// Email Compilation
 
- $e_body = "Hello: <br /><br /> You have been contacted by <b>$name</b> with regards to <b>$subject</b>. <br /><br />";
- $e_content = "<b>Message:</b> <br /><br />".$comments."<br /><br />";
- $e_reply = "You can contact $name via email at: $email";
- if (!empty($phone)) $e_reply .= " or via phone $phone.";
+ $e_subject = "$name has contacted about $subject";
 
- $msg = $e_body . $e_content . $e_reply;
+ $e_content = $comments." <br /><br />";
+ $e_reply = "You can contact $name via email at: $email or simply reply to this message.";
+
+ $msg = $e_content . $e_reply;
 
  if( _email($name, $email, $e_subject, $msg)) {
-
-	 // Email has sent successfully, echo a success page.
+	 //The file custom.js is using the keyword "submitted" to let know js that the message was successfully sent and close the form
+	 //If you intent on changing it, remember to also change it on /views/assets/scripts/custom.js for proper functioning
 	 echo "<div class='contact-sent'>Thank you <strong>$name</strong>, your message has been submitted to us.</div>";
-
- } else {
-
-	 //echo 'ERROR! Please ensure PHP Mail() is correctly configured on this server.';
-
-	 // Email has sent successfully, echo a success page.
+ } 
+ else {
 	 echo "<div class='notification error'>An error occurred while sending the message. Please try again later, or contact us by email.</div>";
-
  }
+
+ ///////////////////////////////////////////////////////////////////////////
 ?>
