@@ -18,11 +18,11 @@
 
 ## WHEN LIVE
  - Move database to Managed Mysql digital ocean
- - Start Using Digital Ocean Spaces
- - npm install
- - npm start
 
 ## MVP LAUNCH
+   **On all the functions, you need to check if the variable, user, city, listing exists, before making any update to them;
+   UPDATE THE FUNCTIONS TO REFLECT THOSE CHANGES
+   
  1) Submit Property:
     - all that relates to adding a property
 
@@ -68,7 +68,9 @@
     Database
         1) User
             - status: {active, inactive, archived}
+            - type: {super_admin, admin, landlords, realtors, tenants}
             - code: variable that is used to verify a email, restore password or a phone number
+            - profile_image: 200x200
         2) Cities
         3) Settings
         4) Listings

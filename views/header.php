@@ -126,7 +126,33 @@
 			<div class="right-side">
 				<!-- Header Widget -->
 				<div class="header-widget">
-					<a href="/account" class="sign-in"><i class="fa fa-user"></i> Log In </a>
+
+					<?php
+						if($user) {
+							$name = explode(" ", $user['fullname'])[0];
+					?>
+
+					<!-- User Menu -->
+					<div class="user-menu">
+						<div class="user-name"><span><img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt=""></span><?php if(!empty($name)) { echo 'Hi, '.$name.'!'; } else { echo 'Hi, cool user!'; }; ?></div>
+						<ul>
+							<li><a href="/my-profile"><i class="sl sl-icon-user"></i> My Profile</a></li>
+							<li><a href="/my-properties"><i class="sl sl-icon-docs"></i> My Properties</a></li>
+							<li><a href="/logout"><i class="sl sl-icon-power"></i> Log Out</a></li>
+						</ul>
+					</div>
+
+					<?php
+						}
+						else {
+					?>
+
+					<a href="/login" class="sign-in"><i class="fa fa-user"></i> Log In </a>
+
+					<?php
+						}
+					?>
+
 					<a href="/submit-property" class="button border">Submit Property</a>
 				</div>
 				<!-- Header Widget / End -->

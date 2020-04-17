@@ -13,14 +13,19 @@
 
 	use \ParagonIE\Halite\{
 		KeyFactory,
-		Password
+		Password,
+		HiddenString
 	};
-
+	
 	function is_login_user() {
 		global $db;
+		
+		if( get_cookie ( 'USMP' ) && !empty(get_cookie( 'USMP' )) ) {
+			$cookie = get_cookie ( 'USMP' );
+			$pieces = explode('|', $cookie);
 
-		if( get_cookie ( 'USM' ) && get_cookie ( 'USP' ) ) {
-			$email = get_cookie ( 'USM' );
+			$email = $pieces[0];
+			$password_hash = $pieces[1];
 
 			$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ? LIMIT 1" );
 			$q->bind_param ( 's', $email );
@@ -28,7 +33,7 @@
 			$result = $q->get_result();
 
 			while ( $o = $result->fetch_array(MYSQLI_ASSOC) ) {
-				if ( get_cookie ( 'USM' ) == $o['email'] && get_cookie ( 'USP' ) == $o['password'] ) {
+				if ( $email == $o['email'] && $password_hash == $o['password'] ) {
 					return $o;
 				}
 			}
@@ -39,14 +44,14 @@
 
 	function logout_user() {
 		if ( is_login_user() ) {
-			if ( delete_cookie ( 'USM' ) && delete_cookie ( 'USP' ) ) {
+			if ( delete_cookie ( 'USMP' ) ) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	function login_user($email, $password, $remember = '') {
+	function login_user($email, $password, $remember = 'true') {
 		global $db;
 
 		if ( !is_email($email) ) {
@@ -63,24 +68,74 @@
 		$q->execute();
 		$result = $q->get_result();
 
-		$key = KeyFactory::loadEncryptionKey(PWKEY);
+		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
 
 		while ( $o = $result->fetch_array ( MYSQLI_ASSOC ) ) {
-			if ($email == $o['email'] && Password::verify($password, $o['password'], $key) && $o['status'] == 'active') {
+			if ($email == $o['email'] && Password::verify(new HiddenString($password), $o['password'], $key) && $o['status'] == 'active') {
 
-				/*
-				// Login successful, but first, check that our hash is still good (i.e. in case Halite updates):
-				if (Password::needsRehash($hash, $key, KeyFactory::INTERACTIVE)) {
-					$replaceStoredHash = Password::hash($password, $key);
+				// Login successful, but first, check that our hash is still good (i.e. in case Halite updates)
+				if (Password::needsRehash($o['password'], $key, KeyFactory::INTERACTIVE)) {
+					update_password($o['id_user'], $password);
 				}
-				*/
-				if ( new_cookie ( 'USM', $o['email'], $expire ) && new_cookie ( 'USP', $o['password'], $expire ) ) {
+
+				if ( new_cookie ( 'USMP', $o['email'].'|'.$o['password'], $expire ) ) {
 					return true;
 				}
 			} 
 		}
 		$q->close();
 
+		return false;
+	}
+
+	function update_code($id_user, $code) {
+		global $db;
+		
+		$q = $db->prepare ( "UPDATE xvls_users SET code = ? WHERE id_user = ?" );
+		$q->bind_param ( 'si', $code, $id_user );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
+	}
+
+	function update_password($id_user, $password) {
+		global $db;
+
+		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
+		$new_password = Password::hash(new HiddenString($password), $key);
+		
+		$q = $db->prepare ( "UPDATE xvls_users SET password = ? WHERE id_user = ?" );
+		$q->bind_param ( 'si', $new_password, $id_user );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
+	}
+
+	function get_user_by_email($email) {
+		global $db;
+
+		if ( !is_email($email) ) {
+			return false;
+		}
+		
+		$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ?" );
+		$q->bind_param ( 's', $email );
+		$q->execute();
+		$result = $q->get_result();
+	
+		while ( $o = $result->fetch_array(MYSQLI_ASSOC) ) {	
+			if ( $o['email'] == $email ) {
+				return $o;
+			}		
+		}
 		return false;
 	}
 

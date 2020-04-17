@@ -61,13 +61,14 @@
          * Change the keys directory with every single installation
          * 
          * Help
-         * @ https://paragonie.com/blog/2016/05/solve-all-your-cryptography-problems-in-three-easy-steps-with-halite
-         * @ https://paragonie.com/blog/2015/05/using-encryption-and-authentication-correctly
+         * @ https://github.com/paragonie/halite/tree/master/doc
+         * @ https://github.com/paragonie/halite/blob/master/doc/Basic.md
          */
-        define( 'CKKEY', 'includes/urVb1StRUZ9Y/kUXcipHKGFMROuP.key' );
-        define( 'PWKEY', 'includes/urVb1StRUZ9Y/L7HCKFrao4PSxdk.key' );
+        define( 'CKKEY', '314004002e3d950d25195f71b2a420891326c63459c0518208059a86ce27436d19b96be96726e07ae2b18a012c973081a56d8069298c94bd6e8bce275e84458fc228d5f93bc17cd171e6c8c808f3922fb2b2eb618177415e9a78891cedd2256d53d09927' );
+        define( 'PWKEY', '31400400b76380d53f88477ded3743f9c558223948ebe1527aefe6b3bc26a3246ec6155a0908a15ac92bc54fd56091a61916c68b59ed5834bb85844231c1987359afb4068ba6435cecc2fe322788f1e5b4cc2a158f3fe0ab8ef95641bf6da96895b1d584' );
+        define( 'GNKEY', '314004006c8aade1e827efc8339adc94e743868727390d813ae6454b03d22b90d151e33263bf4a5ad182f6cc12442638e3b6c8ea145d86f7949c113acb5dbb2727cc9837bde07efd88aa0b4e0b3c5ef30f6057b4148956624b692e0c13d20a32ff8a6eaf' );
     
-        if( !is_file(CKKEY) || !is_file(PWKEY) ) {
+        if( !defined('CKKEY') || !defined('PWKEY') || !defined('GNKEY') ) {
             /**
              *  The script below will help you generate a key and save it to its location
              * 
@@ -75,7 +76,10 @@
              * 
              * 	use \ParagonIE\Halite\KeyFactory;
              *  $encryptionKey = KeyFactory::generateEncryptionKey();
-             *	KeyFactory::save($encryptionKey, '/path/to/encryption.key');
+             *	$key_hex = KeyFactory::export($encryptionKey)->getString();
+             *
+             *  TO USE THE KEYS THE FOLLOWING FUNCTION WILL HELP YOU
+             *  $enc_key = KeyFactory::importEncryptionKey(new HiddenString($key_hex));
              */
             die ('Keys are missing, generate them before continuing');
         }

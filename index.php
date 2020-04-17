@@ -3,7 +3,7 @@
 define('SCRIP_LOAD', true);
 define('THEME_LOAD', true);
 
-if(is_file(__DIR__ . '/includes/install.php')) {
+if(!is_file(__DIR__ . '/includes/configuration.php') && is_file(__DIR__ . '/includes/install.php')) {
     die( header('Location: /includes/install.php') );
 }
 
@@ -11,6 +11,7 @@ require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
 
 $request = $_SERVER['REQUEST_URI'];
+$user = is_login_user();
 
 if (substr_count($request, "?") > 0) {
     $pieces = explode("?", $request);
@@ -36,14 +37,76 @@ switch ($request) {
         require_once __DIR__ . '/views/index.php';
         require_once __DIR__ . '/views/footer.php';
         break;
-    case '/account' :
+    case '/login' :
+        if($user) {
+            header('Location: /my-profile');
+        }
         $seo = array(
-            "title" => "My Account",
+            "title" => "Login",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/login.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/login.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/reset-password' :
+        if($user) {
+            header('Location: /my-profile');
+        }
+        $seo = array(
+            "title" => "Reset Password",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/reset-password.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/reset-password.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/my-profile' :
+        if(!$user) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "My Profile",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
-        require_once __DIR__ . '/views/account.php';
+        require_once __DIR__ . '/views/my-profile.php';
         require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/my-properties' :
+        if(!$user) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "My Properties",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/my-properties.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/change-password' :
+        if(!$user) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Change Password",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/my-profile-change-password.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/logout' :
+        if($user) {
+            logout_user();
+            header('Location: /');
+        }
+        else {
+            header('Location: /');
+        }
         break;
     case '/find-a-homebase' :
         $seo = array(

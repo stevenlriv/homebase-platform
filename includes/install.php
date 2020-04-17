@@ -1,4 +1,16 @@
 <?php
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    // INSTALLER
+    //
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Verify if configuration file already exists
+    if(is_file('configuration.php')) {
+      die( header('Location: /not-found') );
+    }
+  
     define('SCRIP_LOAD', true);
     require_once('lib/class.functions.php');
 
@@ -9,10 +21,6 @@
     require_once ( '../vendor/autoload.php' );
 
     use \ParagonIE\Halite\KeyFactory;
-
-    function generatenotsecuredRandomString($length = 10) {
-        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
-    }
 
     if( isset($_POST['submit']) ) {
         $postValues = array();
@@ -28,21 +36,18 @@
         ///////////////////////////////////////////////////////////////////////////
 
         //We generate some randomness for directory name as where the keys are going to be placed
-        $keys_dir = generatenotsecuredRandomString(12).'/';
-        $keys_cookies_path = $keys_dir.generatenotsecuredRandomString(15).'.key';
-        $keys_general_path = $keys_dir.generatenotsecuredRandomString(15).'.key';
-
-        //Generate folder if it does not exists
-        if(!is_dir($keys_dir)) {
-            mkdir($keys_dir, 0755);
-        }
 
         //Generate Keys
         $keys_cookies = KeyFactory::generateEncryptionKey();
+        $keys_password = KeyFactory::generateEncryptionKey();
         $keys_general = KeyFactory::generateEncryptionKey();
 
         //Save Keys
-        if( !KeyFactory::save($keys_cookies, $keys_cookies_path) || !KeyFactory::save($keys_general , $keys_general_path) ) {
+        $keys_cookies_hex = KeyFactory::export($keys_cookies)->getString();
+        $keys_password_hex = KeyFactory::export($keys_password)->getString();
+        $keys_general_hex = KeyFactory::export($keys_general)->getString();
+
+        if( !$keys_cookies_hex || !$keys_password_hex || !$keys_general_hex ) {
             $error = 'An error occured while generating the security keys, please try again or do it manually.';
         }
 
@@ -64,10 +69,6 @@
         //
         // @https://wordpress.org/support/article/changing-file-permissions/
         ///////////////////////////////////////////////////////////////////////////
-
-        //Due to how the files are load in index.php, we need to give global variables for include
-        $keys_cookies_path_alter = 'includes/'.$keys_cookies_path;
-        $keys_general_path_alter = 'includes/'.$keys_general_path;
 
         //Configuration file content
         $file_content = "<?php
@@ -133,13 +134,14 @@
          * Change the keys directory with every single installation
          * 
          * Help
-         * @ https://paragonie.com/blog/2016/05/solve-all-your-cryptography-problems-in-three-easy-steps-with-halite
-         * @ https://paragonie.com/blog/2015/05/using-encryption-and-authentication-correctly
+         * @ https://github.com/paragonie/halite/tree/master/doc
+         * @ https://github.com/paragonie/halite/blob/master/doc/Basic.md
          */
-        define( 'CKKEY', '$keys_cookies_path_alter' );
-        define( 'PWKEY', '$keys_general_path_alter' );
+        define( 'CKKEY', '$keys_cookies_hex' );
+        define( 'PWKEY', '$keys_password_hex' );
+        define( 'GNKEY', '$keys_general_hex' );
     
-        if( !is_file(CKKEY) || !is_file(PWKEY) ) {
+        if( !defined('CKKEY') || !defined('PWKEY') || !defined('GNKEY') ) {
             /**
              *  The script below will help you generate a key and save it to its location
              * 
@@ -147,7 +149,10 @@
              * 
              * 	use \ParagonIE\Halite\KeyFactory;
              *  \$encryptionKey = KeyFactory::generateEncryptionKey();
-             *	KeyFactory::save(\$encryptionKey, '/path/to/encryption.key');
+             *	\$key_hex = KeyFactory::export(\$encryptionKey)->getString();
+             *
+             *  TO USE THE KEYS THE FOLLOWING FUNCTION WILL HELP YOU
+             *  \$enc_key = KeyFactory::importEncryptionKey(new HiddenString(\$key_hex));
              */
             die ('Keys are missing, generate them before continuing');
         }
@@ -163,13 +168,16 @@
         define ( 'UPLOAD_LOCATION', dirname(__DIR__).'/uploads/' );
     ?>";
 
-        //Generate the new configuration file
-        if(!$fp = fopen('configuration.php', 'w')) {
+        //To generate the configuration file, we make sure that we were able to connect to the database
+        if( !$db->connect_errno ) {
+          //Generate the new configuration file
+          if(!$fp = fopen('configuration.php', 'w')) {
             $error = 'Error opening configuration file, try again or do it manually.';
-        }
+          }
 
-        if(!fwrite($fp, $file_content)) {
+          if(!fwrite($fp, $file_content)) {
             $error = 'Error writting to the configuration file, try again or do it manually.';
+          }
         }
 
         ///////////////////////////////////////////////////////////////////////////
@@ -189,8 +197,6 @@
 
         //Securring Important Files
         chmod('configuration.php', 0440);
-        chmod($keys_cookies_path, 0440);
-        chmod($keys_general_path, 0440);
 
         //
         ///////////////////////////////////////////////////////////////////////////

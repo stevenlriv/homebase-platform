@@ -12,6 +12,10 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @since      File available since 1.0.0
 	 */
 
+	function generateNotSecureRandomString($length = 10) {
+		return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+	}
+
 	function is_email($email) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;

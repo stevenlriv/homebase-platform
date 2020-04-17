@@ -13,18 +13,19 @@
 
 	use \ParagonIE\Halite\{
 		KeyFactory,
-		Cookie
+		Cookie,
+		HiddenString
 	};
 
 	function get_cookie($name) {
-		$key = KeyFactory::loadEncryptionKey(CKKEY);
-		$cookieStorage = new Cookie($key);
+		$key = KeyFactory::importEncryptionKey(new HiddenString(CKKEY));
+		$cookie = new Cookie($key);
 
-		return $cookieStorage->fetch($name);
+		return $cookie->fetch($name);
 	}
 
 	function delete_cookie($name) {
-		if( new_cookie($name, 'delt') ) {
+		if( new_cookie($name, '', time()-3600) ) {
 			return true;
 		}
 		return false;
@@ -43,8 +44,8 @@
 	 * @return: true or false
 	 */
 	function new_cookie($name, $value, $expire = '') {
-		$key = KeyFactory::loadEncryptionKey(CKKEY);
-		$cookieStorage = new Cookie($key);
+		$key = KeyFactory::importEncryptionKey(new HiddenString(CKKEY));
+		$cookie = new Cookie($key);
 
 		if ( empty($expire) ) {
 			$expire = time()+60*60*24;
@@ -57,7 +58,7 @@
 		
 		$http = true;
         
-		if ( $cookieStorage->store($name, $value, $expire, $path, $domain, $secure, $http) ) {
+		if ( $cookie->store($name, $value, $expire, $path, $domain, $secure, $http) ) {
 			return true;
 		}
         

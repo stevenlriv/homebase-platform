@@ -43,7 +43,13 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 			return;
 		}
 
-		$_SESSION['LTVWS'] = $_SESSION['LTVWS']."-".$uri;
+		if(!empty($_SESSION['LTVWS'])) {
+			$_SESSION['LTVWS'] = $_SESSION['LTVWS']."-".$uri;
+		}
+		else {
+			$_SESSION['LTVWS'] = $uri;
+		}
+		
 		
 		$q = $db->prepare ( "UPDATE xvls_listings SET views_count = views_count + 1 WHERE uri = ?" );
 		$q->bind_param ( 's', $uri );		

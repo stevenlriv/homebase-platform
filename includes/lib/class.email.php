@@ -19,7 +19,23 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\SMTP;
 
-	function _email ($from_name, $from_email, $subject, $message) {
+	function send_recover_email($to_name, $to_email, $link) {
+		$message = "Hi <b>$to_name</b>!<br /><br />";
+		$message = $message."You have requested a password reset at <b>".get_setting(12)."</b>.<br /><br />";
+		$message = $message."If you didn't perform this action, just ignore this email and the link will expire in 24 hours.<br /><br />";
+		$message = $message."To reset your password, click the following link or copy and paste it in your browser: <br /><br /><br /><a href='$link' target='_blank'>$link</a>";	
+		
+		$subject = "Password Reset";
+		$from_email = 'no-reply@'.get_host();
+		
+		if ( send_email(get_setting(12), $from_email, $to_email, $to_name, $subject, $message) ) {
+			return true;
+		}
+		
+		return false;
+    }
+    
+	function support_email ($from_name, $from_email, $subject, $message) {
 		
 		if ( send_email($from_name, $from_email, get_setting(1), get_setting(12), $subject, $message) ) {
 			return true;
