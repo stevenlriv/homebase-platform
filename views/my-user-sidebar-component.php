@@ -10,13 +10,13 @@
 					
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Manage Account</li>
-						<li><a href="/my-profile" class="current"><i class="sl sl-icon-user"></i> My Profile</a></li>
-						<li><a href="/change-password"><i class="sl sl-icon-lock"></i> Change Password</a></li>
+						<li><a href="/my-profile" <?php if($request == '/my-profile') echo 'class="current"'; ?>><i class="sl sl-icon-user"></i> My Profile</a></li>
+						<li><a href="/change-password" <?php if($request == '/change-password') echo 'class="current"'; ?>><i class="sl sl-icon-lock"></i> Change Password</a></li>
 					</ul>
 					
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Manage Listings</li>
-						<li><a href="/my-properties"><i class="sl sl-icon-docs"></i> My Properties</a></li>
+						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> My Properties</a></li>
 						<li><a href="/submit-property"><i class="sl sl-icon-action-redo"></i> Submit New Property</a></li>
 					</ul>
 

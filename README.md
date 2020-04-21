@@ -33,6 +33,7 @@
     - &date=[starting date]
     - &id=[property id]
     - users are required to create an account
+    - https://www.pandadoc.com/api/esignature-api/
 
  4) LISTING.php
     - Book Now (save booking details when user is trying to log-in, use cookies)
@@ -54,6 +55,9 @@
         - &bedroom=[# of bethroom]
         - &bathroom=[# of bathrooms]
         - &maxprice=[Max house price]
+
+      Edit Property
+        - &q=[uri]
 
     SOFTWARE
         - Send grid

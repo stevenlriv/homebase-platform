@@ -7,11 +7,13 @@
     };
 
     $approved_to_reset = false;
+    $form_success = '';
+    $form_error = '';
 
     if(!empty($_GET['email']) && !empty($_GET['validation'])) {
         //First verify that the validation code is the same cypher text that we have in the database
         $user_details = get_user_by_email($_GET['email']);
-        $validation = $_GET['validation'];
+        $validation = sanitize_xss($_GET['validation']); //new
 
         if($validation==$user_details['code']) {
             //Know lets both to double check
@@ -66,7 +68,7 @@
                     $form_success = 'Great, your password has been updated, you can log in now.';
                 }
                 else {
-                    $form_error = 'An error occurred while updating your password, please enter them again.';
+                    $form_error = 'An error occurred while updating your password, please try again again.';
                 }
             }
         }

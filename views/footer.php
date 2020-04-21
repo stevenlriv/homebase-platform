@@ -280,6 +280,18 @@ $('#date-picker-mobile').on('hide.daterangepicker', function(ev, picker) {
 });
 </script>
 
+<!-- Replacing dropdown placeholder with selected time slot -->
+<script>
+$(".time-slot").each(function() {
+	var timeSlot = $(this);
+	$(this).find('input').on('change',function() {
+		var timeSlotVal = timeSlot.find('strong').text();
+
+		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+		$('.panel-dropdown').removeClass('active');
+	});
+});
+</script>
 
 </div>
 <!-- Wrapper / End -->

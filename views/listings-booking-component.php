@@ -33,28 +33,6 @@
 								<input name="date" type="text" id="<?php echo $jquery_id; ?>" placeholder="Date" readonly="readonly">
 							</div>
 
-							<!-- Panel Dropdown -->
-							<div class="col-lg-12">
-								<div class="panel-dropdown">
-									<a href="#">Family Members <span class="qtyTotal" name="qtyTotal">1</span></a>
-									<div class="panel-dropdown-content">
-
-										<!-- Quantity Buttons -->
-										<div class="qtyButtons">
-											<div class="qtyTitle">Adults</div>
-											<input type="text" name="qtyInput" value="1">
-										</div>
-
-										<div class="qtyButtons">
-											<div class="qtyTitle">Childrens</div>
-											<input type="text" name="qtyInput" value="0">
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<!-- Panel Dropdown / End -->
-
 						</div>
 						
 						<!-- Book Now -->

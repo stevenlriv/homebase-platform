@@ -112,18 +112,8 @@
     //Lets get the query results
     $total_results = get_listings('count', $query);
 
-    //Pagination configuration
-    //Lets get the actual page
-    if (!empty($_GET['p']) && is_numeric($_GET['p'])) {
-        $page = $_GET['p'];
-    } 
-    else {
-        $page = 1;
-    }
-
-    $no_of_records_per_page = 10;
-    $offset = ($page-1) * $no_of_records_per_page; 
-    $total_pages = ceil($total_results / $no_of_records_per_page);
+	//Pagination configuration
+	$pagination = new Pagination($total_results, $url);
 ?>
 <!-- Content
 ================================================== -->
@@ -282,7 +272,7 @@
 				if($total_results == 0) {
 			?>
 
-			<!-- No results / Cities -->
+				<!-- No results / Cities -->
 
 			<?php
 				}
@@ -291,7 +281,7 @@
 			<div class="listings-container list-layout row fs-listings">
 
 			<?php
-                $query_listings = get_listings('all', $query, "ORDER BY id_listing DESC LIMIT $offset, $no_of_records_per_page");
+                $query_listings = get_listings('all', $query, "ORDER BY id_listing DESC LIMIT {$pagination->get_offset()}, {$pagination->get_records_per_page()}");
 
 				foreach ( $query_listings  as $id => $value ) {
 			?>
@@ -370,82 +360,9 @@
 			<!-- Listings Container / End -->
 
 
-			<!-- Pagination Container -->
-			<div class="row fs-listings">
-				<div class="col-md-12">
-
-					<!-- Pagination -->
-					<div class="clearfix"></div>
-					<div class="pagination-container margin-top-10 margin-bottom-45">
-						<nav class="pagination">
-							<ul>
-                                <?php
-                                    if($total_pages > 1 ) {
-                                        
-                                        //First page
-                                        if($page != 1) {
-                                            echo "<li><a href=\"?p=1&{$url}\">1</a></li>\n";
-                                        }
-
-                                        //Place holder
-                                        //We don't show it in the first 3 pages
-                                        if($page != 1 && $page != 2 && $page != 3) {
-                                            echo "<li class=\"blank\">...</li>\n";
-                                        }
-
-                                        //Backward pages
-                                        if( ($page-2)>=2 ) {
-                                            echo "<li><a href=\"?p=".($page-2)."&{$url}\">".($page-2)."</a></li>\n";
-                                        }
-                                        if( ($page-1)>1 ) {
-                                            echo "<li><a href=\"?p=".($page-1)."&{$url}\">".($page-1)."</a></li>\n";
-                                        }
-
-                                        //Show current page
-                                        echo "<li class=\"blank\">".($page)."</li>\n";                             
-
-                                        //Foward pages
-                                        if( ($page+1)<$total_pages ) {
-                                            echo "<li><a href=\"?p=".($page+1)."&{$url}\">".($page+1)."</a></li>\n";
-                                        }
-                                        if( ($page+2)<$total_pages ) {
-                                            echo "<li><a href=\"?p=".($page+2)."&{$url}\">".($page+2)."</a></li>\n";
-                                        }
-
-                                        //Place holder
-                                        //We don't show it is its the last 3 pages
-                                        if($page != $total_pages && $page != ($total_pages-1) && $page != ($total_pages-2)) {
-                                            echo "<li class=\"blank\">...</li>\n";
-                                        }
-                                        
-                                        //Last page
-                                        if($page != $total_pages) {
-                                            echo "<li><a href=\"?p=".($total_pages)."&{$url}\">".($total_pages)."</a></li>\n";
-                                        }
-                                        
-                                    }
-                                ?>
-							</ul>
-						</nav>
-
-						<nav class="pagination-next-prev">
-							<ul>
-                                <?php
-                                    if($page > 1) {
-                                        echo '<li><a href="?p='.($page-1).'&'.$url.'" class="prev">Previous</a></li>';
-                                    }
-                                    
-                                    if($page < $total_pages) {
-                                        echo '<li><a href="?p='.($page+1).'&'.$url.'" class="next">Next</a></li>';
-                                    }
-                                ?>
-							</ul>
-						</nav>
-					</div>
-
-				</div>
-			</div>
-			<!-- Pagination Container / End -->
+			<?php
+				$pagination->print();
+			?>
 			
 
 		</div>

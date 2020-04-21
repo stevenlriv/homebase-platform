@@ -58,6 +58,8 @@
 			return false;
 		}
 
+		$password = sanitize_xss($password);
+
 		$expire = '';
 		if ( $remember == 'true' ) {
 			$expire = time()+60*60*24*45;//45 days

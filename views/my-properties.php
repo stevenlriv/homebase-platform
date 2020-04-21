@@ -1,9 +1,25 @@
 <?php
-    if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
+	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
+	
+	//We proccess the query details and the current search URL
+	$url = '';
+	$query = array();
+
+	//We verify if the user is an admin or a regular user
+	if( $user['type'] == "super_admin" || $user['type'] == "admin" ) {
+		//array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"));
+	}
+	else {
+		array_push($query, array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_user", "command" => "=", "value" => $user['id_user']));
+	}
+
+
+    //Lets get the query results
+    $total_results = get_listings('count', $query);
+
+	//Pagination configuration
+	$pagination = new Pagination($total_results, $url, 'col-md-8');
 ?>
-
-
-
 <!-- Titlebar
 ================================================== -->
 <div id="titlebar">
@@ -32,93 +48,77 @@
 <div class="container">
 	<div class="row">
 
+		<?php 
+			// Side bar
+			include_once('my-user-sidebar-component.php'); 
+		?>
 
-		<?php include_once('my-user-sidebar-component.php'); ?>
+		<?php
+			if($total_results == 0) {
+		?>
+			<div class="col-md-8">
+				<h3>You currently don't have properties in our platform, add your first property today.</h3>
+			</div>
+
+		<?php
+			}
+			else {
+		?>
 
 		<div class="col-md-8">
 			<table class="manage-table responsive-table">
 
 				<tr>
 					<th><i class="fa fa-file-text"></i> Property</th>
-					<th class="expire-date"><i class="fa fa-calendar"></i> Expiration Date</th>
+					<th class="expire-date"><i class="fa fa-calendar"></i> Occupancy</th>
 					<th></th>
 				</tr>
 
-				<!-- Item #1 -->
-				<tr>
-					<td class="title-container">
-						<img src="images/listing-02.jpg" alt="">
-						<div class="title">
-							<h4><a href="#">Serene Uptown</a></h4>
-							<span>6 Bishop Ave. Perkasie, PA </span>
-							<span class="table-property-price">$900 / monthly</span>
-						</div>
-					</td>
-					<td class="expire-date">December 30, 2016</td>
-					<td class="action">
-						<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-						<a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
-						<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-					</td>
-				</tr>
+				<?php
+                	$query_listings = get_listings('all', $query, "ORDER BY id_listing DESC LIMIT {$pagination->get_offset()}, {$pagination->get_records_per_page()}");
 
-				<!-- Item #2 -->
+					foreach ( $query_listings  as $id => $value ) {
+				?>
 				<tr>
 					<td class="title-container">
-						<img src="images/listing-05.jpg" alt="">
+						<img src="<?php echo get_json($value['listing_images'], 0); ?>" alt="<?php echo $value['physical_address']; ?>" />
 						<div class="title">
-							<h4><a href="#">Oak Tree Villas</a></h4>
-							<span>71 Lower River Dr. Bronx, NY</span>
-							<span class="table-property-price">$535,000</span>
+							<h4><a href="/<?php echo $value['uri']; ?>" target="_blank"><?php echo $value['listing_title']; ?></a></h4>
+							<span><?php echo $value['physical_address']; ?> </span>
+							<span class="table-property-price">$<?php echo $value['monthly_house']; ?> / monthly</span>
 						</div>
 					</td>
-					<td class="expire-date">December 12, 2016</td>
+					<td class="expire-date"><?php 
+								
+								if($value['available'] > date("m/d/Y")) {
+									echo "YES UNTIL {$value['available']}";
+								}
+								else {
+									echo "VACANT";
+								}
+								
+								?></td>
 					<td class="action">
-						<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-						<a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
-						<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
+						<a href="/edit-property?q=<?php echo $value['uri']; ?>"><i class="fa fa-pencil"></i> Edit</a>
+						<a href="?hide=<?php echo $value['uri']; ?>"><i class="fa  fa-eye-slash"></i> Hide</a>
+						<a href="?delte=<?php echo $value['uri']; ?>" class="delete"><i class="fa fa-remove"></i> Delete</a>
 					</td>
 				</tr>
-
-				<!-- Item #3 -->
-				<tr>
-					<td class="title-container">
-						<img src="images/listing-04.jpg" alt="">
-						<div class="title">
-							<h4><a href="#">Selway Apartments</a></h4>
-							<span>33 William St. Northbrook, IL </span>
-							<span class="table-property-price">$420,000</span>
-						</div>
-					</td>
-					<td class="expire-date">December 04, 2016</td>
-					<td class="action">
-						<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-						<a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
-						<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-					</td>
-				</tr>
-
-				<!-- Item #4 -->
-				<tr>
-					<td class="title-container">
-						<img src="images/listing-06.jpg" alt="">
-						<div class="title">
-							<h4><a href="#">Old Town Manchester</a></h4>
-							<span> 7843 Durham Avenue, MD  </span>
-							<span class="table-property-price">$420,000</span>
-						</div>
-					</td>
-					<td class="expire-date">November 27, 2016</td>
-					<td class="action">
-						<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-						<a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
-						<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-					</td>
-				</tr>
+				<?php
+					}
+				?>
 
 			</table>
-			<a href="submit-property.html" class="margin-top-40 button">Submit New Property</a>
+
+			<?php
+				$pagination->print();
+			?>
+
 		</div>
+
+		<?php
+			}
+		?>
 
 	</div>
 </div>

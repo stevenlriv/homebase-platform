@@ -34,27 +34,49 @@
 		<?php include_once('my-user-sidebar-component.php'); ?>
 
 		<div class="col-md-8">
-			<div class="row">
-				<div class="col-md-6  my-profile">
-					<h4 class="margin-top-0 margin-bottom-30">Change Password</h4>
 
-					<label>Current Password</label>
-					<input type="password">
-
-					<label>New Password</label>
-					<input type="password">
-
-					<label>Confirm New Password</label>
-					<input type="password">
-
-					<a href="submit-property.html" class="margin-top-20 button">Save Changes</a>
-				</div>
-
-				<div class="col-md-6">
+			<div class="row hidden-md hidden-lg">
+				<div class="col-md-6 margin-bottom-30">
 					<div class="notification notice">
-						<p>Your password should be at least 12 random characters long to be safe</p>
+						<p>Your password should be at least 12 characters long</p>
 					</div>
 				</div>
+			</div>
+
+			<div class="row" style="margin-top: -30px;">
+				<div class="col-md-6 my-profile">
+					<form method="post">
+
+						<?php
+							show_message($form_success, $form_error);
+						?>
+
+						<label>Current Password</label>
+						<input type="password" name="old">
+
+						<label>New Password</label>
+						<input type="password" name="password">
+
+						<label>Confirm New Password</label>
+						<input type="password" name="confirm">
+
+						<button type="submit" name="submit" class="button border margin-top-10">Save Changes</button>
+					</form>
+				</div>
+
+				<?php
+					if(empty($form_success) && empty($form_error)) {
+				?>
+				<div class="hidden-xs hidden-sm">
+					<div class="col-md-6">
+						<div class="notification notice">
+							<p>Your password should be at least 12 characters long</p>
+						</div>
+					</div>
+				</div>
+				<?php
+					}
+				?>
 
 			</div>
 		</div>

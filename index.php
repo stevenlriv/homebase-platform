@@ -95,6 +95,7 @@ switch ($request) {
             "title" => "Change Password",
             "request" => $request,
         );
+        require_once __DIR__ . '/includes/actions/change-password.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/my-profile-change-password.php';
         require_once __DIR__ . '/views/footer.php';

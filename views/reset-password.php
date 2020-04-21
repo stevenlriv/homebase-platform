@@ -37,23 +37,7 @@
 	<div class="my-account style-1 margin-top-5 margin-bottom-40">
 
 	<?php
-		if(!empty($form_error)) {
-	?>
-		<div class="notification error closeable">
-			<p><?php echo $form_error; ?></p>
-		</div>
-	<?php
-		}
-	?>
-
-    <?php
-		if(!empty($form_success)) {
-	?>
-		<div class="notification success closeable">
-			<p><?php echo $form_success; ?></p>
-		</div>
-	<?php
-		}
+		show_message($form_success, $form_error);
 	?>
 
 		<div class="tabs-container alt">
