@@ -4,7 +4,7 @@
     $form_success = '';
 	$form_error = '';
 	
-	if ( isset($_POST['login-submit']) ) {
+	if ( isset($_POST['submit']) ) {
 
 		if(empty($_POST['password'])) {
 			$form_error = 'You must enter your password.';

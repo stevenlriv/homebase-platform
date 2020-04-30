@@ -31,7 +31,7 @@
 	<div class="row">
 
 
-		<?php include_once('my-user-sidebar-component.php'); ?>
+		<?php sidebar_component(); ?>
 
 		<div class="col-md-8">
 

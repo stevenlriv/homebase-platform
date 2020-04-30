@@ -71,6 +71,7 @@ switch ($request) {
             "title" => "My Profile",
             "request" => $request,
         );
+        require_once __DIR__ . '/includes/actions/my-profile.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/my-profile.php';
         require_once __DIR__ . '/views/footer.php';

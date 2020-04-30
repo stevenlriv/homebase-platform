@@ -31,62 +31,59 @@
 	<div class="row">
 
 
-		<?php include_once('my-user-sidebar-component.php'); ?>
+		<?php sidebar_component(); ?>
 
 		<div class="col-md-8">
 			<div class="row">
 
 
 				<div class="col-md-8 my-profile">
-					<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
 
-					<label>Your Name</label>
-					<input value="Jennie Wilson" type="text">
+					<form method="post">
 
-					<label>Your Title</label>
-					<input value="Agent In New York" type="text">
+						<?php
+							show_message($form_success, $form_error);
+						?>
 
-					<label>Phone</label>
-					<input value="(123) 123-456" type="text">
+						<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
 
-					<label>Email</label>
-					<input value="jennie@example.com" type="text">
+						<label>Full Name</label>
+						<input name="fullname" value="<?php if(!empty($user['fullname'])) echo $user['fullname']; ?>" type="text">
+
+						<label>Phone</label>
+						<input name="phone_number" value="<?php if(!empty($user['phone_number'])) echo $user['phone_number']; ?>" type="text">
+
+						<label>Email</label>
+						<input name="email" value="<?php if(!empty($user['email'])) echo $user['email']; ?>" type="text">
 
 
-					<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
-					<textarea name="about" id="about" cols="30" rows="10">Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper</textarea>
+						<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
+						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php if(!empty($user['profile_bio'])) echo $user['profile_bio']; ?></textarea>
 				
 
-					<h4 class="margin-top-50 margin-bottom-0">Social</h4>
+						<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin</h4>
 
-					<label><i class="fa fa-twitter"></i> Twitter</label>
-					<input value="https://www.twitter.com/" type="text">
-
-					<label><i class="fa fa-facebook-square"></i> Facebook</label>
-					<input value="https://www.facebook.com/" type="text">
-
-					<label><i class="fa fa-google-plus"></i> Google+</label>
-					<input value="https://www.google.com/" type="text">
-
-					<label><i class="fa fa-linkedin"></i> Linkedin</label>
-					<input value="https://www.linkedin.com/" type="text">
+						<input name="profile_linkedIn" value="<?php if(!empty($user['profile_linkedIn'])) echo $user['profile_linkedIn']; ?>" type="text">
 
 
-					<button class="button margin-top-20 margin-bottom-20">Save Changes</button>
+						<button name="submit" class="button margin-top-20 margin-bottom-20">Save Changes</button>
+					</form>
 				</div>
 
 				<div class="col-md-4">
-					<!-- Avatar -->
-					<div class="edit-profile-photo">
-						<img src="images/agent-02.jpg" alt="">
-						<div class="change-photo-btn">
-							<div class="photoUpload">
-							    <span><i class="fa fa-upload"></i> Upload Photo</span>
-							    <input type="file" class="upload" />
+					<form method="post" enctype="multipart/form-data">
+						<!-- Avatar -->
+						<div class="edit-profile-photo">
+							<img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt="">
+							<div class="change-photo-btn">
+								<div class="photoUpload">
+							    	<span><i class="fa fa-upload"></i> Upload Photo</span>
+							    	<input type="file" id="profile_image" name="profile_image" class="upload" />
+								</div>
 							</div>
 						</div>
-					</div>
-
+						<button name="submit-image" id="submit-image" style="display: none;" class="button margin-top-20 margin-bottom-20">Upload Image</button>
+					</form>
 				</div>
 
 

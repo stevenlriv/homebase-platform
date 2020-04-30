@@ -50,7 +50,7 @@
 
 		<?php 
 			// Side bar
-			include_once('my-user-sidebar-component.php'); 
+			sidebar_component();
 		?>
 
 		<?php

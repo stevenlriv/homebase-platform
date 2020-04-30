@@ -85,7 +85,7 @@
 				?>
 
 					<p class="form-row">
-						<input type="submit" class="button border margin-top-10" name="reset-submit" value="Reset Password" />
+						<input type="submit" class="button border margin-top-10" name="submit" value="Reset Password" />
 					</p>
 					
 				</form>

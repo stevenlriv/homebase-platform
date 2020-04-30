@@ -12,4 +12,5 @@
 	require_once ( dirname(__FILE__).'/lib/class.cities.php' );
 	require_once ( dirname(__FILE__).'/lib/class.seo.php' );
 	require_once ( dirname(__FILE__).'/lib/class.pagination.php' );
+	require_once ( dirname(__FILE__).'/lib/class.images.php' );
 ?>

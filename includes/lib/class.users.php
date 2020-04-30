@@ -16,7 +16,7 @@
 		Password,
 		HiddenString
 	};
-	
+
 	function is_login_user() {
 		global $db;
 		
@@ -112,6 +112,39 @@
 		
 		$q = $db->prepare ( "UPDATE xvls_users SET password = ? WHERE id_user = ?" );
 		$q->bind_param ( 'si', $new_password, $id_user );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
+	}
+
+	function update_profile_image($id_user, $url) {
+		global $db;
+		
+		$q = $db->prepare ( "UPDATE xvls_users SET profile_image = ? WHERE id_user = ?" );
+		$q->bind_param ( 'si', $url, $id_user );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
+	}
+
+	function update_profile($id_user, $fullname, $phone_number, $email, $profile_bio, $profile_linkedin) {
+		global $db;
+
+		//Verify if there is not an user with the same email, also confirm is not the same user
+		if(get_user_by_email($email) && get_user_by_email($email)['id_user']!=$id_user) {
+			return false;
+		}
+		
+		$q = $db->prepare ( "UPDATE xvls_users SET fullname = ?, phone_number = ?, email = ?, profile_bio = ?, profile_linkedin = ? WHERE id_user = ?" );
+		$q->bind_param ( 'sssssi', $fullname, $phone_number, $email, $profile_bio, $profile_linkedin, $id_user );		
 	
 		if ( $q->execute() ) {
 			return true;

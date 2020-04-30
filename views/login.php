@@ -59,7 +59,7 @@
 					</p>
 
 					<p class="form-row">
-						<input type="submit" class="button border margin-top-10" name="login-submit" value="Login" />
+						<input type="submit" class="button border margin-top-10" name="submit" value="Login" />
 					</p>
 
 					<p class="lost_password">

@@ -39,7 +39,7 @@
         }
     }
     
-	if ( isset($_POST['reset-submit']) ) {
+	if ( isset($_POST['submit']) ) {
 
         if($approved_to_reset) {
 

@@ -5,8 +5,6 @@
 	// Used to sort popular recommended listings
 	update_views($listing['uri']);
 
-	require_once('listings-booking-component.php'); 
-
 	$city = get_cities('one', $listing['id_city']);	
 ?>
 <!-- Titlebar
@@ -65,7 +63,7 @@
 			<!-- Show only on small devices -->
 			<div class="hidden-md hidden-lg">
 				<?php 
-					print_booking($listing, 'date-picker-mobile');
+					booking_component($listing, 'date-picker-mobile');
 				?>
 			</div>
 
@@ -242,7 +240,7 @@
 		<div class="col-lg-4 col-md-5 hidden-xs hidden-sm">
 			<div class="sidebar sticky right">
 				<?php 
-					print_booking($listing, 'date-picker'); 
+					booking_component($listing, 'date-picker'); 
 				?>
 			</div>
 		</div>
