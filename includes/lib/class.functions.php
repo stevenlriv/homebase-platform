@@ -12,6 +12,20 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @since      File available since 1.0.0
 	 */
 
+	function form_print_value($cache, $database, $field_name) {
+		if($cache) {
+			$content = get_cache_value($cache['form_name'], $field_name);
+		}
+		else {
+			if(!empty($database[$field_name])) {
+				$content = $database[$field_name];
+			}
+		}
+
+		echo $content;
+		
+	}
+
 	function generateNotSecureRandomString($length = 10) {
 		return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 	}

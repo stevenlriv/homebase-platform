@@ -778,6 +778,77 @@ $(document).ready(function(){
 		 fixedContentPos: false
 	});
 
+	//Open Hide popup
+	$( ".open-hd-pp" ).click(function() {
+
+		//get url
+		var a_href = $(this).attr('href');
+		var a_href = a_href.replace("#", "?");
+		
+		//define url
+		var cancel_url = '#';
+		var confirm_url = '/my-properties' + a_href;
+
+		//Content
+		var title = 'Are you sure?';
+		var content = 'This will hide your listing from the platform and search engines. No one will be able to see it or rent it.';
+
+		//Generate the popup
+		new_action_popup(title, content, cancel_url, confirm_url);
+	});
+
+	//Open Show popup
+	$( ".open-sw-pp" ).click(function() {
+
+		//get url
+		var a_href = $(this).attr('href');
+		var a_href = a_href.replace("#", "?");
+		
+		//define url
+		var cancel_url = '#';
+		var confirm_url = '/my-properties' + a_href;
+
+		//Content
+		var title = 'Are you sure?';
+		var content = 'This will list your listing to the platform and search engines will be able to see it. Tenants on the platform will be able to see it and rent it.';
+
+		//Generate the popup
+		new_action_popup(title, content, cancel_url, confirm_url);
+	});
+
+	//Open delete popup
+	$( ".open-dl-pp" ).click(function() {
+
+		//get url
+		var a_href = $(this).attr('href');
+		var a_href = a_href.replace("#", "?");
+		
+		//define url
+		var cancel_url = '#';
+		var confirm_url = '/my-properties' + a_href;
+
+		//Content
+		var title = 'Are you sure?';
+		var content = 'This will permanently delete your listing from the platform and no one will be able to see them or rent it. There is no going back from this action.';
+
+		//Generate the popup
+		new_action_popup(title, content, cancel_url, confirm_url);
+	});
+
+	//Close popup
+	$( ".close-pp" ).click(function() {
+		$.magnificPopup.close(); 
+	});
+
+	//Popups
+	function new_action_popup(title, content, cancel_url, confirm_url) {
+		$.magnificPopup.open({
+			items: {
+				src: '<div id="small-dialog" class="zoom-anim-dialog"><button title="Close" type="button" style="color: #000;" class="mfp-close"></button><h2>' + title + '</h2><p>' + content + '</p><p><a href="' + cancel_url + '" class="button border close-pp" onClick="$.magnificPopup.close();">NO</a><a href="' + confirm_url + '" class="button">YES</a></div>', // can be a HTML string, jQuery object, or CSS selector
+				type: 'inline'
+			}
+		  });		
+	}
 
     /*----------------------------------------------------*/
     /*  Sticky Footer (footer-reveal.js)
@@ -1394,6 +1465,23 @@ $(document).ready(function(){
 		});
 
 	}
+
+	/*--------------------------------------------------*/
+	/*  Cache Actions
+	/*--------------------------------------------------*/
+	$(".form-cache").on('change', function() {
+		var datastring = $(this).serializeArray();
+		var formName = $(this).attr("id");
+
+		$.ajax({
+            type: "POST",
+			url: "/cache.php",
+            data: { form_name: formName, content: datastring },
+            success: function(data) {
+				console.log(data.response);
+			},
+        });
+	});
 
 // ------------------ End Document ------------------ //
 });

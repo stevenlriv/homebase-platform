@@ -1,5 +1,7 @@
 <?php
-    if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
+	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
+	
+	$cache = get_cache('my-profile');
 ?>
 
 <!-- Titlebar
@@ -39,32 +41,37 @@
 
 				<div class="col-md-8 my-profile">
 
-					<form method="post">
+					<form method="post" class="form-cache" id="my-profile">
 
 						<?php
-							show_message($form_success, $form_error);
+							if($cache) {
+								$form_info = 'Press the "Save Changes" button below to save your information.';
+							}
+
+							show_message($form_success, $form_error, $form_info);
 						?>
 
 						<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
 
 						<label>Full Name</label>
-						<input name="fullname" value="<?php if(!empty($user['fullname'])) echo $user['fullname']; ?>" type="text">
+						<input name="fullname" value="<?php form_print_value($cache, $user, 'fullname'); ?>" type="text">
 
 						<label>Phone</label>
-						<input name="phone_number" value="<?php if(!empty($user['phone_number'])) echo $user['phone_number']; ?>" type="text">
+						<input name="phone_number" value="<?php form_print_value($cache, $user, 'phone_number'); ?>" type="text">
 
 						<label>Email</label>
-						<input name="email" value="<?php if(!empty($user['email'])) echo $user['email']; ?>" type="text">
+						<input name="email" value="<?php form_print_value($cache, $user, 'email'); ?>" type="text">
 
 
 						<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
-						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php if(!empty($user['profile_bio'])) echo $user['profile_bio']; ?></textarea>
+						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php form_print_value($cache, $user, 'profile_bio'); ?></textarea>
 				
 
 						<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin</h4>
 
-						<input name="profile_linkedIn" value="<?php if(!empty($user['profile_linkedIn'])) echo $user['profile_linkedIn']; ?>" type="text">
+						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">
 
+						<input name="form_name" type="hidden" placeholder="" value="my-profile" />
 
 						<button name="submit" class="button margin-top-20 margin-bottom-20">Save Changes</button>
 					</form>

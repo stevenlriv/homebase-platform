@@ -13,9 +13,22 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 */
 
 	function is_uri($uri) {
+		//Property needs to be active
 		$query = get_listings('one', array( 
 			0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
 			1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "uri", "command" => "=", "value" => $uri) 
+		), "LIMIT 1");	
+
+		if($query) {
+			return $query;
+		}
+		return false;
+	}
+
+	function is_listing_by_uri_id($uri) {
+		//Property needs to be active
+		$query = get_listings('one', array( 
+			0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "uri", "command" => "=", "value" => $uri) 
 		), "LIMIT 1");	
 
 		if($query) {
@@ -59,6 +72,79 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		}
 		$q->close();
 	
+		return false;
+	}
+
+	function update_visibilty($id_listing, $type) {
+		global $db;
+
+		$status = 'inactive';
+
+		if($type == 'show') {
+			$status = 'active';
+		}
+		
+		$q = $db->prepare ( "UPDATE xvls_listings SET status = ? WHERE id_listing = ?" );
+		$q->bind_param ( 'si', $status, $id_listing );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
+	}
+
+	function delete_listing($id_listing) {
+		global $db;
+
+		$q = $db->prepare ( "DELETE FROM xvls_listings WHERE id_listing = ?" );
+		$q->bind_param ( 'i', $id_listing );
+
+		if ( $q->execute() ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	//check how the per room algo works on the listings
+
+	function new_listing ( $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+						$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
+						$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi, 
+						$laundry_room, $gym, $alarm, $swimming_pool) {
+		global $db;
+
+		$id_user = is_login_user()['id_user'];
+
+		//Uri - Convert it from the listing_title
+			//If uri exists, just combine uri + city name
+		$uri = clean_url($listing_title);
+
+		//Trim keywords
+		$keywords = trim($keywords);
+
+
+		if ( empty($lb_type) ) {
+			return false;
+		}
+
+		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, id_city, `type`, available, zipcode, uri, keywords, monthly_house, monthly_per_room, deposit_house, deposit_per_room, number_rooms,
+											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,
+											calendly_link, checkin_images, checkin_description, air_conditioning, electricity, furnished, parking, pets, smoking, water, wifi,
+											laundry_room, gym, alarm, swimming_pool)
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+		$q->bind_param ( 'iisssssssssssssssssssssssssssssssssss', $id_user, $id_city, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
+										$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
+										$laundry_room, $gym, $alarm, $swimming_pool);
+
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+
 		return false;
 	}
 

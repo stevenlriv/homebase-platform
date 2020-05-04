@@ -18,14 +18,6 @@ function __construct($total_results, $url, $boostrap_colum = 'col-md-12', $recor
     $this->url = $url;
 
     //get current page
-    $this->get_page();
-
-    //set private vars
-    $this->offset = ($this->current_page-1) * $this->records_per_page;
-    $this->total_pages = ceil($this->total_results / $this->records_per_page);
-}
-
-function get_page() {
     if (!empty($_GET['p']) && is_numeric($_GET['p'])) {
         $this->current_page = $_GET['p'];
     } 
@@ -33,7 +25,13 @@ function get_page() {
         $this->current_page = 1;
     }
 
-    return;
+    //set private vars
+    $this->offset = ($this->current_page-1) * $this->records_per_page;
+    $this->total_pages = ceil($this->total_results / $this->records_per_page);
+}
+
+function get_page() {
+    return $this->current_page;
 }
 
 function get_offset() {

@@ -3,6 +3,7 @@
     
     $form_success = '';
     $form_error = '';
+    $form_info = '';
 
     //update_profile_image($user['id_user'], $url)
     
@@ -28,6 +29,7 @@
         if(empty($form_error)) { 
             if(update_profile($user['id_user'], $_POST['fullname'], $_POST['phone_number'], $_POST['email'], $_POST['profile_bio'], $_POST['profile_linkedIn'])) {
                 $form_success = 'Great, your profile has been updated.';
+                delete_cache($_POST['form_name']);
                 header("Refresh:1");
             }
             else {

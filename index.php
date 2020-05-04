@@ -84,6 +84,12 @@ switch ($request) {
             "title" => "My Properties",
             "request" => $request,
         );
+
+        //Search Algorythm & Actions
+        if($user['type']!='tenants') {
+            require_once __DIR__ . '/includes/actions/my-properties.php';
+            require_once __DIR__ . '/includes/actions/listing-search.php';
+        }
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/my-properties.php';
         require_once __DIR__ . '/views/footer.php';
@@ -116,6 +122,7 @@ switch ($request) {
             "description" => "Easily find your next home. Just take a tour and sign your lease, all online and in a few minutes.",
             "request" => $request,
         );
+        require_once __DIR__ . '/includes/actions/listing-search.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/find-a-homebase.php';
         require_once __DIR__ . '/views/footer.php';
@@ -141,6 +148,10 @@ switch ($request) {
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/submit-property' :
+        //Do not allow tenants to submit a property
+        if($user['type']=='tenants') {
+            header('Location: /my-profile');
+        }
         $seo = array(
             "title" => "Add a New Property",
             "description" => "",
@@ -188,18 +199,6 @@ switch ($request) {
         require_once __DIR__ . '/views/contact.php';
         require_once __DIR__ . '/views/footer.php';
         break;
-    /*
-    case '/rent' :
-        $seo = array(
-            "title" => "Contact Us",
-            "description" => "Get in touch with us easily, we will reach out to you in less than 24 hours.",
-            "request" => $request,
-        );
-        require_once __DIR__ . '/views/header.php';
-        require_once __DIR__ . '/views/contact.php';
-        require_once __DIR__ . '/views/footer.php';
-        break;
-    */
     default:
         $request_strip = str_replace('/', '', trim($request));
         $listing = is_uri($request_strip);

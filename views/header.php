@@ -153,7 +153,19 @@
 						}
 					?>
 
-					<a href="/submit-property" class="button border">Submit Property</a>
+					<?php
+						//Hide from tenants
+						if(!empty($user) && $user['type']!='tenants') {
+					?>
+							<a href="/submit-property" class="button border">Submit Property</a>
+					<?php
+						}
+						else {
+					?>
+						<a href="/submit-property" class="button border">Submit Property</a>
+					<?php
+						}
+					?>
 				</div>
 				<!-- Header Widget / End -->
 			</div>

@@ -4,6 +4,7 @@
 	require_once ( dirname(__FILE__).'/lib/class.functions.php' );
 	require_once ( dirname(__FILE__).'/lib/class.settings.php' );
 	require_once ( dirname(__FILE__).'/lib/class.cookies.php' );
+	require_once ( dirname(__FILE__).'/lib/class.cache.php' );
 	require_once ( dirname(__FILE__).'/lib/class.users.php' );
 	require_once ( dirname(__FILE__).'/lib/class.email.php' );
 	require_once ( dirname(__FILE__).'/lib/class.theme.php' );

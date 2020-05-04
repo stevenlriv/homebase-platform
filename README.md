@@ -16,12 +16,14 @@
  5) Export database details to server mysql database
  6) You're done!
 
-## WHEN LIVE
- - Move database to Managed Mysql digital ocean
-
 ## MVP LAUNCH
    **On all the functions, you need to check if the variable, user, city, listing exists, before making any update to them;
    UPDATE THE FUNCTIONS TO REFLECT THOSE CHANGES
+
+   TEST
+    - tenants accounts
+    - landlords/realtors accounts
+    - admin accounts
    
  1) Submit Property:
     - all that relates to adding a property
@@ -46,6 +48,17 @@
 
  6) ACCOUNT.php 
     - Allow user registration
+
+ 7) lease.php
+    - Realtors/Landlord will be able to see actual lease contracts
+    - Tenants will be able to see lease contracts
+    - Links under /my-properties need to be fixed
+
+ 8) edit.php
+
+ 9) EXPANSION
+    - Support rent by room, with lease, etc
+    - Create a Cron algoryth that features the 5% most viewed listings every week
 
 ## NOTES
     Find My Homebase
