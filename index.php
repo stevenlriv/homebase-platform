@@ -157,6 +157,28 @@ switch ($request) {
             "description" => "",
             "request" => $request,
         );
+        require_once __DIR__ . '/includes/actions/submit-property.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/submit-property.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/edit-property' :
+        //Do not allow tenants to submit a property
+        if($user['type']=='tenants') {
+            header('Location: /my-profile');
+        }
+
+        //Verify if property exists and that the user has access
+        $listing = is_uri($_GET['q']);
+        if(!$listing || !user_has_access_listing($listing)) {
+            header('Location: /my-properties');
+        }
+        $seo = array(
+            "title" => "Edit Property",
+            "description" => "",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/submit-property.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/submit-property.php';
         require_once __DIR__ . '/views/footer.php';

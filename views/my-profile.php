@@ -71,8 +71,6 @@
 
 						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">
 
-						<input name="form_name" type="hidden" placeholder="" value="my-profile" />
-
 						<button name="submit" class="button margin-top-20 margin-bottom-20">Save Changes</button>
 					</form>
 				</div>

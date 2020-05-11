@@ -11,8 +11,47 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @version    1.0.0
 	 * @since      File available since 1.0.0
 	 */
+	
+	function get_google_analytics() {
+		if( get_host() == "localhost" || substr_count(get_host(), '.host') > 0  ) {
+			//development enviroment
+			return 'n/a';
+		}
+		else {
+			//production enviroment
+			return get_setting(15);
+		}
+	}
+
+	function get_maps_api_key() {
+		if( get_host() == "localhost" || substr_count(get_host(), '.host') > 0  ) {
+			//development enviroment
+			return get_setting(10);
+		}
+		else {
+			//production enviroment
+			return get_setting(11);
+		}
+	}
+
+	function form_get_value($cache, $database, $field_name) {
+		$content = '';
+		
+		if($cache) {
+			$content = get_cache_value($cache['form_name'], $field_name);
+		}
+		else {
+			if(!empty($database[$field_name])) {
+				$content = $database[$field_name];
+			}
+		}
+
+		return $content;	
+	}
 
 	function form_print_value($cache, $database, $field_name) {
+		$content = '';
+		
 		if($cache) {
 			$content = get_cache_value($cache['form_name'], $field_name);
 		}

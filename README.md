@@ -27,6 +27,16 @@
    
  1) Submit Property:
     - all that relates to adding a property
+    - rent by the room
+    - self checkin ability to add that data
+    - postal address
+    - fix cities table add another database for countries and combine it with the cities side
+    --- work will need to be done on "submit-property-login.php" find-a-homebase.php, listing-search.php
+    - jquery form valitadion
+    - more form validation required
+    - fix uri flexibility
+    - FIX FORM CACHE PROBLEM!!
+    - Add the part where you can add images
 
  2) SEO:
     - canonical url for find-a-homebase.php searchs

@@ -5174,8 +5174,8 @@ textarea.WYSIWYG { min-height: 250px; }
 	margin: -20px 0 35px 0;
 }
 
-a.button.preview { font-size: 17px; padding: 15px 25px; }
-a.button.preview i { margin-left: 5px; }
+button.preview { font-size: 17px; padding: 15px 25px; }
+button.preview i { margin-left: 5px; }
 
 
 /* Infobox */

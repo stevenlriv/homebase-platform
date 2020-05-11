@@ -92,20 +92,8 @@ if($request != '/find-a-homebase') {
 <script type="text/javascript" src="/views/assets/scripts/custom.js"></script>
 
 <!-- Maps -->
-<?php
-	if( get_host() == "localhost" || substr_count(get_host(), '.host') > 0  ) {
-		//development enviroment
-		$google_key = get_setting(10);
-		$google_analytics = 'n/a';
-	}
-	else {
-		//production enviroment
-		$google_key = get_setting(11);
-		$google_analytics = get_setting(15);
-	}
-?>
 
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo $google_key; ?>&language=en"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo get_maps_api_key(); ?>&language=en"></script>
 <script type="text/javascript" src="/views/assets/scripts/infobox.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/markerclusterer.js"></script>
 
@@ -116,7 +104,7 @@ if($request != '/find-a-homebase') {
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-<?php echo $google_analytics; ?>', 'auto');
+ga('create', 'UA-<?php echo get_google_analytics(); ?>', 'auto');
 ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->
@@ -278,6 +266,60 @@ $('#date-picker-mobile').on('hide.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').removeClass('calendar-visible');
 	$('.daterangepicker').addClass('calendar-hidden');
 });
+
+<?php
+	if($request == '/submit-property' || $request == '/edit-property' ) {
+?>
+//////////////////////////////////
+// Calendar Init Form
+$(function() {
+	$('#date-picker-property-form').daterangepicker({
+		"opens": "left",
+		singleDatePicker: true,
+
+		// Disabling Date Ranges
+		isInvalidDate: function(date) {
+		// Disabling Date Range
+		var disabled_start = moment('09/02/2015', 'MM/DD/YYYY');
+
+		<?php
+			//We get the saved date
+			$lt_date = form_get_value($cache, $listing, 'available');
+
+			if(empty($lt_date)) {
+				$lt_date = date("m/d/Y");
+			}
+
+			echo "var disabled_end = moment('".$lt_date."', 'MM/DD/YYYY')";
+		?>
+	
+		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+
+		// Disabling Single Day
+		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
+		//     return true; 
+		// }
+		},
+
+		"startDate": "<?php echo sanitize_xss($lt_date); ?>",
+	});
+});
+
+// Calendar animation
+$('#date-picker-property-form').on('showCalendar.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-animated');
+});
+$('#date-picker-property-form').on('show.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-visible');
+	$('.daterangepicker').removeClass('calendar-hidden');
+});
+$('#date-picker-property-form').on('hide.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').removeClass('calendar-visible');
+	$('.daterangepicker').addClass('calendar-hidden');
+});
+<?php
+	}
+?>
 </script>
 
 <!-- Replacing dropdown placeholder with selected time slot -->

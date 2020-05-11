@@ -121,8 +121,13 @@
 
 							<div class="listing-carousel">
 								<?php
-									foreach ( get_json($value['listing_images'], 'all') as $id => $image ) {
-										echo '<div style="height: 280px;"><img src="'.$image.'" alt="'.$value['physical_address'].'"></div>';
+									if(!empty($value['listing_images'])) {
+										foreach ( get_json($value['listing_images'], 'all') as $id => $image ) {
+											echo '<div style="height: 280px;"><img src="'.$image.'" alt="'.$value['physical_address'].'"></div>';
+										}
+									}
+									else {
+										echo '<div style="height: 280px;"><img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/single-property-01.jpg" alt="'.$value['physical_address'].'"></div>';
 									}
 								?>
 							</div>

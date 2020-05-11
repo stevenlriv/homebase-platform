@@ -47,8 +47,13 @@
 <!-- Slider -->
 <div class="fullwidth-property-slider margin-bottom-50">
 	<?php
-		foreach ( get_json($listing['listing_images'], 'all') as $id => $image ) {
-			echo '<a href="'.$image.'" data-background-image="'.$image.'" class="item mfp-gallery"></a>';
+		if(!empty($listing['listing_images'])) {
+			foreach ( get_json($listing['listing_images'], 'all') as $id => $image ) {
+				echo '<a href="'.$image.'" data-background-image="'.$image.'" class="item mfp-gallery"></a>';
+			}
+		}
+		else {
+			echo '<a href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/single-property-01.jpg" data-background-image="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/single-property-01.jpg" class="item mfp-gallery"></a>';
 		}
 	?>
 </div>
@@ -179,8 +184,13 @@
 
 							<div class="listing-carousel">
 								<?php
-									foreach ( get_json($value['listing_images'], 'all') as $id => $image ) {
-										echo '<div style="height: 280px;"><img src="'.$image.'" alt="'.$value['physical_address'].'"></div>';
+									if(!empty($value['listing_images'])) {
+										foreach ( get_json($value['listing_images'], 'all') as $id => $image ) {
+											echo '<div style="height: 280px;"><img src="'.$image.'" alt="'.$value['physical_address'].'"></div>';
+										}
+									}
+									else {
+										echo '<div style="height: 280px;"><img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/single-property-01.jpg" alt="'.$value['physical_address'].'"></div>';
 									}
 								?>
 							</div>

@@ -13,6 +13,8 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 */
 
 	function is_uri($uri) {
+		$uri = clean_url($uri);
+		
 		//Property needs to be active
 		$query = get_listings('one', array( 
 			0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
@@ -44,7 +46,8 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 			return $array;
 		}
 		
-		return $array[$position];
+		if(is_array($array))
+			return $array[$position];
 	}
 
 
@@ -108,7 +111,39 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		return false;
 	}
 
-	//check how the per room algo works on the listings
+	function update_listing ( $id_listing, $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+						$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
+						$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi, 
+						$laundry_room, $gym, $alarm, $swimming_pool) {
+		global $db;
+
+		//$id_user = is_login_user()['id_user'];
+
+		//Uri - Convert it from the listing_title
+			//If uri exists, just combine uri + city name
+		$uri = clean_url($listing_title);
+
+		//Trim keywords
+		$keywords = trim($keywords);
+
+		$q = $db->prepare ( "UPDATE xvls_listings SET id_city = ?, `type` = ?, available = ?, zipcode = ?, uri = ?, keywords = ?, monthly_house = ?, monthly_per_room = ?, deposit_house = ?, deposit_per_room = ?, number_rooms = ?,
+											number_bathroom = ?, square_feet = ?, physical_address = ?, postal_address = ?, latitude = ?, longitude = ?, listing_title = ?, listing_description = ?, listing_images = ?, video_tour = ?,
+											calendly_link = ?, checkin_images = ?, checkin_description = ?, air_conditioning = ?, electricity = ?, furnished = ?, parking = ?, pets = ?, smoking = ?, water = ?, wifi = ?,
+											laundry_room = ?, gym = ?, alarm = ?, swimming_pool = ? WHERE id_listing = ?" );
+									
+		$q->bind_param ( 'isssssssssssssssssssssssssssssssssssi', $id_city, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
+										$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
+										$laundry_room, $gym, $alarm, $swimming_pool, $id_listing);
+
+		if ( $q->execute() ) {
+			return true;
+		}
+		//echo $q->error;
+		$q->close();
+
+		return false;
+	}
 
 	function new_listing ( $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 						$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
@@ -125,16 +160,12 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		//Trim keywords
 		$keywords = trim($keywords);
 
-
-		if ( empty($lb_type) ) {
-			return false;
-		}
-
 		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, id_city, `type`, available, zipcode, uri, keywords, monthly_house, monthly_per_room, deposit_house, deposit_per_room, number_rooms,
 											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,
 											calendly_link, checkin_images, checkin_description, air_conditioning, electricity, furnished, parking, pets, smoking, water, wifi,
 											laundry_room, gym, alarm, swimming_pool)
 							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+									
 		$q->bind_param ( 'iisssssssssssssssssssssssssssssssssss', $id_user, $id_city, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
@@ -143,6 +174,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		if ( $q->execute() ) {
 			return true;
 		}
+		echo $q->error;
 		$q->close();
 
 		return false;
