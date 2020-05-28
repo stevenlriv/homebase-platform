@@ -1,10 +1,6 @@
 <?php
     if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
-    $form_success = '';
-    $form_error = '';
-    $form_info = '';
-
     //This section id is used on images.php and submit-property-login.php to know to which listing we are currently working for cache purposes
     if($request == '/edit-property') {
         $_SESSION['LIT_CACHE_ID'] = 'edit-property-'.$listing['id_listing'];
@@ -112,14 +108,14 @@
         if(empty($_POST['smoking'])) { $_POST['smoking'] = '0'; }
 
         //Get GPS Latitude and Longitude
-            $address = urlencode($_POST['physical_address']);
-            $apikey  = urlencode(get_maps_api_key(true));
-            $url     = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apikey}";
-            $resp    = json_decode( file_get_contents( $url ), true );
+        $address = urlencode($_POST['physical_address']);
+        $apikey  = urlencode(get_maps_api_key(true));
+        $url     = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apikey}";
+        $resp    = json_decode( file_get_contents( $url ), true );
 
-            // Latitude and Longitude (PHP 7 syntax)
-            $latitude    = $resp['results'][0]['geometry']['location']['lat'] ?? '';
-            $longitude   = $resp['results'][0]['geometry']['location']['lng'] ?? '';
+        // Latitude and Longitude (PHP 7 syntax)
+        $latitude    = $resp['results'][0]['geometry']['location']['lat'] ?? '';
+        $longitude   = $resp['results'][0]['geometry']['location']['lng'] ?? '';
 
         //Get $listing_images from JQUERY
         $listing_images = '';

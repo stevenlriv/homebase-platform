@@ -10,6 +10,10 @@ if(!is_file(__DIR__ . '/includes/configuration.php') && is_file(__DIR__ . '/incl
 require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
 
+$form_success = '';
+$form_error = '';
+$form_info = '';
+
 $request = $_SERVER['REQUEST_URI'];
 $user = is_login_user();
 
@@ -107,6 +111,43 @@ switch ($request) {
         require_once __DIR__ . '/views/my-profile-change-password.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/edit-property' :
+        //Do not allow tenants to edit a property
+        if(!$user || $user['type']=='tenants') {
+            header('Location: /');
+        }
+
+        //Verify if property exists and that the user has access
+        $listing = is_uri($_GET['q']);
+        if(!$listing || !user_has_access_listing($listing)) {
+            header('Location: /my-properties');
+        }
+        $seo = array(
+            "title" => "Edit Property",
+            "description" => "",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/submit-property.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/submit-property.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/submit-property' :
+        //Submit property has a section for logged in users and non logged in users
+        //But if the logged in user is a tenant, we don't allow him access to the page
+        if($user && $user['type']=='tenants') {
+            header('Location: /my-profile');
+        }
+        $seo = array(
+            "title" => "Add a New Property",
+            "description" => "",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/submit-property.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/submit-property.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/logout' :
         if($user) {
             logout_user();
@@ -145,42 +186,6 @@ switch ($request) {
         );
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/for-realtors.php';
-        require_once __DIR__ . '/views/footer.php';
-        break;
-    case '/submit-property' :
-        //Do not allow tenants to submit a property
-        if($user['type']=='tenants') {
-            header('Location: /my-profile');
-        }
-        $seo = array(
-            "title" => "Add a New Property",
-            "description" => "",
-            "request" => $request,
-        );
-        require_once __DIR__ . '/includes/actions/submit-property.php';
-        require_once __DIR__ . '/views/header.php';
-        require_once __DIR__ . '/views/submit-property.php';
-        require_once __DIR__ . '/views/footer.php';
-        break;
-    case '/edit-property' :
-        //Do not allow tenants to submit a property
-        if($user['type']=='tenants') {
-            header('Location: /my-profile');
-        }
-
-        //Verify if property exists and that the user has access
-        $listing = is_uri($_GET['q']);
-        if(!$listing || !user_has_access_listing($listing)) {
-            header('Location: /my-properties');
-        }
-        $seo = array(
-            "title" => "Edit Property",
-            "description" => "",
-            "request" => $request,
-        );
-        require_once __DIR__ . '/includes/actions/submit-property.php';
-        require_once __DIR__ . '/views/header.php';
-        require_once __DIR__ . '/views/submit-property.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/privacy' :

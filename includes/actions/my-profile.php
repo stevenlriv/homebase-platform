@@ -1,12 +1,6 @@
 <?php
     if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     
-    $form_success = '';
-    $form_error = '';
-    $form_info = '';
-
-    //update_profile_image($user['id_user'], $url)
-    
 	if ( isset($_POST['submit']) ) {
 
         //Verify if there is not an user with the same email, also confirm is not the same user
@@ -45,7 +39,7 @@
         }
 
         if(empty($form_error)) { 
-            if(profile_image($user['id_user'], $_FILES['profile_image'])){
+            if(profile_image($_FILES['profile_image'])){
                 $form_success = 'Great, your profile image has been updated.';
                 header("Refresh:1");
             }

@@ -103,8 +103,6 @@
 
 						<div class="listing-img-content">
 							<span class="listing-price">$<?php echo $value['monthly_house']; ?>  <i>monthly</i></span>
-							<!--<span class="like-icon with-tip" data-tip-content="Add to Bookmarks"></span>
-							<span class="compare-button with-tip" data-tip-content="Add to Compare"></span>-->
 						</div>
 
                         <div class="listing-carousel">

@@ -8,7 +8,6 @@
 	 * @license    http://creativecommons.org/licenses/by-nc-nd/4.0/
 	 * @version    1.0.0
 	 * @since      File available since 1.0.0
-	 * 
 	 */
 
 	use \ParagonIE\Halite\{
@@ -77,7 +76,7 @@
 
 				// Login successful, but first, check that our hash is still good (i.e. in case Halite updates)
 				if (Password::needsRehash($o['password'], $key, KeyFactory::INTERACTIVE)) {
-					update_password($o['id_user'], $password);
+					update_user_table('password', $o['id_user'], $password);
 				}
 
 				if ( new_cookie ( 'USMP', $o['email'].'|'.$o['password'], $expire ) ) {
@@ -90,55 +89,10 @@
 		return false;
 	}
 
-	function update_code($id_user, $code) {
-		global $db;
-		
-		$q = $db->prepare ( "UPDATE xvls_users SET code = ? WHERE id_user = ?" );
-		$q->bind_param ( 'si', $code, $id_user );		
-	
-		if ( $q->execute() ) {
-			return true;
-		}
-		$q->close();
-	
-		return false;
-	}
-
-	function update_password($id_user, $password) {
-		global $db;
-
-		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
-		$new_password = Password::hash(new HiddenString($password), $key);
-		
-		$q = $db->prepare ( "UPDATE xvls_users SET password = ? WHERE id_user = ?" );
-		$q->bind_param ( 'si', $new_password, $id_user );		
-	
-		if ( $q->execute() ) {
-			return true;
-		}
-		$q->close();
-	
-		return false;
-	}
-
-	function update_profile_image($id_user, $url) {
-		global $db;
-		
-		$q = $db->prepare ( "UPDATE xvls_users SET profile_image = ? WHERE id_user = ?" );
-		$q->bind_param ( 'si', $url, $id_user );		
-	
-		if ( $q->execute() ) {
-			return true;
-		}
-		$q->close();
-	
-		return false;
-	}
-
 	function update_profile($id_user, $fullname, $phone_number, $email, $profile_bio, $profile_linkedin) {
 		global $db;
 
-		//Verify if there is not an user with the same email, also confirm is not the same user
+		//Verify if there is not an user with the same email, also confirm is not the same user in case that email belong to the user making the update
 		if(get_user_by_email($email) && get_user_by_email($email)['id_user']!=$id_user) {
 			return false;
 		}
@@ -154,6 +108,36 @@
 		return false;
 	}
 
+	function update_user_table($table, $id_user, $value) {
+		global $db;
+
+		if($table != 'profile_image' && $table != 'password' && $table != 'code') {
+			return false;
+		}
+
+		if($table == 'code') {
+			$q = $db->prepare ( "UPDATE xvls_users SET code = ? WHERE id_user = ?" );
+		}
+		elseif($table == 'profile_image') {
+			$q = $db->prepare ( "UPDATE xvls_users SET profile_image = ? WHERE id_user = ?" );
+		}
+		elseif($table == 'password') {
+			$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
+			$value = Password::hash(new HiddenString($value), $key);
+
+			$q = $db->prepare ( "UPDATE xvls_users SET password = ? WHERE id_user = ?" );
+		}
+
+		$q->bind_param ( 'si', $value, $id_user );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;		
+	}
+
 	function get_user_by_email($email) {
 		global $db;
 
@@ -161,7 +145,7 @@
 			return false;
 		}
 		
-		$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ?" );
+		$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ? LIMIT 1" );
 		$q->bind_param ( 's', $email );
 		$q->execute();
 		$result = $q->get_result();
@@ -171,46 +155,6 @@
 				return $o;
 			}		
 		}
-		return false;
-	}
-
-	function get_user($var, $specific = '') {
-		global $db;
-
-		if ( $var == 'all' or $var == 'count' ) {
-			$q = $db->prepare ( "SELECT * FROM xvls_users $specific" );
-		}
-		elseif ( is_email ($var) ) {
-			$q = $db->prepare ( "SELECT * FROM xvls_users WHERE email = ? LIMIT 1" );
-			$q->bind_param ( 's', $var );
-		}
-		elseif( is_numeric ($var) ) {
-			$q = $db->prepare ( "SELECT * FROM xvls_users WHERE id_user = ? LIMIT 1" );
-			$q->bind_param ( 'i', $var );
-		}
-
-		$q->execute();
-		$result = $q->get_result();
-		$array = array();
-
-		if ( $var == 'count' ) {
-			return $result->num_rows;
-		}
-
-		while ( $o = $result->fetch_array ( MYSQLI_ASSOC ) ) {
-			if ( $var == 'all' ) {
-				array_push($array, $o);
-			}
-			else {
-				return $o;
-			}
-		}
-		$q->close();
-
-		if ( $var == 'all' ) {
-			return $array;
-		}
-
 		return false;
 	}
 ?>

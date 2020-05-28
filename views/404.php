@@ -41,7 +41,6 @@
 					<div class="icon-container">
 						<i class="im im-icon-Home-2"></i>
 						<div class="icon-links">
-							<!--<a href="listings-grid-standard-with-sidebar.html">For Sale</a>-->
 							<a href="/find-a-homebase?type=house">For Rent</a>
 						</div>
 					</div>
@@ -58,7 +57,6 @@
 					<div class="icon-container">
 						<i class="im im-icon-Office"></i>
 						<div class="icon-links">
-							<!--<a href="listings-grid-standard-with-sidebar.html">For Sale</a>-->
 							<a href="/find-a-homebase?type=apartment">For Rent</a>
 						</div>
 					</div>

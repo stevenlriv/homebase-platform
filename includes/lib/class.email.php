@@ -104,6 +104,8 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	function boostrap_email($subject, $comments) {
 		/**
 		 * ORIGINAL WHITHOUT COMPILE Boostrap Email Template
+         * @https://bootstrapemail.com/editor
+         * 
 		 * <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 		 * <html>
 		 * <head>
@@ -309,7 +311,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
                                                             <tr>
                                                                 <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-top-width: 0; border-bottom-width: 0; margin: 0;" align="left">© '.get_setting(12).'</td>
                                                                 <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-top-width: 0; border-bottom-width: 0; margin: 0;" align="left">
-                                                                    <a href="'.get_setting(2).'" style="color: #274abb;"></a>
+                                                                    <a href="'.get_setting(2).'" style="color: #274abb;">
                                                                     <table class="float-right" align="right" border="0" cellpadding="0" cellspacing="0" style="font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse;">
                                                                         <tbody>
                                                                             <tr>
@@ -328,8 +330,9 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
+                                                                    </a>
 
-                                                                    <a href="'.get_setting(3).'" style="color: #274abb;"></a>
+                                                                    <a href="'.get_setting(3).'" style="color: #274abb;">
                                                                     <table class="float-right" align="right" border="0" cellpadding="0" cellspacing="0" style="font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse;">
                                                                         <tbody>
                                                                             <tr>
@@ -339,6 +342,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
+                                                                    </a>
 
                                                                 </td>
                                                             </tr>

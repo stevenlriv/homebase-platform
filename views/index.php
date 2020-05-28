@@ -20,8 +20,6 @@
 							<!-- Type -->
 							<div class="search-type">
 								<label class="active"><input class="first-tab" checked="checked" type="radio">For Rent</label>
-								<!--<label><input name="tab" type="radio">For Sale</label>-->
-								<!--<label><input name="tab" type="radio">For Rent</label>-->
 								<div class="search-type-arrow"></div>
 							</div>
 
@@ -31,7 +29,7 @@
 								
 								<!-- Main Search Input -->
 								<div class="main-search-input larger-input">
-									<input name="location" type="text" class="ico-01" id="autocomplete-input" placeholder="Enter address e.g. street, city and state or zip" required />
+									<input name="location" type="text" class="ico-01" id="autocomplete-input" placeholder="Enter address e.g. street, city or state" required />
 									<button class="button">Search</button>
 								</div>
 
@@ -115,8 +113,6 @@
 
 							<div class="listing-img-content">
 								<span class="listing-price">$<?php echo $value['monthly_house']; ?> <i>monthly</i></span>
-								<!--<span class="like-icon with-tip" data-tip-content="Add to Bookmarks"></span>
-								<span class="compare-button with-tip" data-tip-content="Add to Compare"></span>-->
 							</div>
 
 							<div class="listing-carousel">
@@ -152,7 +148,7 @@
 
 							<div class="listing-footer">
 								<a href="#" style="visibility: hidden;"><i class="fa fa-user"></i> Chester Miller</a>
-								<span><i class="fa fa-calendar-o"></i> <?php print_available_status($value['available']); ?>
+								<span><i class="fa fa-calendar-o"></i> <?php print_available_message('status', $value['available']); ?>
 							</span>
 							</div>
 
@@ -162,7 +158,6 @@
 					</div>
 				</div>
 				<!-- Listing Item / End -->
-
 
 			<?php
 				}
@@ -193,7 +188,6 @@
 					<div class="icon-container">
 						<i class="im im-icon-Home-2"></i>
 						<div class="icon-links">
-							<!--<a href="listings-grid-standard-with-sidebar.html">For Sale</a>-->
 							<a href="/find-a-homebase?type=house">For Rent</a>
 						</div>
 					</div>
@@ -210,7 +204,6 @@
 					<div class="icon-container">
 						<i class="im im-icon-Office"></i>
 						<div class="icon-links">
-							<!--<a href="listings-grid-standard-with-sidebar.html">For Sale</a>-->
 							<a href="/find-a-homebase?type=apartment">For Rent</a>
 						</div>
 					</div>

@@ -79,9 +79,8 @@
 					<li>Area <span><?php echo $listing['square_feet']; ?> sq ft</span></li>
 					<li>Bedrooms <span><?php echo $listing['number_rooms']; ?></span></li>
 					<li>Bathrooms <span><?php echo $listing['number_bathroom']; ?></span></li>
-					<li>Available <span><?php print_available_date($listing['available']); ?></span></li>
+					<li>Available <span><?php print_available_message('date', $listing['available']); ?></span></li>
 				</ul>
-
 
 				<!-- Description -->
 				<h3 class="desc-headline">Description</h3>
@@ -207,7 +206,7 @@
 
 							<div class="listing-footer">
 								<a href="#" style="visibility: hidden;"><i class="fa fa-user"></i> Chester Miller</a>
-								<span><i class="fa fa-calendar-o"></i> <?php print_available_status($value['available']); ?></span>
+								<span><i class="fa fa-calendar-o"></i> <?php print_available_message('status', $value['available']); ?></span>
 							</div>
 
 						</div>

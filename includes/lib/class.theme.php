@@ -18,14 +18,12 @@
         $message = $error;
     }
 
-	//Message Info notice is different when adding a new listing or editing one
 	if($big_info && $type == 'notice' ) {
 		echo '<div class="notification notice large margin-bottom-55">';
 			echo '<h4>Quick Notice!</h4>';
 			echo '<p>'.$message.'</p>';
 		echo '</div>';
 	}
-
     elseif($message != '') {
 	    echo '<div class="notification '.$type.' closeable">';
 	        echo '<p>'.$message.'</p>';
@@ -145,6 +143,7 @@ function sidebar_component() {
 }
 
 function full_search_form($type = '') {
+	//action for search form
 	if($type == 'my-properties') {
 		$action = '/my-properties';
 		$date_name = 'Available By';
@@ -159,7 +158,6 @@ function full_search_form($type = '') {
 <form action="<?php echo $action; ?>" type="GET">
                         
 						<div class="main-search-box no-shadow">
-
 
 							<!-- Row With Forms -->
 							<div class="row with-forms">

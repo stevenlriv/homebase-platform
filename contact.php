@@ -99,7 +99,7 @@ if (!empty($error)) {
  $msg = $e_content . $e_reply;
 
  if( support_email($name, $email, $e_subject, $msg)) {
-	 //The file custom.js is using the keyword "submitted" to let know js that the message was successfully sent and close the form
+	 //The file custom.js is using the keyword "submitted" on the message text to let know js that the message was successfully sent and close the form
 	 //If you intent on changing it, remember to also change it on /views/assets/scripts/custom.js for proper functioning
 	 echo "<div class='contact-sent'>Thank you <strong>$name</strong>, your message has been submitted to us.</div>";
  } 

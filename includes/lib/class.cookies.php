@@ -54,7 +54,7 @@
 		$path = '/';
 		$domain = get_host();
 
-		$secure = true; //SSL Required for true
+		$secure = true; //SSL Required
 		
 		$http = true;
         

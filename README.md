@@ -21,6 +21,7 @@
  1) [DONE] Add Picture Capabilities To Listings, Test Accounts and fix Bugs
     
  2-3) Improve "Submit Listing" Interface
+    - certification box: "i certify that this property can be accesed with the details provided above. I understand that if i'm lieng my account can and will be penalized and I will not be able to list on Homebase anymore"
     - add 10% increase on listing pricing
     - show how much will be listed at on Homebase based on their price
     - limit listing title to 40 characters per website design in message add "do not make titles like 2 bed/1 bath, bed and bath are always indicated when we show the listing"
@@ -29,15 +30,11 @@
     - Fix "Submit Listing" form cache system and why all of it is not working
     - Canonical url for find-a-homebase.php searchs
     - picture sorting and ordering jquery
-    - Hide php errors on the .htaccess
     - Contact form: if user is logged in add their email & name and lock those inputs to view only
    ========
     - Create the part where you can add self-checkin data
     --- Postal Address
     --- Include images feauture for self-checkin
-    - Improve the cities table with a country table that is connected to that city
-    - Only show the cities available once the person choose the country
-    --- Files that might need to be updated "submit-property-login.php", "find-a-homebase.php", "listing-search.php"
     - Rent by the room
     - JQUERY FORM VALIDATION STRUCTURE: "my-profile", "submit-listings"
     ========
@@ -45,6 +42,12 @@
     - See how their platform page looks like
     - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
     - There is a listing search bug with the year date that need to be fixed for example listing of 2021 listing-search.php
+    --- it can be esaly fixed by changing the date format on the database to time stampt and then converting that timestamp to a date you can show on the full script. there would be a lot of places where changes would need to be done, specially the footer.php
+    ========
+    - Restructure the Country, City and State type of
+    - Improve the cities table with a country table that is connected to that city
+    - Only show the cities available once the person choose the country
+    --- Files that might need to be updated "submit-property-login.php", "find-a-homebase.php", "listing-search.php"
 
  4) Realtors and Landlords Accounts Creations
     - Allow for new realtor and landlords to conviniently create an account
@@ -120,6 +123,18 @@
     OTHER
         - Logo color: #282828
         - Logo Font: Museo Sans
+        - Files with hardcoded images links
+            - lib
+               - class.seo.php
+               - class.email.php
+            - views
+               - submit-property-not-login.php
+               - my-profile.php
+               - listing.php
+               - index.php
+               - header.php
+               - for-realtors.php
+               - for-landlords.php
 
     Database
         1) User

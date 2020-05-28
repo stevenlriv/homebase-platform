@@ -12,13 +12,12 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @since      File available since 1.0.0
 	 */
 
-	//Determine if a user has access to an action
-	//We will only give access to a listing if the user is an 'super_admin' an 'admin' or the owner of the listing
 	function user_has_access_listing($listing) {
 		global $user;
 
 		$user = is_login_user();
 
+		//We will only give access to a listing if the user is an 'super_admin' an 'admin' or the owner of the listing
         if($listing['id_user']==$user['id_user'] || $listing['id_user']!=$user['id_user'] && $user['type']=='super_admin' || $listing['id_user']!=$user['id_user'] && $user['type']=='admin') {
             return true;
 		}
@@ -26,53 +25,41 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		return false;
 	}
 
-	function print_available_status($available_date) {
+	function print_available_message($type, $available_date) {
 		if(strtotime($available_date) > strtotime(date("m/d/Y"))) {
-			echo "Available soon";
+			if($type == 'admin')
+				echo "<a href='#'>until {$available_date}</a>";
+			elseif($type == 'date')
+				echo "on ".$available_date;
+			elseif($type == 'status')
+				echo "Available soon";
 		}
 		else {
-			echo "Available now";
+			if($type == 'admin')
+				echo "none";
+			elseif($type == 'date')
+				echo "Today";
+			elseif($type == 'status')
+				echo "Available now";
 		}
 	}
 
-	function print_available_date($available_date) {
-		if(strtotime($available_date) > strtotime(date("m/d/Y"))) {
-			echo "on ".$available_date;
-		}
-		else {
-			echo "Today";
-		}
-	}
-
-	function print_available_date_admin($available_date) {
-		if(strtotime($available_date) > strtotime(date("m/d/Y"))) {
-			echo "<a href='#'>until {$available_date}</a>";
-		}
-		else {
-			echo "none";
-		}
-	}
-
-	function is_uri($uri) {
+	function is_uri($uri, $by_uri_id = false) {
 		$uri = clean_url($uri);
-		
-		//Property needs to be active
-		$query = get_listings('one', array( 
-			0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
-			1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "uri", "command" => "=", "value" => $uri) 
-		), "LIMIT 1");	
 
-		if($query) {
-			return $query;
+		if($by_uri_id) {
+			//When we search by uri id, the listing does not have to be active
+			$query = get_listings('one', array( 
+				0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "uri", "command" => "=", "value" => $uri) 
+			), "LIMIT 1");	
 		}
-		return false;
-	}
-
-	function is_listing_by_uri_id($uri) {
-		//Property needs to be active
-		$query = get_listings('one', array( 
-			0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "uri", "command" => "=", "value" => $uri) 
-		), "LIMIT 1");	
+		else {
+			//Property needs to be active when searching if an uri exists
+			$query = get_listings('one', array( 
+				0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
+				1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "uri", "command" => "=", "value" => $uri) 
+			), "LIMIT 1");	
+		}
 
 		if($query) {
 			return $query;
@@ -157,8 +144,6 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 						$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi, 
 						$laundry_room, $gym, $alarm, $swimming_pool) {
 		global $db;
-
-		//$id_user = is_login_user()['id_user'];
 
 		//Uri - Convert it from the listing_title
 			//If uri exists, just combine uri + city name

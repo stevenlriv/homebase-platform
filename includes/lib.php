@@ -14,4 +14,6 @@
 	require_once ( dirname(__FILE__).'/lib/class.seo.php' );
 	require_once ( dirname(__FILE__).'/lib/class.pagination.php' );
 	require_once ( dirname(__FILE__).'/lib/class.images.php' );
+
+    if(is_production_enviroment()) { ini_set('display_errors','off'); }
 ?>

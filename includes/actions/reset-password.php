@@ -7,8 +7,6 @@
     };
 
     $approved_to_reset = false;
-    $form_success = '';
-    $form_error = '';
 
     if(!empty($_GET['email']) && !empty($_GET['validation'])) {
         //First verify that the validation code is the same cypher text that we have in the database
@@ -16,7 +14,7 @@
         $validation = sanitize_xss($_GET['validation']); //new
 
         if($validation==$user_details['code']) {
-            //Know lets both to double check
+            //Now lets double check everything
             $key = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
 
             $plaintext_database = \ParagonIE\Halite\Symmetric\Crypto::decrypt(
@@ -63,8 +61,8 @@
             }
 
             if(empty($form_error)) { 
-                if(update_password($user_details['id_user'], $_POST['password'])) {
-                    update_code($user_details['id_user'], '');
+                if(update_user_table('password', $user_details['id_user'], $_POST['password'])) {
+                    update_user_table('code', $user_details['id_user'], '');
                     $form_success = 'Great, your password has been updated, you can log in now.';
                 }
                 else {
@@ -95,7 +93,7 @@
                         $key
                     );
 
-                    update_code($user_details['id_user'], $ciphertext);
+                    update_user_table('code', $user_details['id_user'], $ciphertext);
 
                     $link = get_domain()."/reset-password?email={$user_details['email']}&validation=$ciphertext";
                     send_recover_email($user_details['fullname'], $_POST['email'], $link);

@@ -6,10 +6,7 @@
 		Password,
 		HiddenString
 	};
-    
-    $form_success = '';
-    $form_error = '';
-    
+
 	if ( isset($_POST['submit']) ) {
 
         $key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
@@ -40,14 +37,14 @@
         }
 
         if(empty($form_error)) { 
-            if(update_password($user['id_user'], $_POST['password'])) {
+            if(update_user_table('password', $user['id_user'], $_POST['password'])) {
                 $form_success = 'Great, your password has been updated.';
 
                 //Auto log-in them
                 login_user($user['email'], $_POST['password']);
             }
             else {
-                $form_error = 'An error occurred while updating your password, please try them again.';
+                $form_error = 'An error occurred while updating your password, please try again.';
             }
         }
 

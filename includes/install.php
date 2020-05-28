@@ -161,11 +161,6 @@
          * Lets start the php sessions
          */
         if ( !isset(\$_SESSION) ) { session_start(); }
-    
-        /**
-         * Lets define the basic upload location
-         */
-        define ( 'UPLOAD_LOCATION', dirname(__DIR__).'/uploads/' );
     ?>";
 
         //To generate the configuration file, we make sure that we were able to connect to the database

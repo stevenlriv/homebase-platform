@@ -1,9 +1,6 @@
 <?php
     if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
-    $form_success = '';
-	$form_error = '';
-	
 	if ( isset($_POST['submit']) ) {
 
 		if(empty($_POST['password'])) {

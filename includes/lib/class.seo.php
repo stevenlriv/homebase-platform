@@ -50,7 +50,7 @@ function social_tags($array) {
 
 function seo_title($array) {
     if ( !empty($array['extra_title']) ) { 
-        echo $array['extra_title'].' &bull; '; 
+        echo $array['extra_title']." &bull; "; 
     }	 
     if ( !empty($array['title']) ) { 
         echo $array['title']." &bull; "; 
