@@ -1,7 +1,8 @@
 <?php
 
- function show_message($success = '', $error = '', $info = '') {
-
+ function show_message($success = '', $error = '', $info = '', $big_info = false) {
+	global $request;
+	
     $type = '';
 
     if(!empty($success)) {
@@ -17,11 +18,19 @@
         $message = $error;
     }
 
-    if($message != '') {
+	//Message Info notice is different when adding a new listing or editing one
+	if($big_info && $type == 'notice' ) {
+		echo '<div class="notification notice large margin-bottom-55">';
+			echo '<h4>Quick Notice!</h4>';
+			echo '<p>'.$message.'</p>';
+		echo '</div>';
+	}
+
+    elseif($message != '') {
 	    echo '<div class="notification '.$type.' closeable">';
 	        echo '<p>'.$message.'</p>';
         echo '</div>';
-    }
+	}
 
  }
 
@@ -236,7 +245,7 @@ function full_search_form($type = '') {
 										<!-- Status -->
 										<div class="col-fs-3">
 										    <select name="status" data-placeholder="Status (Any)" class="chosen-select-no-single">
-												<option value="">Status (Any)</option>
+												<option value="">Prop. Status (Any)</option>
                                                 <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'active') echo 'selected="selected"' ?> value="active">Active</option>
 											    <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'inactive') echo 'selected="selected"' ?> value="inactive">Hidden</option>
 										    </select>

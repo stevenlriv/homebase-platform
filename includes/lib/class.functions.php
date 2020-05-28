@@ -23,7 +23,12 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		}
 	}
 
-	function get_maps_api_key() {
+	function get_maps_api_key($is_server = false) {
+		if($is_server) {
+			//we return the server key is unrestricted but the public does not have access to it
+			return get_setting(21);
+		}
+
 		if( get_host() == "localhost" || substr_count(get_host(), '.host') > 0  ) {
 			//development enviroment
 			return get_setting(10);

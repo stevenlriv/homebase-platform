@@ -16,61 +16,90 @@
  5) Export database details to server mysql database
  6) You're done!
 
-## MVP LAUNCH
-   **On all the functions, you need to check if the variable, user, city, listing exists, before making any update to them;
-   UPDATE THE FUNCTIONS TO REFLECT THOSE CHANGES
+## MVP LAUNCH (# is number of weeks)
 
-   TEST
-    - tenants accounts
-    - landlords/realtors accounts
-    - admin accounts
-   
- 1) Submit Property:
-    - all that relates to adding a property
-    - rent by the room
-    - self checkin ability to add that data
-    - postal address
-    - fix cities table add another database for countries and combine it with the cities side
-    --- work will need to be done on "submit-property-login.php" find-a-homebase.php, listing-search.php
-    - jquery form valitadion
-    - more form validation required
-    - fix uri flexibility
-    - FIX FORM CACHE PROBLEM!!
-    - Add the part where you can add images
+ 1) [DONE] Add Picture Capabilities To Listings, Test Accounts and fix Bugs
+    
+ 2-3) Improve "Submit Listing" Interface
+    - add 10% increase on listing pricing
+    - show how much will be listed at on Homebase based on their price
+    - limit listing title to 40 characters per website design in message add "do not make titles like 2 bed/1 bath, bed and bath are always indicated when we show the listing"
+    - limit search keywords to 5 and 255 characters
+    - Fix uri flexibility
+    - Fix "Submit Listing" form cache system and why all of it is not working
+    - Canonical url for find-a-homebase.php searchs
+    - picture sorting and ordering jquery
+    - Hide php errors on the .htaccess
+    - Contact form: if user is logged in add their email & name and lock those inputs to view only
+   ========
+    - Create the part where you can add self-checkin data
+    --- Postal Address
+    --- Include images feauture for self-checkin
+    - Improve the cities table with a country table that is connected to that city
+    - Only show the cities available once the person choose the country
+    --- Files that might need to be updated "submit-property-login.php", "find-a-homebase.php", "listing-search.php"
+    - Rent by the room
+    - JQUERY FORM VALIDATION STRUCTURE: "my-profile", "submit-listings"
+    ========
+    - Test accounts types to see how they work: tenants, realtors, landlords, admins, super admin
+    - See how their platform page looks like
+    - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
+    - There is a listing search bug with the year date that need to be fixed for example listing of 2021 listing-search.php
 
- 2) SEO:
-    - canonical url for find-a-homebase.php searchs
+ 4) Realtors and Landlords Accounts Creations
+    - Allow for new realtor and landlords to conviniently create an account
+      - FOR-LANDLORDS.php - Get started should redirect them to create an account
+      - FOR-REALTORS.php - Get started should redirect them to create an account
+    - Realtor bank information settings: Bank Name, Routing Number, Bank Account Number
+    - Allow for realtors to filter the houses by Occupancy (Any) or "Occupied" and "Not Ocuppied"
+    - Change Status Listing (Any); on realtor and landlord search
 
- 3) RENT.php
-    - &date=[starting date]
-    - &id=[property id]
-    - users are required to create an account
-    - https://www.pandadoc.com/api/esignature-api/
+ 5-6-7-8-9) PandaDocs API and Renting Infracstructure
+    - PandaDocs API Integration with Platform
+      - We will able to automated and standarize listing creation
+      - We will able to accept Payments
+      - https://www.pandadoc.com/api/esignature-api/
+    - lease.php
+      - Realtors/Landlord will be able to see actual lease contracts
+      - Tenants will be able to see lease contracts
+      - Links under /my-properties need to be fixed
+      - Support rent by room, with lease, etc
+    - Tenants will be able to create an account and rent from the website
+    - LISTINGS.php
+      - Book Now (save booking details when user is trying to log-in, use cookies)
+      - **Book now is redirecting to contact us
+    - RENT.php
+      - &date=[starting date]
+      - &id=[property id]
+    - Monthly payment history for users and realtors & landlords
+    - Ability to view the user profile with lease docs of their tenants
+    - Calendly integration into the platform
+    
+ 10) Tenant account Journey consolidated
+    - Account creation enabled
+    - Background and credit checks after account creation
+    - Salary/Job verification (OPTIONAL)
+    - Risk Score will be assigned to the tenant
+    - Tenant Account Dashboard
+      - require lease type
+      - lease details
+      - current and past homebase
 
- 4) LISTING.php
-    - Book Now (save booking details when user is trying to log-in, use cookies)
-    - Book now is redirecting to contact us
-    - Date picker not working on mobile
+ 11) Master Admin Panel
+    - Ability to edit settings
+    - Ability to manage and create users
+    - Ability to enable new cities y countries
 
- 5) User Account Ready
-    - FOR-LANDLORDS.php - Get started should redirect them to create an account
-    - FOR-REALTORS.php - Get started should redirect them to create an account
+ 12) Platform Upgrade
+    - Move to a Managed MYSQL Database on Digital Ocean
+    - Move Website to a Scalable Managed Digital Ocean dropplet by Cloudways
 
- 6) ACCOUNT.php 
-    - Allow user registration
-
- 7) lease.php
-    - Realtors/Landlord will be able to see actual lease contracts
-    - Tenants will be able to see lease contracts
-    - Links under /my-properties need to be fixed
-
- 8) edit.php
-
- 9) EXPANSION
-    - Support rent by room, with lease, etc
-    - Create a Cron algoryth that features the 5% most viewed listings every week
+ 13) User Feedback Iteration ** Repeat
 
 ## NOTES
+    CRON FILE
+        - Set it to run every Sunday
+
     Find My Homebase
         - &type=[apartment, house]
         - &location=[city name or uri, phisical address, etc]

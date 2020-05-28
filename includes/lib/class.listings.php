@@ -12,6 +12,47 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @since      File available since 1.0.0
 	 */
 
+	//Determine if a user has access to an action
+	//We will only give access to a listing if the user is an 'super_admin' an 'admin' or the owner of the listing
+	function user_has_access_listing($listing) {
+		global $user;
+
+		$user = is_login_user();
+
+        if($listing['id_user']==$user['id_user'] || $listing['id_user']!=$user['id_user'] && $user['type']=='super_admin' || $listing['id_user']!=$user['id_user'] && $user['type']=='admin') {
+            return true;
+		}
+		
+		return false;
+	}
+
+	function print_available_status($available_date) {
+		if(strtotime($available_date) > strtotime(date("m/d/Y"))) {
+			echo "Available soon";
+		}
+		else {
+			echo "Available now";
+		}
+	}
+
+	function print_available_date($available_date) {
+		if(strtotime($available_date) > strtotime(date("m/d/Y"))) {
+			echo "on ".$available_date;
+		}
+		else {
+			echo "Today";
+		}
+	}
+
+	function print_available_date_admin($available_date) {
+		if(strtotime($available_date) > strtotime(date("m/d/Y"))) {
+			echo "<a href='#'>until {$available_date}</a>";
+		}
+		else {
+			echo "none";
+		}
+	}
+
 	function is_uri($uri) {
 		$uri = clean_url($uri);
 		
@@ -174,7 +215,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		if ( $q->execute() ) {
 			return true;
 		}
-		echo $q->error;
+		//echo $q->error;
 		$q->close();
 
 		return false;

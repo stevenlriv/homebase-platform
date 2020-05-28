@@ -4,6 +4,17 @@
     $form_success = '';
     $form_error = '';
     $form_info = '';
+
+    //This section id is used on images.php and submit-property-login.php to know to which listing we are currently working for cache purposes
+    if($request == '/edit-property') {
+        $_SESSION['LIT_CACHE_ID'] = 'edit-property-'.$listing['id_listing'];
+        $_SESSION['IMG_CACHE_ID'] = 'edit-property-images-'.$listing['id_listing'];
+    }
+    else {
+        $_SESSION['LIT_CACHE_ID'] = 'add-property';
+        $_SESSION['IMG_CACHE_ID'] = 'add-property-images';
+    }
+    /////////////////
     
 	if ( isset($_POST['submit']) ) {
 
@@ -102,7 +113,7 @@
 
         //Get GPS Latitude and Longitude
             $address = urlencode($_POST['physical_address']);
-            $apikey  = urlencode(get_maps_api_key());
+            $apikey  = urlencode(get_maps_api_key(true));
             $url     = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apikey}";
             $resp    = json_decode( file_get_contents( $url ), true );
 
@@ -123,7 +134,14 @@
         if(empty($form_error)) { 
             ///determine if is an update or a new listing
             if(!empty($listing)) {
-                if(!empty($listing['listing_images'])) {
+                //Get images from cache is already encoded
+                if(get_cache($_SESSION['IMG_CACHE_ID'])) {
+                    $listing_images = get_cache($_SESSION['IMG_CACHE_ID'])['content'];
+                }
+
+                //If there is not image in cache that means that we are not doing any update, so just use the
+                //Same data saved in the database
+                else {
                     $listing_images = $listing['listing_images'];
                 }
 
@@ -132,7 +150,8 @@
                 $_POST['calendly_link'], $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
                 $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool']) ) {
                     $form_success = 'Great, your property was updated.';
-                    delete_cache('edit-property-'.$listing['id_listing']);
+                    delete_cache($_SESSION['LIT_CACHE_ID']);
+                    delete_cache($_SESSION['IMG_CACHE_ID']);
                     header("Refresh:1");
                 }
                 else {
@@ -140,12 +159,16 @@
                 }
             }
             else {
+                //Get images from cache; is already encoded
+                $listing_images = get_cache($_SESSION['IMG_CACHE_ID'])['content'];
+
                 if(new_listing ( $_POST['id_city'], $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house'], $monthly_per_room, $_POST['deposit_house'], $deposit_per_room, $_POST['number_rooms'],
                 $_POST['number_bathroom'], $_POST['square_feet'], $_POST['physical_address'], $postal_address, $latitude, $longitude, $_POST['listing_title'], $_POST['listing_description'], $listing_images, $_POST['video_tour'],
                 $_POST['calendly_link'], $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
                 $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool']) ) {
                     $form_success = 'Great, your property was added.';
-                    delete_cache('add-property');
+                    delete_cache($_SESSION['LIT_CACHE_ID']);
+                    delete_cache($_SESSION['IMG_CACHE_ID']);
                 }
                 else {
                     $form_error = 'An error occurred while adding your listing, please try again.';

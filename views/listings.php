@@ -79,16 +79,7 @@
 					<li>Area <span><?php echo $listing['square_feet']; ?> sq ft</span></li>
 					<li>Bedrooms <span><?php echo $listing['number_rooms']; ?></span></li>
 					<li>Bathrooms <span><?php echo $listing['number_bathroom']; ?></span></li>
-					<li>Available <span><?php 
-								
-								if($listing['available'] > date("m/d/Y")) {
-									echo "on ".$listing['available'];
-								}
-								else {
-									echo "Today";
-								}
-								
-						?></span></li>
+					<li>Available <span><?php print_available_date($listing['available']); ?></span></li>
 				</ul>
 
 
@@ -216,16 +207,7 @@
 
 							<div class="listing-footer">
 								<a href="#" style="visibility: hidden;"><i class="fa fa-user"></i> Chester Miller</a>
-								<span><i class="fa fa-calendar-o"></i> <?php 
-								
-								if($value['available'] > date("m/d/Y")) {
-									echo "Available soon";
-								}
-								else {
-									echo "Available now";
-								}
-								
-								?></span>
+								<span><i class="fa fa-calendar-o"></i> <?php print_available_status($value['available']); ?></span>
 							</div>
 
 						</div>

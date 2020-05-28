@@ -167,7 +167,7 @@ $(function() {
 			$date = date("m/d/Y");
 
 			if(!empty($listing)) {
-				if($listing['available'] > date("m/d/Y")) {
+				if(strtotime($listing['available']) > strtotime(date("m/d/Y"))) {
 					$date = $listing['available'];
 				}
 			}
@@ -186,7 +186,7 @@ $(function() {
 		<?php 
 			//If he is looking for a specific date and is not on a listing show it
 			//Or if the listing date is <= that session date show session date as the selected one
-			if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && $listing['available']<=$_SESSION['search-date']) { 
+			if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && strtotime($listing['available'])<=strtotime($_SESSION['search-date'])) { 
 				$date = $_SESSION['search-date'];
 			 } 
 		?>
@@ -226,7 +226,7 @@ $(function() {
 			$date = date("m/d/Y");
 
 			if(!empty($listing)) {
-				if($listing['available'] > date("m/d/Y")) {
+				if(strtotime($listing['available']) > strtotime(date("m/d/Y"))) {
 					$date = $listing['available'];
 				}
 			}
@@ -245,7 +245,7 @@ $(function() {
 		<?php 
 			//If he is looking for a specific date and is not on a listing show it
 			//Or if the listing date is <= that session date show session date as the selected one
-			if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && $listing['available']<=$_SESSION['search-date']) { 
+			if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && strtotime($listing['available'])<=strtotime($_SESSION['search-date'])) { 
 				$date = $_SESSION['search-date'];
 			 } 
 		?>
@@ -266,10 +266,12 @@ $('#date-picker-mobile').on('hide.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').removeClass('calendar-visible');
 	$('.daterangepicker').addClass('calendar-hidden');
 });
+</script>
 
 <?php
-	if($request == '/submit-property' || $request == '/edit-property' ) {
+	if($request == '/submit-property' && $user || $request == '/edit-property' && $user ) {
 ?>
+<script>
 //////////////////////////////////
 // Calendar Init Form
 $(function() {
@@ -290,7 +292,8 @@ $(function() {
 				$lt_date = date("m/d/Y");
 			}
 
-			echo "var disabled_end = moment('".$lt_date."', 'MM/DD/YYYY')";
+			//disable date is set to the current date so the person is able to change the available date to any date in the future
+			echo "var disabled_end = moment('".date("m/d/Y")."', 'MM/DD/YYYY')";
 		?>
 	
 		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
@@ -317,10 +320,143 @@ $('#date-picker-property-form').on('hide.daterangepicker', function(ev, picker) 
 	$('.daterangepicker').removeClass('calendar-visible');
 	$('.daterangepicker').addClass('calendar-hidden');
 });
+</script>
+
+<!-- DropZone | Documentation: http://dropzonejs.com -->
+<script type="text/javascript" src="/views/assets/scripts/dropzone.js"></script>
+<script>
+	$(".dropzone").dropzone({
+		acceptedFiles: "image/*",
+		dictDefaultMessage: "<i class='sl sl-icon-plus'></i> Click here or drop files to upload",
+		init: function () {		
+			var th = this; //to access this "global" inside functions
+			
+			//function to add files  
+        	this.addCustomFile = function(file, thumbnail_url , responce){
+            	// Push file to collection
+            	this.files.push(file);
+            	// Emulate event to create interface
+            	this.emit("addedfile", file);
+            	// Add thumbnail url
+            	this.emit("thumbnail", file, thumbnail_url);
+            	// Add status processing to file
+            	this.emit("processing", file);
+            	// Add status success to file AND RUN EVENT success from responce
+            	this.emit("success", file, responce , false);
+            	// Add status complete to file
+            	this.emit("complete", file);
+			}
+
+			//function to load current files
+			this.loadAllFiles = function(){
+				$.get('images.php?action=get-img', function(data) {
+ 					$.each(data.content, function(key,value){	  
+					 	//+ one on key so "image 0" is not shown
+					 	key = key + 1;
+					 	th.addCustomFile(
+            				// File options
+            				{
+                				// flag: processing is complete
+                				processing: true,
+                				// flag: file is accepted (for limiting maxFiles)
+                				accepted: true,
+                				// name of file on page
+                				name: "Image " + key,
+                				// image size
+                				size: 2123455,
+                				// image type
+                				//type: 'image/jpeg',
+                				// flag: status upload
+								status: Dropzone.SUCCESS,
+								imageURL: value,
+
+								//file comes from a server
+								isServer: true,
+							},
+				
+            				// Thumbnail url
+            				value,
+            				// Custom responce for event success
+            				{
+                				status: "success"
+            				}
+        				);
+ 					});
+				});
+			}
+
+			//we load all the files the first time
+			this.loadAllFiles();
+
+			//We establish the variable to know when we will need to reload files
+			var loadTheFiles = true;
+
+			//Once are the files are done, we let them load again
+			this.on("queuecomplete", function(file) {
+				loadTheFiles = true;
+				//$("#dropzone-text").text(''); //remove text
+			});
+
+			//dropzone refresh manager
+			this.on("complete", function(file) {
+				//console.log(file);
+				if(file.isServer) {
+					//alert('file comes from server');
+				}
+				else {
+					//alert('new file upload'); 				
+
+					//Remove the current files from the dropzone
+					//$("#dropzone-text").text('Processing images...'); //show message
+
+					this.files.forEach(function(entry) {
+						var _ref = entry.previewElement;
+
+						//console.log('File' + entry.name);
+						try {
+							_ref.parentNode.removeChild(entry.previewElement);
+						}
+						catch(err) {
+  							//console.log(err);
+						}
+					});
+
+					//We load the files again, but from the server
+					if(loadTheFiles) {
+						th.loadAllFiles();
+						loadTheFiles = false; //used to avoid multiple files load
+					}
+				}
+			});
+    	},
+		addRemoveLinks: true,
+		removedfile: function(file) {
+			var imageURL = file.imageURL; 
+			   
+   			$.ajax({
+     			type: 'POST',
+     			url: '/images.php',
+     			data: {action: 'remove-img', content: imageURL},
+				success: function(data) {
+					//console.log(data.response);
+				},
+			});
+			   
+   			var _ref;
+    		return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+		 },
+	});
+
+</script>
+
+<!-- Galery Section -->
+<script>
+$( "#galery-content" ).appendTo( "#galery-section" );
+</script>
 <?php
 	}
 ?>
-</script>
+
 
 <!-- Replacing dropdown placeholder with selected time slot -->
 <script>

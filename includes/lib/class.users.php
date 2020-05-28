@@ -17,20 +17,6 @@
 		HiddenString
 	};
 
-	//Determine if a user has access to an action
-	//We will only give access to a listing if the user is an 'super_admin' an 'admin' or the owner of the listing
-	function user_has_access_listing($listing) {
-		global $user;
-
-		$user = is_login_user();
-
-        if($listing['id_user']==$user['id_user'] || $listing['id_user']!=$user['id_user'] && $user['type']=='super_admin' || $listing['id_user']!=$user['id_user'] && $user['type']=='admin') {
-            return true;
-		}
-		
-		return false;
-	}
-
 	function is_login_user() {
 		global $db;
 		

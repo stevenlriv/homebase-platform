@@ -1,13 +1,19 @@
 <?php
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
 
+	//Cache settings
 	if(!empty($listing)) {
-		$form_name = 'edit-property-'.$listing['id_listing'];
-		$cache = get_cache($form_name);
+		$form_name = $_SESSION['LIT_CACHE_ID'];
+
+		$cache = get_cache($_SESSION['LIT_CACHE_ID']);
+		$cache_img = get_cache($_SESSION['IMG_CACHE_ID']);
 	}
 	else {
-		$form_name = 'add-property';
-		$cache = get_cache($form_name);
+		$form_name = $_SESSION['LIT_CACHE_ID'];
+
+		$cache = get_cache($_SESSION['LIT_CACHE_ID']);
+		$cache_img = get_cache($_SESSION['IMG_CACHE_ID']);
+
 		$listing = '';
 	}
 ?>
@@ -47,21 +53,33 @@
 		<div class="submit-page">
 
 		<?php
-			if($cache && $form_error=='') {
+			if($cache && $form_error=='' || $cache_img && $form_error=='') {
 				if(!empty($listing)) {
-					$form_info = 'Press the "Save Changes" button below to save your changes.';
+					$form_info = 'It looks like you have some pending changes. Press the "Save Changes" button below to save your changes.';
 				}
 				else {
-					$form_info = 'Press the "Add New" button below to add your new property.';
+					$form_info = 'It looks like you have a draft listing. Press the "Add New" button below to add your new property.';
 				}
 			}
 
-			show_message($form_success, $form_error, $form_info);
+			show_message($form_success, $form_error, $form_info, true);
 		?>
+
+		<!-- Mmoved below using JS; Conflicts on a child form on a parent form; -->
+		<div id="galery-content">
+			<h3>Gallery <i class="tip" data-tip-content="Removing an image is a permanent action"></i> &nbsp;&nbsp;&nbsp;&nbsp; <span id="dropzone-text" style="color: red;"></span></h3>
+			<br />
+			<?php show_message('', '', 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs.'); ?>
+			<div class="submit-section">
+				<form action="/images.php" class="dropzone" id="listing-dropzone"></form>
+			</div>
+		</div>
 
 		<!-- Section -->
 		<h3>Basic Information</h3>
 		<div class="submit-section">
+
+
 		<form method="post" enctype="multipart/form-data" class="form-cache" id="<?php echo $form_name; ?>">
 
 			<!-- Title -->
@@ -149,6 +167,10 @@
 			<!-- Row / End -->
 
 		</div>
+		<!-- Section / End -->
+
+		<!-- Section -->
+		<div id="galery-section"></div>
 		<!-- Section / End -->
 
 		<h3>Specifics</h3>

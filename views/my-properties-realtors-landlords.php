@@ -119,17 +119,7 @@
 							<span class="table-property-price">$<?php echo $value['monthly_house']; ?> / monthly</span>
 						</div>
 					</td>
-					<td class="expire-date"><?php 
-                                
-                                //Link to property lease
-								if($value['available'] > date("m/d/Y")) {
-									echo "<a href='#'>UNTIL {$value['available']}</a>";
-								}
-								else {
-									echo "NONE";
-								}
-								
-								?></td>
+					<td class="expire-date"><?php print_available_date_admin($value['available']); ?></td>
 					<td class="action">
 						<a href="/edit-property?q=<?php echo $value['uri']; ?>"><i class="fa fa-pencil"></i> Edit</a>
                         <?php

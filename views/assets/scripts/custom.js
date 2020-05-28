@@ -1478,7 +1478,7 @@ $(document).ready(function(){
 			url: "/cache.php",
             data: { form_name: formName, content: datastring },
             success: function(data) {
-				console.log(data.response);
+				//console.log(data.response);
 			},
         });
 	});

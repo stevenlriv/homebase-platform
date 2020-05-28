@@ -152,16 +152,8 @@
 
 							<div class="listing-footer">
 								<a href="#" style="visibility: hidden;"><i class="fa fa-user"></i> Chester Miller</a>
-								<span><i class="fa fa-calendar-o"></i> <?php 
-								
-										if($value['available'] > date("m/d/Y")) {
-											echo "Available soon";
-										}
-										else {
-											echo "Available now";
-										}
-										
-								?></span>
+								<span><i class="fa fa-calendar-o"></i> <?php print_available_status($value['available']); ?>
+							</span>
 							</div>
 
 						</div>
