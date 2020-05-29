@@ -1,6 +1,63 @@
 <?php
     if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
+	/***
+	 * Cache Explanations
+	 * 
+     * The general formula of how it works, its just when you just input data into a form, the data is saved 
+     * into a database using javascript and it can be retrieved if needed.
+     * 
+     * HOW TO USE IT
+     * 
+	 * 1) The javascript code is requied on the footer/header of website for it to work. Also a root cache.php is required too
+     * 
+     * 2) On the action/files at the top you need to add a session with the unique identifier
+     *      //Cache settings
+     *      $_SESSION['CACHE_UNIQUE_NAME'] = 'unique-id';
+     * 
+     * 3) On the views/ files at the top you need to add the cache with its unique identifier
+     *      //Cache settings
+     * 	    $form_cache_id = $_SESSION['CACHE_UNIQUE_NAME'];
+     *      $cache = get_cache($form_cache_id);
+     * 
+     * 4) To us it in a in a for and input you will need to do add the class="form-cache" to the form and an unique id
+     *      <form method="post" class="form-cache" id="<?php echo $form_cache_id; ?>">
+     *      <input name="input-name" value="<?php form_print_value($cache, $array-from-database, 'input-name'); ?>" type="text">
+     * 
+     *      You can show the user a message to indicate that there is cache and they should save the data:
+     *          if($cache && $form_error=='') {
+	 *				$form_info = 'Press the "Save Changes" button below to save your information.';
+	 *			}
+     *
+     *			show_message($form_success, $form_error, $form_info);
+     *
+     * 5) Once you are making the form update/creation on the actions/ files and the update/creation is successful you need to delete that cache
+     *      $form_success = 'Great, your profile has been updated.';
+     *      delete_cache('unique-id');
+	 */
+	function form_get_value($cache, $database, $field_name) {
+		return form_value($cache, $database, $field_name);	
+	}
+
+	function form_print_value($cache, $database, $field_name) {
+		echo form_value($cache, $database, $field_name);
+	}
+
+	function form_value($cache, $database, $field_name) {
+		$content = '';
+		
+		if($cache) {
+			$content = get_cache_value($cache['form_name'], $field_name);
+		}
+		else {
+			if(!empty($database[$field_name])) {
+				$content = $database[$field_name];
+			}
+		}
+
+		return $content;
+    }
+    
     function delete_cache($form_name) {
         global $db;
 
@@ -83,4 +140,28 @@
 		return false;
     }
     
+    function print_cache_js() {
+?>
+        <script>
+            $(function() {
+                /*--------------------------------------------------*/
+	            /*  Cache Actions
+	            /*--------------------------------------------------*/
+	            $(".form-cache").on('change', function() {
+		            var datastring = $(this).serializeArray();
+		            var formName = $(this).attr("id");
+
+		            $.ajax({
+                        type: "POST",
+			            url: "/cache.php",
+                        data: { form_name: formName, content: datastring },
+                        success: function(data) {
+				            //console.log(data.response);
+			            },
+                 });
+                });
+            });
+        </script>
+<?php
+    }
 ?>

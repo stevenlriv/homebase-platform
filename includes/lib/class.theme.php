@@ -81,6 +81,87 @@
 <?php
 }
 
+	function booking_component_js($listing, $jquery_id, $cache = '') {
+?>
+
+			<script>
+				$(function() {
+					$('#<?php echo $jquery_id; ?>').daterangepicker({
+						"opens": "left",
+						singleDatePicker: true,
+
+						// Disabling Date Ranges
+						isInvalidDate: function(date) {
+							// Disabling Date Range
+							var disabled_start = moment('09/02/2015', 'MM/DD/YYYY');
+
+							<?php
+								//If the $listing var is not empty, that means that we are on a listing and we will be limiting
+								//The dates based on that listing data
+								$date = date("m/d/Y");
+
+								if(!empty($listing)) {
+									if(strtotime($listing['available']) > strtotime(date("m/d/Y"))) {
+										$date = $listing['available'];
+									}
+								}
+
+								if(is_on_listing_creation_page()) {
+									//disable date is set to the current date so the person is able to change the available date to any date in the future
+									//Here I should verify if an user is renting it to disable it or not
+									echo "var disabled_end = moment('".date("m/d/Y")."', 'MM/DD/YYYY')";
+									//echo "var disabled_end = moment('".$date."', 'MM/DD/YYYY')";
+								}
+								else {
+									echo "var disabled_end = moment('".$date."', 'MM/DD/YYYY')";
+								}
+							?>
+	
+							return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+						},
+
+						<?php 
+							//If he is looking for a specific date and is not on a listing show it
+							//Or if the listing date is <= that session date show session date as the selected one
+							if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && strtotime($listing['available'])<=strtotime($_SESSION['search-date'])) { 
+								$date = $_SESSION['search-date'];
+							} 
+							 
+							if(is_on_listing_creation_page()) {
+								$lt_date = form_get_value($cache, $listing, 'available'); //We get the saved date
+								if(empty($lt_date)) {
+									$lt_date = date("m/d/Y");
+								}
+							?>
+								"startDate": "<?php echo sanitize_xss($lt_date); ?>",
+							<?php
+							}
+							else {
+							?>
+								"startDate": "<?php echo sanitize_xss($date); ?>",
+							<?php
+							}
+						?>
+					});
+				});
+
+				// Calendar animation
+				$('#<?php echo $jquery_id; ?>').on('showCalendar.daterangepicker', function(ev, picker) {
+					$('.daterangepicker').addClass('calendar-animated');
+				});
+				$('#<?php echo $jquery_id; ?>').on('show.daterangepicker', function(ev, picker) {
+					$('.daterangepicker').addClass('calendar-visible');
+					$('.daterangepicker').removeClass('calendar-hidden');
+				});
+				$('#<?php echo $jquery_id; ?>').on('hide.daterangepicker', function(ev, picker) {
+					$('.daterangepicker').removeClass('calendar-visible');
+					$('.daterangepicker').addClass('calendar-hidden');
+				});
+			</script>
+
+<?php
+	}
+
 function sidebar_component() {
     global $request, $user;
 ?>

@@ -1465,24 +1465,6 @@ $(document).ready(function(){
 		});
 
 	}
-
-	/*--------------------------------------------------*/
-	/*  Cache Actions
-	/*--------------------------------------------------*/
-	$(".form-cache").on('change', function() {
-		var datastring = $(this).serializeArray();
-		var formName = $(this).attr("id");
-
-		$.ajax({
-            type: "POST",
-			url: "/cache.php",
-            data: { form_name: formName, content: datastring },
-            success: function(data) {
-				//console.log(data.response);
-			},
-        });
-	});
-
 // ------------------ End Document ------------------ //
 });
 

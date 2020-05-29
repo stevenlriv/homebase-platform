@@ -12,6 +12,16 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @since      File available since 1.0.0
 	 */
 
+	function is_on_listing_creation_page() {
+		global $user, $request;
+
+		if($request == '/submit-property' && $user || $request == '/edit-property' && $user ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	function user_has_access_listing($listing) {
 		global $user;
 

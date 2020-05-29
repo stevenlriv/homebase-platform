@@ -3,10 +3,10 @@
 ?>
 <!-- Footer
 ================================================== -->
+
 <?php 
 // The sticky footer is hidden for the find a homebase page
 if($request != '/find-a-homebase') {
-
 	// Space required if not index page
 	if($request != '/' && $request != '/submit-property') {
 		echo '<div class="margin-top-55"></div>'; 
@@ -43,8 +43,6 @@ if($request != '/find-a-homebase') {
 			<div class="col-md-3  col-sm-12">
 				<h4>Contact Us</h4>
 				<div class="text-widget">
-					<!--<span>12345 Little Lonsdale St, Melbourne</span> <br>-->
-					<!--Phone: <span>(123) 123-456 </span><br>-->
 					E-Mail:<span> <a href="mailto:<?php _setting(1); ?>"><?php _setting(1); ?></a> </span><br>
 				</div>
 
@@ -78,6 +76,18 @@ if($request != '/find-a-homebase') {
 
 <!-- Scripts
 ================================================== -->
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-<?php echo get_google_analytics(); ?>', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
 <script type="text/javascript" src="/views/assets/scripts/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/jquery-migrate-3.1.0.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/chosen.min.js"></script>
@@ -91,26 +101,34 @@ if($request != '/find-a-homebase') {
 <script type="text/javascript" src="/views/assets/scripts/masonry.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/custom.js"></script>
 
-<!-- Maps -->
+<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+<script src="/views/assets/scripts/moment.min.js"></script>
+<script src="/views/assets/scripts/daterangepicker.js"></script>
 
+<!-- Booking Components -->
+	<?php
+		if(empty($listing)) { $listing = ''; } //to avoid undefined variable
+	?>
+	<?php booking_component_js($listing, 'date-picker'); ?>
+	<?php booking_component_js($listing, 'date-picker-mobile'); ?>
+	<?php
+		if( is_on_listing_creation_page() ) {
+			booking_component_js($listing, 'date-picker-property-form', $cache);
+		}
+	?>
+<!-- END Booking Components -->
+
+<!-- Cache Components -->
+		<?php print_cache_js(); ?>
+<!-- END Cache Components -->
+
+<!-- Maps -->
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo get_maps_api_key(); ?>&language=en"></script>
 <script type="text/javascript" src="/views/assets/scripts/infobox.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/markerclusterer.js"></script>
 
-<!-- Google Analytics -->
+<!-- Find A Homebase Maps Data -->
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-<?php echo get_google_analytics(); ?>', 'auto');
-ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<script type="text/javascript">
-
     // Marker
     // ----------------------------------------------- //
     var markerIcon = {
@@ -140,336 +158,18 @@ ga('send', 'pageview');
 	function locationData(locationURL,locationPrice,locationPriceDetails,locationImg,locationTitle,locationAddress) {
           return('<a href="'+ locationURL +'" class="listing-img-container"><div class="infoBox-close"><i class="fa fa-times"></i></div><div class="listing-img-content"><span class="listing-price">'+ locationPrice +'<i>' + locationPriceDetails +'</i></span></div><img src="'+locationImg+'" alt=""></a><div class="listing-content"><div class="listing-title"><h4><a href="'+ locationURL +'">'+locationTitle+'</a></h4><p>'+locationAddress+'</p></div></div>')
       }
-
 </script>
-
 <script type="text/javascript" src="/views/assets/scripts/maps.js"></script>
-
-<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
-<script src="/views/assets/scripts/moment.min.js"></script>
-<script src="/views/assets/scripts/daterangepicker.js"></script>
-<script>
-///////////////////////////////
-// Calendar Init
-$(function() {
-	$('#date-picker').daterangepicker({
-		"opens": "left",
-		singleDatePicker: true,
-
-		// Disabling Date Ranges
-		isInvalidDate: function(date) {
-		// Disabling Date Range
-		var disabled_start = moment('09/02/2015', 'MM/DD/YYYY');
-
-		<?php
-			//If the $listing var is not empty, that means that we are on a listing and we will be limiting
-			//The dates based on that listing data
-			$date = date("m/d/Y");
-
-			if(!empty($listing)) {
-				if(strtotime($listing['available']) > strtotime(date("m/d/Y"))) {
-					$date = $listing['available'];
-				}
-			}
-
-			echo "var disabled_end = moment('".$date."', 'MM/DD/YYYY')";
-		?>
-	
-		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
-
-		// Disabling Single Day
-		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
-		//     return true; 
-		// }
-		},
-
-		<?php 
-			//If he is looking for a specific date and is not on a listing show it
-			//Or if the listing date is <= that session date show session date as the selected one
-			if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && strtotime($listing['available'])<=strtotime($_SESSION['search-date'])) { 
-				$date = $_SESSION['search-date'];
-			 } 
-		?>
-
-		"startDate": "<?php echo sanitize_xss($date); ?>",
-	});
-});
-
-// Calendar animation
-$('#date-picker').on('showCalendar.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').addClass('calendar-animated');
-});
-$('#date-picker').on('show.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').addClass('calendar-visible');
-	$('.daterangepicker').removeClass('calendar-hidden');
-});
-$('#date-picker').on('hide.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').removeClass('calendar-visible');
-	$('.daterangepicker').addClass('calendar-hidden');
-});
-
-//////////////////////////////////
-// Calendar Init MOBILE
-$(function() {
-	$('#date-picker-mobile').daterangepicker({
-		"opens": "center",
-		singleDatePicker: true,
-
-		// Disabling Date Ranges
-		isInvalidDate: function(date) {
-		// Disabling Date Range
-		var disabled_start = moment('09/02/2015', 'MM/DD/YYYY');
-
-		<?php
-			//If the $listing var is not empty, that means that we are on a listing and we will be limiting
-			//The dates based on that listing data
-			$date = date("m/d/Y");
-
-			if(!empty($listing)) {
-				if(strtotime($listing['available']) > strtotime(date("m/d/Y"))) {
-					$date = $listing['available'];
-				}
-			}
-
-			echo "var disabled_end = moment('".$date."', 'MM/DD/YYYY')";
-		?>
-	
-		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
-
-		// Disabling Single Day
-		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
-		//     return true; 
-		// }
-		},
-
-		<?php 
-			//If he is looking for a specific date and is not on a listing show it
-			//Or if the listing date is <= that session date show session date as the selected one
-			if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && strtotime($listing['available'])<=strtotime($_SESSION['search-date'])) { 
-				$date = $_SESSION['search-date'];
-			 } 
-		?>
-
-		"startDate": "<?php echo sanitize_xss($date); ?>",
-	});
-});
-
-// Calendar animation
-$('#date-picker-mobile').on('showCalendar.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').addClass('calendar-animated');
-});
-$('#date-picker-mobile').on('show.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').addClass('calendar-visible');
-	$('.daterangepicker').removeClass('calendar-hidden');
-});
-$('#date-picker-mobile').on('hide.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').removeClass('calendar-visible');
-	$('.daterangepicker').addClass('calendar-hidden');
-});
-</script>
+<!-- END Finds A Homebase Maps Data -->
 
 <?php
-	if($request == '/submit-property' && $user || $request == '/edit-property' && $user ) {
-?>
-<script>
-//////////////////////////////////
-// Calendar Init Form
-$(function() {
-	$('#date-picker-property-form').daterangepicker({
-		"opens": "left",
-		singleDatePicker: true,
+	if( is_on_listing_creation_page() ) {
+		echo '<script type="text/javascript" src="/views/assets/scripts/dropzone.js"></script>';
 
-		// Disabling Date Ranges
-		isInvalidDate: function(date) {
-		// Disabling Date Range
-		var disabled_start = moment('09/02/2015', 'MM/DD/YYYY');
-
-		<?php
-			//We get the saved date
-			$lt_date = form_get_value($cache, $listing, 'available');
-
-			if(empty($lt_date)) {
-				$lt_date = date("m/d/Y");
-			}
-
-			//disable date is set to the current date so the person is able to change the available date to any date in the future
-			echo "var disabled_end = moment('".date("m/d/Y")."', 'MM/DD/YYYY')";
-		?>
-	
-		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
-
-		// Disabling Single Day
-		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
-		//     return true; 
-		// }
-		},
-
-		"startDate": "<?php echo sanitize_xss($lt_date); ?>",
-	});
-});
-
-// Calendar animation
-$('#date-picker-property-form').on('showCalendar.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').addClass('calendar-animated');
-});
-$('#date-picker-property-form').on('show.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').addClass('calendar-visible');
-	$('.daterangepicker').removeClass('calendar-hidden');
-});
-$('#date-picker-property-form').on('hide.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').removeClass('calendar-visible');
-	$('.daterangepicker').addClass('calendar-hidden');
-});
-</script>
-
-<!-- DropZone | Documentation: http://dropzonejs.com -->
-<script type="text/javascript" src="/views/assets/scripts/dropzone.js"></script>
-<script>
-	$(".dropzone").dropzone({
-		acceptedFiles: "image/*",
-		dictDefaultMessage: "<i class='sl sl-icon-plus'></i> Click here or drop files to upload",
-		init: function () {		
-			var th = this; //to access this "global" inside functions
-			
-			//function to add files  
-        	this.addCustomFile = function(file, thumbnail_url , responce){
-            	// Push file to collection
-            	this.files.push(file);
-            	// Emulate event to create interface
-            	this.emit("addedfile", file);
-            	// Add thumbnail url
-            	this.emit("thumbnail", file, thumbnail_url);
-            	// Add status processing to file
-            	this.emit("processing", file);
-            	// Add status success to file AND RUN EVENT success from responce
-            	this.emit("success", file, responce , false);
-            	// Add status complete to file
-            	this.emit("complete", file);
-			}
-
-			//function to load current files
-			this.loadAllFiles = function(){
-				$.get('images.php?action=get-img', function(data) {
- 					$.each(data.content, function(key,value){	  
-					 	//+ one on key so "image 0" is not shown
-					 	key = key + 1;
-					 	th.addCustomFile(
-            				// File options
-            				{
-                				// flag: processing is complete
-                				processing: true,
-                				// flag: file is accepted (for limiting maxFiles)
-                				accepted: true,
-                				// name of file on page
-                				name: "Image " + key,
-                				// image size
-                				size: 2123455,
-                				// image type
-                				//type: 'image/jpeg',
-                				// flag: status upload
-								status: Dropzone.SUCCESS,
-								imageURL: value,
-
-								//file comes from a server
-								isServer: true,
-							},
-				
-            				// Thumbnail url
-            				value,
-            				// Custom responce for event success
-            				{
-                				status: "success"
-            				}
-        				);
- 					});
-				});
-			}
-
-			//we load all the files the first time
-			this.loadAllFiles();
-
-			//We establish the variable to know when we will need to reload files
-			var loadTheFiles = true;
-
-			//Once are the files are done, we let them load again
-			this.on("queuecomplete", function(file) {
-				loadTheFiles = true;
-				//$("#dropzone-text").text(''); //remove text
-			});
-
-			//dropzone refresh manager
-			this.on("complete", function(file) {
-				//console.log(file);
-				if(file.isServer) {
-					//alert('file comes from server');
-				}
-				else {
-					//alert('new file upload'); 				
-
-					//Remove the current files from the dropzone
-					//$("#dropzone-text").text('Processing images...'); //show message
-
-					this.files.forEach(function(entry) {
-						var _ref = entry.previewElement;
-
-						//console.log('File' + entry.name);
-						try {
-							_ref.parentNode.removeChild(entry.previewElement);
-						}
-						catch(err) {
-  							//console.log(err);
-						}
-					});
-
-					//We load the files again, but from the server
-					if(loadTheFiles) {
-						th.loadAllFiles();
-						loadTheFiles = false; //used to avoid multiple files load
-					}
-				}
-			});
-    	},
-		addRemoveLinks: true,
-		removedfile: function(file) {
-			var imageURL = file.imageURL; 
-			   
-   			$.ajax({
-     			type: 'POST',
-     			url: '/images.php',
-     			data: {action: 'remove-img', content: imageURL},
-				success: function(data) {
-					//console.log(data.response);
-				},
-			});
-			   
-   			var _ref;
-    		return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-		 },
-	});
-
-</script>
-
-<!-- Galery Section -->
-<script>
-$( "#galery-content" ).appendTo( "#galery-section" );
-</script>
-<?php
+		// Dropzone Listing Images
+		dropzone_js('dropzone-listing', 'galery-content', 'galery-section', '/images.php?action=get-img');
 	}
 ?>
-
-
-<!-- Replacing dropdown placeholder with selected time slot -->
-<script>
-$(".time-slot").each(function() {
-	var timeSlot = $(this);
-	$(this).find('input').on('change',function() {
-		var timeSlotVal = timeSlot.find('strong').text();
-
-		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
-		$('.panel-dropdown').removeClass('active');
-	});
-});
-</script>
 
 </div>
 <!-- Wrapper / End -->

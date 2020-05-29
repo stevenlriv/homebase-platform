@@ -1,5 +1,4 @@
 <?php
-    //There needs to be a POST request to manipulate cache actions
     if(!$_POST && !$_FILES && !$_GET) exit( header('Location: /not-found') );
 
     define('SCRIP_LOAD', true);
@@ -19,19 +18,26 @@
     header('Content-Type: application/json');
 
     //We get the listing from the session id if it exists
-    if(empty($_SESSION['IMG_CACHE_ID'])) { $_SESSION['IMG_CACHE_ID'] = 'placeholder'; }
-    $listing_id = str_replace('edit-property-images-', '', $_SESSION['IMG_CACHE_ID']);
-    $listing = get_listings('one', array( 
-        0 => array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "=", "value" => $listing_id),
-    ), "LIMIT 1");
-    /////////////////////////////////////////////////////	
+    if(empty($_SESSION['CACHE_IMG_LISTING'])) { 
+        $_SESSION['CACHE_IMG_LISTING'] = ''; 
+    }
+    $listing_id = str_replace('edit-property-images-', '', $_SESSION['CACHE_IMG_LISTING']);
+
+    if(is_numeric($listing_id)) {
+        $listing = get_listings('one', array( 
+            0 => array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "=", "value" => $listing_id),
+            ), "LIMIT 1");
+    }
+    else {
+        $listing = '';
+    }	
 
     if(!empty($_POST['action']) || !empty($_GET['action'])) {
         if($_GET['action'] == 'get-img') {
 
             //** If there is no cache only show database, if there is cache, do not show database images as it would be already included in cache */
-	        if(get_cache($_SESSION['IMG_CACHE_ID'])) {
-		        $array = get_cache($_SESSION['IMG_CACHE_ID']);
+	        if(get_cache($_SESSION['CACHE_IMG_LISTING'])) {
+		        $array = get_cache($_SESSION['CACHE_IMG_LISTING']);
                 $response['content'] = json_decode($array['content']);
                 $response['response'] = 'true';
 	        }
@@ -46,13 +52,13 @@
             //This also verify if the listing exists
             if(!empty($listing) && user_has_access_listing($listing)) {
                 //Add the database image url to cache so we can manipulate it easier
-                if(!get_cache($_SESSION['IMG_CACHE_ID'])) {
-                    new_cache($_SESSION['IMG_CACHE_ID'], $listing['listing_images']);
+                if(!get_cache($_SESSION['CACHE_IMG_LISTING'])) {
+                    new_cache($_SESSION['CACHE_IMG_LISTING'], $listing['listing_images']);
                 }  
 
                 //Now you can remove that image from the cache
                 $new_array = array();
-                $array = get_cache($_SESSION['IMG_CACHE_ID']);
+                $array = get_cache($_SESSION['CACHE_IMG_LISTING']);
                 $array = json_decode($array['content']);
 
                 //Remove the image from array and delete file
@@ -66,17 +72,17 @@
                 //Encode and Update the cache
                 $json = json_encode($new_array);
 
-                if(update_cache($_SESSION['IMG_CACHE_ID'], $json)) {
+                if(update_cache($_SESSION['CACHE_IMG_LISTING'], $json)) {
                     $response['response'] = 'true'; 
                 }
             }
 
             //Need to have cache data to work with
-            elseif(get_cache($_SESSION['IMG_CACHE_ID'])) {
+            elseif(get_cache($_SESSION['CACHE_IMG_LISTING'])) {
 
                 //Now you can remove that image from the cache
                 $new_array = array();
-                $array = get_cache($_SESSION['IMG_CACHE_ID']);
+                $array = get_cache($_SESSION['CACHE_IMG_LISTING']);
                 $array = json_decode($array['content']);
 
                 //Remove the image from array and delete file
@@ -90,27 +96,27 @@
                 //Encode and Update the cache
                 $json = json_encode($new_array);
 
-                if(update_cache($_SESSION['IMG_CACHE_ID'], $json)) {
+                if(update_cache($_SESSION['CACHE_IMG_LISTING'], $json)) {
                     $response['response'] = 'true'; 
                 }
             }
         }
     }
 
-    elseif(!empty($_FILES) && !empty($_SESSION['IMG_CACHE_ID'])) {
+    elseif(!empty($_FILES) && !empty($_SESSION['CACHE_IMG_LISTING'])) {
         //File to be uploaded
         $file_data = $_FILES['file'];
 
         //*** Add database images to cache to preserve the order */
         //In preparation for later images update	
         if(!empty($listing['listing_images'])) {
-            new_cache($_SESSION['IMG_CACHE_ID'], $listing['listing_images']);
+            new_cache($_SESSION['CACHE_IMG_LISTING'], $listing['listing_images']);
         }
         ////////////////////////////////
 
-        if(get_cache($_SESSION['IMG_CACHE_ID'])) {
+        if(get_cache($_SESSION['CACHE_IMG_LISTING'])) {
             //Decode image array
-            $array = get_cache($_SESSION['IMG_CACHE_ID']);
+            $array = get_cache($_SESSION['CACHE_IMG_LISTING']);
             $array = json_decode($array['content']);
 
             //Upload image so you can get the URL
@@ -123,7 +129,7 @@
                 //Then encode again
                 $json = json_encode($array);
 
-                if(update_cache($_SESSION['IMG_CACHE_ID'], $json)) {
+                if(update_cache($_SESSION['CACHE_IMG_LISTING'], $json)) {
                     $response['response'] = 'true'; 
                 }
             }
@@ -143,7 +149,7 @@
                 //Encode content
                 $json = json_encode($array);
 
-                if(new_cache($_SESSION['IMG_CACHE_ID'], $json)) {
+                if(new_cache($_SESSION['CACHE_IMG_LISTING'], $json)) {
                     $response['response'] = 'true'; 
                 }
             }

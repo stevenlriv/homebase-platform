@@ -1,6 +1,9 @@
 <?php
     if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     
+    //Cache settings
+    $_SESSION['CACHE_MY_PROFILE'] = 'my-profile';
+
 	if ( isset($_POST['submit']) ) {
 
         //Verify if there is not an user with the same email, also confirm is not the same user
@@ -23,7 +26,7 @@
         if(empty($form_error)) { 
             if(update_profile($user['id_user'], $_POST['fullname'], $_POST['phone_number'], $_POST['email'], $_POST['profile_bio'], $_POST['profile_linkedIn'])) {
                 $form_success = 'Great, your profile has been updated.';
-                delete_cache('my-profile');
+                delete_cache($_SESSION['CACHE_MY_PROFILE']);
                 header("Refresh:1");
             }
             else {

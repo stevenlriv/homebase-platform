@@ -44,29 +44,6 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		}
 	}
 
-	function form_get_value($cache, $database, $field_name) {
-		return form_value($cache, $database, $field_name);	
-	}
-
-	function form_print_value($cache, $database, $field_name) {
-		echo form_value($cache, $database, $field_name);
-	}
-
-	function form_value($cache, $database, $field_name) {
-		$content = '';
-		
-		if($cache) {
-			$content = get_cache_value($cache['form_name'], $field_name);
-		}
-		else {
-			if(!empty($database[$field_name])) {
-				$content = $database[$field_name];
-			}
-		}
-
-		return $content;
-	}
-
 	function generateNotSecureRandomString($length = 10) {
 		return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 	}

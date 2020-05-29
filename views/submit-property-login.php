@@ -3,18 +3,20 @@
 
 	//Cache settings
 	if(!empty($listing)) {
-		$form_name = $_SESSION['LIT_CACHE_ID'];
+		$form_cache_id = $_SESSION['CACHE_ID_LISTING'];
+		$cache = get_cache($form_cache_id);
 
-		$cache = get_cache($_SESSION['LIT_CACHE_ID']);
-		$cache_img = get_cache($_SESSION['IMG_CACHE_ID']);
+		$form_cache_img_id = $_SESSION['CACHE_IMG_LISTING'];
+		$cache_img = get_cache($form_cache_img_id);
 	}
 	else {
-		$form_name = $_SESSION['LIT_CACHE_ID'];
+		$form_cache_id = $_SESSION['CACHE_ID_LISTING'];
+		$cache = get_cache($_SESSION['CACHE_ID_LISTING']);
 
-		$cache = get_cache($_SESSION['LIT_CACHE_ID']);
-		$cache_img = get_cache($_SESSION['IMG_CACHE_ID']);
+		$form_cache_img_id = $_SESSION['CACHE_IMG_LISTING'];
+		$cache_img = get_cache($form_cache_img_id);		
 
-		$listing = '';
+		$listing = ''; //to indicate we are not editing a listing
 	}
 ?>
 <!-- Titlebar
@@ -65,22 +67,13 @@
 			show_message($form_success, $form_error, $form_info, true);
 		?>
 
-		<!-- Mmoved below using JS; Conflicts on a child form on a parent form; -->
-		<div id="galery-content">
-			<h3>Gallery <i class="tip" data-tip-content="Removing an image is a permanent action"></i> &nbsp;&nbsp;&nbsp;&nbsp; <span id="dropzone-text" style="color: red;"></span></h3>
-			<br />
-			<?php show_message('', '', 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs.'); ?>
-			<div class="submit-section">
-				<form action="/images.php" class="dropzone" id="listing-dropzone"></form>
-			</div>
-		</div>
+		<?php dropzone_box('Gallery', 'dropzone-listing', 'galery-content'); ?>
 
 		<!-- Section -->
 		<h3>Basic Information</h3>
 		<div class="submit-section">
 
-
-		<form method="post" enctype="multipart/form-data" class="form-cache" id="<?php echo $form_name; ?>">
+		<form method="post" enctype="multipart/form-data" class="form-cache" id="<?php echo $form_cache_id; ?>">
 
 			<!-- Title -->
 			<div class="form">
@@ -169,9 +162,7 @@
 		</div>
 		<!-- Section / End -->
 
-		<!-- Section -->
-		<div id="galery-section"></div>
-		<!-- Section / End -->
+		<?php dropzone_form('galery-section'); ?>
 
 		<h3>Specifics</h3>
 		<div class="submit-section">

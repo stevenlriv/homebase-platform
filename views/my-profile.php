@@ -1,7 +1,9 @@
 <?php
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
 	
-	$cache = get_cache('my-profile');
+	//Cache settings
+	$form_cache_id = $_SESSION['CACHE_MY_PROFILE'];
+	$cache = get_cache($form_cache_id);
 ?>
 
 <!-- Titlebar
@@ -41,10 +43,10 @@
 
 				<div class="col-md-8 my-profile">
 
-					<form method="post" class="form-cache" id="my-profile">
+					<form method="post" class="form-cache" id="<?php echo $form_cache_id; ?>">
 
 						<?php
-							if($cache) {
+							if($cache && $form_error=='') {
 								$form_info = 'Press the "Save Changes" button below to save your information.';
 							}
 

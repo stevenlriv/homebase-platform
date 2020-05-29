@@ -77,6 +77,7 @@
     - Monthly payment history for users and realtors & landlords
     - Ability to view the user profile with lease docs of their tenants
     - Calendly integration into the platform
+    - class.theme.php verify if the house is really rented or not to disable the date usings js on the landlord/realtor panel
     
  10) Tenant account Journey consolidated
     - Account creation enabled
@@ -135,13 +136,14 @@
                - header.php
                - for-realtors.php
                - for-landlords.php
+               - footer.php
+               - find-a-homebase.php
 
     Database
         1) User
             - status: {active, inactive, archived}
             - type: {super_admin, admin, landlords, realtors, tenants}
             - code: variable that is used to verify a email, restore password or a phone number
-            - profile_image: 200x200
         2) Cities
         3) Settings
         4) Listings
