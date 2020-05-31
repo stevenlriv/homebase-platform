@@ -143,7 +143,7 @@
 				<div class="col-md-4">
 					<h5>Monthly Rent <i class="tip" data-tip-content="Monthly rent for the property"></i></h5>
 					<div class="select-input disabled-first-option">
-						<input name="monthly_house" value="<?php form_print_value($cache, $listing, 'monthly_house'); ?>" type="number" data-unit="USD" required>
+						<input name="monthly_house" value="<?php form_print_value($cache, $listing, 'monthly_house_original'); //we always get the original value ?>" type="number" data-unit="USD" required>
 					</div>
 				</div>
 
@@ -179,7 +179,7 @@
 
 				<div class="col-md-12">
 					<h5>Availability <i class="tip" data-tip-content="When is the property available to start being rented"></i></h5>
-                    <input name="available" type="text" id="date-picker-property-form" placeholder="Date" value="<?php form_print_value($cache, $listing, 'square_feet'); ?>" required>
+                    <input name="available" type="text" id="date-picker-property-form" placeholder="Date" value="<?php //only works on class.theme.php form_print_value($cache, $listing, 'available'); ?>" required>
 				</div>
 			</div>
 

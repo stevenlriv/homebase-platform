@@ -778,6 +778,26 @@ $(document).ready(function(){
 		 fixedContentPos: false
 	});
 
+	//Open Unique Link Popup
+	$( ".open-ul-pp" ).click(function() {
+
+		//get url
+		var a_href = $(this).attr('href');
+		var a_href = a_href.replace("#", ""); //remove it
+
+		//Content
+		var title = 'Share the link below';
+		var content = 'Its simple, share the link to prospect tenants and if they rent with us you get paid!';
+
+		//Generate the popup
+		$.magnificPopup.open({
+			items: {
+				src: '<div id="small-dialog" class="zoom-anim-dialog"><button title="Close" type="button" style="color: #000;" class="mfp-close"></button><h2>' + title + '</h2><p>' + content + '</p><p><a href="' + a_href + '" onClick="$.magnificPopup.close();">' + a_href + '</a></p></div>',
+				type: 'inline'
+			}
+		  });
+	});
+
 	//Open Hide popup
 	$( ".open-hd-pp" ).click(function() {
 

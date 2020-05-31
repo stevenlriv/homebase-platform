@@ -101,8 +101,8 @@
 								$date = date("m/d/Y");
 
 								if(!empty($listing)) {
-									if(strtotime($listing['available']) > strtotime(date("m/d/Y"))) {
-										$date = $listing['available'];
+									if($listing['available'] > strtotime(date("m/d/Y"))) {
+										$date = date("m/d/Y", $listing['available']);
 									}
 								}
 
@@ -123,13 +123,17 @@
 						<?php 
 							//If he is looking for a specific date and is not on a listing show it
 							//Or if the listing date is <= that session date show session date as the selected one
-							if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && strtotime($listing['available'])<=strtotime($_SESSION['search-date'])) { 
+							if(!empty($_SESSION['search-date']) && empty($listing) || !empty($_SESSION['search-date']) && !empty($listing) && $listing['available']<=strtotime($_SESSION['search-date'])) { 
 								$date = $_SESSION['search-date'];
 							} 
 							 
 							if(is_on_listing_creation_page()) {
 								$lt_date = form_get_value($cache, $listing, 'available'); //We get the saved date
-								if(empty($lt_date)) {
+								
+								if(is_numeric($lt_date) && $lt_date!=0) {
+									$lt_date = date("m/d/Y", $lt_date);
+								}
+								elseif(empty($lt_date)) {
 									$lt_date = date("m/d/Y");
 								}
 							?>
@@ -243,6 +247,8 @@ function sidebar_component() {
 }
 
 function full_search_form($type = '') {
+	global $user;
+	
 	//action for search form
 	if($type == 'my-properties') {
 		$action = '/my-properties';
@@ -338,7 +344,8 @@ function full_search_form($type = '') {
 										</div>
 
 										<?php
-											if($type == 'my-properties') {
+											// Don't show this option to listers, because they only see active ones
+											if($type == 'my-properties' && $user['type'] != 'listers') {
 										?>
 										<!-- Status -->
 										<div class="col-fs-3">

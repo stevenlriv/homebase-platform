@@ -114,12 +114,6 @@
         //Get $listing_images from JQUERY
         $listing_images = '';
 
-        //We change the listing pricing using our current business model of 10% mark up
-        //Also on the footer.php there is some js code to let the lister know how much is going to be listed at Homebase
-        //No decimals numbers use round()
-        $_POST['monthly_house'] = round($_POST['monthly_house'] + ($_POST['monthly_house']*0.10));
-        $_POST['deposit_house'] = round($_POST['deposit_house'] + ($_POST['deposit_house']*0.10));
-
         //Not in use currently
         $monthly_per_room = 0;
         $deposit_per_room = 0;

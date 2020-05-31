@@ -9,7 +9,7 @@
 			<div class="col-md-12">
 
 				<h2>Terms of Service</h2>
-				<span>Last Updated: 12/26/2019</span>
+				<span>Last Updated: 05/31/2020</span>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
@@ -60,8 +60,8 @@
                               <br /> 2.4 You agree to provide and maintain true, accurate, current and complete information about yourself as prompted by the Service&rsquo;s registration form and each Member Agreement. If your information is not true, accurate, current, or complete, this will be a non-curable material breach of this Agreement and we may terminate your rights under this Agreement and all applicable Member Agreements. Registration data and certain other information about you are governed by our Privacy Policy.
                               <br /> 2.5 You may not register more than one (1) Homebase Account unless Homebase authorizes you to do so. You may not assign or otherwise transfer your Homebase Account to another party.
                               <br /> 2.6 You are responsible for maintaining the confidentiality of your password and account, if any, and are fully responsible for any and all activities that occur under your password or account. You agree to (a) immediately notify Homebase of any unauthorized use of your password or account or any other breach of security, and (b) ensure that you exit from your account at the end of each session when accessing the Service. Homebase will not be liable for any loss or damage arising from your failure to comply with this Section.
-                              <br /> 2.8 You acknowledge that Homebase may establish general practices and limits concerning use of the Service, including without limitation the maximum period of time that data or other content will be retained by the Service and the maximum storage space that will be allotted on Homebase&rsquo;s servers on your behalf. You agree that Homebase has no responsibility or liability for the deletion or failure to store any data or other content maintained or uploaded by the Service. You acknowledge that Homebase reserves the right to terminate accounts that are inactive for an extended period of time. You further acknowledge that Homebase reserves the right to change these general practices and limits at any time, in its sole discretion, with or without notice.</p>
-
+                              <br /> 2.8 You acknowledge that Homebase may establish general practices and limits concerning use of the Service, including without limitation the maximum period of time that data or other content will be retained by the Service and the maximum storage space that will be allotted on Homebase&rsquo;s servers on your behalf. You agree that Homebase has no responsibility or liability for the deletion or failure to store any data or other content maintained or uploaded by the Service. You acknowledge that Homebase reserves the right to terminate accounts that are inactive for an extended period of time. You further acknowledge that Homebase reserves the right to change these general practices and limits at any time, in its sole discretion, with or without notice.
+                              <br /> 2.9 Listers may create an account if they are eligible and promote all the listing they would like, but they will only be paid a commission by the link clicks that converts. The total amount of the commission will be divided in 2, 4, or 8 months depending on the specifics of that property and the lease duration.</p>
                           <br />
                           <h3>3. Financial Terms for Guests</h3>
                           <br />

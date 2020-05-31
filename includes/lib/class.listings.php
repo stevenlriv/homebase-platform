@@ -36,11 +36,11 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	}
 
 	function print_available_message($type, $available_date) {
-		if(strtotime($available_date) > strtotime(date("m/d/Y"))) {
+		if($available_date > strtotime(date("m/d/Y"))) {
 			if($type == 'admin')
-				echo "<a href='#'>until {$available_date}</a>";
+				echo "<a href='#lease-link'>until ".date("m/d/Y", $available_date)."</a>";
 			elseif($type == 'date')
-				echo "on ".$available_date;
+				echo "on ".date("m/d/Y", $available_date);
 			elseif($type == 'status')
 				echo "Available soon";
 		}
@@ -182,16 +182,26 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		global $db;
 
 		//URI CANT BE CHANGED AFTER IT IS CREATED
+		$available = strtotime($available);
 
 		//Trim keywords
 		$keywords = trim($keywords);
 
-		$q = $db->prepare ( "UPDATE xvls_listings SET id_city = ?, `type` = ?, available = ?, zipcode = ?, keywords = ?, monthly_house = ?, monthly_per_room = ?, deposit_house = ?, deposit_per_room = ?, number_rooms = ?,
+		//Original Rent Cost
+		$original_rent_cost = $monthly_house;
+
+        //We change the listing pricing using our current business model of 10% mark up
+        //Also on the footer.php there is some js code to let the lister know how much is going to be listed at Homebase
+        //No decimals numbers use round()
+        $monthly_house = round($monthly_house + ($monthly_house*0.10));
+		$deposit_house = round($deposit_house + ($deposit_house*0.10));
+		
+		$q = $db->prepare ( "UPDATE xvls_listings SET id_city = ?, `type` = ?, available = ?, zipcode = ?, keywords = ?, monthly_house = ?, monthly_house_original = ?, monthly_per_room = ?, deposit_house = ?, deposit_per_room = ?, number_rooms = ?,
 											number_bathroom = ?, square_feet = ?, physical_address = ?, postal_address = ?, latitude = ?, longitude = ?, listing_title = ?, listing_description = ?, listing_images = ?, video_tour = ?,
 											calendly_link = ?, checkin_images = ?, checkin_description = ?, air_conditioning = ?, electricity = ?, furnished = ?, parking = ?, pets = ?, smoking = ?, water = ?, wifi = ?,
 											laundry_room = ?, gym = ?, alarm = ?, swimming_pool = ? WHERE id_listing = ?" );
 									
-		$q->bind_param ( 'issssssssssssssssssssssssssssssssssi', $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'isssssssssssssssssssssssssssssssssssi', $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
 										$laundry_room, $gym, $alarm, $swimming_pool, $id_listing);
@@ -211,6 +221,9 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 						$laundry_room, $gym, $alarm, $swimming_pool) {
 		global $db;
 
+		// Change date to time stamp to be able to compare
+		$available = strtotime($available);
+
 		$id_user = is_login_user()['id_user'];
 
 		$uri = get_unique_uri(array( 'title' => $listing_title, 'id_city' => $id_city));
@@ -218,13 +231,22 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		//Trim keywords
 		$keywords = trim($keywords);
 
-		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, id_city, `type`, available, zipcode, uri, keywords, monthly_house, monthly_per_room, deposit_house, deposit_per_room, number_rooms,
+		//Original Rent Cost
+		$original_rent_cost = $monthly_house;
+
+        //We change the listing pricing using our current business model of 10% mark up
+        //Also on the footer.php there is some js code to let the lister know how much is going to be listed at Homebase
+        //No decimals numbers use round()
+        $monthly_house = round($monthly_house + ($monthly_house*0.10));
+        $deposit_house = round($deposit_house + ($deposit_house*0.10));
+
+		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, id_city, `type`, available, zipcode, uri, keywords, monthly_house, monthly_house_original, monthly_per_room, deposit_house, deposit_per_room, number_rooms,
 											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,
 											calendly_link, checkin_images, checkin_description, air_conditioning, electricity, furnished, parking, pets, smoking, water, wifi,
 											laundry_room, gym, alarm, swimming_pool)
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 									
-		$q->bind_param ( 'iisssssssssssssssssssssssssssssssssss', $id_user, $id_city, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'iissssssssssssssssssssssssssssssssssss', $id_user, $id_city, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
 										$laundry_room, $gym, $alarm, $swimming_pool);

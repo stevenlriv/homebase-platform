@@ -18,18 +18,11 @@
 
 ## MVP LAUNCH (# is number of weeks)
 
-   ** Reorganize the roadmap; main focus will be listers
-   ** Update database table on the live site
-
  1) [DONE] Add Picture Capabilities To Listings, Test Accounts and fix Bugs
     
  2-3) Improve "Submit Listing" Interface
-   Users
-      -- create a menu on template for every usrr
-      -- create a function to let user types access that page
-      -- terms of service for a lister on the commission
 
-
+    **Listers affiliated database structure
 
     - WEBSITES PAGES (ERNESTO TASK)
       --- Landlords
@@ -39,19 +32,15 @@
     - Fix "Submit Listing" form cache system and why all of it is not working
       -- if you edit the bottom part and then the upper part the bottom part gets saved too
       -- if you only edit the bottom part it does not saves
-   ========
+   =================
     - Create the part where you can add self-checkin data
     --- Postal Address
     --- Include images feauture for self-checkin
-    - Rent by the room
     - JQUERY FORM VALIDATION STRUCTURE: "my-profile", "submit-listings"
-    ========
-    - Test accounts types to see how they work: tenants, realtors, landlords, admins, super admin
-    - See how their platform page looks like
+    ================
     - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
-    - There is a listing search bug with the year date that need to be fixed for example listing of 2021 listing-search.php
-    --- it can be esaly fixed by changing the date format on the database to time stampt and then converting that timestamp to a date you can show on the full script. there would be a lot of places where changes would need to be done, specially the footer.php
-    - Bank information settings: Bank Name, Routing Number, Bank Account Number
+
+       ** Update database table and files on the live site
 
  4) Realtors and Landlords Accounts Creations
     - Allow for new realtor and landlords to conviniently create an account
@@ -81,6 +70,7 @@
     - Ability to view the user profile with lease docs of their tenants
     - Calendly integration into the platform
     - class.theme.php verify if the house is really rented or not to disable the date usings js on the landlord/realtor panel
+    - #lease-link on class.listings.php
     
  10) Tenant account Journey consolidated
     - Account creation enabled
@@ -151,7 +141,8 @@
                - bank_routing_number
                - bank_account_number
             xvls_listings
-               - available - 255 char
+               - available - 255 char; and update all of the datos to strtotime (one way to do it, is just to edit the listings)
+               - monthly_house_original; price established by user or landlord
                
         1) User
             - id_referral: starts at 1000 and increments +1 per user

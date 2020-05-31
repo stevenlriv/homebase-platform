@@ -57,7 +57,7 @@
 				show_message($form_success, $form_error);
 			?>
 
-            <h4 class="search-title">Search The Available Properties</h4>
+            <h4 class="search-title">Search Properties</h4>
             <?php full_search_form('my-properties'); ?>
         </div>
 
@@ -67,7 +67,7 @@
 
 				<tr>
 					<th><i class="fa fa-file-text"></i> Property</th>
-					<th class="expire-date"><i class="fa fa-calendar"></i> Occupancy</th>
+					<th class="expire-date"><i class="fa fa-calendar"></i> Available</th>
 					<th></th>
 				</tr>
 
@@ -87,32 +87,21 @@
                                 echo '<h4>'.$value['listing_title'].'</h4>';
                             }
                             else {
-                                echo '<h4><a href="/'.$value['uri'].'" target="_blank">'.$value['listing_title'].'</a></h4>';
+                                echo '<h4><a href="/'.$value['uri'].'?ref='.$user['id_referral'].'" target="_blank">'.$value['listing_title'].'</a></h4>';
                             }
 						?>
 							
 							<span><?php echo $value['physical_address']; ?> </span>
-							<span class="table-property-price">$<?php echo $value['monthly_house']; ?> / monthly</span>
+							<span class="table-property-price">$<?php echo (round($value['monthly_house_original']*0.10))*2; ?> / paid in 2 months</span>
 						</div>
 					</td>
-					<td class="expire-date"><?php print_available_message('admin', $value['available']); ?></td>
+					<td class="expire-date"><?php print_available_message('date', $value['available']); ?></td>
 					<td class="action">
-						<a href="/edit-property?q=<?php echo $value['uri']; ?>"><i class="fa fa-pencil"></i> Edit</a>
                         <?php
-
 							//Modify new url, so javascript object can get it '#' will be removed by javascript on the other end
-							$show_url = '#p='.$pagination->get_page().'&show='.$value['uri'].'&confirm=true&'.$url;
-							$hide_url = '#p='.$pagination->get_page().'&hide='.$value['uri'].'&confirm=true&'.$url;
-							$delete_url = '#p='.$pagination->get_page().'&delete='.$value['uri'].'&confirm=true&'.$url;
-
-                            if($value['status']=='inactive') {
-                                echo '<a href="'.$show_url.'" class="open-sw-pp"><i class="fa fa-eye"></i> Show</a>';
-                            }
-                            else {
-                                echo '<a href="'.$hide_url.'" class="open-hd-pp"><i class="fa fa-eye-slash"></i> Hide</a>';
-                            }
+							$unique_link = '#'.get_domain().'/'.$value['uri'].'?ref='.$user['id_referral'];
 						?>
-						<a href="<?php echo $delete_url; ?>" class="delete open-dl-pp"><i class="fa fa-remove"></i> Delete</a>
+						<a href="<?php echo $unique_link; ?>" class="open-ul-pp"><i class="fa fa-link"></i> Get Unique Link</a>
 					</td>
 				</tr>
 				<?php

@@ -63,9 +63,12 @@
 			$date = sanitize_xss($_GET['date']);
 			$_SESSION['search-date'] = $date;
 
+			//We transform the date to unix to be able to do a search in the database
+			$available = strtotime($date);
+
             $url = $url."date=$date&";
 
-            array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "available", "command" => "<=", "value" => $date));	
+            array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "available", "command" => "<=", "value" => $available));	
         }
 		else {
 			//$_SESSION['search-date'] = ''; //to reset for fields if left empty; do not reset due to user experience resons
