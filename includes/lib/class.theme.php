@@ -191,8 +191,27 @@ function sidebar_component() {
 					</ul>
 
                     <?php
-                        //Realtor Menu
-                        }
+						}
+						
+						//Lister Menu
+						if($user['type'] == 'listers') {
+					?>
+
+					<ul class="my-account-nav">
+						<li class="sub-nav-title">Properties</li>
+						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> All Properties</a></li>
+					</ul>
+
+					<ul class="my-account-nav">
+						<li class="sub-nav-title">Manage Financials</li>
+						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
+                        <li><a href="#" <?php if($request == '/people-referred') echo 'class="current"'; ?>><i class="sl sl-icon-people"></i> People Referred</a></li>
+                        <li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
+					</ul>
+					<?php
+						}
+
+						//Realtor/Landlord/Admin Menus
                         else {
                     ?>
 					<ul class="my-account-nav">
@@ -205,7 +224,7 @@ function sidebar_component() {
 						<li class="sub-nav-title">Manage Financials</li>
 						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
                         <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>
-                        <li><a href="#" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
+                        <li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
 					</ul>
                     <?php
                         }
@@ -344,10 +363,6 @@ function full_search_form($type = '') {
 						</div>
 						<!-- Box / End -->
                         </form>
-
-
-
-
 
 <?php
 }

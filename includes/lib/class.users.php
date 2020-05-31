@@ -16,6 +16,33 @@
 		HiddenString
 	};
 
+	//$type = user type separated by comma
+	//There can also be one user type
+	//@return true = user is not allowed
+	//@return false = user is not allowed
+	function do_not_allow_user($type) {
+		global $user;
+
+		$type = trim($type);
+		$array = explode(',', $type);
+
+		if(count($array)>1) {
+			foreach ( $array as $id => $value ) {
+				$value = trim($value);
+				if($value == $user['type']) {
+					return true;
+				}
+			}
+		}
+		else {
+			if($type == $user['type']) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	function is_login_user() {
 		global $db;
 		
@@ -99,6 +126,20 @@
 		
 		$q = $db->prepare ( "UPDATE xvls_users SET fullname = ?, phone_number = ?, email = ?, profile_bio = ?, profile_linkedin = ? WHERE id_user = ?" );
 		$q->bind_param ( 'sssssi', $fullname, $phone_number, $email, $profile_bio, $profile_linkedin, $id_user );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
+	}
+
+	function update_bank_information($id_user, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number) {
+		global $db;
+		
+		$q = $db->prepare ( "UPDATE xvls_users SET bank_name = ?, bank_sole_owner = ?, bank_routing_number = ?, bank_account_number = ? WHERE id_user = ?" );
+		$q->bind_param ( 'ssssi', $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $id_user );		
 	
 		if ( $q->execute() ) {
 			return true;

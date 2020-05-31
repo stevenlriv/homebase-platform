@@ -26,13 +26,14 @@ if($request != '/find-a-homebase') {
 			<div class="col-md-4 col-sm-6 ">
 				<h4>Helpful Links</h4>
 				<ul class="footer-links">
-					<li><a href="/faq">FAQ</a></li>
 					<li><a href="/find-a-homebase">Find a Homebase</a></li>
                     <li><a href="/for-landlords">For Landlords</a></li>
 					<li><a href="/for-realtors">For Realtors</a></li>
+					<li><a href="/for-listers">For Listers</a></li>
 				</ul>
 
 				<ul class="footer-links">
+					<li><a href="/faq">FAQ</a></li>
 				    <li><a href="/contact">Contact</a></li>
 					<li><a href="/privacy">Privacy Policy</a></li>
                     <li><a href="/terms">Terms of Service</a></li>
@@ -168,6 +169,31 @@ ga('send', 'pageview');
 
 		// Dropzone Listing Images
 		dropzone_js('dropzone-listing', 'galery-content', 'galery-section', '/images.php?action=get-img');
+?>
+
+<script>
+	/*--------------------------------------------------*/
+	/*  Submit Property
+	/*--------------------------------------------------*/
+
+	$('form input[name="monthly_house_homebase"]').prop("disabled", true);
+
+	// In case there is form data while editing or cache
+	var monthly_rent = parseInt($( 'form input[name="monthly_house"]' ).val(), 10);
+	var monthly_rent_homebase = monthly_rent + ((monthly_rent)*0.10);
+	$('form input[name="monthly_house_homebase"]').attr('value', Math.trunc(monthly_rent_homebase));
+
+	// When the form input is updated;
+	$( 'form input[name="monthly_house"]' ).keyup(function() {
+		monthly_rent = parseInt($( 'form input[name="monthly_house"]' ).val(), 10);
+		monthly_rent_homebase = monthly_rent + ((monthly_rent)*0.10);
+
+		
+		$('form input[name="monthly_house_homebase"]').attr('value', Math.trunc(monthly_rent_homebase));
+	});
+</script>
+
+<?php
 	}
 ?>
 

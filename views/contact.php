@@ -16,7 +16,9 @@
 	}
 
 	// Landlord/Realtor Inquiry
+	$realtor_landlord = false;
 	if( !empty($_GET['inquiry']) ) {
+		$realtor_landlord = true;
 		if($_GET['inquiry'] == 'landlord') {
 			$subject = "Interested in being a Homebase landlord";
 			$message = "Looking to add my property to be rented on the platform. The property is located at ...";	
@@ -74,20 +76,44 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div>
-								<input name="name" type="text" id="name" placeholder="Your Name" required="required" />
+								<?php
+									if($user) {
+										echo '<input name="name" type="hidden" id="name" value="'.$user['fullname'].'" />';
+									}
+									else {
+										echo '<input name="name" type="text" id="name" placeholder="Your Name" required="required" />';
+									}
+								?>
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div>
-								<input name="email" type="email" id="email" placeholder="Email Address" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required" />
+								<?php
+									if($user) {
+										echo '<input name="email" type="hidden" id="email" value="'.$user['email'].'" />';
+									}
+									else {
+										echo '<input name="email" type="email" id="email" placeholder="Email Address" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required" />';
+									}
+								?>
 							</div>
 						</div>
 					</div>
 
 					<div>
-						<input name="subject" type="text" id="subject" placeholder="Subject" required="required" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
+						<input name="subject" type="<?php if(!empty($listing) || $realtor_landlord) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" required="required" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
 					</div>
+
+					<?php
+						if(!empty($listing)) {
+					?>
+					<div>
+						<input name="person" type="text" id="person" placeholder="Did any one recommended you the property?" value="" />
+					</div>
+					<?php
+						}
+					?>
 
 					<div>
 						<textarea name="comments" cols="40" rows="3" id="comments" placeholder="Message" spellcheck="true" required="required"><?php if(!empty($message)) echo $message; ?></textarea>

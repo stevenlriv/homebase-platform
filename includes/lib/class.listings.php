@@ -54,6 +54,32 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		}
 	}
 
+	function get_unique_uri($array, $only_verify = false) {
+		$title = $array['title'];
+		$id_city = $array['id_city'];
+
+		//Basic uri
+		$uri = clean_url($title);
+
+		//If basic uri exists, just combine uri + city name
+		if(is_uri($uri, true)) {
+			$uri = get_cities('one', $id_city)['uri'].'-'.$uri;
+			$uri = clean_url($uri);
+		}	
+		
+		// Verify if the url already exists
+		if($only_verify) {
+			if(is_uri($uri, true)) {
+				return true;
+			}
+
+			return false;
+		}
+
+		// Return the url uri
+		return $uri;
+	}
+
 	function is_uri($uri, $by_uri_id = false) {
 		$uri = clean_url($uri);
 
@@ -155,19 +181,17 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 						$laundry_room, $gym, $alarm, $swimming_pool) {
 		global $db;
 
-		//Uri - Convert it from the listing_title
-			//If uri exists, just combine uri + city name
-		$uri = clean_url($listing_title);
+		//URI CANT BE CHANGED AFTER IT IS CREATED
 
 		//Trim keywords
 		$keywords = trim($keywords);
 
-		$q = $db->prepare ( "UPDATE xvls_listings SET id_city = ?, `type` = ?, available = ?, zipcode = ?, uri = ?, keywords = ?, monthly_house = ?, monthly_per_room = ?, deposit_house = ?, deposit_per_room = ?, number_rooms = ?,
+		$q = $db->prepare ( "UPDATE xvls_listings SET id_city = ?, `type` = ?, available = ?, zipcode = ?, keywords = ?, monthly_house = ?, monthly_per_room = ?, deposit_house = ?, deposit_per_room = ?, number_rooms = ?,
 											number_bathroom = ?, square_feet = ?, physical_address = ?, postal_address = ?, latitude = ?, longitude = ?, listing_title = ?, listing_description = ?, listing_images = ?, video_tour = ?,
 											calendly_link = ?, checkin_images = ?, checkin_description = ?, air_conditioning = ?, electricity = ?, furnished = ?, parking = ?, pets = ?, smoking = ?, water = ?, wifi = ?,
 											laundry_room = ?, gym = ?, alarm = ?, swimming_pool = ? WHERE id_listing = ?" );
 									
-		$q->bind_param ( 'isssssssssssssssssssssssssssssssssssi', $id_city, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'issssssssssssssssssssssssssssssssssi', $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
 										$laundry_room, $gym, $alarm, $swimming_pool, $id_listing);
@@ -189,9 +213,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
 		$id_user = is_login_user()['id_user'];
 
-		//Uri - Convert it from the listing_title
-			//If uri exists, just combine uri + city name
-		$uri = clean_url($listing_title);
+		$uri = get_unique_uri(array( 'title' => $listing_title, 'id_city' => $id_city));
 
 		//Trim keywords
 		$keywords = trim($keywords);

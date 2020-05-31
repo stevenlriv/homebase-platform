@@ -2,7 +2,11 @@
 if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
 function canonical_url($array) {
+    global $url_canonical;
+
     $url = get_actual_url($array);
+
+    if($url_canonical!='') $url = $url.'?'.rtrim($url_canonical, '&');
 
     echo "<link rel=\"canonical\" href=\"$url\" />\n";
 }

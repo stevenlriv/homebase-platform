@@ -93,10 +93,15 @@ if (!empty($error)) {
 
  $e_subject = "$name has contacted about $subject";
 
+ $e_person = "";
+ if (!empty($person)) {
+ 	$e_person = "$person recommended this property to $name <br /><br />";
+ }
+
  $e_content = $comments." <br /><br />";
  $e_reply = "You can contact $name via email at: $email or simply reply to this message.";
 
- $msg = $e_content . $e_reply;
+ $msg = $e_person . $e_content . $e_reply;
 
  if( support_email($name, $email, $e_subject, $msg)) {
 	 //The file custom.js is using the keyword "submitted" on the message text to let know js that the message was successfully sent and close the form

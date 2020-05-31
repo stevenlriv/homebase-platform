@@ -108,6 +108,9 @@
 			$_SESSION['search-maxprice'] = ''; //to reset for fields if left empty
 		}
 
+	//This url variable is used on the class.seo.php to show the real canonical url while searching
+	//This will help SEO to better index our pages
+	$url_canonical = $url;
     /////////////////////////////////////////
 
 

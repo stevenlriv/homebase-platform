@@ -77,15 +77,15 @@
 
 			<!-- Title -->
 			<div class="form">
-				<h5>Property Title <i class="tip" data-tip-content="Type title that will also contains an unique feature of your property (e.g. renovated, air contidioned)"></i></h5>
-				<input name="listing_title" class="search-field" type="text" value="<?php form_print_value($cache, $listing, 'listing_title'); ?>" required/>
+				<h5>Property Title <i class="tip" data-tip-content="Type clean title that will also contains an unique feature of your property (e.g. renovated, air contidioned). Limit of 40 characters. Do not make titles like 2 bed/1 bath, bed and bath are always indicated when we show the listings."></i></h5>
+				<input name="listing_title" class="search-field" type="text" value="<?php form_print_value($cache, $listing, 'listing_title'); ?>" maxlength="40" required/>
 			</div>
 
 			<!-- Row -->
 			<div class="row with-forms">
 
 				<!-- Type -->
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<h5>Type</h5>
 					<select name="type" class="chosen-select-no-single" required>
 						<option label="blank"></option>		
@@ -94,6 +94,13 @@
 					</select>
 				</div>
 
+				<!-- Area -->
+				<div class="col-md-6">
+					<h5>Area <i class="tip" data-tip-content="Property size in square feet"></i></h5>
+					<div class="select-input disabled-first-option">
+						<input name="square_feet" value="<?php form_print_value($cache, $listing, 'square_feet'); ?>" type="number" data-unit="Sq Ft" required>
+					</div>
+				</div>
 			</div>
 			<!-- Row / End -->
 
@@ -142,17 +149,17 @@
 
 				<!-- Price -->
 				<div class="col-md-4">
+					<h5>Homebase Listing Rent <i class="tip" data-tip-content="This is the price your property will be listed at Homebase"></i></h5>
+					<div class="select-input disabled-first-option">
+						<input name="monthly_house_homebase" value="" type="number" data-unit="USD">
+					</div>
+				</div>
+
+				<!-- Price -->
+				<div class="col-md-4">
 					<h5>Deposit <i class="tip" data-tip-content="Property deposit"></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="deposit_house" value="<?php form_print_value($cache, $listing, 'deposit_house'); ?>" type="number" data-unit="USD" required>
-					</div>
-				</div>
-				
-				<!-- Area -->
-				<div class="col-md-4">
-					<h5>Area <i class="tip" data-tip-content="Property size in square feet"></i></h5>
-					<div class="select-input disabled-first-option">
-						<input name="square_feet" value="<?php form_print_value($cache, $listing, 'square_feet'); ?>" type="number" data-unit="Sq Ft" required>
 					</div>
 				</div>
 
@@ -295,13 +302,12 @@
 			</div>
 
 			<div class="form">
-				<h5>Search Keywords <i class="tip" data-tip-content="Add keywords separated by comma, that you think a tenant would search an example would be a restaurant or mural name near the property"></i></h5>
-				<textarea name="keywords" cols="10" rows="1" id="keywords" spellcheck="true"><?php form_print_value($cache, $listing, 'keywords'); ?></textarea>
+				<h5>Search Keywords <i class="tip" data-tip-content="Add keywords separated by comma, that you think a tenant would search an example would be a restaurant or mural name near the property. Limit 100 characters."></i></h5>
+				<input name="keywords" id="keywords" type="text" value="<?php form_print_value($cache, $listing, 'keywords'); ?>" maxlength="100">
 			</div>
 
 		</div>
 		<!-- Section / End -->
-
 
 		<!-- Section -->
 		<h3>Virtual Details</h3>
@@ -313,24 +319,28 @@
 				<!-- Name -->
 				<div class="col-md-12">
 					<h5>Calendly <i class="tip" data-tip-content="Link to calendly where tenants can schedule showing appointments"></i></h5>
-					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>">
+					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>" required>
 				</div>
 
 				<!-- Email -->
 				<div class="col-md-12">
-					<h5>Video Tour <i class="tip" data-tip-content="Youtube video link where people can see a video tour of the property"></i></h5>
+					<h5>Video Tour (optional) <i class="tip" data-tip-content="Youtube video link where people can see a video tour of the property"></i></h5>
 					<input name="video_tour" type="text" value="<?php form_print_value($cache, $listing, 'video_tour'); ?>">
 				</div>
 
 			</div>
 			<!-- Row / End -->
 
+			<div class="checkboxes in-row margin-bottom-20 margin-top-10">
+				<input id="check-30" type="checkbox" name="check-required" required>
+				<label for="check-30">I certify that this property can be accessed with the details provided above. I understand that if this property is not able to be accessed remotely, my account can be penalized and I will not be able to list on Homebase anymore.</label>
+			</div>
 		</div>
 		<!-- Section / End -->
 
 		<div class="divider"></div>
 
-		<button name="submit" class="button margin-top-5 margin-bottom-20 preview"> <?php if(!empty($listing)) { echo 'Save Changes'; } else { echo 'Add New'; } ?> <i class="fa fa-arrow-circle-right"></i></button>
+		<button name="submit" class="button margin-top-10 margin-bottom-20 preview"> <?php if(!empty($listing)) { echo 'Save Changes'; } else { echo 'Add New'; } ?> <i class="fa fa-arrow-circle-right"></i></button>
 
 		</div>
 		</form>

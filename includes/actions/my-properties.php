@@ -36,9 +36,17 @@
     if(!empty($_GET['delete']) && !empty($_GET['confirm']) && $_GET['confirm'] == 'true' && is_uri($_GET['delete'], true)) {
         $listing = is_uri($_GET['delete'], true);
 
+        //We get the image array so we can delete the images after the listing is deleted
+        $images_array = json_decode($listing['listing_images']);
+
         if(user_has_access_listing($listing)) {
             if(delete_listing($listing['id_listing'])) {
                 $form_success = 'The property was deleted successfully.';
+
+                //We now procced to delete every image
+                foreach($images_array as $id => $value) {
+                    delete_image($value);
+                }
             }
             else {
                 $form_error = 'There was an error deleting the property, please try again.';

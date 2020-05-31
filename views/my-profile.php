@@ -50,6 +50,14 @@
 								$form_info = 'Press the "Save Changes" button below to save your information.';
 							}
 
+							// Bank Account Information Message
+							// Don't show this message if there is something else to show
+							if($form_success=='' && $form_error=='' && $form_info=='') {
+								if($user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
+									$form_info = 'Remember to set up your bank information under financial settings.';
+								}
+							}
+
 							show_message($form_success, $form_error, $form_info);
 						?>
 
@@ -68,7 +76,6 @@
 						<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
 						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php form_print_value($cache, $user, 'profile_bio'); ?></textarea>
 				
-
 						<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin</h4>
 
 						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">

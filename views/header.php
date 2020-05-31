@@ -154,15 +154,16 @@
 					?>
 
 					<?php
-						//Hide from tenants
-						if(!empty($user) && $user['type']!='tenants') {
+						//If the user is logged in, Hide from tenants and listers
+						if(!empty($user) && !do_not_allow_user('tenants, listers')) {
 					?>
 							<a href="/submit-property" class="button border">Submit Property</a>
 					<?php
 						}
-						else {
+
+						elseif(empty($user)) {
 					?>
-						<a href="/submit-property" class="button border">Submit Property</a>
+							<a href="/submit-property" class="button border">Submit Property</a>
 					<?php
 						}
 					?>

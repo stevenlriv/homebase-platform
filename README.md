@@ -18,19 +18,27 @@
 
 ## MVP LAUNCH (# is number of weeks)
 
+   ** Reorganize the roadmap; main focus will be listers
+   ** Update database table on the live site
+
  1) [DONE] Add Picture Capabilities To Listings, Test Accounts and fix Bugs
     
  2-3) Improve "Submit Listing" Interface
-    - certification box: "i certify that this property can be accesed with the details provided above. I understand that if i'm lieng my account can and will be penalized and I will not be able to list on Homebase anymore"
-    - add 10% increase on listing pricing
-    - show how much will be listed at on Homebase based on their price
-    - limit listing title to 40 characters per website design in message add "do not make titles like 2 bed/1 bath, bed and bath are always indicated when we show the listing"
-    - limit search keywords to 5 and 255 characters
-    - Fix uri flexibility
+   Users
+      -- create a menu on template for every usrr
+      -- create a function to let user types access that page
+      -- terms of service for a lister on the commission
+
+
+
+    - WEBSITES PAGES (ERNESTO TASK)
+      --- Landlords
+      --- Realtors
+      --- Listers
+      --- FAQ
     - Fix "Submit Listing" form cache system and why all of it is not working
-    - Canonical url for find-a-homebase.php searchs
-    - picture sorting and ordering jquery
-    - Contact form: if user is logged in add their email & name and lock those inputs to view only
+      -- if you edit the bottom part and then the upper part the bottom part gets saved too
+      -- if you only edit the bottom part it does not saves
    ========
     - Create the part where you can add self-checkin data
     --- Postal Address
@@ -43,17 +51,12 @@
     - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
     - There is a listing search bug with the year date that need to be fixed for example listing of 2021 listing-search.php
     --- it can be esaly fixed by changing the date format on the database to time stampt and then converting that timestamp to a date you can show on the full script. there would be a lot of places where changes would need to be done, specially the footer.php
-    ========
-    - Restructure the Country, City and State type of
-    - Improve the cities table with a country table that is connected to that city
-    - Only show the cities available once the person choose the country
-    --- Files that might need to be updated "submit-property-login.php", "find-a-homebase.php", "listing-search.php"
+    - Bank information settings: Bank Name, Routing Number, Bank Account Number
 
  4) Realtors and Landlords Accounts Creations
     - Allow for new realtor and landlords to conviniently create an account
       - FOR-LANDLORDS.php - Get started should redirect them to create an account
       - FOR-REALTORS.php - Get started should redirect them to create an account
-    - Realtor bank information settings: Bank Name, Routing Number, Bank Account Number
     - Allow for realtors to filter the houses by Occupancy (Any) or "Occupied" and "Not Ocuppied"
     - Change Status Listing (Any); on realtor and landlord search
 
@@ -140,9 +143,20 @@
                - find-a-homebase.php
 
     Database
+         NEW STRUCTURE CHANGES
+            xvls_users
+               - id_referral
+               - bank_name
+               - bank_sole_owner
+               - bank_routing_number
+               - bank_account_number
+            xvls_listings
+               - available - 255 char
+               
         1) User
+            - id_referral: starts at 1000 and increments +1 per user
             - status: {active, inactive, archived}
-            - type: {super_admin, admin, landlords, realtors, tenants}
+            - type: {super_admin, admin, landlords, realtors, tenants, listers}
             - code: variable that is used to verify a email, restore password or a phone number
         2) Cities
         3) Settings

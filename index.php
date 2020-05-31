@@ -80,6 +80,20 @@ switch ($request) {
         require_once __DIR__ . '/views/my-profile.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/financial-settings' :
+        if(!$user) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Financial Settings",
+            "request" => $request,
+        );
+
+        require_once __DIR__ . '/includes/actions/my-financial-settings.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/my-financial-settings.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/my-properties' :
         if(!$user) {
             header('Location: /');
@@ -89,11 +103,12 @@ switch ($request) {
             "request" => $request,
         );
 
-        //Search Algorythm & Actions
-        if($user['type']!='tenants') {
+        //Hide Property Actions For Tenants and Listers "!" = return false; meaning the user is not tenant or lister
+        if(!do_not_allow_user('tenants, listers')) {
             require_once __DIR__ . '/includes/actions/my-properties.php';
-            require_once __DIR__ . '/includes/actions/listing-search.php';
         }
+        
+        require_once __DIR__ . '/includes/actions/listing-search.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/my-properties.php';
         require_once __DIR__ . '/views/footer.php';
@@ -112,8 +127,8 @@ switch ($request) {
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/edit-property' :
-        //Do not allow tenants to edit a property
-        if(!$user || $user['type']=='tenants') {
+        //The user needs to be logged in and it cannot be a tenant or lister
+        if(!$user || do_not_allow_user('tenants, listers')) {
             header('Location: /');
         }
 
@@ -122,6 +137,7 @@ switch ($request) {
         if(!$listing || !user_has_access_listing($listing)) {
             header('Location: /my-properties');
         }
+
         $seo = array(
             "title" => "Edit Property",
             "description" => "",
@@ -134,10 +150,11 @@ switch ($request) {
         break;
     case '/submit-property' :
         //Submit property has a section for logged in users and non logged in users
-        //But if the logged in user is a tenant, we don't allow him access to the page
-        if($user && $user['type']=='tenants') {
+        //But if the logged in user is a tenant or lister, we don't allow him access to the page
+        if($user && do_not_allow_user('tenants, listers')) {
             header('Location: /my-profile');
         }
+
         $seo = array(
             "title" => "Add a New Property",
             "description" => "",
@@ -171,7 +188,7 @@ switch ($request) {
     case '/for-landlords' :
         $seo = array(
             "title" => "For Landlords",
-            "description" => "A marketplace where everything it's easy and done for you, just add your house and get it rented, all online.",
+            "description" => "A marketplace where everything it's easy and done for you, just add your house and get it rented quickly, all online.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -181,7 +198,7 @@ switch ($request) {
     case '/for-realtors' :
         $seo = array(
             "title" => "For Realtors",
-            "description" => "As realtors, you can bring clients to our platform to make their life and your life easier. And at the same time, you can earn up to $100 in extra commission.",
+            "description" => "As realtors, you can bring clients to our platform to make their life and your life easier.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -230,6 +247,7 @@ switch ($request) {
         $request_strip = str_replace('/', '', trim($request));
         $listing = is_uri($request_strip);
         if($listing) {
+            //Here we proccess the lister unique link
             $seo = array(
                 "title" => $listing['listing_title'],
                 "description" => substr($listing['listing_description'],0,150)."...",

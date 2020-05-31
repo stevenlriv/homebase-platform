@@ -118,9 +118,9 @@
 
 				<!-- Toggle 1 -->
 				<div class="toggle-wrap">
-					<span class="trigger "><a href="#">How will Homebase help my clients (landlords)?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger "><a href="#"> How will Homebase help me make more money?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>We’ll find vetted tenants willing to pay a 15-60% premiums on rent, handle lease agreements and rent collection. AAll they need to do is sit back and relax while the monthly payments appear in their bank account, minus our 10% monthly fee.</p>
+						<p>We’ll find vetted tenants, handle any questions that they might have about the listing through our chatbot, schedule self-guided & virtual tours, handle lease agreements & rent collection, and hand off the keys to the property for you. That way, you can manage more listings without having to do much of the work. All you need to do is list your properties on our platform following our simple three step guidelines.</p>
 					</div>
 				</div>
 

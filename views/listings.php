@@ -2,7 +2,7 @@
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
 
 	// Add +1 view to the listing table
-	// Used to sort popular recommended listings
+	// Used to sort popular recommended listings that are available
 	update_views($listing['uri']);
 
 	$city = get_cities('one', $listing['id_city']);	

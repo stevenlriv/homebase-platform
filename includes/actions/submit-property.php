@@ -13,12 +13,7 @@
     
 	if ( isset($_POST['submit']) ) {
 
-        if(empty($listing) && is_uri($_POST['listing_title'])) {
-            $form_error = 'You will need to change your property title, because there is an existing property with the same title';
-        }
-
-        // We verify if the current property is not the one with the title
-        if(!empty($listing) && is_uri($_POST['listing_title']) && $listing['uri']!=clean_url($_POST['listing_title'])) {
+        if(empty($listing) && get_unique_uri(array( 'title' => $_POST['listing_title'], 'id_city' => $_POST['id_city']), true)) {
             $form_error = 'You will need to change your property title, because there is an existing property with the same title';
         }
 
@@ -118,6 +113,12 @@
 
         //Get $listing_images from JQUERY
         $listing_images = '';
+
+        //We change the listing pricing using our current business model of 10% mark up
+        //Also on the footer.php there is some js code to let the lister know how much is going to be listed at Homebase
+        //No decimals numbers use round()
+        $_POST['monthly_house'] = round($_POST['monthly_house'] + ($_POST['monthly_house']*0.10));
+        $_POST['deposit_house'] = round($_POST['deposit_house'] + ($_POST['deposit_house']*0.10));
 
         //Not in use currently
         $monthly_per_room = 0;
