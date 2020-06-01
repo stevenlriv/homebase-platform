@@ -11,6 +11,30 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @version    1.0.0
 	 * @since      File available since 1.0.0
 	 */
+
+	function get_array_by_comma($string, $validate = '') {
+		$string = trim($string);
+		$array = explode(',', $string);
+		$array_return = array();
+
+		if(count($array)>1) {
+			foreach ( $array as $id => $value ) {
+				$value = trim($value);
+
+				if($validate == 'email' && is_email($value)) {
+					array_push($array_return, $value);
+				}
+				if($validate == 'numeric' && is_numeric($value)) {
+					array_push($array_return, $value);
+				}
+				elseif($validate == '') {
+					array_push($array_return, $value);
+				}
+			}
+		}
+
+		return $array_return;
+	}
 	
 	function get_google_analytics() {
 		if( is_production_enviroment()  ) {

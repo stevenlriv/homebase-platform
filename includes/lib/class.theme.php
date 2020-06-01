@@ -246,13 +246,18 @@ function sidebar_component() {
 <?php
 }
 
-function full_search_form($type = '') {
+function full_search_form($type = '', $extra = '') {
 	global $user;
 	
 	//action for search form
 	if($type == 'my-properties') {
 		$action = '/my-properties';
 		$date_name = 'Available By';
+	}
+	elseif($type == 'profile') {
+		$action = '/profile';
+		$date_name = 'Available By';
+		$view_user = get_user_by_id($extra);
 	}
 	else {
 		$action = '/find-a-homebase';
@@ -263,6 +268,11 @@ function full_search_form($type = '') {
 <!-- Form -->
 <form action="<?php echo $action; ?>" type="GET">
                         
+						<?php
+							if(is_admin() && !empty($view_user)) {
+								echo '<input name="id" type="hidden" value="'.$view_user['id_user'].'" readonly="readonly">';
+							}
+						?>
 						<div class="main-search-box no-shadow">
 
 							<!-- Row With Forms -->
@@ -353,6 +363,14 @@ function full_search_form($type = '') {
 												<option value="">Prop. Status (Any)</option>
                                                 <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'active') echo 'selected="selected"' ?> value="active">Active</option>
 											    <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'inactive') echo 'selected="selected"' ?> value="inactive">Hidden</option>
+
+												<?php
+													if(is_admin()) {
+												?>
+												<option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'pending') echo 'selected="selected"' ?> value="pending">Pending</option>
+												<?php
+													}
+												?>
 										    </select>
 										</div>
 										<?php

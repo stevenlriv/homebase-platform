@@ -30,6 +30,22 @@
             }
         }
     }
+
+    ////////////////// APPROVED ////////////////// 
+    
+    // Only admins can approve listings
+    if(is_admin() && !empty($_GET['approve']) && !empty($_GET['confirm']) && $_GET['confirm'] == 'true' && is_uri($_GET['approve'], true)) {
+        $listing = is_uri($_GET['approve'], true);
+
+        if($listing['status']=='pending') {
+            if(update_visibilty($listing['id_listing'], 'approve')) {
+                $form_success = 'The property was approved successfully.';
+            }
+            else {
+                $form_error = 'There was an error approving the property, please try again.';
+            }
+        }
+    }
     
     ////////////////// DELETE ////////////////// 
     

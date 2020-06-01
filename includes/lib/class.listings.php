@@ -147,7 +147,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
 		$status = 'inactive';
 
-		if($type == 'show') {
+		if($type == 'show' || $type == 'approve') {
 			$status = 'active';
 		}
 		
@@ -223,6 +223,10 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code) {
 		global $db;
 
+		// Listing status on publish
+		// Admins will need to approve it
+		$status = 'pending';
+
 		// Change date to time stamp to be able to compare
 		$available = strtotime($available);
 
@@ -244,18 +248,25 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
         $monthly_house = round($monthly_house + ($monthly_house*$percentage_markup));
         $deposit_house = round($deposit_house + ($deposit_house*$percentage_markup));
 
-		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, id_city, `type`, available, zipcode, uri, keywords, monthly_house, monthly_house_original, monthly_per_room, deposit_house, deposit_house_original, deposit_per_room, number_rooms,
+		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, id_city, `status`, `type`, available, zipcode, uri, keywords, monthly_house, monthly_house_original, monthly_per_room, deposit_house, deposit_house_original, deposit_per_room, number_rooms,
 											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,
 											calendly_link, checkin_access_code, checkin_images, checkin_description, air_conditioning, electricity, furnished, parking, pets, smoking, water, wifi,
 											laundry_room, gym, alarm, swimming_pool)
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 									
-		$q->bind_param ( 'iissssssssssssssssssssssssssssssssssssss', $id_user, $id_city, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'iisssssssssssssssssssssssssssssssssssssss', $id_user, $id_city, $status, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_access_code, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
 										$laundry_room, $gym, $alarm, $swimming_pool);
 
 		if ( $q->execute() ) {
+			// Send Email of Approval
+			$emails = get_array_by_comma(get_setting(22), 'email');
+
+			foreach($emails as $id => $value) {
+				send_pending_listing_email($value);
+			}
+
 			return true;
 		}
 		//echo $q->error;

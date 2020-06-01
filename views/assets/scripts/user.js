@@ -242,6 +242,25 @@
 		    });
 	    });
 
+	    //Open Approval popup
+	    $( ".open-ap-pp" ).click(function() {
+
+		    //get url
+		    var a_href = $(this).attr('href');
+		    var a_href = a_href.replace("#", "?");
+		
+		    //define url
+		    var cancel_url = '#';
+		    var confirm_url = '/my-properties' + a_href;
+
+		    //Content
+		    var title = 'Are you sure?';
+		    var content = 'This will approve the listing on the platform and search engines. Tenants will be able to rent it.';
+
+		    //Generate the popup
+		    new_action_popup(title, content, cancel_url, confirm_url);
+        });
+        
 	    //Open Hide popup
 	    $( ".open-hd-pp" ).click(function() {
 

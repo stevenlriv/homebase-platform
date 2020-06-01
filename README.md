@@ -29,25 +29,18 @@
     LIVE RELEASE
       ** Compare Live and Production databases
       ** Update database table and files on the live site
+      ** Edit the pending approval admin emails
+
+   --- fix city, country and zip code allowed
 
  4) Realtors and Landlords Accounts Creations
-    - Allow for new realtor and landlords to conviniently create an account
-      - FOR-LANDLORDS.php - Get started should redirect them to create an account
-      - FOR-REALTORS.php - Get started should redirect them to create an account
-    - Allow for realtors to filter the houses by Occupancy (Any) or "Occupied" and "Not Ocuppied"
     - Submmit-property.php
       -- Checkin images
       -- Checkin text
     - Remove realtor and landlord autofill from contact form
-    - Remove redirection to contact form on index.php
-    ====
-    ---- show counts of pendings post on the user account 
-    ---- send an email to all the admins when there is a listing to be approoved
-
-     ---- Have listings on pending approval
-      ------ admin allow for approval
-      ------ allow draft view for admins on all listen hidden or pendin
-      ------ allow draft view of hidden listing for users logged in for owners of that listing
+    - Remove redirection to contact form on index.php for realtor and landlord
+    - Calendly integration into the platform
+      -- remove calendly link form verification from user.js
 
  5-6-7-8-9) PandaDocs API and Renting Infracstructure
     - PandaDocs API Integration with Platform
@@ -57,9 +50,8 @@
     - lease.php
       - Realtors/Landlord will be able to see actual lease contracts
       - Tenants will be able to see lease contracts
-      - Links under /my-properties need to be fixed
+      - Links under /my-properties attached to lease end date need to be fixed
       - Support rent by room, with lease, etc
-    - Tenants will be able to create an account and rent from the website
     - LISTINGS.php
       - Book Now (save booking details when user is trying to log-in, use cookies)
       - **Book now is redirecting to contact us
@@ -70,10 +62,10 @@
       - &id=[property id]
     - Monthly payment history for users and realtors & landlords
     - Ability to view the user profile with lease docs of their tenants
-    - Calendly integration into the platform
-      -- remove calendly link form verification from user.js
     - class.theme.php verify if the house is really rented or not to disable the date usings js on the landlord/realtor panel
     - #lease-link -- on class.listings.php
+    -- Allow access to tenants and landlords to the user profile page only if they have a lease or pending lease with them
+    -- add edit and disable account actions in the /profile page, only for admins
     
  10) Tenant account Journey consolidated
     - Account creation enabled
@@ -84,12 +76,14 @@
       - require lease type
       - lease details
       - current and past homebase
+    - remove tenant autofill from contact form
+    - Remove redirection to contact form on index.php for tenants
 
  11) Master Admin Panel
     - Ability to edit settings
     - Ability to manage and create users
     - Ability to enable new cities y countries
-    - Ability to permanently disable a listing
+    - Ability to permanently disable a listing (status -> archive)
 
  12) Platform Upgrade
     - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
@@ -149,6 +143,11 @@
                - 8-10 = Low Risk
                - 5-7  = Medium Risk
                - 1-4  = High Risk
+               - Formula
+                  -- background check
+                  -- credit check
+                  -- salary
+               - ** Include tenant risk score it in the user profile page
 
     Database
          NEW STRUCTURE CHANGES
@@ -163,6 +162,9 @@
                - monthly_house_original; price established by user or landlord
                - checkin_access_code
                - deposit_house_original
+            xvls_settings
+               - ENTRY
+                  - Pending Approval Admin Emails
             
                
         1) User

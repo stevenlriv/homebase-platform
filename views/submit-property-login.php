@@ -55,7 +55,7 @@
 		<div class="submit-page">
 
 		<?php
-			if($cache && $form_error=='' || $cache_img && $form_error=='') {
+			if($cache && $form_error=='' && $form_success=='' || $cache_img && $form_error=='' && $form_success=='') {
 				if(!empty($listing)) {
 					$form_info = 'It looks like you have some pending changes. Press the "Save Changes" button below to save your changes.';
 				}

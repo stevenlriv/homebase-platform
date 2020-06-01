@@ -6,6 +6,18 @@
 
 	if ( isset($_POST['submit']) ) {
 
+        if(empty($_POST['country'])) {
+            $_POST['country'] = '';
+        }
+
+        if(empty($_POST['profile_bio'])) {
+            $_POST['profile_bio'] = '';
+        }
+
+        if(empty($_POST['profile_linkedIn'])) {
+            $_POST['profile_linkedIn'] = '';
+        }
+
         //Verify if there is not an user with the same email, also confirm is not the same user
 		if(get_user_by_email($_POST['email']) && get_user_by_email($_POST['email'])['id_user']!=$user['id_user']) {
 			$form_error = 'That email address is already in use.';
@@ -23,8 +35,12 @@
             $form_error = 'You must enter your full name.';
         }
 
+        if (!empty($_POST['profile_linkedIn']) && !filter_var($_POST['profile_linkedIn'], FILTER_VALIDATE_URL)) {
+            $form_error = 'You must enter a valid LinkedIn link.';
+        }
+
         if(empty($form_error)) { 
-            if(update_profile($user['id_user'], $_POST['fullname'], $_POST['phone_number'], $_POST['email'], $_POST['profile_bio'], $_POST['profile_linkedIn'])) {
+            if(update_profile($user['id_user'], $_POST['fullname'], $_POST['phone_number'], $_POST['email'], $_POST['profile_bio'], $_POST['profile_linkedIn'], $_POST['country'])) {
                 $form_success = 'Great, your profile has been updated.';
                 delete_cache($_SESSION['CACHE_MY_PROFILE']);
                 header("Refresh:1");

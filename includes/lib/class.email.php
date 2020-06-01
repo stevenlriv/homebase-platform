@@ -15,9 +15,27 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * 
 	 * @help https://bootstrapemail.com/docs/introduction
 	 */
-	
+
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\SMTP;
+
+	function send_pending_listing_email($to_email) {
+        $to_name = 'Admin';
+        $link = get_domain()."/my-properties?status=pending";
+
+		$message = "Hi <b>$to_name</b>!<br /><br />";
+		$message = $message."A new listing have been added at <b>".get_setting(12)."</b> and it requires an admin approval.<br /><br />";
+		$message = $message."To approve the listing, click the following link or copy and paste it in your browser: <br /><br /><br /><a href='$link' target='_blank'>$link</a>";	
+		
+		$subject = "New Listing Pending Approval";
+		$from_email = 'no-reply@'.get_host();
+		
+		if ( send_email(get_setting(12), $from_email, $to_email, $to_name, $subject, $message) ) {
+			return true;
+		}
+		
+		return false;
+    }
 
 	function send_recover_email($to_name, $to_email, $link) {
 		$message = "Hi <b>$to_name</b>!<br /><br />";

@@ -46,7 +46,7 @@
 					<form method="post" class="form-cache" name="financial-settings" id="<?php echo $form_cache_id; ?>">
 
 						<?php
-							if($cache && $form_error=='') {
+							if($cache && $form_error=='' && $form_success=='') {
 								$form_info = 'Press the "Save Changes" button below to save your information.';
 							}
 

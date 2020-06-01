@@ -114,6 +114,21 @@ switch ($request) {
         require_once __DIR__ . '/views/my-profile.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/profile' :
+        // Only allow admins to view profile for now
+        if(!$user || !is_admin() || !get_user_by_id($_GET['id'])) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Use profile",
+            "request" => $request,
+        );
+        
+        require_once __DIR__ . '/includes/actions/listing-search.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/user-profile.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/financial-settings' :
         if(!$user) {
             header('Location: /');
@@ -147,6 +162,28 @@ switch ($request) {
         require_once __DIR__ . '/views/my-properties.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/draft' :
+        if(!$user || empty($_GET['uri'])) {
+            header('Location: /');
+        }
+
+        $listing = is_uri($_GET['uri'], true);
+
+        // We verify the listing exists and that the user has access
+        if(!$listing || !user_has_access_listing($listing)) {
+            header('Location: /my-properties');
+        }
+        
+        $seo = array(
+            "title" => $listing['listing_title'],
+            "description" => substr($listing['listing_description'],0,150)."...",
+            "image" => get_json($listing['listing_images'], 0),
+            "request" => $request,
+        );
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/listings.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/change-password' :
         if(!$user) {
             header('Location: /');
@@ -166,8 +203,14 @@ switch ($request) {
             header('Location: /');
         }
 
+        //If is an admin allow him access every property don't matter the status
+        if( is_admin() ) {
+            $listing = is_uri($_GET['q'], true);
+        }
         //Verify if property exists and that the user has access
-        $listing = is_uri($_GET['q']);
+        else {
+            $listing = is_uri($_GET['q']);
+        }
         if(!$listing || !user_has_access_listing($listing)) {
             header('Location: /my-properties');
         }

@@ -5,8 +5,8 @@
 	array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"));
 
     //Lets get the query results
-    $total_results = get_listings('count', $query);
-
+	$total_results = get_listings('count', $query);
+	
 	//Pagination configuration
 	$pagination = new Pagination($total_results, $url, 'col-md-8');
 ?>

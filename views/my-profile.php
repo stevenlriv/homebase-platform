@@ -46,7 +46,7 @@
 					<form method="post" class="form-cache" name="my-profile" id="<?php echo $form_cache_id; ?>">
 
 						<?php
-							if($cache && $form_error=='') {
+							if($cache && $form_error=='' && $form_success=='') {
 								$form_info = 'Press the "Save Changes" button below to save your information.';
 							}
 
@@ -76,6 +76,9 @@
 						<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
 						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php form_print_value($cache, $user, 'profile_bio'); ?></textarea>
 				
+						<label>Country</label>
+						<input name="country" value="<?php form_print_value($cache, $user, 'country'); ?>" type="text">
+
 						<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin</h4>
 
 						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">

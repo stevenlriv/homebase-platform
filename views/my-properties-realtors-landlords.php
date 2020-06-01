@@ -1,10 +1,15 @@
 <?php
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
 
-	//We verify if the user is an admin or a regular user
-	//We only show the listing that realtor or landlord added
+	//Pending approval query array
+	$query_approval = array();
+
+	//We only show the listing that realtor or landlord added and do not show pending properties, but get pending counts for user
 	if( !is_admin() ) {
 		array_push($query, array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_user", "command" => "=", "value" => $user['id_user']));
+		array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "!=", "value" => "pending"));
+
+		array_push($query_approval, array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_user", "command" => "=", "value" => $user['id_user']));
 	}
     
     //Query for listing status
@@ -16,7 +21,14 @@
             $url = $url."type=$type&";
     
             array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => $type));
-        }
+		}
+		
+		//Online allow pending approval searchs for admins
+        if(is_admin() && $type == 'pending') {
+			$url = $url."type=$type&";
+    
+            array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => $type));
+		}	
     }
     else {
         $_SESSION['search-status'] = ''; //to reset for fields if left empty
@@ -24,6 +36,10 @@
 
     //Lets get the query results
     $total_results = get_listings('count', $query);
+
+	//Lets get the pending approval count
+	array_push($query_approval, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "pending"));
+	$pending_results = get_listings('count', $query_approval);
 
 	//Pagination configuration
 	$pagination = new Pagination($total_results, $url, 'col-md-8');
@@ -72,7 +88,11 @@
 
         <div class="col-md-8 margin-bottom-55">
 			<?php
-				show_message($form_success, $form_error);
+				if($pending_results>0 && $form_error == '' && $form_success == '') {
+					$form_info = 'There are '.$pending_results.' listings pending approval.';
+				}
+
+				show_message($form_success, $form_error, $form_info);
 			?>
 
             <h4 class="search-title">Search Your Properties</h4>
@@ -101,8 +121,8 @@
 
                         <?php
                             //No url link if inactive due that the listing is hidden from search engines
-                            if($value['status']=='inactive') {
-                                echo '<h4>'.$value['listing_title'].'</h4>';
+                            if($value['status']=='inactive' || $value['status']=='pending') {
+                                echo '<h4><a href="/draft?uri='.$value['uri'].'" target="_blank">'.$value['listing_title'].'</a></h4>';
                             }
                             else {
                                 echo '<h4><a href="/'.$value['uri'].'" target="_blank">'.$value['listing_title'].'</a></h4>';
@@ -111,6 +131,9 @@
 							
 							<span><?php echo $value['physical_address']; ?> </span>
 							<span class="table-property-price">$<?php echo $value['monthly_house']; ?> / monthly</span>
+							
+							<!-- Space for bottom border -->
+							<span style="visibility: hidden;">space; space</span>
 						</div>
 					</td>
 					<td class="expire-date"><?php print_available_message('admin', $value['available']); ?></td>
@@ -118,17 +141,31 @@
 						<a href="/edit-property?q=<?php echo $value['uri']; ?>"><i class="fa fa-pencil"></i> Edit</a>
                         <?php
 
+							//Urls
+							$user_url = '/profile?id='.$value['id_user'];
+
 							//Modify new url, so javascript object can get it '#' will be removed by javascript on the other end
+							$delete_url = '#p='.$pagination->get_page().'&delete='.$value['uri'].'&confirm=true&'.$url;
+							$approve_url = '#p='.$pagination->get_page().'&approve='.$value['uri'].'&confirm=true&'.$url;
 							$show_url = '#p='.$pagination->get_page().'&show='.$value['uri'].'&confirm=true&'.$url;
 							$hide_url = '#p='.$pagination->get_page().'&hide='.$value['uri'].'&confirm=true&'.$url;
-							$delete_url = '#p='.$pagination->get_page().'&delete='.$value['uri'].'&confirm=true&'.$url;
 
-                            if($value['status']=='inactive') {
-                                echo '<a href="'.$show_url.'" class="open-sw-pp"><i class="fa fa-eye"></i> Show</a>';
-                            }
-                            else {
-                                echo '<a href="'.$hide_url.'" class="open-hd-pp"><i class="fa fa-eye-slash"></i> Hide</a>';
-                            }
+							//Show the user profile only to admins
+							if( is_admin() ) {
+								echo '<a href="'.$user_url.'" target="_blank"><i class="fa fa-user"></i> View User</a>';
+							}
+
+							if( is_admin() && $value['status']=='pending') {
+								echo '<a href="'.$approve_url.'" class="open-ap-pp"><i class="fa fa-thumbs-up"></i> Approve</a>';
+							}
+							else {
+                            	if($value['status']=='inactive') {
+                                	echo '<a href="'.$show_url.'" class="open-sw-pp"><i class="fa fa-eye"></i> Show</a>';
+                            	}
+                            	else {
+                                	echo '<a href="'.$hide_url.'" class="open-hd-pp"><i class="fa fa-eye-slash"></i> Hide</a>';
+								}
+							}
 						?>
 						<a href="<?php echo $delete_url; ?>" class="delete open-dl-pp"><i class="fa fa-remove"></i> Delete</a>
 					</td>

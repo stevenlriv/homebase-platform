@@ -126,7 +126,7 @@
 		return false;
 	}
 
-	function update_profile($id_user, $fullname, $phone_number, $email, $profile_bio, $profile_linkedin) {
+	function update_profile($id_user, $fullname, $phone_number, $email, $profile_bio, $profile_linkedin, $country) {
 		global $db;
 
 		//Verify if there is not an user with the same email, also confirm is not the same user in case that email belong to the user making the update
@@ -134,8 +134,8 @@
 			return false;
 		}
 		
-		$q = $db->prepare ( "UPDATE xvls_users SET fullname = ?, phone_number = ?, email = ?, profile_bio = ?, profile_linkedin = ? WHERE id_user = ?" );
-		$q->bind_param ( 'sssssi', $fullname, $phone_number, $email, $profile_bio, $profile_linkedin, $id_user );		
+		$q = $db->prepare ( "UPDATE xvls_users SET fullname = ?, phone_number = ?, country = ?, email = ?, profile_bio = ?, profile_linkedin = ? WHERE id_user = ?" );
+		$q->bind_param ( 'ssssssi', $fullname, $phone_number, $country, $email, $profile_bio, $profile_linkedin, $id_user );		
 	
 		if ( $q->execute() ) {
 			return true;
@@ -252,6 +252,24 @@
 			if ( $o['email'] == $email ) {
 				return $o;
 			}		
+		}
+		return false;
+	}
+
+	function get_user_by_id($id) {
+		global $db;
+		
+		if(!is_numeric($id)) {
+			return false;
+		}
+
+		$q = $db->prepare ( "SELECT * FROM xvls_users WHERE id_user = ? LIMIT 1" );
+		$q->bind_param ( 'i', $id );
+		$q->execute();
+		$result = $q->get_result();
+	
+		while ( $o = $result->fetch_array(MYSQLI_ASSOC) ) {	
+			return $o;
 		}
 		return false;
 	}
