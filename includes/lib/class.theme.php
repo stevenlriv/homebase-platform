@@ -373,4 +373,32 @@ function full_search_form($type = '') {
 
 <?php
 }
+
+function calculate_homebase_listed_js($input_from, $input_to, $percentaje = 0.10) {
+?>
+
+<script>
+	/*--------------------------------------------------*/
+	/*  Submit Property
+	/*--------------------------------------------------*/
+
+	$('form input[name="<?php echo $input_to; ?>"]').prop("disabled", true);
+
+	// In case there is form data while editing or cache
+	var monthly_rent = parseInt($( 'form input[name="<?php echo $input_from; ?>"]' ).val(), 10);
+	var monthly_rent_homebase = monthly_rent + ((monthly_rent)*<?php echo $percentaje; ?>);
+	$('form input[name="<?php echo $input_to; ?>"]').attr('value', Math.trunc(monthly_rent_homebase));
+
+	// When the form input is updated;
+	$( 'form input[name="<?php echo $input_from; ?>"]' ).keyup(function() {
+		monthly_rent = parseInt($( 'form input[name="<?php echo $input_from; ?>"]' ).val(), 10);
+		monthly_rent_homebase = monthly_rent + ((monthly_rent)*<?php echo $percentaje; ?>);
+
+		
+		$('form input[name="<?php echo $input_to; ?>"]').attr('value', Math.trunc(monthly_rent_homebase));
+	});
+</script>
+
+<?php
+}
 ?>

@@ -21,12 +21,17 @@
 		$realtor_landlord = true;
 		if($_GET['inquiry'] == 'landlord') {
 			$subject = "Interested in being a Homebase landlord";
-			$message = "Looking to add my property to be rented on the platform. The property is located at ...";	
+			$message = "I'm a landlord, looking to add my property to be rented on the platform. The property is located at ...";	
 		}	
 
 		if($_GET['inquiry'] == 'realtor') {
 			$subject = "Interested in working with Homebase as a realtor";
-			$message = "Looking to add a couple of my client's properties to be rented on the platform. The properties are located at ...";	
+			$message = "I'm a realtor, looking to add a couple of my client's properties to be rented on the platform. The properties are located at ...";	
+		}	
+
+		if($_GET['inquiry'] == 'tenant') {
+			$subject = "Interested in renting with Homebase";
+			$message = "I'm a tenant, who is looking to rent a property with Homebase. The property is located at ...";	
 		}	
 	}
 ?>
@@ -81,7 +86,7 @@
 										echo '<input name="name" type="hidden" id="name" value="'.$user['fullname'].'" />';
 									}
 									else {
-										echo '<input name="name" type="text" id="name" placeholder="Your Name" required="required" />';
+										echo '<input name="name" type="text" id="name" placeholder="Your Name" />';
 									}
 								?>
 							</div>
@@ -94,7 +99,7 @@
 										echo '<input name="email" type="hidden" id="email" value="'.$user['email'].'" />';
 									}
 									else {
-										echo '<input name="email" type="email" id="email" placeholder="Email Address" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required" />';
+										echo '<input name="email" type="email" id="email" placeholder="Email Address" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />';
 									}
 								?>
 							</div>
@@ -102,7 +107,7 @@
 					</div>
 
 					<div>
-						<input name="subject" type="<?php if(!empty($listing) || $realtor_landlord) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" required="required" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
+						<input name="subject" type="<?php if(!empty($listing) || $realtor_landlord) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
 					</div>
 
 					<?php
@@ -116,7 +121,7 @@
 					?>
 
 					<div>
-						<textarea name="comments" cols="40" rows="3" id="comments" placeholder="Message" spellcheck="true" required="required"><?php if(!empty($message)) echo $message; ?></textarea>
+						<textarea name="comments" cols="40" rows="3" id="comments" placeholder="Message" spellcheck="true"><?php if(!empty($message)) echo $message; ?></textarea>
 					</div>
 
 					<input name="important" class="mfp-hide" type="text" id="important" placeholder="" value="" />

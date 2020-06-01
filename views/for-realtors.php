@@ -16,10 +16,10 @@
 
 			<div class="row">
 				<div class="col-lg-6 col-sm-8">
-					<h2>Work with Homebase and get an extra $100 commission.</h2>
+					<h2>Work with Homebase so you don't have to work.</h2>
 					<p>As realtors, you can bring your clients to our platform to make their life and your life easier.</p>
 
-					<a href="/contact?inquiry=realtor" class="button margin-top-25">Get Started</a>
+					<a href="/register?type=realtors" class="button margin-top-25">Get Started</a>
 				</div>
 			</div>
 
@@ -38,7 +38,7 @@
 		    <!-- Headline -->
 		    <h3 class="headline with-border margin-top-45 margin-bottom-25">Its Easy To Work With Us</h3>
 
-		    <p>At Homebase, we believe that real estate should not be hard, and we want to make it easier for you. We’ll supercharge your property listing, find vetted tenants, and handle lease agreements and rent collection. </p>
+		    <p>At Homebase, we believe that real estate should not be hard, and we want to make it easier for you. We’ll supercharge your property listing, find vetted tenants, and handle lease agreements and rent collection, all online. </p>
 
 		</div>
 	</div>
@@ -51,13 +51,13 @@
 			<div class="numbered color filled">
 				<ol>
 					<li>
-                        <p><b>Due Diligence Within 12 Hours.</b> Once we receive your inquiry submission we’ll do our homework, verifying your existing property listings, floorplans, and public records, before presenting our decision.</p>
+                        <p><b>Submit a Listing.</b> Sign up for an account and create a listing within minutes. Set the price, the rules, and the minimum lease length.</p>
                     </li>
 					<li>
-                        <p><b>Set Up Your Account.</b> Our team will set up your account. This way you can add the properties that comply with our guidelines and automate your rental process.</p>
+						<p><b>Due Diligence Within 12 Hours.</b> As soon as you submit a property listing, we will do our homework, verifying property photos, and address accuracy, before posting the listing. If necessary, we will take professional photographs for you. For free.</p>
                     </li>
 					<li>
-                        <p><b>Successful Tenant Placement. </b> After every successful tenant placement, you'll receive up to $100 in extra commission.</p>
+                        <p><b>Tenant Placement.</b> We will find tenants for you and add them to your properties. As easy as it sounds.</p>
                     </li>
 				</ol>
 			</div>
@@ -120,7 +120,7 @@
 				<div class="toggle-wrap">
 					<span class="trigger "><a href="#"> How will Homebase help me make more money?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>We’ll find vetted tenants, handle any questions that they might have about the listing through our chatbot, schedule self-guided & virtual tours, handle lease agreements & rent collection, and hand off the keys to the property for you. That way, you can manage more listings without having to do much of the work. All you need to do is list your properties on our platform following our simple three step guidelines.</p>
+						<p>We’ll find vetted tenants, handle any questions that they might have about the listing through our chatbot, schedule self-guided and virtual tours, handle lease agreements and rent collection, and hand off the keys to the property for you. That way, you can manage more listings without having to do much of the work. All you need to do is list your properties on our platform following our simple three step guidelines.</p>
 					</div>
 				</div>
 
@@ -128,7 +128,7 @@
 				<div class="toggle-wrap">
 					<span class="trigger"><a href="#"> What about my regular commission as a realtor?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>If you're working with a landlord, you will be able to charge them your regular fee even though you're using our platform, just make it clear to them. On top of that, we will pay you up to $100 on additional commissions after we successfully place a tenant on your listed property (only one commission per property).</p>
+						<p>If you're working with a landlord, you will be able to charge them your regular fee even though you're using our platform, just make it clear to them.</p>
 					</div>
 				</div>
 
@@ -136,7 +136,7 @@
 				<div class="toggle-wrap">
 					<span class="trigger"><a href="#"> Do I have any control on who stays at the property?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Information about current tenants is accessible online. You will be provided with the results of any tenant background checks prior to their tenancy.</p>
+						<p>Information about current tenants is accessible online. You will be provided with the results of any tenant background and credit checks prior to their tenancy.</p>
 					</div>
 				</div>
 

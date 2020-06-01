@@ -69,16 +69,16 @@
 
 		<?php dropzone_box('Gallery', 'dropzone-listing', 'galery-content'); ?>
 
+		<form method="post" enctype="multipart/form-data" class="form-cache" name="submit-property" id="<?php echo $form_cache_id; ?>">
+
 		<!-- Section -->
 		<h3>Basic Information</h3>
 		<div class="submit-section">
 
-		<form method="post" enctype="multipart/form-data" class="form-cache" id="<?php echo $form_cache_id; ?>">
-
 			<!-- Title -->
 			<div class="form">
 				<h5>Property Title <i class="tip" data-tip-content="Type clean title that will also contains an unique feature of your property (e.g. renovated, air contidioned). Limit of 40 characters. Do not make titles like 2 bed/1 bath, bed and bath are always indicated when we show the listings."></i></h5>
-				<input name="listing_title" class="search-field" type="text" value="<?php form_print_value($cache, $listing, 'listing_title'); ?>" maxlength="40" required/>
+				<input name="listing_title" class="search-field" type="text" value="<?php form_print_value($cache, $listing, 'listing_title'); ?>" maxlength="40"/>
 			</div>
 
 			<!-- Row -->
@@ -87,7 +87,7 @@
 				<!-- Type -->
 				<div class="col-md-6">
 					<h5>Type</h5>
-					<select name="type" class="chosen-select-no-single" required>
+					<select name="type" class="chosen-select-no-single">
 						<option label="blank"></option>		
 						<option <?php if(form_get_value($cache, $listing, 'type') == 'apartment') echo 'selected="selected"' ?> value="apartment">Apartment</option>
 						<option <?php if(form_get_value($cache, $listing, 'type') == 'house') echo 'selected="selected"' ?> value="house">House</option>
@@ -98,7 +98,7 @@
 				<div class="col-md-6">
 					<h5>Area <i class="tip" data-tip-content="Property size in square feet"></i></h5>
 					<div class="select-input disabled-first-option">
-						<input name="square_feet" value="<?php form_print_value($cache, $listing, 'square_feet'); ?>" type="number" data-unit="Sq Ft" required>
+						<input name="square_feet" value="<?php form_print_value($cache, $listing, 'square_feet'); ?>" type="number" data-unit="Sq Ft">
 					</div>
 				</div>
 			</div>
@@ -110,7 +110,7 @@
 				<!-- Beds -->
 				<div class="col-md-6">
 					<h5>Bedrooms</h5>
-					<select name="number_rooms" class="chosen-select-no-single" required>
+					<select name="number_rooms" class="chosen-select-no-single">
 						<option label="blank"></option>	
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 1) echo 'selected="selected"' ?> value="1">1</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 2) echo 'selected="selected"' ?> value="2">2</option>
@@ -123,7 +123,7 @@
 				<!-- Baths -->
 				<div class="col-md-6">
 					<h5>Bathrooms</h5>
-					<select name="number_bathroom" class="chosen-select-no-single" required>
+					<select name="number_bathroom" class="chosen-select-no-single">
 						<option label="blank"></option>	
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 1) echo 'selected="selected"' ?> value="1">1</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 2) echo 'selected="selected"' ?> value="2">2</option>
@@ -140,26 +140,40 @@
 			<div class="row with-forms">
 
 				<!-- Price -->
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<h5>Monthly Rent <i class="tip" data-tip-content="Monthly rent for the property"></i></h5>
 					<div class="select-input disabled-first-option">
-						<input name="monthly_house" value="<?php form_print_value($cache, $listing, 'monthly_house_original'); //we always get the original value ?>" type="number" data-unit="USD" required>
+						<input name="monthly_house_original" value="<?php form_print_value($cache, $listing, 'monthly_house_original'); //we always get the original value ?>" type="number" data-unit="USD">
 					</div>
 				</div>
 
 				<!-- Price -->
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<h5>Homebase Listing Rent <i class="tip" data-tip-content="This is the price your property will be listed at Homebase"></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="monthly_house_homebase" value="" type="number" data-unit="USD">
 					</div>
 				</div>
 
+			</div>
+			<!-- Row / End -->
+
+			<!-- Row -->
+			<div class="row with-forms">
+
 				<!-- Price -->
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<h5>Deposit <i class="tip" data-tip-content="Property deposit"></i></h5>
 					<div class="select-input disabled-first-option">
-						<input name="deposit_house" value="<?php form_print_value($cache, $listing, 'deposit_house'); ?>" type="number" data-unit="USD" required>
+						<input name="deposit_house_original" value="<?php form_print_value($cache, $listing, 'deposit_house_original'); ?>" type="number" data-unit="USD">
+					</div>
+				</div>
+
+				<!-- Price -->
+				<div class="col-md-6">
+					<h5>Homebase Listing Deposit <i class="tip" data-tip-content="This is the deposit amount your property will be listed at Homebase"></i></h5>
+					<div class="select-input disabled-first-option">
+						<input name="deposit_house_homebase" value="" type="number" data-unit="USD">
 					</div>
 				</div>
 
@@ -177,10 +191,17 @@
 			<!-- Row -->
 			<div class="row with-forms">
 
+				<!-- Address -->
+				<div class="col-md-12">
+					<h5>Full Postal Address <i>(optional)</i> <i class="tip" data-tip-content="Is the property can receive mail, add the full postal address image including country, state and postal code. It will only be show to the user once he signs the lease."></i></h5>
+					<input name="postal_address" type="text" value="<?php form_print_value($cache, $listing, 'postal_address'); ?>">
+				</div>
+
 				<div class="col-md-12">
 					<h5>Availability <i class="tip" data-tip-content="When is the property available to start being rented"></i></h5>
                     <input name="available" type="text" id="date-picker-property-form" placeholder="Date" value="<?php //only works on class.theme.php form_print_value($cache, $listing, 'available'); ?>" required>
 				</div>
+
 			</div>
 
 			<!-- Row -->
@@ -251,13 +272,13 @@
 				<!-- Address -->
 				<div class="col-md-12">
 					<h5>Physical Address</h5>
-					<input name="physical_address" type="text" value="<?php form_print_value($cache, $listing, 'physical_address'); ?>" required>
+					<input name="physical_address" type="text" value="<?php form_print_value($cache, $listing, 'physical_address'); ?>">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>City</h5>
-					<select name="id_city" class="chosen-select-no-single" required>
+					<select name="id_city" class="chosen-select-no-single">
 						<option label="blank"></option>	
 						<?php
 							$id_city = form_get_value($cache, $listing, 'id_city');
@@ -281,8 +302,8 @@
 
 				<!-- Zip-Code -->
 				<div class="col-md-6">
-					<h5>Address Zipcode</h5>
-					<input name="zipcode" type="text" value="<?php form_print_value($cache, $listing, 'zipcode'); ?>" required>
+					<h5>Zipcode</h5>
+					<input name="zipcode" type="text" value="<?php form_print_value($cache, $listing, 'zipcode'); ?>">
 				</div>
 
 			</div>
@@ -298,7 +319,7 @@
 			<!-- Description -->
 			<div class="form">
 				<h5>Description <i class="tip" data-tip-content="Sell your property, describe how it looks like and what they could get"></i></h5>
-				<textarea name="listing_description" class="WYSIWYG" cols="40" rows="3" id="summary" spellcheck="true" required><?php form_print_value($cache, $listing, 'listing_description'); ?></textarea>
+				<textarea name="listing_description" class="WYSIWYG" cols="40" rows="3" id="summary" spellcheck="true"><?php form_print_value($cache, $listing, 'listing_description'); ?></textarea>
 			</div>
 
 			<div class="form">
@@ -318,13 +339,19 @@
 
 				<!-- Name -->
 				<div class="col-md-12">
-					<h5>Calendly <i class="tip" data-tip-content="Link to calendly where tenants can schedule showing appointments"></i></h5>
-					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>" required>
+					<h5>Propety Access Code <i class="tip" data-tip-content="Access code so the tenant can enter when doing a non-guided tour"></i></h5>
+					<input name="checkin_access_code" type="text" value="<?php form_print_value($cache, $listing, 'checkin_access_code'); ?>">
+				</div>
+
+				<!-- Name -->
+				<div class="col-md-12">
+					<h5>Calendly <i style="color: red;">*beta</i> <i class="tip" data-tip-content="Link to calendly where tenants can schedule showing appointments"></i></h5>
+					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>">
 				</div>
 
 				<!-- Email -->
 				<div class="col-md-12">
-					<h5>Video Tour (optional) <i class="tip" data-tip-content="Youtube video link where people can see a video tour of the property"></i></h5>
+					<h5>Video Tour <i>(optional)</i> <i class="tip" data-tip-content="Youtube video link where people can see a video tour of the property"></i></h5>
 					<input name="video_tour" type="text" value="<?php form_print_value($cache, $listing, 'video_tour'); ?>">
 				</div>
 
@@ -332,8 +359,8 @@
 			<!-- Row / End -->
 
 			<div class="checkboxes in-row margin-bottom-20 margin-top-10">
-				<input id="check-30" type="checkbox" name="check-required" required>
-				<label for="check-30">I certify that this property can be accessed with the details provided above. I understand that if this property is not able to be accessed remotely, my account can be penalized and I will not be able to list on Homebase anymore.</label>
+				<input id="check-30" type="checkbox" name="check_required">
+				<label for="check-30">I certify that this property can be accessed with the details provided above. I understand that if this property is not able to be accessed remotely, my account can be penalized and I will not be able to list on Homebase anymore. <i style="color: red;">*required</i></label>
 			</div>
 		</div>
 		<!-- Section / End -->
@@ -342,8 +369,8 @@
 
 		<button name="submit" class="button margin-top-10 margin-bottom-20 preview"> <?php if(!empty($listing)) { echo 'Save Changes'; } else { echo 'Add New'; } ?> <i class="fa fa-arrow-circle-right"></i></button>
 
-		</div>
 		</form>
+		</div>
 	</div>
 
 </div>

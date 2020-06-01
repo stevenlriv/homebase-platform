@@ -43,6 +43,16 @@
 		return false;
 	}
 
+	function is_admin() {
+		global $user;
+
+		if( $user['type'] == "super_admin" || $user['type'] == "admin" ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	function is_login_user() {
 		global $db;
 		
@@ -177,6 +187,53 @@
 		$q->close();
 	
 		return false;		
+	}
+
+	function new_user($fullname, $email, $phone_number, $password) {
+		global $db, $type;
+
+        // Verify if the email address is already in use
+		if(get_user_by_email($email)) {
+			return false;
+		}
+
+		//Verify Account type
+        if($type != 'landlords' && $type != 'realtors' && $type != 'listers' && $type != 'tenants') {
+            return false;
+		}
+
+		// We create its referral id; timestamp + random string
+		$id_referral = generateNotSecureRandomString(10).time();
+
+		//Password
+		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
+		$password = Password::hash(new HiddenString($password), $key);
+
+		//Not in use
+		$birthdate = '';
+		$country = '';
+		$code = '';
+		$profile_image = '';
+		$profile_bio = '';
+		$profile_linkedIn = '';
+		$bank_name = '';
+		$bank_sole_owner = '';
+		$bank_routing_number = '';
+		$bank_account_number = '';
+		$user_time_zone = '';
+		$cookies_track = '';
+
+		$q = $db->prepare ( "INSERT INTO xvls_users (id_referral, `type`, fullname, email, phone_number, birthdate, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
+													bank_name, bank_sole_owner, bank_routing_number, bank_account_number, user_time_zone, cookies_track) 
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+		$q->bind_param ( 'ssssssssssssssssss', $id_referral, $type, $fullname, $email, $phone_number, $birthdate, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;			
 	}
 
 	function get_user_by_email($email) {

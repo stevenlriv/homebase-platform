@@ -45,7 +45,7 @@
 
 			<div class="row" style="margin-top: -30px;">
 				<div class="col-md-6 my-profile">
-					<form method="post">
+					<form method="post" name="change-password">
 
 						<?php
 							show_message($form_success, $form_error);
@@ -58,7 +58,7 @@
 						<input type="password" name="password">
 
 						<label>Confirm New Password</label>
-						<input type="password" name="confirm">
+						<input type="password" id="confirm" name="confirm">
 
 						<button type="submit" name="submit" class="button border margin-top-10">Save Changes</button>
 					</form>

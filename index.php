@@ -54,6 +54,40 @@ switch ($request) {
         require_once __DIR__ . '/views/login.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/register' :
+        if($user) {
+            header('Location: /my-profile');
+        }
+
+        $type = '';
+        if(empty($_GET['type'])) {
+            $_GET['type'] = '';
+        }
+        
+        if($_GET['type'] == 'landlords' || $_GET['type'] == 'realtors' || $_GET['type'] == 'listers' || $_GET['type'] == 'tenants') {
+            $type = $_GET['type'];
+        }
+
+        //There are a couple of accounts that are not available at this moment: landlord, tenants and realtors
+        if($type == 'realtors') {
+            header('Location: /contact?inquiry=realtor');
+        }
+        elseif($type == 'landlords'){
+            header('Location: /contact?inquiry=landlord');
+        }
+        elseif($type == 'tenants'){
+            header('Location: /contact?inquiry=tenant');
+        }
+
+        $seo = array(
+            "title" => "Register",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/register.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/register.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/reset-password' :
         if($user) {
             header('Location: /my-profile');
@@ -183,6 +217,16 @@ switch ($request) {
         require_once __DIR__ . '/includes/actions/listing-search.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/find-a-homebase.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/for-listers' :
+        $seo = array(
+            "title" => "For Listers",
+            "description" => "It has never been easier to make money with real estate. Cero investment and all online.",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/for-listers.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/for-landlords' :

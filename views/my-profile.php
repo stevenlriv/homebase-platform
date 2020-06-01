@@ -43,7 +43,7 @@
 
 				<div class="col-md-8 my-profile">
 
-					<form method="post" class="form-cache" id="<?php echo $form_cache_id; ?>">
+					<form method="post" class="form-cache" name="my-profile" id="<?php echo $form_cache_id; ?>">
 
 						<?php
 							if($cache && $form_error=='') {

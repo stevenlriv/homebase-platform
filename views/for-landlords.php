@@ -21,7 +21,7 @@
 
                     <h3>15-60% premiums on rent</h3>
 
-					<a href="/contact?inquiry=landlord" class="button margin-top-25">Get Started</a>
+					<a href="/register?type=landlords" class="button margin-top-25">Get Started</a>
 				</div>
 			</div>
 
@@ -40,7 +40,7 @@
 		    <!-- Headline -->
 		    <h3 class="headline with-border margin-top-45 margin-bottom-25">The Homebase Experience</h3>
 
-		    <p>At Homebase, we believe that building wealth and residual income from real estate growth should be accessible to everyone. We’ll supercharge your property listing, find vetted tenants, perform all tours and showings, and handle lease agreements and rent collection. Just sit back and relax as your monthly payments appear, minus our 10% monthly fee.</p>
+		    <p>At Homebase, we believe that building wealth and residual income from real estate growth should be accessible to everyone. We will find vetted tenants faster, automate all tours and showings, and handle lease agreements and rent collection online. Just sit back, relax, and get paid rent every month.</p>
 
 		</div>
 	</div>
@@ -53,13 +53,13 @@
 			<div class="numbered color filled">
 				<ol>
 					<li>
-                        <p><b>Due Diligence and Our Estimate Within 12 Hours.</b> Once we receive your property submission we’ll do our homework, verifying existing property photos, floorplans, and public records, before presenting a draft listing with the estimated monthly rent.</p>
+                        <p><b>Submit a Listing.</b> Sign up for an account and create a listing within minutes. Set the price, the rules, and the minimum lease length.</p>
                     </li>
 					<li>
-                        <p><b>On-site visit.</b> Our team will visit your property to perform a physical inspection and take professional photos. This is also our chance to get to know you and learn more about your goals and expectations.</p>
+                        <p><b>Due Diligence Within 12 Hours.</b> As soon as you submit a property listing, we will do our homework, verifying property photos, and address accuracy, before posting the listing. If necessary, we will take professional photographs for you. For free.</p>
                     </li>
 					<li>
-                        <p><b>Sign Agreement and Launch Listing. </b> Our Tenant Placement Agreement can be signed online prior to launching your listing. Remember, we only make money when you do, so we’re incentivized to fill your property ASAP!</p>
+                        <p><b>Get Paid.</b> We fill your property faster by advertising to millions so you can get paid sooner. All payments are made online and on time.</p>
                     </li>
 				</ol>
 			</div>
@@ -71,7 +71,7 @@
 
 		<div class="col-md-12">
 
-            <h3 class="headline margin-bottom-30 margin-top-40">Landlords love us because of our unique system, attention to detail and reliability.</h3>
+            <h3 class="headline margin-bottom-30 margin-top-40">Landlords love us because we don’t charge commission and fill their properties faster.</h3>
 
 			<!-- Toggles Container -->
 			<div class="style-2">
@@ -88,7 +88,7 @@
 				<div class="toggle-wrap">
 					<span class="trigger"><a href="#"> Do I get any reports or updates?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Homebase owners have 24/7 access to online data in their personal online file or on the Homebase partners mobile app.</p>
+						<p>Homebase landlords have 24/7 access to online data in their personal online account.</p>
 					</div>
 				</div>
 
@@ -112,16 +112,12 @@
 				<div class="toggle-wrap">
 					<span class="trigger"><a href="#"> Do I have any control on who stays in my property?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Information about current tenants is accessible online. You will be provided with the results of any tenant background checks prior to their tenancy.</p>
+						<p>Information about current tenants is accessible online. You will be provided with the results of any tenant background and credit checks prior to their tenancy.</p>
 					</div>
 				</div>
 
 			</div>
 			<!-- Toggles Container / End -->
 		</div>
-
-
-
-
 	</div>
 </div>

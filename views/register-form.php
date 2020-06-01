@@ -1,5 +1,5 @@
 <?php
-	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
+    if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
 ?>
 <!-- Titlebar
 ================================================== -->
@@ -8,13 +8,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Log In</h2>
+				<h2>Register for a <?php echo rtrim($type, 's'); //remove last letter 's' ?> account</h2>
 				
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li>Log In</li>
+						<li>Register</li>
 					</ul>
 				</nav>
 
@@ -42,11 +42,23 @@
 
 		<div class="tabs-container alt">
 			<!-- Login -->
-				<form method="post" name="login" class="login">
+				<form method="post" name="register" class="login">
 
 					<p class="form-row form-row-wide">
-						<label for="username">Email:
-							<input type="email" class="input-text" name="email" id="username" value="" />
+						<label for="fullname">Full Name:
+							<input class="input-text" type="text" name="fullname" id="fullname"/>
+						</label>
+					</p>
+
+					<p class="form-row form-row-wide">
+						<label for="email">Email:
+							<input type="email" class="input-text" name="email" id="email" value="" />
+						</label>
+					</p>
+
+					<p class="form-row form-row-wide">
+						<label for="phone_number">Phone Number:
+							<input type="text" class="input-text" name="phone_number" id="phone_number" value="" />
 						</label>
 					</p>
 
@@ -57,25 +69,17 @@
 					</p>
 
 					<p class="form-row">
-						<input type="submit" class="button border margin-top-10" name="submit" value="Login" />
+						<input type="submit" class="button border margin-top-10" name="submit" value="Register" />
 					</p>
 
 					<p class="lost_password">
-						<a href="/register">Create an account</a>
-					</p>
-
-					<br />
-					
-					<p class="lost_password">
-						<a href="/reset-password">Forgot Password?</a>
+						<a href="/login">Have an account? Login.</a>
 					</p>
 					
 				</form>
 
 		</div>
 	</div>
-
-
 
 	</div>
 	</div>

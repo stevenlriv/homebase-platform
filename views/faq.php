@@ -75,7 +75,7 @@
 				<div class="toggle-wrap">
 					<span class="trigger"><a href="#"> Can I tour a home before booking it?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Currently, we are only doing pre-recorded video tours.</p>
+						<p>Yes, you can do a self guided tour or watch one of our pre-recorded video tours.</p>
 					</div>
 				</div>
 

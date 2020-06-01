@@ -102,6 +102,17 @@ ga('send', 'pageview');
 <script type="text/javascript" src="/views/assets/scripts/masonry.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/custom.js"></script>
 
+<!-- Forms validations -->
+<script type="text/javascript" src="/views/assets/scripts/jquery.validate.min.js"></script>
+
+<?php
+	if($user) {
+?>
+		<script type="text/javascript" src="/views/assets/scripts/user.js"></script>
+<?php
+	}
+?>
+
 <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
 <script src="/views/assets/scripts/moment.min.js"></script>
 <script src="/views/assets/scripts/daterangepicker.js"></script>
@@ -169,31 +180,12 @@ ga('send', 'pageview');
 
 		// Dropzone Listing Images
 		dropzone_js('dropzone-listing', 'galery-content', 'galery-section', '/images.php?action=get-img');
-?>
 
-<script>
-	/*--------------------------------------------------*/
-	/*  Submit Property
-	/*--------------------------------------------------*/
+		// House Rent
+		calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase');
 
-	$('form input[name="monthly_house_homebase"]').prop("disabled", true);
-
-	// In case there is form data while editing or cache
-	var monthly_rent = parseInt($( 'form input[name="monthly_house"]' ).val(), 10);
-	var monthly_rent_homebase = monthly_rent + ((monthly_rent)*0.10);
-	$('form input[name="monthly_house_homebase"]').attr('value', Math.trunc(monthly_rent_homebase));
-
-	// When the form input is updated;
-	$( 'form input[name="monthly_house"]' ).keyup(function() {
-		monthly_rent = parseInt($( 'form input[name="monthly_house"]' ).val(), 10);
-		monthly_rent_homebase = monthly_rent + ((monthly_rent)*0.10);
-
-		
-		$('form input[name="monthly_house_homebase"]').attr('value', Math.trunc(monthly_rent_homebase));
-	});
-</script>
-
-<?php
+		// House Deposit
+		calculate_homebase_listed_js('deposit_house_original', 'deposit_house_homebase');
 	}
 ?>
 

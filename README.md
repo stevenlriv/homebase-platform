@@ -22,32 +22,32 @@
     
  2-3) Improve "Submit Listing" Interface
 
-    **Listers affiliated database structure
+   LISTERS
+      ** People referred page and database
+      ** Listers action system on index.php
 
-    - WEBSITES PAGES (ERNESTO TASK)
-      --- Landlords
-      --- Realtors
-      --- Listers
-      --- FAQ
-    - Fix "Submit Listing" form cache system and why all of it is not working
-      -- if you edit the bottom part and then the upper part the bottom part gets saved too
-      -- if you only edit the bottom part it does not saves
-   =================
-    - Create the part where you can add self-checkin data
-    --- Postal Address
-    --- Include images feauture for self-checkin
-    - JQUERY FORM VALIDATION STRUCTURE: "my-profile", "submit-listings"
-    ================
-    - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
-
-       ** Update database table and files on the live site
+    LIVE RELEASE
+      ** Compare Live and Production databases
+      ** Update database table and files on the live site
 
  4) Realtors and Landlords Accounts Creations
     - Allow for new realtor and landlords to conviniently create an account
       - FOR-LANDLORDS.php - Get started should redirect them to create an account
       - FOR-REALTORS.php - Get started should redirect them to create an account
     - Allow for realtors to filter the houses by Occupancy (Any) or "Occupied" and "Not Ocuppied"
-    - Change Status Listing (Any); on realtor and landlord search
+    - Submmit-property.php
+      -- Checkin images
+      -- Checkin text
+    - Remove realtor and landlord autofill from contact form
+    - Remove redirection to contact form on index.php
+    ====
+    ---- show counts of pendings post on the user account 
+    ---- send an email to all the admins when there is a listing to be approoved
+
+     ---- Have listings on pending approval
+      ------ admin allow for approval
+      ------ allow draft view for admins on all listen hidden or pendin
+      ------ allow draft view of hidden listing for users logged in for owners of that listing
 
  5-6-7-8-9) PandaDocs API and Renting Infracstructure
     - PandaDocs API Integration with Platform
@@ -63,14 +63,17 @@
     - LISTINGS.php
       - Book Now (save booking details when user is trying to log-in, use cookies)
       - **Book now is redirecting to contact us
+      ** On rent now, reddirect to login page if user is not logged in and use a ?back=listing-page
+      ** Create a redirrection system
     - RENT.php
       - &date=[starting date]
       - &id=[property id]
     - Monthly payment history for users and realtors & landlords
     - Ability to view the user profile with lease docs of their tenants
     - Calendly integration into the platform
+      -- remove calendly link form verification from user.js
     - class.theme.php verify if the house is really rented or not to disable the date usings js on the landlord/realtor panel
-    - #lease-link on class.listings.php
+    - #lease-link -- on class.listings.php
     
  10) Tenant account Journey consolidated
     - Account creation enabled
@@ -86,12 +89,12 @@
     - Ability to edit settings
     - Ability to manage and create users
     - Ability to enable new cities y countries
+    - Ability to permanently disable a listing
 
  12) Platform Upgrade
+    - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
     - Move to a Managed MYSQL Database on Digital Ocean
     - Move Website to a Scalable Managed Digital Ocean dropplet by Cloudways
-
- 13) User Feedback Iteration ** Repeat
 
 ## NOTES
     CRON FILE
@@ -117,6 +120,16 @@
     OTHER
         - Logo color: #282828
         - Logo Font: Museo Sans
+        - Files with 10% business model
+            - actions
+               - submit-property.php
+            - views
+               - footer.php
+               - submit-property-login.php
+            - lib/
+               - class.listings.php
+               - class.theme.php
+
         - Files with hardcoded images links
             - lib
                - class.seo.php
@@ -129,8 +142,13 @@
                - header.php
                - for-realtors.php
                - for-landlords.php
+               - for-listers.php
                - footer.php
                - find-a-homebase.php
+         - Tenant Risk Score from 1-10
+               - 8-10 = Low Risk
+               - 5-7  = Medium Risk
+               - 1-4  = High Risk
 
     Database
          NEW STRUCTURE CHANGES
@@ -143,6 +161,9 @@
             xvls_listings
                - available - 255 char; and update all of the datos to strtotime (one way to do it, is just to edit the listings)
                - monthly_house_original; price established by user or landlord
+               - checkin_access_code
+               - deposit_house_original
+            
                
         1) User
             - id_referral: starts at 1000 and increments +1 per user
@@ -152,7 +173,7 @@
         2) Cities
         3) Settings
         4) Listings
-            - status: {active, inactive, archived}
+            - status: {active, inactive, archived, pending}
             - type: {house, apartment}
             - available: is the date when this unit becomes available again
 

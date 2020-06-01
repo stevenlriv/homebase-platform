@@ -2,11 +2,8 @@
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
 
 	//We verify if the user is an admin or a regular user
-	if( $user['type'] == "super_admin" || $user['type'] == "admin" ) {
-		//We will show all the listing to an admin user
-	}
-	else {
-		//We only show the listing that realtor or landlord added
+	//We only show the listing that realtor or landlord added
+	if( !is_admin() ) {
 		array_push($query, array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_user", "command" => "=", "value" => $user['id_user']));
 	}
     

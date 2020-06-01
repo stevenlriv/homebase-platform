@@ -4,13 +4,116 @@
 
 $(document).ready(function(){
 
-	/*--------------------------------------------------*/
-	/*  User Profile Image
-	/*--------------------------------------------------*/
-	$("#profile_image").change(function(){
-		$( "#submit-image" ).trigger( "click" );
+	/*----------------------------------------------------*/
+	/* Contact Form Validation
+	/*----------------------------------------------------*/
+
+	$("form[name='contactform']").validate({
+    	// Specify validation rules
+    	rules: {
+      		// The key name on the left side is the name attribute
+      		// of an input field. Validation rules are defined
+      		// on the right side
+      		name: "required",
+      		subject: "required",
+      		email: {
+        		required: true,
+        		// Specify that email should be validated
+        		// by the built-in "email" rule
+        		email: true
+			},
+			comments: "required",
+    	},
+	
+		// Specify validation error messages
+        messages: {
+            name: "Please enter your name",
+            subject: "Please enter your message subject",
+			email: "Please enter a valid email address",
+			comments: "Please enter your message",
+        },
+
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+            form.submit();
+        }
 	});
 
+	/*----------------------------------------------------*/
+	/* Login Form Validation
+	/*----------------------------------------------------*/
+
+	$("form[name='login']").validate({
+    	// Specify validation rules
+    	rules: {
+      		// The key name on the left side is the name attribute
+      		// of an input field. Validation rules are defined
+      		// on the right side
+      		email: {
+        		required: true,
+        		// Specify that email should be validated
+        		// by the built-in "email" rule
+        		email: true
+			},
+			password: "required",
+    	},
+	
+		// Specify validation error messages
+        messages: {
+			email: "Please enter a valid email address",
+			password: "Please enter your password",
+        },
+
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+            form.submit();
+        }
+	});
+
+	/*----------------------------------------------------*/
+	/* Register Form Validation
+	/*----------------------------------------------------*/
+
+	$("form[name='register']").validate({
+    	// Specify validation rules
+    	rules: {
+      		// The key name on the left side is the name attribute
+      		// of an input field. Validation rules are defined
+      		// on the right side
+      		fullname: "required",
+      		email: {
+        		required: true,
+        		// Specify that email should be validated
+        		// by the built-in "email" rule
+        		email: true
+			},
+			phone_number: "required",
+			password: {
+				required: true,
+				minlength: 12
+			},
+    	},
+	
+		// Specify validation error messages
+        messages: {
+            fullname: "Please enter your full name",
+			email: "Please enter a valid email address",
+            phone_number: "Please enter your phone number",
+			password: {
+				required: "Please enter your new password",
+				minlength: "Your password must be at least 12 characters long"
+			},
+        },
+
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+            form.submit();
+        }
+	});
+		
 	/*--------------------------------------------------*/
 	/*  Mobile Menu - mmenu.js
 	/*--------------------------------------------------*/
@@ -777,98 +880,6 @@ $(document).ready(function(){
 
 		 fixedContentPos: false
 	});
-
-	//Open Unique Link Popup
-	$( ".open-ul-pp" ).click(function() {
-
-		//get url
-		var a_href = $(this).attr('href');
-		var a_href = a_href.replace("#", ""); //remove it
-
-		//Content
-		var title = 'Share the link below';
-		var content = 'Its simple, share the link to prospect tenants and if they rent with us you get paid!';
-
-		//Generate the popup
-		$.magnificPopup.open({
-			items: {
-				src: '<div id="small-dialog" class="zoom-anim-dialog"><button title="Close" type="button" style="color: #000;" class="mfp-close"></button><h2>' + title + '</h2><p>' + content + '</p><p><a href="' + a_href + '" onClick="$.magnificPopup.close();">' + a_href + '</a></p></div>',
-				type: 'inline'
-			}
-		  });
-	});
-
-	//Open Hide popup
-	$( ".open-hd-pp" ).click(function() {
-
-		//get url
-		var a_href = $(this).attr('href');
-		var a_href = a_href.replace("#", "?");
-		
-		//define url
-		var cancel_url = '#';
-		var confirm_url = '/my-properties' + a_href;
-
-		//Content
-		var title = 'Are you sure?';
-		var content = 'This will hide your listing from the platform and search engines. No one will be able to see it or rent it.';
-
-		//Generate the popup
-		new_action_popup(title, content, cancel_url, confirm_url);
-	});
-
-	//Open Show popup
-	$( ".open-sw-pp" ).click(function() {
-
-		//get url
-		var a_href = $(this).attr('href');
-		var a_href = a_href.replace("#", "?");
-		
-		//define url
-		var cancel_url = '#';
-		var confirm_url = '/my-properties' + a_href;
-
-		//Content
-		var title = 'Are you sure?';
-		var content = 'This will list your listing to the platform and search engines will be able to see it. Tenants on the platform will be able to see it and rent it.';
-
-		//Generate the popup
-		new_action_popup(title, content, cancel_url, confirm_url);
-	});
-
-	//Open delete popup
-	$( ".open-dl-pp" ).click(function() {
-
-		//get url
-		var a_href = $(this).attr('href');
-		var a_href = a_href.replace("#", "?");
-		
-		//define url
-		var cancel_url = '#';
-		var confirm_url = '/my-properties' + a_href;
-
-		//Content
-		var title = 'Are you sure?';
-		var content = 'This will permanently delete your listing from the platform and no one will be able to see them or rent it. There is no going back from this action.';
-
-		//Generate the popup
-		new_action_popup(title, content, cancel_url, confirm_url);
-	});
-
-	//Close popup
-	$( ".close-pp" ).click(function() {
-		$.magnificPopup.close(); 
-	});
-
-	//Popups
-	function new_action_popup(title, content, cancel_url, confirm_url) {
-		$.magnificPopup.open({
-			items: {
-				src: '<div id="small-dialog" class="zoom-anim-dialog"><button title="Close" type="button" style="color: #000;" class="mfp-close"></button><h2>' + title + '</h2><p>' + content + '</p><p><a href="' + cancel_url + '" class="button border close-pp" onClick="$.magnificPopup.close();">NO</a><a href="' + confirm_url + '" class="button">YES</a></div>', // can be a HTML string, jQuery object, or CSS selector
-				type: 'inline'
-			}
-		  });		
-	}
 
     /*----------------------------------------------------*/
     /*  Sticky Footer (footer-reveal.js)
