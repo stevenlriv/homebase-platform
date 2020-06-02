@@ -5,7 +5,10 @@
 	// Used to sort popular recommended listings that are available
 	update_views($listing['uri']);
 
-	$city = get_cities('one', $listing['id_city']);	
+	$city = get_location('cities', 'one', $listing['id_city']);	
+
+	// Replace '-' for '+' so browser and listing-search.php can read it well
+	$city['uri'] = str_replace('-', '+', $city['uri']);
 ?>
 <!-- Titlebar
 ================================================== -->

@@ -63,7 +63,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
 		//If basic uri exists, just combine uri + city name
 		if(is_uri($uri, true)) {
-			$uri = get_cities('one', $id_city)['uri'].'-'.$uri;
+			$uri = get_location('cities', 'one', $id_city)['uri'].'-'.$uri;
 			$uri = clean_url($uri);
 		}	
 		

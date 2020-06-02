@@ -10,6 +10,8 @@ if(!is_file(__DIR__ . '/includes/configuration.php') && is_file(__DIR__ . '/incl
 require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
 
+lister_backend();
+
 $form_success = '';
 $form_error = '';
 $form_info = '';
@@ -115,8 +117,10 @@ switch ($request) {
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/profile' :
-        // Only allow admins to view profile for now
-        if(!$user || !is_admin() || !get_user_by_id($_GET['id'])) {
+        // Only allow admins to view users profiles for now
+        $view_user = get_user_by_id($_GET['id']);
+
+        if(!$user || !is_admin() || !$view_user) {
             header('Location: /');
         }
         $seo = array(
@@ -130,7 +134,8 @@ switch ($request) {
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/financial-settings' :
-        if(!$user) {
+        // Don't allow tenants to edit bank information, their payments are managed with PandaDocs
+        if(!$user || $user['type'] == 'tenants') {
             header('Location: /');
         }
         $seo = array(
@@ -152,8 +157,8 @@ switch ($request) {
             "request" => $request,
         );
 
-        //Hide Property Actions For Tenants and Listers "!" = return false; meaning the user is not tenant or lister
-        if(!do_not_allow_user('tenants, listers')) {
+        //Hide Property Actions For Tenants and Listers
+        if($user['type'] != 'tenants' && $user['type'] != 'listers') {
             require_once __DIR__ . '/includes/actions/my-properties.php';
         }
         
@@ -199,7 +204,7 @@ switch ($request) {
         break;
     case '/edit-property' :
         //The user needs to be logged in and it cannot be a tenant or lister
-        if(!$user || do_not_allow_user('tenants, listers')) {
+        if(!$user || $user['type'] == 'tenants' || $user['type'] == 'listers') {
             header('Location: /');
         }
 
@@ -207,10 +212,11 @@ switch ($request) {
         if( is_admin() ) {
             $listing = is_uri($_GET['q'], true);
         }
-        //Verify if property exists and that the user has access
         else {
             $listing = is_uri($_GET['q']);
         }
+
+        //Verify if property exists and that the user has access
         if(!$listing || !user_has_access_listing($listing)) {
             header('Location: /my-properties');
         }
@@ -228,7 +234,7 @@ switch ($request) {
     case '/submit-property' :
         //Submit property has a section for logged in users and non logged in users
         //But if the logged in user is a tenant or lister, we don't allow him access to the page
-        if($user && do_not_allow_user('tenants, listers')) {
+        if($user && $user['type'] == 'tenants' || $user && $user['type'] == 'listers') {
             header('Location: /my-profile');
         }
 
@@ -334,7 +340,6 @@ switch ($request) {
         $request_strip = str_replace('/', '', trim($request));
         $listing = is_uri($request_strip);
         if($listing) {
-            //Here we proccess the lister unique link
             $seo = array(
                 "title" => $listing['listing_title'],
                 "description" => substr($listing['listing_description'],0,150)."...",

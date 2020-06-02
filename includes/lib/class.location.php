@@ -26,8 +26,24 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * 			- 'command' which its the type of query like '=' or 'LIKE'
 	 * 			- 'value' which its the value to be searched
 	 */
-	function get_cities ($type, $query = '', $extra = '') {
+	function get_location ($location, $type, $query = '', $extra = '') {
 		global $db;
+
+		if($location == 'cities'){
+			$var_table = 'xvls_location_cities';
+			$var_id = 'id_city';
+		}
+		elseif($location == 'state'){
+			$var_table = 'xvls_location_state';
+			$var_id = 'id_state';
+		}
+		elseif($location == 'country'){
+			$var_table = 'xvls_location_country';
+			$var_id = 'id_countr';
+		}
+		else {
+			return false;
+		}
 
 		if(is_array($query)) {
 			$bind_param_type = '';
@@ -58,7 +74,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 				array_push($bind_param_values, $value['value']);
 			}
 
-			$q = $db->prepare ( "SELECT * FROM xvls_cities $build_query $extra" );
+			$q = $db->prepare ( "SELECT * FROM $var_table $build_query $extra" );
 
 			//Now using count we will select the corrent bin param
 			//Remmeber that arrays start at "0"
@@ -105,7 +121,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 			}
 		}
 		else {
-			$q = $db->prepare ( "SELECT * FROM xvls_cities WHERE id_city = ? LIMIT 1" );
+			$q = $db->prepare ( "SELECT * FROM $var_table WHERE $var_id = ? LIMIT 1" );
 			$q->bind_param ( 'i', $query );			
 		}
 

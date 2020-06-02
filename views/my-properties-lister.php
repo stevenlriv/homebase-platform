@@ -87,7 +87,7 @@
                                 echo '<h4>'.$value['listing_title'].'</h4>';
                             }
                             else {
-                                echo '<h4><a href="/'.$value['uri'].'?ref='.$user['id_referral'].'" target="_blank">'.$value['listing_title'].'</a></h4>';
+                                echo '<h4><a href="/'.$value['uri'].'?ref='.$user['id_user_referral'].'" target="_blank">'.$value['listing_title'].'</a></h4>';
                             }
 						?>
 							
@@ -99,7 +99,7 @@
 					<td class="action">
                         <?php
 							//Modify new url, so javascript object can get it '#' will be removed by javascript on the other end
-							$unique_link = '#'.get_domain().'/'.$value['uri'].'?ref='.$user['id_referral'];
+							$unique_link = '#'.get_domain().'/'.$value['uri'].'?ref='.$user['id_user_referral'];
 						?>
 						<a href="<?php echo $unique_link; ?>" class="open-ul-pp"><i class="fa fa-link"></i> Get Unique Link</a>
 					</td>

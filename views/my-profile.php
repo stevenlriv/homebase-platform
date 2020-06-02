@@ -52,7 +52,8 @@
 
 							// Bank Account Information Message
 							// Don't show this message if there is something else to show
-							if($form_success=='' && $form_error=='' && $form_info=='') {
+							// Do not show message to tenants
+							if($form_success=='' && $form_error=='' && $form_info=='' && $user['type'] != 'tenants') {
 								if($user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
 									$form_info = 'Remember to set up your bank information under financial settings.';
 								}

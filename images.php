@@ -6,9 +6,9 @@
     require __DIR__ . '/includes/configuration.php';
     require __DIR__ . '/includes/lib.php';
 
-    //There needs to be an user logged in 
+    //There needs to be an user logged in, the user can't be a tenant or lister
     $user = is_login_user();
-    if(!$user) {
+    if(!$user || $user['type'] == 'tenants' || $user['type'] == 'listers') {
         exit( header('Location: /not-found') );
     }
 

@@ -137,7 +137,21 @@
 						<div class="user-name"><span><img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt=""></span><?php if(!empty($name)) { echo 'Hi, '.$name.'!'; } else { echo 'Hi, cool user!'; }; ?></div>
 						<ul>
 							<li><a href="/my-profile"><i class="sl sl-icon-user"></i> My Profile</a></li>
-							<li><a href="/my-properties"><i class="sl sl-icon-docs"></i> My Properties</a></li>
+
+							<li><a href="/my-properties"><i class="sl sl-icon-docs"></i>
+								<?php
+									if($user['type'] == 'tenants') {
+										echo 'My Property';
+									}
+									elseif($user['type'] == 'listers') {
+										echo 'Properties';
+									}
+									else {
+										echo 'My Properties';
+									}
+								?>
+							</a></li>
+							 
 							<li><a href="/logout"><i class="sl sl-icon-power"></i> Log Out</a></li>
 						</ul>
 					</div>
@@ -155,7 +169,7 @@
 
 					<?php
 						//If the user is logged in, Hide from tenants and listers
-						if(!empty($user) && !do_not_allow_user('tenants, listers')) {
+						if(!empty($user) && $user['type'] != 'tenants' && $user['type'] != 'listers') {
 					?>
 							<a href="/submit-property" class="button border">Submit Property</a>
 					<?php

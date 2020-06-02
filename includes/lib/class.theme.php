@@ -198,7 +198,7 @@ function sidebar_component() {
 						}
 						
 						//Lister Menu
-						if($user['type'] == 'listers') {
+						elseif($user['type'] == 'listers') {
 					?>
 
 					<ul class="my-account-nav">

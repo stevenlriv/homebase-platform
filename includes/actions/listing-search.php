@@ -18,7 +18,7 @@
 			}
 			else {
 				//Search for a city; Limit one because all we need is the first city id
-				$city = get_cities('one', array( 
+				$city = get_location('cities', 'one', array( 
 					0 => array("type" => "CHR", "condition" => "AND", "loose" => true, "table" => "name", "command" => "LIKE", "value" => $location),
 					1 => array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "state", "command" => "LIKE", "value" => $location),
 					2 => array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "country", "command" => "LIKE", "value" => $location),

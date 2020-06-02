@@ -16,33 +16,6 @@
 		HiddenString
 	};
 
-	//$type = user type separated by comma
-	//There can also be one user type
-	//@return true = user is not allowed
-	//@return false = user is not allowed
-	function do_not_allow_user($type) {
-		global $user;
-
-		$type = trim($type);
-		$array = explode(',', $type);
-
-		if(count($array)>1) {
-			foreach ( $array as $id => $value ) {
-				$value = trim($value);
-				if($value == $user['type']) {
-					return true;
-				}
-			}
-		}
-		else {
-			if($type == $user['type']) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	function is_admin() {
 		global $user;
 
@@ -203,7 +176,7 @@
 		}
 
 		// We create its referral id; timestamp + random string
-		$id_referral = generateNotSecureRandomString(10).time();
+		$id_user_referral = generateNotSecureRandomString(10).time();
 
 		//Password
 		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
@@ -223,10 +196,10 @@
 		$user_time_zone = '';
 		$cookies_track = '';
 
-		$q = $db->prepare ( "INSERT INTO xvls_users (id_referral, `type`, fullname, email, phone_number, birthdate, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
+		$q = $db->prepare ( "INSERT INTO xvls_users (id_user_referral, `type`, fullname, email, phone_number, birthdate, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
 													bank_name, bank_sole_owner, bank_routing_number, bank_account_number, user_time_zone, cookies_track) 
 							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
-		$q->bind_param ( 'ssssssssssssssssss', $id_referral, $type, $fullname, $email, $phone_number, $birthdate, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
+		$q->bind_param ( 'ssssssssssssssssss', $id_user_referral, $type, $fullname, $email, $phone_number, $birthdate, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
 	
 		if ( $q->execute() ) {
 			return true;

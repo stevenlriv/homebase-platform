@@ -283,7 +283,7 @@
 						<?php
 							$id_city = form_get_value($cache, $listing, 'id_city');
 							if(!empty($id_city)) {
-								$city = get_cities('one', array( 
+								$city = get_location('cities', 'one', array( 
 									0 => array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_city", "command" => "=", "value" => $id_city),
 								), "LIMIT 1");	
 				
@@ -293,7 +293,7 @@
 								}
 							}
 
-							foreach ( get_cities('all', array())  as $id => $value ) {
+							foreach ( get_location('cities', 'all', array())  as $id => $value ) {
 								echo '<option value="'.$value['id_city'].'">'.$value['name'].', '.$value['state'].'</option>';
 							}
 						?>

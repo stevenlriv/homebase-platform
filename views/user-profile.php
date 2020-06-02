@@ -1,7 +1,5 @@
 <?php
     if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
-    
-    $view_user = get_user_by_id($_GET['id']);
 
     // Add to the url the current user
     $url = $url."id={$view_user['id_user']}&";
