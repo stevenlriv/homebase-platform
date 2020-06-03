@@ -11,7 +11,6 @@
 	require_once ( dirname(__FILE__).'/lib/class.theme.php' );
 
 	require_once ( dirname(__FILE__).'/lib/class.listings.php' );
-	require_once ( dirname(__FILE__).'/lib/class.location.php' );
 	require_once ( dirname(__FILE__).'/lib/class.seo.php' );
 	require_once ( dirname(__FILE__).'/lib/class.pagination.php' );
 	require_once ( dirname(__FILE__).'/lib/class.images.php' );

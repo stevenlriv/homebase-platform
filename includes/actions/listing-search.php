@@ -17,26 +17,24 @@
                 array_push($query, array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "zipcode", "command" => "=", "value" => $location));			
 			}
 			else {
-				//Search for a city; Limit one because all we need is the first city id
-				$city = get_location('cities', 'one', array( 
-					0 => array("type" => "CHR", "condition" => "AND", "loose" => true, "table" => "name", "command" => "LIKE", "value" => $location),
-					1 => array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "state", "command" => "LIKE", "value" => $location),
-					2 => array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "country", "command" => "LIKE", "value" => $location),
-				), "LIMIT 1");	
 
-				if($city) {
-                    array_push($query, array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_city", "command" => "=", "value" => $city['id_city']));	
-				}
-				else {
-					//Physical Address
-                    array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => true, "table" => "physical_address", "command" => "LIKE", "value" => $location));
-                    
-                    //Keywords
-					array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "keywords", "command" => "LIKE", "value" => $location));	
+				//Country
+				array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "country", "command" => "LIKE", "value" => $location));
 					
-                    //Listing Title
-                    array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "listing_title", "command" => "LIKE", "value" => $location));	
-				}				
+				//State
+				array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "state", "command" => "LIKE", "value" => $location));
+
+				//City
+				array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "city", "command" => "LIKE", "value" => $location));
+
+				//Physical Address
+                array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "physical_address", "command" => "LIKE", "value" => $location));
+                    
+                //Keywords
+				array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "keywords", "command" => "LIKE", "value" => $location));	
+					
+                //Listing Title
+                array_push($query, array("type" => "CHR", "condition" => "OR", "loose" => true, "table" => "listing_title", "command" => "LIKE", "value" => $location));			
 			}
 		}
 		else {

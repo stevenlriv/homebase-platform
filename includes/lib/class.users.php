@@ -19,7 +19,7 @@
 	function is_admin() {
 		global $user;
 
-		if( $user['type'] == "super_admin" || $user['type'] == "admin" ) {
+		if( !$user || $user['type'] == "super_admin" || $user['type'] == "admin" ) {
 			return true;
 		}
 
@@ -82,15 +82,18 @@
 		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
 
 		while ( $o = $result->fetch_array ( MYSQLI_ASSOC ) ) {
-			if ($email == $o['email'] && Password::verify(new HiddenString($password), $o['password'], $key) && $o['status'] == 'active') {
+			if ($email == $o['email'] && Password::verify(new HiddenString($password), $o['password'], $key)) {
 
-				// Login successful, but first, check that our hash is still good (i.e. in case Halite updates)
-				if (Password::needsRehash($o['password'], $key, KeyFactory::INTERACTIVE)) {
-					update_user_table('password', $o['id_user'], $password);
-				}
+				// We verify first that the user is active or pending email confirmation
+				if($o['status'] == 'active' || $o['status'] == 'pending') {
+					// Login successful, but first, check that our hash is still good (i.e. in case Halite updates)
+					if (Password::needsRehash($o['password'], $key, KeyFactory::INTERACTIVE)) {
+						update_user_table('password', $o['id_user'], $password);
+					}
 
-				if ( new_cookie ( 'USMP', $o['email'].'|'.$o['password'], $expire ) ) {
-					return true;
+					if ( new_cookie ( 'USMP', $o['email'].'|'.$o['password'], $expire ) ) {
+						return true;
+					}
 				}
 			} 
 		}
@@ -135,7 +138,7 @@
 	function update_user_table($table, $id_user, $value) {
 		global $db;
 
-		if($table != 'profile_image' && $table != 'password' && $table != 'code') {
+		if($table != 'profile_image' && $table != 'password' && $table != 'code' && $table != 'status') {
 			return false;
 		}
 
@@ -144,6 +147,9 @@
 		}
 		elseif($table == 'profile_image') {
 			$q = $db->prepare ( "UPDATE xvls_users SET profile_image = ? WHERE id_user = ?" );
+		}
+		elseif($table == 'status') {
+			$q = $db->prepare ( "UPDATE xvls_users SET `status` = ? WHERE id_user = ?" );
 		}
 		elseif($table == 'password') {
 			$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
@@ -182,6 +188,9 @@
 		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
 		$password = Password::hash(new HiddenString($password), $key);
 
+		//They need to confirm email
+		$status = 'pending';
+
 		//Not in use
 		$birthdate = '';
 		$country = '';
@@ -196,10 +205,10 @@
 		$user_time_zone = '';
 		$cookies_track = '';
 
-		$q = $db->prepare ( "INSERT INTO xvls_users (id_user_referral, `type`, fullname, email, phone_number, birthdate, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
+		$q = $db->prepare ( "INSERT INTO xvls_users (id_user_referral, `status`, `type`, fullname, email, phone_number, birthdate, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
 													bank_name, bank_sole_owner, bank_routing_number, bank_account_number, user_time_zone, cookies_track) 
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
-		$q->bind_param ( 'ssssssssssssssssss', $id_user_referral, $type, $fullname, $email, $phone_number, $birthdate, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+		$q->bind_param ( 'sssssssssssssssssss', $id_user_referral, $status, $type, $fullname, $email, $phone_number, $birthdate, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
 	
 		if ( $q->execute() ) {
 			return true;
@@ -207,6 +216,20 @@
 		$q->close();
 	
 		return false;			
+	}
+
+	function get_user_by_referral($id_user_referral) {
+		global $db;
+		
+		$q = $db->prepare ( "SELECT * FROM xvls_users WHERE id_user_referral = ? LIMIT 1" );
+		$q->bind_param ( 's', $id_user_referral );
+		$q->execute();
+		$result = $q->get_result();
+	
+		while ( $o = $result->fetch_array(MYSQLI_ASSOC) ) {	
+			return $o;
+		}
+		return false;
 	}
 
 	function get_user_by_email($email) {

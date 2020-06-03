@@ -22,17 +22,7 @@
 
  1) [DONE] Add Picture Capabilities To Listings, Test Accounts and fix Bugs
     
- 2-3) Improve "Submit Listing" Interface
-
-   LISTERS
-      ** Listers referral action system on index.php also include it in the contact.php
-
-   --- fix city, country and zip code allowed on the submit listing
-   --- don't show cities until a state and country for that cities is selected
-
-   ====
-
-   -- only allow listings from PR currently show message to user using JS on the location section
+ 2-3) [DONE] Improve "Submit Listing" Interface
 
  4) Realtors and Landlords Accounts Creations
     - Submmit-property.php
@@ -45,6 +35,10 @@
 
    ======== =======
 
+   Test editing listings and adding new listings
+
+   ===============
+   
     LIVE RELEASE
       ** Dump data from live to production database
       ** Upgrade to new database in the live version
@@ -163,12 +157,16 @@
                   -- credit check
                   -- salary
                - ** Include tenant risk score it in the user profile page
+         - Encrypted Cookies
+               - USMP = user email and password hash
+               - USRF = referral fullname and referral id
 
       DATABASE
 
         1) User
             - id_user_referral
-            - status: {active, inactive, archived}
+            - status: {active, inactive, pending, archived}
+            - --- pending = user is active but is pending email confirmation
             - type: {super_admin, admin, landlords, realtors, tenants, listers}
             - code: variable that is used to verify a email, restore password or a phone number
         2) Cities

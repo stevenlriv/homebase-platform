@@ -10,7 +10,7 @@ if(!is_file(__DIR__ . '/includes/configuration.php') && is_file(__DIR__ . '/incl
 require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
 
-lister_backend();
+establish_referral();
 
 $form_success = '';
 $form_error = '';
@@ -103,10 +103,21 @@ switch ($request) {
         require_once __DIR__ . '/views/reset-password.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/confirm' :
+        $seo = array(
+            "title" => "Account Confirmation",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/confirm.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/confirm.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/my-profile' :
         if(!$user) {
             header('Location: /');
         }
+
         $seo = array(
             "title" => "My Profile",
             "request" => $request,

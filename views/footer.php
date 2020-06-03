@@ -108,7 +108,11 @@ ga('send', 'pageview');
 <?php
 	if($user) {
 ?>
-		<script type="text/javascript" src="/views/assets/scripts/user.js"></script>
+	<script type="text/javascript" src="/views/assets/scripts/user.js"></script>
+
+	<!-- Cache Components -->
+		<?php print_cache_js(); ?>
+	<!-- END Cache Components -->	
 <?php
 	}
 ?>
@@ -129,10 +133,6 @@ ga('send', 'pageview');
 		}
 	?>
 <!-- END Booking Components -->
-
-<!-- Cache Components -->
-		<?php print_cache_js(); ?>
-<!-- END Cache Components -->
 
 <!-- Maps -->
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo get_maps_api_key(); ?>&language=en"></script>

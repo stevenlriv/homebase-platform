@@ -4,11 +4,6 @@
 	// Add +1 view to the listing table
 	// Used to sort popular recommended listings that are available
 	update_views($listing['uri']);
-
-	$city = get_location('cities', 'one', $listing['id_city']);	
-
-	// Replace '-' for '+' so browser and listing-search.php can read it well
-	$city['uri'] = str_replace('-', '+', $city['uri']);
 ?>
 <!-- Titlebar
 ================================================== -->
@@ -17,7 +12,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				
-				<a href="/find-a-homebase?location=<?php echo $city['uri']; ?>" class="back-to-listings"></a>
+				<a href="/find-a-homebase?location=<?php echo $listing['city']; ?>" class="back-to-listings"></a>
 				<div class="property-title">
 					<h2><?php echo $listing['listing_title']; ?> <span class="property-badge">For Rent</span></h2>
 					<span>
@@ -150,7 +145,7 @@
 				<?php
 					$query_related_listings = get_listings('all', array( 
 						0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
-						1 => array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_city", "command" => "=", "value" => $listing['id_city']),
+						1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "city", "command" => "LIKE", "value" => $listing['city']),
 						2 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "!=", "value" => $listing['id_listing']),
 					), "ORDER BY views_count DESC LIMIT 3");	
 

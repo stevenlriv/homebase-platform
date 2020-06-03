@@ -92,6 +92,37 @@
 
 	    /*----------------------------------------------------*/
 	    /* Financial Settings Form Validation
+        /*----------------------------------------------------*/
+        
+        $("form[name='financial-settings']").validate({
+    	    // Specify validation rules
+    	    rules: {
+      		    // The key name on the left side is the name attribute
+      		    // of an input field. Validation rules are defined
+      		    // on the right side
+      		    bank_name: "required",
+                bank_sole_owner: "required",
+                bank_routing_number: "required",
+                bank_account_number: "required",
+    	    },
+	
+			// Specify validation error messages
+            messages: {
+                bank_name: "Please enter your bank name",
+                bank_sole_owner: "Please enter your bank account sole owner name",
+                bank_routing_number: "Please enter your bank routing number",
+                bank_account_number: "Please enter your bank account number",
+            },
+
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+
+	    /*----------------------------------------------------*/
+	    /* Submit Property Form Validation
 	    /*----------------------------------------------------*/
 
         $("form[name='submit-property']").validate({
@@ -111,9 +142,15 @@
                 monthly_house_original: "required",
                 deposit_house_original: "required",
                 physical_address: "required",
-                id_city: "required",
+                country: "required",
+                state: "required",
+                city: "required",
                 zipcode: "required",
-                listing_description: "required",
+                listing_description: {
+                    required: true,
+                    minlength: 100,
+                    maxlength: 2000
+                },
                 keywords: {
                     maxlength: 100
                 }, 
@@ -155,14 +192,22 @@
                 physical_address: {
                     required: "You must set the property physical address.",
                 },
-                id_city: {
-                    required: "You must select city where your property is located.",
+                country: {
+                    required: "You must enter the country where your property is located.",
+                },
+                state: {
+                    required: "You must enter the state where your property is located. If there are no states, just re-enter your country name.",
+                },
+                city: {
+                    required: "You must enter the city where your property is located.",
                 },
                 zipcode: {
                     required: "You must set the property zip code.",
                 },
                 listing_description: {
                     required: "You must set the property listing description.",
+                    minlength: "You description must be at least 100 characters or more.",
+                    maxlength: "You description must be 2000 characters or less.",
                 },
                 keywords: {
                     maxlength: "You keywords must be 100 characters or less."
@@ -176,37 +221,6 @@
                 check_required: {
                     required: "You must agree to our terms before adding or editing the listing.",
                 },
-            },
-
-            // Make sure the form is submitted to the destination defined
-            // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-                form.submit();
-            }
-        });
-
-	    /*----------------------------------------------------*/
-	    /* Submit Property Form Validation
-	    /*----------------------------------------------------*/
-
-        $("form[name='financial-settings']").validate({
-    	    // Specify validation rules
-    	    rules: {
-      		    // The key name on the left side is the name attribute
-      		    // of an input field. Validation rules are defined
-      		    // on the right side
-      		    bank_name: "required",
-                bank_sole_owner: "required",
-                bank_routing_number: "required",
-                bank_account_number: "required",
-    	    },
-	
-			// Specify validation error messages
-            messages: {
-                bank_name: "Please enter your bank name",
-                bank_sole_owner: "Please enter your bank account sole owner name",
-                bank_routing_number: "Please enter your bank routing number",
-                bank_account_number: "Please enter your bank account number",
             },
 
             // Make sure the form is submitted to the destination defined

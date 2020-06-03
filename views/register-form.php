@@ -68,6 +68,11 @@
 						</label>
 					</p>
 
+					<div class="checkboxes in-row margin-bottom-20 margin-top-10">
+						<input id="check-30" type="checkbox" name="check_required">
+						<label for="check-30">I have read and agree to the <a href="/terms" target="_blank">Terms of Service</a>. I also certify that I have read the <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
+					</div>
+
 					<p class="form-row">
 						<input type="submit" class="button border margin-top-10" name="submit" value="Register" />
 					</p>

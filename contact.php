@@ -94,8 +94,13 @@ if (!empty($error)) {
  $e_subject = "$name has contacted about $subject";
 
  $e_person = "";
- if (!empty($person)) {
- 	$e_person = "$person recommended this property to $name <br /><br />";
+ $referral = get_referral_cookie();
+
+ if($referral) {
+	$e_person = "Our system detects that {$referral[0]} with the referral id of '{$referral[1]}' recommended a property on Homebase to $name <br /><br />";
+ }
+ elseif (!empty($person)) {
+ 	$e_person = "$person recommended a property on Homebase to $name <br /><br />";
  }
 
  $e_content = $comments." <br /><br />";

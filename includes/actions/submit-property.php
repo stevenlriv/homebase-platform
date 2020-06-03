@@ -57,8 +57,16 @@
             $form_error = 'You must set the property physical address.';
         }     
         
-        if(empty($_POST['id_city'])) {
-            $form_error = 'You must select city where your property is located.';
+        if(empty($_POST['country'])) {
+            $form_error = 'You must enter the country where your property is located.';
+        }
+
+        if(empty($_POST['state'])) {
+            $form_error = 'You must enter the state where your property is located.';
+        }
+
+        if(empty($_POST['city'])) {
+            $form_error = 'You must enter the city where your property is located.';
         }
         
         if(empty($_POST['zipcode'])) {
@@ -121,18 +129,6 @@
         if(empty($_POST['pets'])) { $_POST['pets'] = '0'; }
         if(empty($_POST['smoking'])) { $_POST['smoking'] = '0'; }
 
-        //Get GPS Latitude and Longitude
-        if(empty($form_error)) {
-            $address = urlencode($_POST['physical_address']);
-            $apikey  = urlencode(get_maps_api_key(true));
-            $url     = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apikey}";
-            $resp    = json_decode( file_get_contents( $url ), true );
-
-            // Latitude and Longitude (PHP 7 syntax)
-            $latitude    = $resp['results'][0]['geometry']['location']['lat'] ?? '';
-            $longitude   = $resp['results'][0]['geometry']['location']['lng'] ?? '';
-        }
-
         //Verify if there are images availables
         //Get images from cache is already encoded
         if(get_cache($_SESSION['CACHE_IMG_LISTING'])) {
@@ -150,6 +146,18 @@
             $form_error = 'Your listing is required to have at least 1 image.';
         }
 
+        //Get GPS Latitude and Longitude
+        if(empty($form_error)) {
+            $address = urlencode($_POST['physical_address']);
+            $apikey  = urlencode(get_maps_api_key(true));
+            $url     = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apikey}";
+            $resp    = json_decode( file_get_contents( $url ), true );
+
+            // Latitude and Longitude (PHP 7 syntax)
+            $latitude    = $resp['results'][0]['geometry']['location']['lat'] ?? '';
+            $longitude   = $resp['results'][0]['geometry']['location']['lng'] ?? '';
+        }
+        
         //Not in use currently
         $monthly_per_room = 0;
         $deposit_per_room = 0;
@@ -165,7 +173,7 @@
                 if(update_listing ( $listing['id_listing'], $_POST['id_city'], $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
                     $_POST['number_bathroom'], $_POST['square_feet'], $_POST['physical_address'], $postal_address, $latitude, $longitude, $_POST['listing_title'], $_POST['listing_description'], $listing_images, $_POST['video_tour'],
                     $_POST['calendly_link'], $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
-                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code']) ) {
+                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city']) ) {
                     $form_success = 'Great, your property was updated.';
                     delete_cache($_SESSION['CACHE_ID_LISTING']);
                     delete_cache($_SESSION['CACHE_IMG_LISTING']);
@@ -180,7 +188,7 @@
                 if(new_listing ( $_POST['id_city'], $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
                     $_POST['number_bathroom'], $_POST['square_feet'], $_POST['physical_address'], $postal_address, $latitude, $longitude, $_POST['listing_title'], $_POST['listing_description'], $listing_images, $_POST['video_tour'],
                     $_POST['calendly_link'], $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
-                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code']) ) {
+                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city']) ) {
                     $form_success = 'Great, your property was added.';
                     delete_cache($_SESSION['CACHE_ID_LISTING']);
                     delete_cache($_SESSION['CACHE_IMG_LISTING']);

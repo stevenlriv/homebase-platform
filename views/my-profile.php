@@ -50,6 +50,15 @@
 								$form_info = 'Press the "Save Changes" button below to save your information.';
 							}
 
+							// Email confirmation message
+							// Don't show this message if there is something else to show
+							if($form_success=='' && $form_error=='' && $form_info=='') {
+								// Show message to lister and tenant
+								if($user['status']=='pending') {
+									$form_error = 'Please confirm your email address to have full access to your account. <a href="/my-profile?resend=true" style="color: #274abb !important">Click here</a> to resend the confirmation email.';
+								}
+							}
+
 							// Bank Account Information Message
 							// Don't show this message if there is something else to show
 							// Do not show message to tenants

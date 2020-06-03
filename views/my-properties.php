@@ -5,7 +5,12 @@
         require_once('my-properties-tenants.php');
     }
     elseif($user['type'] == 'listers') {
-        require_once('my-properties-lister.php');
+        if($user['status']=='pending') {
+            require_once('my-properties-lister-pending.php');
+        }
+        else {
+            require_once('my-properties-lister.php');
+        }
     }
     else {
         require_once('my-properties-realtors-landlords.php');

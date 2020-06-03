@@ -55,19 +55,32 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	}
 
 	function get_unique_uri($array, $only_verify = false) {
-		$title = $array['title'];
-		$id_city = $array['id_city'];
 
 		//Basic uri
-		$uri = clean_url($title);
+		$uri = clean_url($array['title']);
+		$uri_city = clean_url($array['city']);
+		$uri_state = clean_url($array['state']);
+		$uri_country = clean_url($array['country']);
 
 		//If basic uri exists, just combine uri + city name
 		if(is_uri($uri, true)) {
-			$uri = get_location('cities', 'one', $id_city)['uri'].'-'.$uri;
-			$uri = clean_url($uri);
-		}	
+			$uri = $uri_city.'-'.$uri;
+			$uri = clean_url($uri); //new uri city-title
+		}
 		
-		// Verify if the url already exists
+			//If it also exists with the city add the state
+			if(is_uri($uri, true)) {
+				$uri = $uri_state.'-'.$uri;
+				$uri = clean_url($uri); //new uri state-city-title
+			}
+
+				//If it also exists with the state add the country
+				if(is_uri($uri, true)) {
+					$uri = $uri_country.'-'.$uri;
+					$uri = clean_url($uri); //new uri country-state-city-title
+				}
+
+		// Verify if the url already exists; do not return the uri
 		if($only_verify) {
 			if(is_uri($uri, true)) {
 				return true;
@@ -175,10 +188,10 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		return false;
 	}
 
-	function update_listing ( $id_listing, $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+	function update_listing ( $id_listing, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 						$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 						$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi, 
-						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code) {
+						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code, $country, $state, $city) {
 		global $db;
 
 		//URI CANT BE CHANGED AFTER IT IS CREATED
@@ -198,12 +211,12 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
         $monthly_house = round($monthly_house + ($monthly_house*$percentage_markup));
 		$deposit_house = round($deposit_house + ($deposit_house*$percentage_markup));
 		
-		$q = $db->prepare ( "UPDATE xvls_listings SET id_city = ?, `type` = ?, available = ?, zipcode = ?, keywords = ?, monthly_house = ?, monthly_house_original = ?, monthly_per_room = ?, deposit_house = ?, deposit_house_original = ?, deposit_per_room = ?, number_rooms = ?,
+		$q = $db->prepare ( "UPDATE xvls_listings SET `type` = ?, available = ?, country = ?, `state` = ?, city = ?, zipcode = ?, keywords = ?, monthly_house = ?, monthly_house_original = ?, monthly_per_room = ?, deposit_house = ?, deposit_house_original = ?, deposit_per_room = ?, number_rooms = ?,
 											number_bathroom = ?, square_feet = ?, physical_address = ?, postal_address = ?, latitude = ?, longitude = ?, listing_title = ?, listing_description = ?, listing_images = ?, video_tour = ?,
 											calendly_link = ?, checkin_access_code = ?, checkin_images = ?, checkin_description = ?, air_conditioning = ?, electricity = ?, furnished = ?, parking = ?, pets = ?, smoking = ?, water = ?, wifi = ?,
 											laundry_room = ?, gym = ?, alarm = ?, swimming_pool = ? WHERE id_listing = ?" );
 									
-		$q->bind_param ( 'isssssssssssssssssssssssssssssssssssssi', $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'ssssssssssssssssssssssssssssssssssssssssi', $type, $available, $country, $state, $city, $zipcode, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_access_code, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
 										$laundry_room, $gym, $alarm, $swimming_pool, $id_listing);
@@ -217,10 +230,10 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		return false;
 	}
 
-	function new_listing ( $id_city, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
+	function new_listing ( $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 						$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 						$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi, 
-						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code) {
+						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code, $country, $state, $city) {
 		global $db;
 
 		// Listing status on publish
@@ -232,7 +245,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
 		$id_user = is_login_user()['id_user'];
 
-		$uri = get_unique_uri(array( 'title' => $listing_title, 'id_city' => $id_city));
+		$uri = get_unique_uri(array( 'title' => $listing_title, 'city' => $city, 'state' => $state, 'country' => $country));
 
 		//Trim keywords
 		$keywords = trim($keywords);
@@ -248,13 +261,13 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
         $monthly_house = round($monthly_house + ($monthly_house*$percentage_markup));
         $deposit_house = round($deposit_house + ($deposit_house*$percentage_markup));
 
-		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, id_city, `status`, `type`, available, zipcode, uri, keywords, monthly_house, monthly_house_original, monthly_per_room, deposit_house, deposit_house_original, deposit_per_room, number_rooms,
+		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, `status`, `type`, available, country, `state`, city, zipcode, uri, keywords, monthly_house, monthly_house_original, monthly_per_room, deposit_house, deposit_house_original, deposit_per_room, number_rooms,
 											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,
 											calendly_link, checkin_access_code, checkin_images, checkin_description, air_conditioning, electricity, furnished, parking, pets, smoking, water, wifi,
 											laundry_room, gym, alarm, swimming_pool)
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 									
-		$q->bind_param ( 'iisssssssssssssssssssssssssssssssssssssss', $id_user, $id_city, $status, $type, $available, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'issssssssssssssssssssssssssssssssssssssssss', $id_user, $status, $type, $available, $country, $state, $city, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_access_code, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
 										$laundry_room, $gym, $alarm, $swimming_pool);

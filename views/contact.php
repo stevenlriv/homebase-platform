@@ -111,7 +111,8 @@
 					</div>
 
 					<?php
-						if(!empty($listing)) {
+						// We first verify if we detect that this person was already reccomended
+						if(!empty($listing) && !get_referral_cookie()) {
 					?>
 					<div>
 						<input name="person" type="text" id="person" placeholder="Did any one recommended you the property?" value="" />

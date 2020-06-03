@@ -88,7 +88,7 @@
 				<div class="col-md-6">
 					<h5>Type</h5>
 					<select name="type" class="chosen-select-no-single">
-						<option label="blank"></option>		
+						<option label="Select an Option"></option>		
 						<option <?php if(form_get_value($cache, $listing, 'type') == 'apartment') echo 'selected="selected"' ?> value="apartment">Apartment</option>
 						<option <?php if(form_get_value($cache, $listing, 'type') == 'house') echo 'selected="selected"' ?> value="house">House</option>
 					</select>
@@ -111,7 +111,7 @@
 				<div class="col-md-6">
 					<h5>Bedrooms</h5>
 					<select name="number_rooms" class="chosen-select-no-single">
-						<option label="blank"></option>	
+						<option label="Select an Option"></option>	
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 1) echo 'selected="selected"' ?> value="1">1</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 2) echo 'selected="selected"' ?> value="2">2</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 3) echo 'selected="selected"' ?> value="3">3</option>
@@ -124,7 +124,7 @@
 				<div class="col-md-6">
 					<h5>Bathrooms</h5>
 					<select name="number_bathroom" class="chosen-select-no-single">
-						<option label="blank"></option>	
+						<option label="Select an Option"></option>	
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 1) echo 'selected="selected"' ?> value="1">1</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 2) echo 'selected="selected"' ?> value="2">2</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 3) echo 'selected="selected"' ?> value="3">3</option>
@@ -275,29 +275,22 @@
 					<input name="physical_address" type="text" value="<?php form_print_value($cache, $listing, 'physical_address'); ?>">
 				</div>
 
+				<!-- Country -->
+				<div class="col-md-6">
+					<h5>Country</h5>
+					<input name="country" type="text" value="<?php form_print_value($cache, $listing, 'country'); ?>">
+				</div>
+
+				<!-- State -->
+				<div class="col-md-6" id="state">
+					<h5>State</h5>
+					<input name="state" type="text" value="<?php form_print_value($cache, $listing, 'state'); ?>">
+				</div>
+
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>City</h5>
-					<select name="id_city" class="chosen-select-no-single">
-						<option label="blank"></option>	
-						<?php
-							$id_city = form_get_value($cache, $listing, 'id_city');
-							if(!empty($id_city)) {
-								$city = get_location('cities', 'one', array( 
-									0 => array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_city", "command" => "=", "value" => $id_city),
-								), "LIMIT 1");	
-				
-								if($city) {
-									echo '<option selected="selected" value="'.$city['id_city'].'">'.$city['name'].', '.$city['state'].'</option>';
-									echo '<option label="blank">--- ---</option>';
-								}
-							}
-
-							foreach ( get_location('cities', 'all', array())  as $id => $value ) {
-								echo '<option value="'.$value['id_city'].'">'.$value['name'].', '.$value['state'].'</option>';
-							}
-						?>
-					</select>
+					<input name="city" type="text" value="<?php form_print_value($cache, $listing, 'city'); ?>">
 				</div>
 
 				<!-- Zip-Code -->
@@ -338,6 +331,7 @@
 			<div class="row with-forms">
 
 				<!-- Name -->
+				<?php show_message('', '', 'A property access code is a simple way to allow for remote access to potential tenants. We call this "self-guided tours" and this is how you will be able to handle more properties and tenants request. It usually means the code to a lockbox near your house or the code of a pin pad in your front door. For more information about this, contact us at <a href="mailto:'.get_setting(1).'" style="color: red !important;">'.get_setting(1).'</a>.'); ?>
 				<div class="col-md-12">
 					<h5>Propety Access Code <i class="tip" data-tip-content="Access code so the tenant can enter when doing a non-guided tour"></i></h5>
 					<input name="checkin_access_code" type="text" value="<?php form_print_value($cache, $listing, 'checkin_access_code'); ?>">

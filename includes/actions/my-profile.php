@@ -1,6 +1,16 @@
 <?php
     if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     
+    // Email Confirmation resend
+    if(!empty($_GET['resend']) && $_GET['resend'] == 'true') {
+        $code = generateNotSecureRandomString(20);
+        $link = get_domain()."/confirm?email={$user['email']}&validation=$code";
+
+        if(update_user_table('code', $user['id_user'], $code) && send_confirmation_email($user['fullname'], $user['email'], $link)) {
+            $form_success = 'Great! Your confirmation email has been sent successfully.';
+        }
+    }
+
     //Cache settings
     $_SESSION['CACHE_MY_PROFILE'] = 'my-profile';
 

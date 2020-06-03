@@ -52,6 +52,21 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		
 		return false;
     }
+
+	function send_confirmation_email($to_name, $to_email, $link) {
+		$message = "Hi <b>$to_name</b>!<br /><br />";
+		$message = $message."Here is your account confirmation email.<br /><br />";
+		$message = $message."To confirm your account, click the following link or copy and paste it in your browser: <br /><br /><br /><a href='$link' target='_blank'>$link</a>";	
+		
+		$subject = "Account Confirmation";
+		$from_email = 'no-reply@'.get_host();
+		
+		if ( send_email(get_setting(12), $from_email, $to_email, $to_name, $subject, $message) ) {
+			return true;
+		}
+		
+		return false;
+    }
     
 	function support_email ($from_name, $from_email, $subject, $message) {
 		
