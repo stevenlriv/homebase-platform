@@ -16,5 +16,11 @@
 	require_once ( dirname(__FILE__).'/lib/class.images.php' );
 	require_once ( dirname(__FILE__).'/lib/class.dropzone.php' );
 
-    if(is_production_enviroment()) { ini_set('display_errors','off'); }
+	// Don't show any error on production enviroment
+	if(is_production_enviroment()) { ini_set('display_errors','off'); }
+	
+	// Verify if we have a php version that has libsodium required for encryption
+	if (version_compare(PHP_VERSION, '7.4.0') <= 0) {
+		die('To run this platform we need at least PHP version 7.4.0');
+	}
 ?>

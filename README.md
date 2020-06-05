@@ -18,7 +18,7 @@
 
 ## UPGRADE
  1) Enable upgrade mode on the Super Admin panel or in the database directly
- 2) Secure the current configuration.php
+ 2) Secure the current configuration.php and .hataccess file
  3) Create a backup of live database
  4) Dump data from live to production database
  5) Import new database date to Live MySQL server
@@ -32,83 +32,83 @@
     
  2) [DONE] Improve "Submit Listing" Interface [WEEK 2-3]
 
- 4) [DONE] Realtors and Landlords Accounts Creations [WEEK 4]
+ 3) [DONE] Realtors and Landlords Accounts Creations [WEEK 4]
 
-    LIVE UPDATE
-      ** Move to a Managed MYSQL Database on Digital Ocean
-      ** Move Website to a Scalable Managed Digital Ocean dropplet by Cloudways
-      ** Create a small dropplet for a blog subdomain in Cloudways
+ 4) Tenants Accounts Support & Risk Mitigation [WEEK 5-9]
+      - Remove tenant autofill from contact form
+      - Remove redirection to contact form on index.php for tenants
+      - Account creation enabled
+      - Rent now button add a dropdown date on the listing; we need a starting date and an ending date for the contract 
 
- 5) "Calendly Like" Native Tour Scheduling for Tenants
-      - dropdown date on the listing we need a starting date and an ending date for the contract
-      -- priority for tenants accounts they need to have an account before doing a tour
-      --- restructure the roadmap
+      - Tenant Risk Mitigation
+         - Background check
+         - Credit Check
+         - Salary/Job verification (OPTIONAL)
+         - Risk Score will be assigned to the tenant depending on the above results
 
- 6) PandaDocs API and Renting Infracstructure [WEEK 6, 7, 8, 9]
+      - "Calendly Like" Native Tour Scheduling for Tenants 
+         - They need to create an account before doing a tour
+         - They need to pass background check before getting accepted to do tours
 
-    - PandaDocs API Integration with Platform
+ 5) PandaDocs API and Renting Infracstructure [WEEK 10-16]
+    - PandaDocs API Integration with Platform {https://www.pandadoc.com/api/esignature-api/}
       - We will able to automated and standarize listing creation
       - We will able to accept Payments
-      - https://www.pandadoc.com/api/esignature-api/
+      - Need to create the databases that recors the transactions or extract that data using the pandaDocs API
+
     - lease.php
       - Realtors/Landlord will be able to see actual lease contracts
       - Tenants will be able to see lease contracts
       - Links under /my-properties attached to lease end date need to be fixed
-      - Support rent by room, with lease, etc
+
     - LISTINGS.php
       - Book Now (save booking details when user is trying to log-in, use cookies)
-      - **Book now is redirecting to contact us
-      ** On rent now, reddirect to login page if user is not logged in and use a ?back=listing-page
-      ** Create a redirrection system
+      - Book now is redirecting to contact us with the desire rent date
+      - On rent now, reddirect to login page if user is not logged in and use a ?back=listing-page
+
     - RENT.php
       - &date=[starting date]
       - &id=[property id]
-    - Monthly payment history for users and realtors & landlords
-    - Ability to view the user profile with lease docs of their tenants
-    - class.theme.php verify if the house is really rented or not to disable the date usings js on the landlord/realtor panel
-    - #lease-link -- on class.listings.php
-    -- Allow access to tenants and landlords to the user profile page only if they have a lease or pending lease with them
-    -- add edit and disable account actions in the /profile page, only for admins
-    --0 Once the user rents the house update the availability date in the listing database
-    -- If a listing have other types of data in the database, like lease payments, etc, it CANT be deleted, so fix that
-    -- They can spefify to use a different bank information for that lease, update the lease database with the pertinent bank information
-    ---- when user is renting verify of it is a referral
+      - class.theme.php verify if the house is really rented or not to disable the date usings js on the landlord/realtor panel; #lease-link on class.listings.php
+      - Once the user rents the house update the availability date in the listing database
+      - If a listing have other types of data in the database, like lease payments, etc, it CANT be deleted by any person!!, so fix that
+      - when user is renting verify of it is a referral to give credit to listers
 
-    ---- once an user rents landlords will receive an email if they decided to manually accept a tenant they have 12 hours to accept or reject the tenant, after that the tenant will be accepted by the system
+    - Landlords and Realtors
+      - once an user rents landlords will receive an email if they decided to manually accept a tenant they have 12 hours to accept or reject the tenant, after that the tenant will be accepted by the system
+      - Ability to view the user profile with lease docs of their tenants and the user risk score
+      - Allow access to realtors and landlords to the user profile page only if they have a lease or pending lease with them
+      - They can spefify to use a different bank information per lease lease, update the lease database with the pertinent bank information
 
-    ======
+    - Landlords, Realtors and Listers dashboards
+      - Show all the payments made to them extracting the data from the database
+      - Include also the bank transfer confirmation and the transfer date in the database tables
 
-    -- Need to create the databases that recors the transactions or extract that data using the pandaDocs API
-    -- Tenants transactions will come from PandaDocs
-    -- Landlords and landlords payments are on a database using thier bank information
-    
- 10) Tenant account Journey consolidated
-    - Account creation enabled
-    - Background and credit checks after account creation
-    - Salary/Job verification (OPTIONAL)
-    - Risk Score will be assigned to the tenant
     - Tenant Account Dashboard
       - require lease type
       - lease details
       - current and past homebase
-    - remove tenant autofill from contact form
-    - Remove redirection to contact form on index.php for tenants
+      - Tenants transactions will come from PandaDocs
+      - They can see their landlord/realtor profile and contact information
 
- 11) Master Admin Panel
-    - Ability to edit settings
-    - Ability to manage and create users
-    - Ability to enable new cities y countries and states
-    -- When editiing them remmeber to change the values on the cities tables due to easier search we only use the city table for query
-    -- Ability to enter into upgrade mode
+ 6) Admin & Roles Expansion [WEEk 17-18]
+ 
+    - Master Admin Panel
+      - Ability to edit settings
+      - Ability to manage and create users
+      - Ability to enter into upgrade mode
+      - Ability to edit and disable account actions in the /profile user page
     
- 12) Admin
-    - Ability to permanently disable a listing (status -> archive)
-    - Ability to manually add a referral to an user
-    - Ability to mark a payment made to an lister
-    - Ability to mark a payment made to a Landlord or Realtor using their bank information
+    - Master Admin & Admin
+      - Ability to permanently disable a listing (status -> archive)
+      - Ability to manually add a referral to an user
 
- 12) Platform Upgrade
-    - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
+    - Master Admin & Admin & Accountant Role
+      - Ability to mark a payment made to an lister
+      - Ability to mark a payment made to a Landlord or Realtor using their bank information
+
+   Platform Upgrade
+      - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
 
 ## NOTES
     CRON FILE

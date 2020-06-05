@@ -3,11 +3,6 @@
 define('SCRIP_LOAD', true);
 define('THEME_LOAD', true);
 
-// Verify if there is an installation file
-if(!is_file(__DIR__ . '/includes/configuration.php') && is_file(__DIR__ . '/includes/install.php')) {
-    die( header('Location: /includes/install.php') );
-}
-
 // Include the required libraries
 require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
