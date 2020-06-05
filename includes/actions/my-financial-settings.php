@@ -3,6 +3,8 @@
     
     //Cache settings
     $_SESSION['CACHE_MY_FINANCIALS'] = 'financial-settings';
+	$cache_id = $_SESSION['CACHE_MY_FINANCIALS'];
+	$cache = get_cache($cache_id);
 
 	if ( isset($_POST['submit']) ) {
         
@@ -25,7 +27,7 @@
         if(empty($form_error)) { 
             if(update_bank_information($user['id_user'], $_POST['bank_name'], $_POST['bank_sole_owner'], $_POST['bank_routing_number'], $_POST['bank_account_number'])) {
                 $form_success = 'Great, your bank information has been updated.';
-                delete_cache($_SESSION['CACHE_MY_FINANCIALS']);
+                delete_cache($cache_id);
                 header("Refresh:1");
             }
             else {

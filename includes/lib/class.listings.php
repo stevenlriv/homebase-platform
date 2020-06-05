@@ -265,7 +265,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,
 											calendly_link, checkin_access_code, checkin_images, checkin_description, air_conditioning, electricity, furnished, parking, pets, smoking, water, wifi,
 											laundry_room, gym, alarm, swimming_pool)
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 									
 		$q->bind_param ( 'issssssssssssssssssssssssssssssssssssssssss', $id_user, $status, $type, $available, $country, $state, $city, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,

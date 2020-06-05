@@ -1,8 +1,13 @@
 <?php
     if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     
+    // Cache Settings
+    $_SESSION['CACHE_MY_PROFILE'] = 'my-profile';
+    $cache_id = $_SESSION['CACHE_MY_PROFILE'];
+    $cache = get_cache($cache_id);
+    
     // Email Confirmation resend
-    if(!empty($_GET['resend']) && $_GET['resend'] == 'true') {
+    if(!empty($_GET['resend']) && $_GET['resend'] == 'true' && $user['status'] == 'pending') {
         $code = generateNotSecureRandomString(20);
         $link = get_domain()."/confirm?email={$user['email']}&validation=$code";
 
@@ -11,9 +16,7 @@
         }
     }
 
-    //Cache settings
-    $_SESSION['CACHE_MY_PROFILE'] = 'my-profile';
-
+    // My Profile Post Submit
 	if ( isset($_POST['submit']) ) {
 
         if(empty($_POST['country'])) {
@@ -52,7 +55,7 @@
         if(empty($form_error)) { 
             if(update_profile($user['id_user'], $_POST['fullname'], $_POST['phone_number'], $_POST['email'], $_POST['profile_bio'], $_POST['profile_linkedIn'], $_POST['country'])) {
                 $form_success = 'Great, your profile has been updated.';
-                delete_cache($_SESSION['CACHE_MY_PROFILE']);
+                delete_cache($cache_id);
                 header("Refresh:1");
             }
             else {
@@ -62,6 +65,7 @@
 
     }
     
+    // My Profile Image Submit
     if ( isset($_POST['submit-image']) ) {
         if( empty($_FILES['profile_image'])) {
             $form_error = 'There is no profile image to be updated, please try again.';

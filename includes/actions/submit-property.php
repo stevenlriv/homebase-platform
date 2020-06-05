@@ -5,15 +5,17 @@
     if($request == '/edit-property') {
         $_SESSION['CACHE_ID_LISTING'] = 'edit-property-'.$listing['id_listing'];
         $_SESSION['CACHE_IMG_LISTING'] = 'edit-property-images-'.$listing['id_listing'];
+        $_SESSION['CACHE_IMG_CHECKIN'] = 'edit-property-images-checkin-'.$listing['id_listing'];
     }
     else {
         $_SESSION['CACHE_ID_LISTING'] = 'add-property';
         $_SESSION['CACHE_IMG_LISTING'] = 'add-property-images';
+        $_SESSION['CACHE_IMG_CHECKIN'] = 'add-property-images-checkin';
     }
     
 	if ( isset($_POST['submit']) ) {
 
-        if(empty($listing) && get_unique_uri(array( 'title' => $_POST['listing_title'], 'id_city' => $_POST['id_city']), true)) {
+        if(empty($listing) && get_unique_uri(array( 'title' => $_POST['listing_title'], 'city' => $_POST['city'], 'state' => $_POST['state'], 'country' => $_POST['country']), true)) {
             $form_error = 'You will need to change your property title, because there is an existing property with the same title';
         }
 
@@ -89,9 +91,9 @@
             $form_error = 'You must set the property access code.';
         }  
 
-        if (!empty($_POST['calendly_link']) && !filter_var($_POST['calendly_link'], FILTER_VALIDATE_URL)) {
-            $form_error = 'You must enter a valid calendly link.';
-        }
+        if(empty($_POST['checkin_description'])) {
+            $form_error = 'You must explain the tenant how to get into the property using the access code.';
+        }  
 
         if (!empty($_POST['video_tour']) && !filter_var($_POST['video_tour'], FILTER_VALIDATE_URL)) {
             $form_error = 'You must use a valid video tour link.';
@@ -99,10 +101,6 @@
 
         if(empty($_POST['postal_address'])) {
             $_POST['postal_address'] = '';
-        }    
-
-        if(empty($_POST['calendly_link'])) {
-            $_POST['calendly_link'] = '';
         }    
   
         if(empty($_POST['video_tour'])) {
@@ -146,6 +144,22 @@
             $form_error = 'Your listing is required to have at least 1 image.';
         }
 
+        //Verify if there are checkin images available
+        if(get_cache($_SESSION['CACHE_IMG_CHECKIN'])) {
+            $checkin_images = get_cache($_SESSION['CACHE_IMG_CHECKIN'])['content'];
+        }
+
+        //If there is not image in cache that means that we are not doing any update, so just use the
+        //Same data saved in the database
+        elseif(!empty($listing['checkin_images'])) {
+            $checkin_images = $listing['checkin_images'];
+        }
+
+        else {
+            $checkin_images = ''; 
+            //$form_error = 'Your listing is required to have at least 1 checkin image.';
+        }
+
         //Get GPS Latitude and Longitude
         if(empty($form_error)) {
             $address = urlencode($_POST['physical_address']);
@@ -161,23 +175,32 @@
         //Not in use currently
         $monthly_per_room = 0;
         $deposit_per_room = 0;
-        $checkin_images = ''; 
-        $checkin_description = '';
+        if(!empty($listing['calendly_link'])) {
+            $calendly_link = $listing['calendly_link'];
+        }
+        else {
+            $calendly_link = '';
+        }
 
         //In use
         $postal_address = $_POST['postal_address'];
+        $checkin_description = $_POST['checkin_description'];
 
         if(empty($form_error)) { 
             // edit an existing listing
             if(!empty($listing)) {
-                if(update_listing ( $listing['id_listing'], $_POST['id_city'], $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
+                if(update_listing ( $listing['id_listing'], $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
                     $_POST['number_bathroom'], $_POST['square_feet'], $_POST['physical_address'], $postal_address, $latitude, $longitude, $_POST['listing_title'], $_POST['listing_description'], $listing_images, $_POST['video_tour'],
-                    $_POST['calendly_link'], $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
+                    $calendly_link, $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
                     $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city']) ) {
                     $form_success = 'Great, your property was updated.';
-                    delete_cache($_SESSION['CACHE_ID_LISTING']);
-                    delete_cache($_SESSION['CACHE_IMG_LISTING']);
-                    header("Refresh:1");
+
+                    // Delete cache
+                        delete_cache($_SESSION['CACHE_ID_LISTING']);
+                        delete_cache($_SESSION['CACHE_IMG_LISTING']); 
+                        delete_cache($_SESSION['CACHE_IMG_CHECKIN']);
+
+                    //header("Refresh:1");
                 }
                 else {
                     $form_error = 'An error occurred while updating your listing, please try again.';
@@ -185,13 +208,16 @@
             }
             // add a new listing
             else {
-                if(new_listing ( $_POST['id_city'], $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
+                if(new_listing ( $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
                     $_POST['number_bathroom'], $_POST['square_feet'], $_POST['physical_address'], $postal_address, $latitude, $longitude, $_POST['listing_title'], $_POST['listing_description'], $listing_images, $_POST['video_tour'],
-                    $_POST['calendly_link'], $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
+                    $calendly_link, $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
                     $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city']) ) {
                     $form_success = 'Great, your property was added.';
-                    delete_cache($_SESSION['CACHE_ID_LISTING']);
-                    delete_cache($_SESSION['CACHE_IMG_LISTING']);
+
+                    // Delete Cache
+                        delete_cache($_SESSION['CACHE_ID_LISTING']);
+                        delete_cache($_SESSION['CACHE_IMG_LISTING']);
+                        delete_cache($_SESSION['CACHE_IMG_CHECKIN']);
                 }
                 else {
                     $form_error = 'An error occurred while adding your listing, please try again.';

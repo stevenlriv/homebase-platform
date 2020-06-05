@@ -15,19 +15,10 @@
 		}
 	}
 
-	// Landlord/Realtor Inquiry
-	$realtor_landlord = false;
+	// Tenant Account Inquiry
+	$tenant = false;
 	if( !empty($_GET['inquiry']) ) {
-		$realtor_landlord = true;
-		if($_GET['inquiry'] == 'landlord') {
-			$subject = "Interested in being a Homebase landlord";
-			$message = "I'm a landlord, looking to add my property to be rented on the platform. The property is located at ...";	
-		}	
-
-		if($_GET['inquiry'] == 'realtor') {
-			$subject = "Interested in working with Homebase as a realtor";
-			$message = "I'm a realtor, looking to add a couple of my client's properties to be rented on the platform. The properties are located at ...";	
-		}	
+		$tenant = true;
 
 		if($_GET['inquiry'] == 'tenant') {
 			$subject = "Interested in renting with Homebase";
@@ -107,7 +98,7 @@
 					</div>
 
 					<div>
-						<input name="subject" type="<?php if(!empty($listing) || $realtor_landlord) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
+						<input name="subject" type="<?php if(!empty($listing) || $tenant) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
 					</div>
 
 					<?php

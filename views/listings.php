@@ -134,20 +134,28 @@
 					}
 				?>
 
-				<!-- Similar Listings Container -->
-				<h3 class="desc-headline no-border margin-bottom-35 margin-top-60">Similar Properties</h3>
+				<?php
+					$query_related_listings = get_listings('all', array( 
+						0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
+						1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "!=", "value" => $listing['id_listing']),
+						2 => array("type" => "CHR", "condition" => "AND", "loose" => true, "table" => "city", "command" => "LIKE", "value" => $listing['city'])
+					), "ORDER BY views_count DESC LIMIT 3");	
 
+					// We need more than 1 to show the title
+					if(count($query_related_listings) > 1) {
+				?>
+					<!-- Similar Listings Container -->
+					<h3 class="desc-headline no-border margin-bottom-35 margin-top-60">Similar Properties</h3>
+
+				<?php
+					}
+				?>
 				<!-- Layout Switcher -->
 
 				<div class="layout-switcher hidden"><a href="#" class="list"><i class="fa fa-th-list"></i></a></div>
 				<div class="listings-container list-layout">
 
 				<?php
-					$query_related_listings = get_listings('all', array( 
-						0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
-						1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "city", "command" => "LIKE", "value" => $listing['city']),
-						2 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "!=", "value" => $listing['id_listing']),
-					), "ORDER BY views_count DESC LIMIT 3");	
 
 					foreach ( $query_related_listings as $id => $value ) {
 				?>

@@ -48,7 +48,7 @@
 					<form method="post" name="change-password">
 
 						<?php
-							show_message($form_success, $form_error);
+							show_message($form_success, $form_error, $form_info);
 						?>
 
 						<label>Current Password</label>

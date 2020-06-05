@@ -88,7 +88,7 @@
 
         <div class="col-md-8 margin-bottom-55">
 			<?php
-				if($pending_results>0 && $form_error == '' && $form_success == '') {
+				if($pending_results>0 && are_messages_empty()) {
 					$form_info = 'There are '.$pending_results.' listings pending approval.';
 				}
 

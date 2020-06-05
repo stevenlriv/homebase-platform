@@ -14,18 +14,15 @@
      * 2) On the action/files at the top you need to add a session with the unique identifier
      *      //Cache settings
      *      $_SESSION['CACHE_UNIQUE_NAME'] = 'unique-id';
-     * 
-     * 3) On the views/ files at the top you need to add the cache with its unique identifier
-     *      //Cache settings
-     * 	    $form_cache_id = $_SESSION['CACHE_UNIQUE_NAME'];
-     *      $cache = get_cache($form_cache_id);
+     *      $cache_id_[IF-MORE-THAN-2-ADD-ANOTHER-IDENTIFIER] = $_SESSION['CACHE_UNIQUE_NAME'];
+     *      $cache = get_cache($form_cache_[IDENTIFIER]);
      * 
      * 4) To us it in a in a for and input you will need to do add the class="form-cache" to the form and an unique id
-     *      <form method="post" class="form-cache" id="<?php echo $form_cache_id; ?>">
+     *      <form method="post" class="form-cache" id="<?php echo $cache_id; ?>">
      *      <input name="input-name" value="<?php form_print_value($cache, $array-from-database, 'input-name'); ?>" type="text">
      * 
      *      You can show the user a message to indicate that there is cache and they should save the data:
-     *          if($cache && $form_error=='') {
+     *          if($cache && $form_error=='' && $form_info='') {
 	 *				$form_info = 'Press the "Save Changes" button below to save your information.';
 	 *			}
      *
@@ -149,7 +146,7 @@
 	            /*--------------------------------------------------*/
 	            $(".form-cache").on('change', function() {
 		            var datastring = $(this).serializeArray();
-		            var formName = $(this).attr("id");
+                    var formName = $(this).attr("id");
 
 		            $.ajax({
                         type: "POST",

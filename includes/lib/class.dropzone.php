@@ -8,7 +8,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
      * 
      * HOW TO USE IT
      * 
-	 * 1) The javascript code for every dropzone is requied on the footer/header of website for it to work. Also a root images.php is required too
+	 * 1) The javascript code for every dropzone is requied on the footer/header of website for it to work. Also a root images-[dropzone].php is required too per dropzone
      * 
      * 2) On the action/files at the top you need to add a session with the unique identifier
 	 * 		//Cache settings
@@ -33,7 +33,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
      *      $form_success = 'Great, your profile has been updated.';
      *      delete_cache('unique-id');
 	 */
-    function dropzone_js($dropzone_id, $jquery_id, $form_id, $get_url) {
+    function dropzone_js($dropzone_id, $jquery_id, $form_id, $get_url, $post_url = '/images.php') {
     ?>
         <script>
             $( "#<?php echo $jquery_id; ?>" ).appendTo( "#<?php echo $form_id; ?>" );
@@ -148,7 +148,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 			   
    			        $.ajax({
      			        type: 'POST',
-     			        url: '/images.php',
+     			        url: '<?php echo $post_url; ?>',
      			        data: {action: 'remove-img', content: imageURL},
 				        success: function(data) {
 					        //console.log(data.response);
@@ -163,15 +163,33 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     <?php
     }
 
-    function dropzone_box($name, $dropzone_id, $jquery_id) {
+    function dropzone_box($name, $dropzone_id, $jquery_id, $design = 'submit-section', $post_url = '/images.php') {
     ?>
 		<div id="<?php echo $jquery_id; ?>">
-			<h3><?php echo $name; ?> <i class="tip" data-tip-content="Removing an image is a permanent action"></i> </h3>
-			<br />
-			<?php show_message('', '', 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs.'); ?>
-			<div class="submit-section">
-				<form action="/images.php" class="dropzone" id="<?php echo $dropzone_id; ?>"></form>
-			</div>
+
+			<?php
+				if($design == 'submit-section') {
+			?>
+				<h3><?php echo $name; ?> <i class="tip" data-tip-content="Removing an image is a permanent action"></i> </h3>
+				<br />
+				<?php show_message('', '', 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs.'); ?>
+				<div class="submit-section">
+					<form action="<?php echo $post_url; ?>" class="dropzone" id="<?php echo $dropzone_id; ?>"></form>
+				</div>
+
+			<?php
+				}
+				else {
+			?>
+				<div class="col-md-12">
+					<h5><?php echo $name; ?> <i class="tip" data-tip-content="Removing an image is a permanent action"></i> </h5>
+					<br />
+					<?php show_message('', '', 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs.'); ?>
+					<form action="<?php echo $post_url; ?>" class="dropzone" id="<?php echo $dropzone_id; ?>"></form>
+				</div>
+			<?php
+				}
+			?>
 		</div>
     <?php
     }

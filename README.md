@@ -17,44 +17,35 @@
  6) You're done!
 
 ## UPGRADE
+ 1) Enable upgrade mode on the Super Admin panel or in the database directly
+ 2) Secure the current configuration.php
+ 3) Create a backup of live database
+ 4) Dump data from live to production database
+ 5) Import new database date to Live MySQL server
+ 6) Perform an git clone with the new repo and delete the installer.php
+ 7) Get the old "configuration.php" and add it to includes/ remember the MYSQL details must match
+ 8) Continue on the Step 2 of installation without using the installer.php
 
 ## MVP LAUNCH (# is number of weeks)
 
- 1) [DONE] Add Picture Capabilities To Listings, Test Accounts and fix Bugs
+ 1) [DONE] Add Picture Capabilities To Listings, Test Accounts and fix Bugs [WEEk 1]
     
- 2-3) [DONE] Improve "Submit Listing" Interface
+ 2) [DONE] Improve "Submit Listing" Interface [WEEK 2-3]
 
- 4) Realtors and Landlords Accounts Creations
-    - Submmit-property.php
-      -- Checkin images
-      -- Checkin text
-    - Remove realtor and landlord autofill from contact form
-    - Remove redirection to contact form on index.php for realtor and landlord
-    - Calendly integration into the platform
-      -- remove calendly link form verification from user.js
+ 4) [DONE] Realtors and Landlords Accounts Creations [WEEK 4]
 
-   ======== =======
+    LIVE UPDATE
+      ** Move to a Managed MYSQL Database on Digital Ocean
+      ** Move Website to a Scalable Managed Digital Ocean dropplet by Cloudways
+      ** Create a small dropplet for a blog subdomain in Cloudways
 
-   Test editing listings and adding new listings
+ 5) "Calendly Like" Native Tour Scheduling for Tenants
+      - dropdown date on the listing we need a starting date and an ending date for the contract
+      -- priority for tenants accounts they need to have an account before doing a tour
+      --- restructure the roadmap
 
-   ===============
-   
-    LIVE RELEASE
-      ** Dump data from live to production database
-      ** Upgrade to new database in the live version
-      ** Edit the pending approval admin emails to Ernesto@ and bianca@
+ 6) PandaDocs API and Renting Infracstructure [WEEK 6, 7, 8, 9]
 
-   --- create a way to easily upgrade from github once its on the server
-
-    - Move to a Managed MYSQL Database on Digital Ocean
-    - Move Website to a Scalable Managed Digital Ocean dropplet by Cloudways
-
-    ================
-    
-    - Create a small dropplet for a blog subdomain in Cloudways
-
-
- 5-6-7-8-9) PandaDocs API and Renting Infracstructure
     - PandaDocs API Integration with Platform
       - We will able to automated and standarize listing creation
       - We will able to accept Payments
@@ -81,6 +72,9 @@
     --0 Once the user rents the house update the availability date in the listing database
     -- If a listing have other types of data in the database, like lease payments, etc, it CANT be deleted, so fix that
     -- They can spefify to use a different bank information for that lease, update the lease database with the pertinent bank information
+    ---- when user is renting verify of it is a referral
+
+    ---- once an user rents landlords will receive an email if they decided to manually accept a tenant they have 12 hours to accept or reject the tenant, after that the tenant will be accepted by the system
 
     ======
 
@@ -105,6 +99,7 @@
     - Ability to manage and create users
     - Ability to enable new cities y countries and states
     -- When editiing them remmeber to change the values on the cities tables due to easier search we only use the city table for query
+    -- Ability to enter into upgrade mode
     
  12) Admin
     - Ability to permanently disable a listing (status -> archive)
@@ -157,6 +152,7 @@
                   -- credit check
                   -- salary
                - ** Include tenant risk score it in the user profile page
+
          - Encrypted Cookies
                - USMP = user email and password hash
                - USRF = referral fullname and referral id

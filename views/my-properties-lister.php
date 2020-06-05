@@ -54,7 +54,7 @@
 
         <div class="col-md-8 margin-bottom-55">
 			<?php
-				show_message($form_success, $form_error);
+				show_message($form_success, $form_error, $form_info);
 			?>
 
             <h4 class="search-title">Search Properties</h4>

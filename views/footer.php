@@ -109,9 +109,10 @@ ga('send', 'pageview');
 	if($user) {
 ?>
 	<script type="text/javascript" src="/views/assets/scripts/user.js"></script>
-
 	<!-- Cache Components -->
-		<?php print_cache_js(); ?>
+		<?php 
+			print_cache_js(); 
+		?>
 	<!-- END Cache Components -->	
 <?php
 	}
@@ -129,6 +130,11 @@ ga('send', 'pageview');
 	<?php booking_component_js($listing, 'date-picker-mobile'); ?>
 	<?php
 		if( is_on_listing_creation_page() ) {
+			// There is a bit of a js bug with this, is working as expected, but every time you reaload the page
+			// Due to the cache being updated when the form changes and 'booking_componen_js' changes the form field
+			// with the id 'date-picker-property-form' technically is a cache update and thats why even if the user
+			// only reloads the page, the get the message, we can fix it so if the date is the same as the database or todays
+			// date we don't update it with the form below
 			booking_component_js($listing, 'date-picker-property-form', $cache);
 		}
 	?>
@@ -180,6 +186,9 @@ ga('send', 'pageview');
 
 		// Dropzone Listing Images
 		dropzone_js('dropzone-listing', 'galery-content', 'galery-section', '/images.php?action=get-img');
+
+		// Dropzone Listing Checkin Images
+		dropzone_js('dropzone-checkin', 'checkin-content', 'checkin-section', '/images-checkin.php?action=get-img', '/images-checkin.php');
 
 		// House Rent
 		calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase');

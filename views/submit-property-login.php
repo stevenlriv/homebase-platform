@@ -55,7 +55,7 @@
 		<div class="submit-page">
 
 		<?php
-			if($cache && $form_error=='' && $form_success=='' || $cache_img && $form_error=='' && $form_success=='') {
+			if($cache && are_messages_empty() || $cache_img && are_messages_empty()) {
 				if(!empty($listing)) {
 					$form_info = 'It looks like you have some pending changes. Press the "Save Changes" button below to save your changes.';
 				}
@@ -68,6 +68,8 @@
 		?>
 
 		<?php dropzone_box('Gallery', 'dropzone-listing', 'galery-content'); ?>
+
+		<?php dropzone_box('Access Images', 'dropzone-checkin', 'checkin-content', 'col-md-12', '/images-checkin.php'); ?>
 
 		<form method="post" enctype="multipart/form-data" class="form-cache" name="submit-property" id="<?php echo $form_cache_id; ?>">
 
@@ -199,7 +201,20 @@
 
 				<div class="col-md-12">
 					<h5>Availability <i class="tip" data-tip-content="When is the property available to start being rented"></i></h5>
-                    <input name="available" type="text" id="date-picker-property-form" placeholder="Date" value="<?php //only works on class.theme.php form_print_value($cache, $listing, 'available'); ?>" required>
+					<input name="available" type="text" id="date-picker-property-form" placeholder="Date" value="<?php 
+						// More info on the bug read "views/footer.php" and "lib/class.theme.php"
+						$cache_bug_js_fix = true; 
+						if( !empty($cache) || !empty($listing) ) { 
+							if(is_numeric(form_get_value($cache, $listing, 'available'))) {
+								echo date("m/d/Y", form_get_value($cache, $listing, 'available')); 
+							}
+							else {
+								form_print_value($cache, $listing, 'available'); 
+							}
+						} 
+						else { 
+							echo date("m/d/Y"); 
+						} ?>" required>
 				</div>
 
 			</div>
@@ -309,15 +324,20 @@
 		<h3>Detailed Information</h3>
 		<div class="submit-section">
 
-			<!-- Description -->
-			<div class="form">
-				<h5>Description <i class="tip" data-tip-content="Sell your property, describe how it looks like and what they could get"></i></h5>
-				<textarea name="listing_description" class="WYSIWYG" cols="40" rows="3" id="summary" spellcheck="true"><?php form_print_value($cache, $listing, 'listing_description'); ?></textarea>
-			</div>
+			<!-- Row -->
+			<div class="row with-forms">
 
-			<div class="form">
-				<h5>Search Keywords <i class="tip" data-tip-content="Add keywords separated by comma, that you think a tenant would search an example would be a restaurant or mural name near the property. Limit 100 characters."></i></h5>
-				<input name="keywords" id="keywords" type="text" value="<?php form_print_value($cache, $listing, 'keywords'); ?>" maxlength="100">
+				<!-- Description -->
+				<div class="col-md-12">
+					<h5>Description <i class="tip" data-tip-content="Sell your property, describe how it looks like and what they could get"></i></h5>
+					<textarea name="listing_description" class="WYSIWYG" cols="40" rows="3" id="summary" spellcheck="true"><?php form_print_value($cache, $listing, 'listing_description'); ?></textarea>
+				</div>
+
+				<div class="col-md-12">
+					<h5>Search Keywords <i class="tip" data-tip-content="Add keywords separated by comma, that you think a tenant would search an example would be a restaurant or mural name near the property. Limit 100 characters."></i></h5>
+					<input name="keywords" id="keywords" type="text" value="<?php form_print_value($cache, $listing, 'keywords'); ?>" maxlength="100">
+				</div>
+
 			</div>
 
 		</div>
@@ -331,17 +351,22 @@
 			<div class="row with-forms">
 
 				<!-- Name -->
-				<?php show_message('', '', 'A property access code is a simple way to allow for remote access to potential tenants. We call this "self-guided tours" and this is how you will be able to handle more properties and tenants request. It usually means the code to a lockbox near your house or the code of a pin pad in your front door. For more information about this, contact us at <a href="mailto:'.get_setting(1).'" style="color: red !important;">'.get_setting(1).'</a>.'); ?>
+				<div class="col-md-12">
+					<?php show_message('', '', 'A property access code is a simple way to allow for remote access to potential tenants. We call this "self-guided tours" and this is how you will be able to handle more properties and tenants request. It usually means the code to a lockbox near your house or the code of a pin pad in your front door. For more information about this, contact us at <a href="mailto:'.get_setting(1).'" style="color: red !important;">'.get_setting(1).'</a>.'); ?>
+				</div>
+
 				<div class="col-md-12">
 					<h5>Propety Access Code <i class="tip" data-tip-content="Access code so the tenant can enter when doing a non-guided tour"></i></h5>
 					<input name="checkin_access_code" type="text" value="<?php form_print_value($cache, $listing, 'checkin_access_code'); ?>">
 				</div>
 
-				<!-- Name -->
+				<!-- Description -->
 				<div class="col-md-12">
-					<h5>Calendly <i style="color: red;">*beta</i> <i class="tip" data-tip-content="Link to calendly where tenants can schedule showing appointments"></i></h5>
-					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>">
+					<h5>Access Description <i class="tip" data-tip-content="A brief description on what the potential tenant should do when they get to the property, to be able to perform a self-guided tour."></i></h5>
+					<textarea name="checkin_description" class="WYSIWYG" cols="40" rows="3" id="checkin_description" maxlength="2000" spellcheck="true"><?php form_print_value($cache, $listing, 'checkin_description'); ?></textarea>
 				</div>
+
+				<?php dropzone_form('checkin-section'); ?>
 
 				<!-- Email -->
 				<div class="col-md-12">

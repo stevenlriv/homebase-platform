@@ -37,7 +37,7 @@
 	<div class="my-account style-1 margin-top-5 margin-bottom-40">
 
 	<?php
-		show_message($form_success, $form_error);
+		show_message($form_success, $form_error, $form_info);
 	?>
 
 		<div class="tabs-container alt">

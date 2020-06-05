@@ -1,9 +1,5 @@
 <?php
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
-	
-	//Cache settings
-	$form_cache_id = $_SESSION['CACHE_MY_PROFILE'];
-	$cache = get_cache($form_cache_id);
 ?>
 
 <!-- Titlebar
@@ -43,7 +39,7 @@
 
 				<div class="col-md-8 my-profile">
 
-					<form method="post" class="form-cache" name="my-profile" id="<?php echo $form_cache_id; ?>">
+					<form method="post" class="form-cache" name="my-profile" id="<?php echo $cache_id; ?>">
 
 						<?php
 							if($cache && $form_error=='' && $form_success=='') {
@@ -51,18 +47,15 @@
 							}
 
 							// Email confirmation message
-							// Don't show this message if there is something else to show
-							if($form_success=='' && $form_error=='' && $form_info=='') {
-								// Show message to lister and tenant
+							if(are_messages_empty()) {
 								if($user['status']=='pending') {
 									$form_error = 'Please confirm your email address to have full access to your account. <a href="/my-profile?resend=true" style="color: #274abb !important">Click here</a> to resend the confirmation email.';
 								}
 							}
 
 							// Bank Account Information Message
-							// Don't show this message if there is something else to show
 							// Do not show message to tenants
-							if($form_success=='' && $form_error=='' && $form_info=='' && $user['type'] != 'tenants') {
+							if(are_messages_empty() && $user['type'] != 'tenants' && !is_admin()) {
 								if($user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
 									$form_info = 'Remember to set up your bank information under financial settings.';
 								}

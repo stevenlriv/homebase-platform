@@ -1,5 +1,14 @@
 <?php
 
+ function are_messages_empty() {
+	 global $form_success, $form_error, $form_info;
+
+	 if(!empty($form_success) || !empty($form_error) || !empty($form_info)) {
+		 return false;
+	 }
+
+	 return true;
+ }
  function show_message($success = '', $error = '', $info = '', $big_info = false) {
 	global $request;
 	
@@ -82,6 +91,7 @@
 }
 
 	function booking_component_js($listing, $jquery_id, $cache = '') {
+		global $cache_bug_js_fix;
 ?>
 
 			<script>
@@ -134,11 +144,19 @@
 									$lt_date = date("m/d/Y", $lt_date);
 								}
 								elseif(empty($lt_date)) {
+
 									$lt_date = date("m/d/Y");
 								}
+
+								// To also avoid reloading a new cache once the page is load
+								// We don't show anything here if the variable is enabled to fix the js bug on page reload
+								// The current date is already showed on "views/submit-property-login.php"
+								// For more information on this bug go to views/footer.php
+								if( !$cache_bug_js_fix ) {
 							?>
-								"startDate": "<?php echo sanitize_xss($lt_date); ?>",
+								"startDate": "<?php echo sanitize_xss($lt_date); ?>",								
 							<?php
+								}
 							}
 							else {
 							?>
@@ -228,7 +246,15 @@ function sidebar_component() {
 						<li class="sub-nav-title">Manage Financials</li>
 						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
                         <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>
-                        <li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
+
+						<?php
+							// Do not show to admins
+							if(!is_admin()) {
+						?>
+                        	<li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
+						<?php
+							}
+						?>
 					</ul>
                     <?php
                         }

@@ -3,15 +3,19 @@
 define('SCRIP_LOAD', true);
 define('THEME_LOAD', true);
 
+// Verify if there is an installation file
 if(!is_file(__DIR__ . '/includes/configuration.php') && is_file(__DIR__ . '/includes/install.php')) {
     die( header('Location: /includes/install.php') );
 }
 
+// Include the required libraries
 require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
 
+// Get the referral URL
 establish_referral();
 
+// Establish blank messages
 $form_success = '';
 $form_error = '';
 $form_info = '';
@@ -19,9 +23,15 @@ $form_info = '';
 $request = $_SERVER['REQUEST_URI'];
 $user = is_login_user();
 
+// We separate the $_GET from the real url
 if (substr_count($request, "?") > 0) {
     $pieces = explode("?", $request);
     $request = $pieces[0];
+}
+
+// We verify if there are platform upgrade
+if(get_setting(23) == 'true' && $user && $request != '/upgrade') {
+    header('Location: /upgrade');
 }
 
 switch ($request) {
@@ -70,14 +80,8 @@ switch ($request) {
             $type = $_GET['type'];
         }
 
-        //There are a couple of accounts that are not available at this moment: landlord, tenants and realtors
-        if($type == 'realtors') {
-            header('Location: /contact?inquiry=realtor');
-        }
-        elseif($type == 'landlords'){
-            header('Location: /contact?inquiry=landlord');
-        }
-        elseif($type == 'tenants'){
+        //There are a couple of accounts that are not available at this moment: tenants
+        if($type == 'tenants'){
             header('Location: /contact?inquiry=tenant');
         }
 
@@ -108,9 +112,22 @@ switch ($request) {
             "title" => "Account Confirmation",
             "request" => $request,
         );
-        require_once __DIR__ . '/includes/actions/confirm.php';
+        require_once __DIR__ . '/includes/actions/confirm-account.php';
         require_once __DIR__ . '/views/header.php';
-        require_once __DIR__ . '/views/confirm.php';
+        require_once __DIR__ . '/views/confirm-account.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/upgrade' :
+        if(get_setting(23) == 'false' || !$user) {
+            header('Location: /my-profile');
+        }
+
+        $seo = array(
+            "title" => "Platform Upgrade",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/platform-upgrade.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/my-profile' :
@@ -146,7 +163,8 @@ switch ($request) {
         break;
     case '/financial-settings' :
         // Don't allow tenants to edit bank information, their payments are managed with PandaDocs
-        if(!$user || $user['type'] == 'tenants') {
+        // Also don't allow admins
+        if(!$user || $user['type'] == 'tenants' || is_admin()) {
             header('Location: /');
         }
         $seo = array(

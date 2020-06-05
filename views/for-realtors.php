@@ -66,45 +66,6 @@
 	</div>
 </div>
 
-<!-- Fullwidth Section -->
-<section class="fullwidth margin-top-105 margin-bottom-0 padding-bottom-80 padding-top-95" data-background-color="#f7f7f7">
-
-	<!-- Box Headline -->
-	<h3 class="headline-box">Trusted By Professionals</h3>
-
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-12">
-				<div class="testimonials-subtitle">Here’s what our partners have to say about Homebase</div>
-			</div>
-
-			<div class="col-md-6">
-				<div class="testimonial-box">
-					<div class="testimonial">It has been great partnering with Homebase. They communicate effectively, are passionate about what they do, and deeply understand the local market. Love working with them!</div>
-					<div class="testimonial-author">
-						<img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/livia-realtor.png" alt="Livia G. - Real Estate Broker">
-						<h4>Livia G. <span>Real Estate Broker</span></h4>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-6">
-				<div class="testimonial-box">
-					<div class="testimonial">Nice, patient, and open to compromise. They’ll do well with their unique culture and innovative approach!</div>
-					<div class="testimonial-author">
-						<img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/cynthia-realtor.jpeg" alt="Cynthia R. - Property Manager">
-						<h4>Cynthia R. <span>Property Manager</span></h4>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-</section>
-<!-- Fullwidth Section / End -->
-
 <!-- Container -->
 <div class="container">
 	<div class="row">

@@ -1,9 +1,5 @@
 <?php
 	if ( !defined('THEME_LOAD') ) { die ( header('Location: /not-found') ); }
-	
-	//Cache settings
-	$form_cache_id = $_SESSION['CACHE_MY_FINANCIALS'];
-	$cache = get_cache($form_cache_id);
 ?>
 
 <!-- Titlebar
@@ -43,10 +39,10 @@
 
 				<div class="col-md-12 my-profile">
 
-					<form method="post" class="form-cache" name="financial-settings" id="<?php echo $form_cache_id; ?>">
+					<form method="post" class="form-cache" name="financial-settings" id="<?php echo $cache_id; ?>">
 
 						<?php
-							if($cache && $form_error=='' && $form_success=='') {
+							if($cache && are_messages_empty()) {
 								$form_info = 'Press the "Save Changes" button below to save your information.';
 							}
 

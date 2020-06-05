@@ -155,10 +155,7 @@
                     maxlength: 100
                 }, 
                 checkin_access_code: "required",
-                calendly_link: {
-                    required: true,
-                    url: true
-                },
+                checkin_description: "required",
                 check_required: {
                     required: true,
                     url: true
@@ -215,8 +212,8 @@
                 checkin_access_code: {
                     required: "You must set the property access code.",
                 },
-                calendly_link: {
-                    url: "You must enter a valid calendly link.",
+                checkin_description: {
+                    required: "You must explain the tenant how to get into the property using the access code.",
                 },
                 check_required: {
                     required: "You must agree to our terms before adding or editing the listing.",
