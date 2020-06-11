@@ -26,10 +26,10 @@ if($request != '/find-a-homebase') {
 			<div class="col-md-4 col-sm-6 ">
 				<h4>Helpful Links</h4>
 				<ul class="footer-links">
-					<li><a href="/find-a-homebase">Find a Homebase</a></li>
-                    <li><a href="/for-landlords">For Landlords</a></li>
-					<li><a href="/for-realtors">For Realtors</a></li>
-					<li><a href="/for-listers">For Listers</a></li>
+					<li><a href="/find-a-homebase">Search Homes</a></li>
+                    <li><a href="/list-your-home">List Your Home</a></li>
+					<li><a href="/make-money">Make Money</a></li>
+					<li><a href="https://blog.renthomebase.com">Blog</a></li>
 				</ul>
 
 				<ul class="footer-links">

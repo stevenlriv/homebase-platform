@@ -81,7 +81,7 @@ switch ($request) {
             $_GET['type'] = '';
         }
         
-        if($_GET['type'] == 'landlords' || $_GET['type'] == 'realtors' || $_GET['type'] == 'listers' || $_GET['type'] == 'tenants') {
+        if($_GET['type'] == 'landlords' || $_GET['type'] == 'listers' || $_GET['type'] == 'tenants') {
             $type = $_GET['type'];
         }
 
@@ -266,10 +266,9 @@ switch ($request) {
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/submit-property' :
-        //Submit property has a section for logged in users and non logged in users
-        //But if the logged in user is a tenant or lister, we don't allow him access to the page
-        if($user && $user['type'] == 'tenants' || $user && $user['type'] == 'listers') {
-            header('Location: /my-profile');
+        //The user needs to be logged in and it cannot be a tenant or lister
+        if(!$user || $user['type'] == 'tenants' || $user['type'] == 'listers') {
+            header('Location: /');
         }
 
         $seo = array(
@@ -302,9 +301,9 @@ switch ($request) {
         require_once __DIR__ . '/views/find-a-homebase.php';
         require_once __DIR__ . '/views/footer.php';
         break;
-    case '/for-listers' :
+    case '/make-money' :
         $seo = array(
-            "title" => "For Listers",
+            "title" => "Make Money",
             "description" => "It has never been easier to make money with real estate. Cero investment and all online.",
             "request" => $request,
         );
@@ -312,7 +311,7 @@ switch ($request) {
         require_once __DIR__ . '/views/for-listers.php';
         require_once __DIR__ . '/views/footer.php';
         break;
-    case '/for-landlords' :
+    case '/list-your-home' :
         $seo = array(
             "title" => "For Landlords",
             "description" => "A marketplace where everything it's easy and done for you, just add your house and get it rented quickly, all online.",
@@ -320,16 +319,6 @@ switch ($request) {
         );
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/for-landlords.php';
-        require_once __DIR__ . '/views/footer.php';
-        break;
-    case '/for-realtors' :
-        $seo = array(
-            "title" => "For Realtors",
-            "description" => "As realtors, you can bring clients to our platform to make their life and your life easier.",
-            "request" => $request,
-        );
-        require_once __DIR__ . '/views/header.php';
-        require_once __DIR__ . '/views/for-realtors.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/privacy' :

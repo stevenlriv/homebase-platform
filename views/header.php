@@ -108,11 +108,9 @@
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
 
-						<li><a <?php if($request == '/find-a-homebase' || !empty($listing)) echo 'class="current"'; ?> href="/find-a-homebase">Find a Homebase</a></li>
+						<li><a <?php if($request == '/find-a-homebase' || !empty($listing)) echo 'class="current"'; ?> href="/find-a-homebase">Search Homes</a></li>
 
-						<li><a <?php if($request == '/for-landlords') echo 'class="current"'; ?> href="/for-landlords">For Landlords</a></li>
-
-						<li><a <?php if($request == '/for-realtors') echo 'class="current"'; ?> href="/for-realtors">For Realtors</a></li>
+						<li><a <?php if($request == '/list-your-home') echo 'class="current"'; ?> href="/list-your-home">List Your Home</a></li>
 
 					</ul>
 				</nav>
@@ -170,15 +168,10 @@
 					<?php
 						//If the user is logged in, Hide from tenants and listers
 						if(!empty($user) && $user['type'] != 'tenants' && $user['type'] != 'listers') {
-					?>
-							<a href="/submit-property" class="button border">Submit Property</a>
-					<?php
+							echo '<a href="/submit-property" class="button border">Submit Property</a>';
 						}
-
-						elseif(empty($user)) {
-					?>
-							<a href="/submit-property" class="button border">Submit Property</a>
-					<?php
+						else {
+							echo '<a href="/register" class="button border">Register</a>';
 						}
 					?>
 				</div>

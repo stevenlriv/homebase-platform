@@ -12,7 +12,7 @@
 
 					<!-- Main Search Container -->
 					<div class="main-search-container">
-						<h2>Home is just a few clicks away.</h2>
+						<h2>Rent Your Next Home in Minutes.</h2>
 						
 						<!-- Main Search -->
 						<form class="main-search-form" action="/find-a-homebase" type="GET">
@@ -170,64 +170,29 @@
 	</div>
 </div>
 
-
 <!-- Fullwidth Section -->
-<section class="fullwidth margin-top-105" data-background-color="#f7f7f7">
-
-	<!-- Box Headline -->
-	<h3 class="headline-box">What are you looking for?</h3>
-	
-	<!-- Content -->
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-6 col-sm-12">
-				<!-- Icon Box -->
-				<div class="icon-box-1">
-
-					<div class="icon-container">
-						<i class="im im-icon-Home-2"></i>
-						<div class="icon-links">
-							<a href="/find-a-homebase?type=house">For Rent</a>
-						</div>
-					</div>
-
-					<h3>Houses</h3>
-					<p>More space and privacy, easier to split rent with others.</p>
-				</div>
-			</div>
-
-			<div class="col-md-6 col-sm-12">
-				<!-- Icon Box -->
-				<div class="icon-box-1">
-
-					<div class="icon-container">
-						<i class="im im-icon-Office"></i>
-						<div class="icon-links">
-							<a href="/find-a-homebase?type=apartment">For Rent</a>
-						</div>
-					</div>
-
-					<h3>Apartments</h3>
-					<p>Less maintenance, and well located. Lots of places walking distance.</p>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</section>
-<!-- Fullwidth Section / End -->
-
-<!-- Fullwidth Section -->
-<section class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" data-background-color="#ffffff">
+<section class="fullwidth border-bottom margin-top-100 margin-bottom-0 padding-top-50 padding-bottom-50" data-background-color="#f7f7f7">
 
 	<!-- Content -->
 	<div class="container">
 		<div class="row">
 
             <div class="col-md-12">
-			    <h3 class="headline centered margin-bottom-35 margin-top-10">Why Homebase? <span>We make residential leasing as easy as booking a vacation with Airbnb.</span></h3>
+			    <h3 class="headline centered margin-bottom-35 margin-top-10">Why Homebase? <span>It's just 3 easy steps.</span></h3>
 		    </div>
+
+			<div class="col-md-4">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div class="icon-container">
+						<i class="im im-icon-Idea"></i>
+					</div>
+
+					<h3>1. Take a tour</h3>
+					<p>Take a sneak peek with our online video tours or book an in-person self-tour.</p>
+				</div>
+			</div>
 
 			<div class="col-md-4">
 				<!-- Icon Box -->
@@ -237,8 +202,8 @@
 						<i class="im im-icon-Mustache-6"></i>
 					</div>
 
-					<h3>Options for every lifestyle</h3>
-					<p>Rent by the room or reserve an entire home. Choose from furnished, unfurnished, or move-in ready with internet and utilities included.</p>
+					<h3>2. Complete online application</h3>
+					<p>Fill in all of the required details so we can quickly approve you to rent the property.</p>
 				</div>
 			</div>
 
@@ -250,21 +215,8 @@
 						<i class="im im-icon-Aerobics-2"></i>
 					</div>
 
-					<h3>Flexible lease duration</h3>
-					<p>Life is uncertain and flexibility is the new stability. Find homes available from 3 months to 3 years and everything in-between.</p>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<!-- Icon Box -->
-				<div class="icon-box-1 alternative">
-
-					<div class="icon-container">
-						<i class="im im-icon-Idea"></i>
-					</div>
-
-					<h3>Video tours and self-tours</h3>
-					<p>You know what you want in a home. Take a sneak peek with our online video tours or book an in-person self-tour on your schedule.</p>
+					<h3>3. Sign lease & pay rent</h3>
+					<p>Sign your lease online and pay your first month's rent and security deposit.</p>
 				</div>
 			</div>
 
@@ -278,8 +230,8 @@
 <!-- Flip banner -->
 <a href="/find-a-homebase" class="flip-banner parallax" data-background="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/intro-minimized.jpg" data-color="#274abb" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
 	<div class="flip-banner-content">
-		<h2 class="flip-visible">We help people and homes find each other</h2>
-		<h2 class="flip-hidden">Browse Properties <i class="sl sl-icon-arrow-right"></i></h2>
+		<h2 class="flip-visible">Ready to find your next home?</h2>
+		<h2 class="flip-hidden">Search Now <i class="sl sl-icon-arrow-right"></i></h2>
 	</div>
 </a>
 <!-- Flip banner / End -->
