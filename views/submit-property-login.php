@@ -356,7 +356,7 @@
 				</div>
 
 				<div class="col-md-12">
-					<h5>Propety Access Code <i class="tip" data-tip-content="Access code so the tenant can enter when doing a non-guided tour"></i></h5>
+					<h5>Property Access Code <i class="tip" data-tip-content="Access code so the tenant can enter when doing a non-guided tour"></i></h5>
 					<input name="checkin_access_code" type="text" value="<?php form_print_value($cache, $listing, 'checkin_access_code'); ?>">
 				</div>
 

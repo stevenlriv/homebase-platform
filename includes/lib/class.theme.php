@@ -248,8 +248,8 @@ function sidebar_component() {
                         <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>
 
 						<?php
-							// Do not show to admins
-							if(!is_admin()) {
+							// Do not show to admins or realtors
+							if(!is_admin() && $user['type'] != 'realtors') {
 						?>
                         	<li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
 						<?php

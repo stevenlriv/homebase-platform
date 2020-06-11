@@ -17,9 +17,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-sm-8">
 					<h2>Become a Homebase landlord and enjoy all the benefits of an income property without the hassle.</h2>
-					<p>Become a Homebase landlord and enjoy all the benefits of an income property without the hassle.</p>
-
-                    <h3>15-60% premiums on rent</h3>
+					<p>As landlords, all you do is list your property and we take care of everything else.</p>
 
 					<a href="/register?type=landlords" class="button margin-top-25">Get Started</a>
 				</div>

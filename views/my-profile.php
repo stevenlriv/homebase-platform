@@ -54,8 +54,8 @@
 							}
 
 							// Bank Account Information Message
-							// Do not show message to tenants
-							if(are_messages_empty() && $user['type'] != 'tenants' && !is_admin()) {
+							// Do not show message to tenants or realtors
+							if(are_messages_empty() && $user['type'] != 'tenants' && $user['type'] != 'realtors' && !is_admin()) {
 								if($user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
 									$form_info = 'Remember to set up your bank information under financial settings.';
 								}

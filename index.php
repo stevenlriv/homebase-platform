@@ -3,12 +3,22 @@
 define('SCRIP_LOAD', true);
 define('THEME_LOAD', true);
 
+
+// Verify if there is an installation file
+if(!is_file(__DIR__ . '/includes/configuration.php') && is_file(__DIR__ . '/includes/install.php')) {
+    die( header('Location: /includes/install.php') );
+}
+
+
 // Include the required libraries
 require_once __DIR__ . '/includes/configuration.php';
 require_once __DIR__ . '/includes/lib.php';
 
+
+
 // Get the referral URL
 establish_referral();
+
 
 // Establish blank messages
 $form_success = '';
@@ -158,8 +168,8 @@ switch ($request) {
         break;
     case '/financial-settings' :
         // Don't allow tenants to edit bank information, their payments are managed with PandaDocs
-        // Also don't allow admins
-        if(!$user || $user['type'] == 'tenants' || is_admin()) {
+        // Also don't allow admins or realtors, because they will be able to setup their bank info per lease
+        if(!$user || $user['type'] == 'tenants' || $user['type'] == 'realtors' || is_admin()) {
             header('Location: /');
         }
         $seo = array(

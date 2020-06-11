@@ -49,6 +49,7 @@
       - "Calendly Like" Native Tour Scheduling for Tenants 
          - They need to create an account before doing a tour
          - They need to pass background check before getting accepted to do tours
+         - Have a link that expires in 24 hours where they can see the checking information
 
  5) PandaDocs API and Renting Infracstructure [WEEK 10-16]
     - PandaDocs API Integration with Platform {https://www.pandadoc.com/api/esignature-api/}
@@ -111,10 +112,33 @@
       - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
 
 ## NOTES
+   USER JOURNEY
+      ==> LANDLORD 
+         1) Create Account
+         2) Create Profile
+         3) Create Listing
+         4) Lock box with key
+         5) Receive tour notification
+         6) Sign Lease
+         7) Receive the rent deposit
+         8) Move in details
+         9) Property Filled
+
+      ==> TENANT
+         1) Seo Post
+         2) Visit Listing on HB
+         3) Create an account and book self-guided tour (with License privided as an ID)
+         4) Tenant Screening
+         5) Sign Lease
+         6) Pay rent + deposit
+         7) Move in details 
+         8) Move in
+
     CRON FILE
         - Set it to run every Sunday
 
     OTHER
+        - https://landbot.io/
         - Logo color: #282828
         - Logo Font: Museo Sans
         - Files with 10% business model
