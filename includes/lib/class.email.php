@@ -80,7 +80,11 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	function send_email ($from_name, $from_email, $to_email, $to_name, $subject, $comments, $attachment = '') {
 		if ( empty($from_name) or !is_email($from_email) or !is_email($to_email) or empty($subject) or empty($comments) ) {
 			return false;
-		}
+        }
+        
+        // Lower case emails
+        $from_email = strtolower($from_email);  
+        $to_email = strtolower($to_email); 
 		
 		$mail = new PHPMailer;
 		$mail->CharSet = 'utf-8';

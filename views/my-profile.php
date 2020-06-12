@@ -36,21 +36,27 @@
 		<div class="col-md-8">
 			<div class="row">
 
+				<!-- Show only on small devices -->
+				<div class="col-md-4 hidden-md hidden-lg">
+					<?php print_profile_image_form('profile_image_mobile', 'submit-image-mobile'); ?>
+					<br />
+				</div>
 
 				<div class="col-md-8 my-profile">
 
 					<form method="post" class="form-cache" name="my-profile" id="<?php echo $cache_id; ?>">
 
 						<?php
-							if($cache && $form_error=='' && $form_success=='') {
-								$form_info = 'Press the "Save Changes" button below to save your information.';
-							}
 
 							// Email confirmation message
 							if(are_messages_empty()) {
 								if($user['status']=='pending') {
-									$form_error = 'Please confirm your email address to have full access to your account. <a href="/my-profile?resend=true" style="color: #274abb !important">Click here</a> to resend the confirmation email.';
+									$form_error = 'Please confirm your email address to have full access to your account. If you have not received the email yet, <a href="/my-profile?resend=true" style="color: #274abb !important">click here</a> to resend it.';
 								}
+							}
+
+							if($cache && are_messages_empty()) {
+								$form_info = 'Press the "Save Changes" button below to save your information.';
 							}
 
 							// Bank Account Information Message
@@ -90,20 +96,9 @@
 					</form>
 				</div>
 
-				<div class="col-md-4">
-					<form method="post" enctype="multipart/form-data">
-						<!-- Avatar -->
-						<div class="edit-profile-photo">
-							<img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt="">
-							<div class="change-photo-btn">
-								<div class="photoUpload">
-							    	<span><i class="fa fa-upload"></i> Upload Photo</span>
-							    	<input type="file" id="profile_image" name="profile_image" class="upload" />
-								</div>
-							</div>
-						</div>
-						<button name="submit-image" id="submit-image" style="display: none;" class="button margin-top-20 margin-bottom-20">Upload Image</button>
-					</form>
+				<!-- Only show on desktop -->
+				<div class="col-md-4 hidden-xs hidden-sm">
+					<?php print_profile_image_form('profile_image', 'submit-image'); ?>
 				</div>
 
 

@@ -63,7 +63,11 @@
             if(empty($form_error)) { 
                 if(update_user_table('password', $user_details['id_user'], $_POST['password'])) {
                     update_user_table('code', $user_details['id_user'], '');
-                    $form_success = 'Great, your password has been updated, you can log in now.';
+                    $form_success = 'Great, your password has been updated.';
+
+                    //Auto log-in them
+                    login_user($user_details['email'], $_POST['password']);
+                    header("Refresh:1");
                 }
                 else {
                     $form_error = 'An error occurred while updating your password, please try again again.';

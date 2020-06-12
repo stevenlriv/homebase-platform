@@ -3,13 +3,6 @@
     "use strict";
     
     $(document).ready(function(){   
-
-	    /*--------------------------------------------------*/
-	    /*  User Profile Image
-	    /*--------------------------------------------------*/
-	    $("#profile_image").change(function(){
-		    $( "#submit-image" ).trigger( "click" );
-        });
     
 	    /*----------------------------------------------------*/
 	    /* My Profile Form Validation

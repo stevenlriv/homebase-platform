@@ -445,4 +445,38 @@ function calculate_homebase_listed_js($input_from, $input_to, $percentaje = 0.10
 
 <?php
 }
+
+function print_profile_image_form($id_input, $id_submit) {
+	global $user;
+?>
+	<form method="post" enctype="multipart/form-data">
+		<!-- Avatar -->
+		<div class="edit-profile-photo">
+			<img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt="">
+			<div class="change-photo-btn">
+				<div class="photoUpload">
+					<span><i class="fa fa-upload"></i> Upload Photo</span>
+					<input type="file" id="<?php echo $id_input; ?>" name="profile_image" class="upload" />
+				</div>
+			</div>
+		</div>
+		<button name="submit-image" id="<?php echo $id_submit; ?>" style="display: none;" class="button margin-top-20 margin-bottom-20">Upload Image</button>
+	</form>
+<?php
+}
+
+function print_profile_image_js($id_input, $id_submit) {
+?>
+
+<script>
+	/*--------------------------------------------------*/
+	/*  User Profile Image
+	/*--------------------------------------------------*/
+	$("#<?php echo $id_input; ?>").change(function(){
+		$( "#<?php echo $id_submit; ?>" ).trigger( "click" );
+    });
+</script>
+
+<?php
+}
 ?>

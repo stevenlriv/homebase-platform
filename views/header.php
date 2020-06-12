@@ -95,7 +95,17 @@
 
 
 				<!-- Mobile Navigation -->
-				<div class="mmenu-trigger">
+
+				<?php
+					// We remove the mobile menu for listers and landlords
+					// This way we make simple their UI and limit their actions on the webpage
+					$visibility = 'visible';
+					if(!empty($user) && $user['type'] == 'landlords' || !empty($user) && $user['type'] == 'listers') {
+						$visibility = 'hidden';
+					}
+				?>
+
+				<div class="mmenu-trigger" style="visibility: <?php echo $visibility; ?>">
 					<button class="hamburger hamburger--collapse" type="button">
 						<span class="hamburger-box">
 							<span class="hamburger-inner"></span>
@@ -105,7 +115,7 @@
 
 
 				<!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
+				<nav id="navigation" class="style-1" style="visibility: <?php echo $visibility; ?>">
 					<ul id="responsive">
 
 						<li><a <?php if($request == '/find-a-homebase' || !empty($listing)) echo 'class="current"'; ?> href="/find-a-homebase">Search Homes</a></li>
@@ -169,6 +179,9 @@
 						//If the user is logged in, Hide from tenants and listers
 						if(!empty($user) && $user['type'] != 'tenants' && $user['type'] != 'listers') {
 							echo '<a href="/submit-property" class="button border">Submit Property</a>';
+						}
+						elseif(!empty($user) && $user['type'] == 'listers') {
+							echo '<a href="/my-properties" class="button border">Share Links</a>';
 						}
 						else {
 							echo '<a href="/register" class="button border">Register</a>';

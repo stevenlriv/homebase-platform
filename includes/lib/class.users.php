@@ -63,6 +63,9 @@
 	function login_user($email, $password, $remember = 'true') {
 		global $db;
 
+		// Lower case email
+		$email = strtolower($email);  
+
 		if ( !is_email($email) ) {
 			return false;
 		}
@@ -103,11 +106,27 @@
 	}
 
 	function update_profile($id_user, $fullname, $phone_number, $email, $profile_bio, $profile_linkedin, $country) {
-		global $db;
+		global $db, $user;
+
+		// Lower case email
+		$email = strtolower($email);  
 
 		//Verify if there is not an user with the same email, also confirm is not the same user in case that email belong to the user making the update
 		if(get_user_by_email($email) && get_user_by_email($email)['id_user']!=$id_user) {
 			return false;
+		}
+
+		//If an user is changing their email, lets update the user cookie
+		if( $user['id_user'] == $id_user && $user['email']!=$email && get_cookie ( 'USMP' ) && !empty(get_cookie( 'USMP' )) ) {
+			$cookie = get_cookie ( 'USMP' );
+			$pieces = explode('|', $cookie);
+
+			$old_email = $pieces[0];
+			$password_hash = $pieces[1];
+
+			//New cookie
+			$expire = time()+60*60*24*45;//45 days
+			new_cookie ( 'USMP', $email.'|'.$password_hash, $expire );
 		}
 		
 		$q = $db->prepare ( "UPDATE xvls_users SET fullname = ?, phone_number = ?, country = ?, email = ?, profile_bio = ?, profile_linkedin = ? WHERE id_user = ?" );
@@ -171,6 +190,9 @@
 	function new_user($fullname, $email, $phone_number, $password) {
 		global $db, $type;
 
+		// Lower case email
+		$email = strtolower($email);  
+
         // Verify if the email address is already in use
 		if(get_user_by_email($email)) {
 			return false;
@@ -189,7 +211,9 @@
 		$password = Password::hash(new HiddenString($password), $key);
 
 		//They need to confirm email
-		$status = 'pending';
+		//$status = 'pending';
+		//For now user does not needs to confirm their email, just to make the proccess easier
+		$status = 'active';
 
 		//Not in use
 		$birthdate = '';
@@ -235,6 +259,9 @@
 	function get_user_by_email($email) {
 		global $db;
 
+		// Lower case email
+		$email = strtolower($email);  
+		
 		if ( !is_email($email) ) {
 			return false;
 		}

@@ -115,6 +115,10 @@ ga('send', 'pageview');
 		?>
 	<!-- END Cache Components -->	
 <?php
+		if($request == '/my-profile') {
+			print_profile_image_js('profile_image', 'submit-image');
+			print_profile_image_js('profile_image_mobile', 'submit-image-mobile');
+		}
 	}
 ?>
 

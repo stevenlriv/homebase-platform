@@ -16,7 +16,7 @@
 
 			<div class="row">
 				<div class="col-lg-6 col-sm-8">
-					<h2>It has never been easier to make money in real estate.</h2>
+					<h2>It has never been easier to make money from real estate.</h2>
 					<p>Just share our properties and get paid for each property you refer!</p>
 
                     <h3>Starting at $100 per month for up to 8 months per property</h3>
@@ -40,7 +40,7 @@
 		    <!-- Headline -->
 		    <h3 class="headline with-border margin-top-45 margin-bottom-25">Its Easy To Work With Us</h3>
 
-		    <p>We believe that building wealth and income from real estate growth should be accessible to everyone. We have already automated all the real estate rental processes, but we need people to help us sharing our properties with the world so that the world can start experiencing the "new real estate way", and at the same time you will get paid every month.</p>
+		    <p>We believe that building wealth and income from real estate growth should be accessible to everyone. That’s why when you share our properties with the world, we’ll pay you a monthly referral commission for up to 8 months—every month. Best of all, there’s no limit to how many properties you can refer.</p>
 
 		</div>
 	</div>
@@ -56,10 +56,10 @@
                         <p><b>Sign up for an account.</b> You will get access to all of our properties and we will provide you with a unique link for every property.</p>
                     </li>
 					<li>
-                        <p><b>Share your unique link.</b> You can share in your social media, with your friends, and at any other platform. Share as much as you can.</p>
+                        <p><b>Share your unique link.</b> You can share on your social media, with your friends, and on any other platform. Share as much as you want.</p>
                     </li>
 					<li>
-                        <p><b>Get Paid.</b> Once a tenant rents a property using your unique link, you will get paid your commission.</p>
+                        <p><b>Get Paid.</b> When someone rents a property using your unique link, you will get paid commission every month for up to 8 months.</p>
                     </li>
 				</ol>
 			</div>
@@ -71,7 +71,7 @@
 
 		<div class="col-md-12">
 
-            <h3 class="headline margin-bottom-30 margin-top-40">Listers love us because all they have to do is share a link to earn a commission.</h3>
+            <h3 class="headline margin-bottom-30 margin-top-40">Listers love us because all they have to do is share a link to earn commission.</h3>
 
 			<!-- Toggles Container -->
 			<div class="style-2">

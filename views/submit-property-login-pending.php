@@ -33,7 +33,7 @@
 	<div class="my-account style-1 margin-top-5 margin-bottom-40">
 
 	<?php
-        $form_error = 'Please confirm your email address to have full access to your account. <a href="/my-profile?resend=true" style="color: #274abb !important">Click here</a> to resend the confirmation email.';
+        $form_error = 'Please confirm your email address to have full access to your account. If you have not received the email yet, <a href="/my-profile?resend=true" style="color: #274abb !important">click here</a> to resend it.';
         
 		show_message($form_success, $form_error, $form_info);
 	?>

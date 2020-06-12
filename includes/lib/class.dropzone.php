@@ -164,6 +164,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     }
 
     function dropzone_box($name, $dropzone_id, $jquery_id, $design = 'submit-section', $post_url = '/images.php') {
+		$form_info = 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs. To delete an image, click on it or hover and then press the Remove file link.';
     ?>
 		<div id="<?php echo $jquery_id; ?>">
 
@@ -172,7 +173,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 			?>
 				<h3><?php echo $name; ?> <i class="tip" data-tip-content="Removing an image is a permanent action"></i> </h3>
 				<br />
-				<?php show_message('', '', 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs.'); ?>
+				<?php show_message('', '', $form_info); ?>
 				<div class="submit-section">
 					<form action="<?php echo $post_url; ?>" class="dropzone" id="<?php echo $dropzone_id; ?>"></form>
 				</div>
@@ -184,7 +185,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 				<div class="col-md-12">
 					<h5><?php echo $name; ?> <i class="tip" data-tip-content="Removing an image is a permanent action"></i> </h5>
 					<br />
-					<?php show_message('', '', 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs.'); ?>
+					<?php show_message('', '', $form_info); ?>
 					<form action="<?php echo $post_url; ?>" class="dropzone" id="<?php echo $dropzone_id; ?>"></form>
 				</div>
 			<?php
