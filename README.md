@@ -92,6 +92,13 @@
       - Tenants transactions will come from PandaDocs
       - They can see their landlord/realtor profile and contact information
 
+    - Website Menu; enable the access to this new features
+    - Allow landlords to order images
+
+    - LISTERS
+      -- Lister payments made
+      -- Lister people referred (they'll get an email when they refer a new person)
+
  6) Admin & Roles Expansion [WEEk 17-18]
  
     - Master Admin Panel
@@ -110,6 +117,7 @@
 
    Platform Upgrade
       - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
+      - Add a hot map to the website
 
 ## NOTES
    USER JOURNEY

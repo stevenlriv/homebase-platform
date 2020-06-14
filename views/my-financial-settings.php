@@ -54,7 +54,7 @@
 						<label>Bank Name</label>
 						<input name="bank_name" value="<?php form_print_value($cache, $user, 'bank_name'); ?>" type="text" maxlength="255" required>
 
-						<label>Sole Owner</label>
+						<label>Account Owner Name</label>
 						<input name="bank_sole_owner" value="<?php form_print_value($cache, $user, 'bank_sole_owner'); ?>" type="text" maxlength="255" required>
 
 						<label>Routing Number</label>
@@ -62,6 +62,9 @@
 
 						<label>Account Number</label>
 						<input name="bank_account_number" value="<?php form_print_value($cache, $user, 'bank_account_number'); ?>" type="number" maxlength="255" required>
+
+						<label>Confirm Account Number</label>
+						<input name="bank_confirm_account_number" value="<?php form_print_value($cache, $user, 'bank_confirm_account_number'); ?>" type="number" maxlength="255" required>
 
 						<button name="submit" class="button margin-top-20 margin-bottom-20">Save Changes</button>
 					</form>

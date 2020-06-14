@@ -36,19 +36,18 @@
             if(new_user($_POST['fullname'], $_POST['email'], $_POST['phone_number'], $_POST['password'])) {
                 $form_success = 'Great, your account has been created.';
 
-                /*
-                accounts are already active for now
-                
-                // Get user id
-                $id_user = get_user_by_email($_POST['email'])['id_user'];
+                // Account confirmation
+                if(get_setting(24) == 'true') {
+                    // Get user id
+                    $id_user = get_user_by_email($_POST['email'])['id_user'];
 
-                // Email Confirmation resend
-                $code = generateNotSecureRandomString(20);
-                $link = get_domain()."/confirm?email={$_POST['email']}&validation=$code";
+                    // Email Confirmation resend
+                    $code = generateNotSecureRandomString(20);
+                    $link = get_domain()."/confirm?email={$_POST['email']}&validation=$code";
 
-                update_user_table('code', $id_user, $code); 
-                send_confirmation_email($_POST['fullname'], $_POST['email'], $link);
-                */
+                    update_user_table('code', $id_user, $code); 
+                    send_confirmation_email($_POST['fullname'], $_POST['email'], $link);
+                }
 
                 // Auto log-in them
                 login_user($_POST['email'], $_POST['password']);

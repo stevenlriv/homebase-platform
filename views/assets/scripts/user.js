@@ -97,6 +97,7 @@
                 bank_sole_owner: "required",
                 bank_routing_number: "required",
                 bank_account_number: "required",
+                bank_confirm_account_number: "required",
     	    },
 	
 			// Specify validation error messages
@@ -105,6 +106,7 @@
                 bank_sole_owner: "Please enter your bank account sole owner name",
                 bank_routing_number: "Please enter your bank routing number",
                 bank_account_number: "Please enter your bank account number",
+                bank_confirm_account_number: "Please enter your bank account number here too.",
             },
 
             // Make sure the form is submitted to the destination defined

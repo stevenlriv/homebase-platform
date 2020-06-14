@@ -43,6 +43,10 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 				echo "on ".date("m/d/Y", $available_date);
 			elseif($type == 'status')
 				echo "Available soon";
+			elseif($type == 'label')
+				echo '<span style="background: red;">Rented</span>';
+			elseif($type == 'blue-label')
+				echo '<span class="property-badge" style="background: red;">Rented</span>';
 		}
 		else {
 			if($type == 'admin')
@@ -51,6 +55,10 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 				echo "Today";
 			elseif($type == 'status')
 				echo "Available now";
+			elseif($type == 'label')
+				echo "<span>For Rent</span>";	
+			elseif($type == 'blue-label')
+				echo '<span class="property-badge">For Rent</span>';		
 		}
 	}
 

@@ -208,8 +208,8 @@ function sidebar_component() {
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Your Property</li>
 						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> My Property</a></li>
-						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
-                        <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Lease</a></li>
+						<!--<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
+                        <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Lease</a></li>-->
 					</ul>
 
                     <?php
@@ -226,8 +226,8 @@ function sidebar_component() {
 
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Manage Financials</li>
-						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
-                        <li><a href="#" <?php if($request == '/people-referred') echo 'class="current"'; ?>><i class="sl sl-icon-people"></i> People Referred</a></li>
+						<!--<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
+                        <li><a href="#" <?php if($request == '/people-referred') echo 'class="current"'; ?>><i class="sl sl-icon-people"></i> People Referred</a></li>-->
                         <li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
 					</ul>
 					<?php
@@ -244,8 +244,8 @@ function sidebar_component() {
 
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Manage Financials</li>
-						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
-                        <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>
+						<!--<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
+                        <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>-->
 
 						<?php
 							// Do not show to admins or realtors

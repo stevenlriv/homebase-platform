@@ -209,11 +209,14 @@
 		//Password
 		$key = KeyFactory::importEncryptionKey(new HiddenString(PWKEY));
 		$password = Password::hash(new HiddenString($password), $key);
-
-		//They need to confirm email
-		//$status = 'pending';
-		//For now user does not needs to confirm their email, just to make the proccess easier
-		$status = 'active';
+	
+		// Account confirmation
+		if(get_setting(24) == 'true') {
+			$status = 'pending';
+		}
+		else {
+			$status = 'active';
+		}
 
 		//Not in use
 		$birthdate = '';

@@ -24,6 +24,14 @@
             $form_error = 'You must enter your bank account number.';
         }
 
+        if(empty($_POST['bank_confirm_account_number'])) {
+            $form_error = 'You must enter your bank account number again.';
+        }
+
+        if($_POST['bank_account_number']!=$_POST['bank_confirm_account_number']) {
+            $form_error = 'Your bank account number does not match, please enter it again.';
+        }
+
         if(empty($form_error)) { 
             if(update_bank_information($user['id_user'], $_POST['bank_name'], $_POST['bank_sole_owner'], $_POST['bank_routing_number'], $_POST['bank_account_number'])) {
                 $form_success = 'Great, your bank information has been updated.';

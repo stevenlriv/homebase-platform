@@ -96,9 +96,10 @@
                             <?php
 							    if($value['featured']) {
 							        echo '<span class="featured">Featured</span>';
-							    }
+								}
+								
+								print_available_message('label', $value['available']);
 							?>
-							<span>For Rent</span>
 						</div>
 
 						<div class="listing-img-content">
@@ -106,12 +107,8 @@
 						</div>
 
                         <div class="listing-carousel">
-								<?php
-									foreach ( get_json($value['listing_images'], 'all') as $id => $image ) {
-										echo '<div style="height: 280px;"><img src="'.$image.'" alt="'.$value['physical_address'].'"></div>';
-									}
-								?>
-							</div>
+							<div style="height: 280px;"><img src="<?php echo get_json($value['listing_images'], 0); ?>" alt="<?php echo $value['physical_address']; ?>" /></div>
+						</div>
 
 					</a>
 					

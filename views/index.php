@@ -106,9 +106,10 @@
                             	<?php
 							    	if($value['featured']) {
 							        	echo '<span class="featured">Featured</span>';
-							    	}
+									}
+									
+									print_available_message('label', $value['available']);
 								?>
-								<span>For Rent</span>
 							</div>
 
 							<div class="listing-img-content">
@@ -116,16 +117,7 @@
 							</div>
 
 							<div class="listing-carousel">
-								<?php
-									if(!empty($value['listing_images'])) {
-										foreach ( get_json($value['listing_images'], 'all') as $id => $image ) {
-											echo '<div style="height: 280px;"><img src="'.$image.'" alt="'.$value['physical_address'].'"></div>';
-										}
-									}
-									else {
-										echo '<div style="height: 280px;"><img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/single-property-01.jpg" alt="'.$value['physical_address'].'"></div>';
-									}
-								?>
+								<div style="height: 280px;"><img src="<?php echo get_json($value['listing_images'], 0); ?>" alt="<?php echo $value['physical_address']; ?>" /></div>
 							</div>
 
 						</a>
