@@ -135,14 +135,19 @@
 				?>
 
 				<?php
+					//We transform the date to unix to be able to do a search in the database
+					//We only get listings that are not rented
+					$qdate = strtotime(date("m/d/Y"));
+
 					$query_related_listings = get_listings('all', array( 
 						0 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"),
 						1 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "id_listing", "command" => "!=", "value" => $listing['id_listing']),
-						2 => array("type" => "CHR", "condition" => "AND", "loose" => true, "table" => "city", "command" => "LIKE", "value" => $listing['city'])
+						2 => array("type" => "CHR", "condition" => "AND", "loose" => true, "table" => "city", "command" => "LIKE", "value" => $listing['city']),
+						3 => array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "available", "command" => "<=", "value" => $qdate)
 					), "ORDER BY views_count DESC LIMIT 3");	
 
 					// We need more than 1 to show the title
-					if(count($query_related_listings) > 1) {
+					if(count($query_related_listings) >= 1) {
 				?>
 					<!-- Similar Listings Container -->
 					<h3 class="desc-headline no-border margin-bottom-35 margin-top-60">Similar Properties</h3>

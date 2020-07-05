@@ -56,7 +56,7 @@ $(document).ready(function(){
 			phone_number: "required",
 			password: {
 				required: true,
-				minlength: 12
+				minlength: 8
 			},
     	},
 	
@@ -67,7 +67,7 @@ $(document).ready(function(){
             phone_number: "Please enter your phone number",
 			password: {
 				required: "Please enter your new password",
-				minlength: "Your password must be at least 12 characters long"
+				minlength: "Your password must be at least 8 characters long"
 			},
         },
 

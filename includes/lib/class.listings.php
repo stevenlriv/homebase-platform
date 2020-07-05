@@ -12,6 +12,30 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @since      File available since 1.0.0
 	 */
 
+	// Examples
+		// 43 -> 50
+		// 56.4 -> 60
+	function round_homebase_fee($house_price, $percentage = 0.10) {
+		$price = $house_price * $percentage;
+
+		//If ends on 5 and up it will always round up
+		//In the case that is below 4 we will just add 5 to be able to round it up
+			//We split the decimals from inter to verifi and add up more
+			if(substr_count($price, '.') > 0) {
+				//Lets get the last number and 
+				$pieces = explode('.', $price); //int = [0], decimals = [1]
+
+				// Lets get the last number
+				$lastint = substr($pieces[0], -1);
+
+				// If is below 5, we add 5 so we can round the number up and don't loose money on the deal
+				if($lastint<5) {
+					$price = $price + 5;
+				}
+			}
+		return round($price, -1);
+	}
+
 	function is_on_listing_creation_page() {
 		global $user, $request;
 
@@ -215,9 +239,9 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
         //We change the listing pricing using our current business model of 10% mark up
         //Also on the footer.php there is some js code to let the lister know how much is going to be listed at Homebase
 		//No decimals numbers use round()
-		$percentage_markup = 0.10; //homabase cut
-        $monthly_house = round($monthly_house + ($monthly_house*$percentage_markup));
-		$deposit_house = round($deposit_house + ($deposit_house*$percentage_markup));
+		$percentage_markup = get_setting(26); //homabase cut
+		$monthly_house = round($monthly_house + round_homebase_fee($monthly_house, $percentage_markup));
+		$deposit_house = round($deposit_house + round_homebase_fee($deposit_house, $percentage_markup));
 		
 		$q = $db->prepare ( "UPDATE xvls_listings SET `type` = ?, available = ?, country = ?, `state` = ?, city = ?, zipcode = ?, keywords = ?, monthly_house = ?, monthly_house_original = ?, monthly_per_room = ?, deposit_house = ?, deposit_house_original = ?, deposit_per_room = ?, number_rooms = ?,
 											number_bathroom = ?, square_feet = ?, physical_address = ?, postal_address = ?, latitude = ?, longitude = ?, listing_title = ?, listing_description = ?, listing_images = ?, video_tour = ?,
@@ -265,9 +289,9 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
         //We change the listing pricing using our current business model of 10% mark up
         //Also on the footer.php there is some js code to let the lister know how much is going to be listed at Homebase
 		//No decimals numbers use round()
-		$percentage_markup = 0.10; //homabase cut
-        $monthly_house = round($monthly_house + ($monthly_house*$percentage_markup));
-        $deposit_house = round($deposit_house + ($deposit_house*$percentage_markup));
+		$percentage_markup = get_setting(26); //homabase cut
+		$monthly_house = round($monthly_house + round_homebase_fee($monthly_house, $percentage_markup));
+		$deposit_house = round($deposit_house + round_homebase_fee($deposit_house, $percentage_markup));
 
 		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, `status`, `type`, available, country, `state`, city, zipcode, uri, keywords, monthly_house, monthly_house_original, monthly_per_room, deposit_house, deposit_house_original, deposit_per_room, number_rooms,
 											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,

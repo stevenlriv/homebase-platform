@@ -35,21 +35,77 @@
  3) [DONE] Realtors and Landlords Accounts Creations [WEEK 4]
 
  4) Tenants Accounts Support & Risk Mitigation [WEEK 5-9]
-      - Remove tenant autofill from contact form
-      - Remove redirection to contact form on index.php for tenants
-      - Account creation enabled
-      - Rent now button add a dropdown date on the listing; we need a starting date and an ending date for the contract 
+      DATABASE CHANGES
+         - Added setting "User Lister Comission"
+         - Added setting "Homebase Price Markup"
+
+      =========================
+      
+      - OTHER TASK:
+            
+         -- LANDLORDS
+               --- tab rojo con fee landlord en el dashboard
+
+      ========
+
+      tour.php
+
+         DATABSE TABLE
+            -- fullname
+            -- email
+            -- phone_number
+            -- drivers license number
+            -- date tour
+            -- time tour
+            -- date created
+
+      - 2 hours before the showing the user gets a text message as settings variables
+      - 30 min before the showing the user gets a text message as settings variables
+
+      - "Calendly Like" Native Tour Scheduling for Tenants
+         - They will verify their phone number 
+         - They need to create an account before doing a tour
+         - They need to pass background check before getting accepted to do tours
+         - Have a link that expires in 15 minutes after their where they can see the checking information
+         - And that opens 15 minutes before their checkin
+         - STRUCTURE
+            -- NEEDS A NEW DATABASE ONLY FOR TOURS
+            -- VERSIONS FOR
+               --- users not logged in
+               --- user logged in
+         - date that they want to see property by $_get
+
+         --- TIME ZONES PER TOUR; HOUSE COUNTRY SHOULD BE THE ONE TAKEN INTO CONSIDERATION FOR THE TOUR
+         ---- show a message, this house is located in the Puerto Rico time zone, etc
+
+         -- dashboard for new tours
+         -- landlords should get email notifications of every new tour; they can turn them on and off
+         -- they can preset the hours range from where they accept tours
+            -- a variable is going to be used from settings or from the landlord profile
+         -- they can cancell tours
+
+      - 15 minutes after the showing the user gets a text message as settings variables
+
+      ==========
+
+
+      ERNESTO SUMARRY
+         Step 1: Select an entry method so that the tenant knows what they are looking for
+         Step 2: Input a property access code so that the tenant can check-in to the showing (if it's a doorman, there's usually a doorman code)
+         Step 3: Paste a Google Maps link detailing the exact location of your property. You can either use an address or a dropped pin
+         Step 4: Upload images illustrating the things that the tenant is to look for in order to successfully check-in to their self-serve showing
+         Step 5: We'll manually review each image to double-check that they are clear and illustrative of the check-in process. We'll also draw arrows and point out any important details if necessary
+         Step 6: An automated text message reminder is sent to the tenant with location information 24 hours, 6 hours, and 2 hours before their appointment
+         Step 7: An automated text message with instructions is sent to the tenant 30 minutes, 15 minutes, and 5 minutes before their appointment
+            "Hey {full_name}, This is a friendly reminder that your appointment to see a Homebase {type_house_apartment} is at {event_time} on {event_date}, click the link for all the details.
+
+      ========
 
       - Tenant Risk Mitigation
          - Background check
          - Credit Check
          - Salary/Job verification (OPTIONAL)
          - Risk Score will be assigned to the tenant depending on the above results
-
-      - "Calendly Like" Native Tour Scheduling for Tenants 
-         - They need to create an account before doing a tour
-         - They need to pass background check before getting accepted to do tours
-         - Have a link that expires in 24 hours where they can see the checking information
 
  5) PandaDocs API and Renting Infracstructure [WEEK 10-16]
     - PandaDocs API Integration with Platform {https://www.pandadoc.com/api/esignature-api/}
@@ -77,6 +133,7 @@
 
     - Landlords and Realtors
       - once an user rents landlords will receive an email if they decided to manually accept a tenant they have 12 hours to accept or reject the tenant, after that the tenant will be accepted by the system
+      - The landlord can select auto-approve
       - Ability to view the user profile with lease docs of their tenants and the user risk score
       - Allow access to realtors and landlords to the user profile page only if they have a lease or pending lease with them
       - They can spefify to use a different bank information per lease lease, update the lease database with the pertinent bank information
@@ -118,6 +175,7 @@
    Platform Upgrade
       - Create a Cron algoryth that features the 5-10% most viewed listings every week that are vacant
       - Add a hot map to the website
+      - Only allow 12 charectars passwords and up for admins
 
 ## NOTES
    USER JOURNEY
@@ -141,6 +199,17 @@
          6) Pay rent + deposit
          7) Move in details 
          8) Move in
+
+      ==> SETP BY STEP OF RENTING AN APARTMENT
+         1) They'll search for a house or are referred by a lister
+         2) They schedule a self-guided tour and for this, we will ask, name, phone, email, Government Id and a password
+         3) They'll get notified of the upcoming tour (2 hours before and 30 min before)
+         4) They do the tour
+         5) 15 minutes after their tour is expired they get a message asking them if they are ready to rent
+         6) They click on the rent link
+         7) We perform a background check and credit check on them, if successful they'll add their credit card and sign the lease
+         8) The landlord will get notified to approve the lease (only if they have manual approval) if they have lease approval manual and will have from 2-6 hours to approve it, if not is approved immediately
+         9) The tenant will get a message that their lease started and they can start moving in 
 
     CRON FILE
         - Set it to run every Sunday

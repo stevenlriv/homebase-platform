@@ -184,7 +184,12 @@
 							echo '<a href="/my-properties" class="button border">Share Links</a>';
 						}
 						else {
-							echo '<a href="/register" class="button border">Register</a>';
+							if($request == '/make-money') {
+								echo '<a href="/register?type=listers" class="button border">Register</a>';
+							}
+							else {
+								echo '<a href="/register" class="button border">Register</a>';
+							}
 						}
 					?>
 				</div>

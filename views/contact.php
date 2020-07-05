@@ -3,27 +3,14 @@
 
 	// Featured use so people can contact us about the house they are interested in renting out, while
 	// We build the payment platform
-	if( !empty($_GET['property']) && is_uri($_GET['property']) && !empty($_GET['date']) ) {
+	if( !empty($_GET['property']) && is_uri($_GET['property']) ) {
 
 		$listing = is_uri($_GET['property']);
 
 		if($listing) {
-			$date = sanitize_xss($_GET['date']);
-
 			$subject = "Interested in renting out {$listing['listing_title']}";
-			$message = "Looking to rent the property located at {$listing['physical_address']}. The starting date of the rental agreement will be {$date}.";
+			$message = "Looking to rent the property located at {$listing['physical_address']}. The starting date of the rental agreement will be...";
 		}
-	}
-
-	// Tenant Account Inquiry
-	$tenant = false;
-	if( !empty($_GET['inquiry']) ) {
-		$tenant = true;
-
-		if($_GET['inquiry'] == 'tenant') {
-			$subject = "Interested in renting with Homebase";
-			$message = "I'm a tenant, who is looking to rent a property with Homebase. The property is located at ...";	
-		}	
 	}
 ?>
 <!-- Content
@@ -98,7 +85,7 @@
 					</div>
 
 					<div>
-						<input name="subject" type="<?php if(!empty($listing) || $tenant) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
+						<input name="subject" type="<?php if(!empty($listing)) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
 					</div>
 
 					<?php

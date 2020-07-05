@@ -50,7 +50,7 @@
 						if(empty($form_success) && empty($form_error)) {
 				?>
 					<div class="notification notice closeable">
-						<p>You might enter your new password now. Password must contain a minimum of 12 characters.</p>
+						<p>You might enter your new password now. Password must contain a minimum of 8 characters.</p>
 					</div>
 				<?php
 						}

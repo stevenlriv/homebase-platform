@@ -53,11 +53,11 @@
                 },
                 password: {
                     required: true,
-                    minlength: 12
+                    minlength: 8
                 },
                 confirm: {
                     required: true,
-                    minlength: 12
+                    minlength: 8
                 },
     	    },
 	
@@ -68,11 +68,11 @@
                 },
                 password: {
                     required: "Please enter your new password",
-                    minlength: "Your password must be at least 12 characters long"
+                    minlength: "Your password must be at least 8 characters long"
                 },
                 confirm: {
                     required: "Please confirm your new password",
-                    minlength: "Your password must be at least 12 characters long"
+                    minlength: "Your password must be at least 8 characters long"
                 },
             },
 

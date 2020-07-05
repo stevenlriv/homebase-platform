@@ -4,6 +4,10 @@
     // We only show active properties to the lister
 	array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"));
 
+	// Hide houses that are already rented from lister
+	//$qdate = strtotime(date("m/d/Y"));
+	//array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "available", "command" => "<=", "value" => $qdate));
+
     //Lets get the query results
 	$total_results = get_listings('count', $query);
 	
@@ -92,7 +96,19 @@
 						?>
 							
 							<span><?php echo $value['physical_address']; ?> </span>
-							<span class="table-property-price">$<?php echo (round($value['monthly_house_original']*0.10))*2; ?> / paid in 2 months</span>
+
+							<?php
+								// Lister Earn Formula
+								// Basic Logic of Business Model as of writting Jun 2020
+								// 6 month lease = 2 months commision for lister divided in 6 months equal pay
+								// 12 months lease = 4 months commision for lister divided in 12 months equal pay
+								// 24 month lease = 8 months for lister divided in 24 months equal pay
+								$lister_commision = round_homebase_fee($value['monthly_house_original'], get_setting(25));
+								$earn_from = $lister_commision*2;
+								$earn_up_to = $lister_commision*8;
+
+							?>
+							<span class="table-property-price">Earn from $<?php echo $earn_from; ?> up to $<?php echo $earn_up_to; ?> **</span>
 						</div>
 					</td>
 					<td class="expire-date"><?php print_available_message('date', $value['available']); ?></td>
@@ -109,6 +125,9 @@
 				?>
 
 			</table>
+
+			<br />
+			<p>** You can earn up to that amount by promoting this property, but you will only be paid a commission by the link clicks that converts, meaning that a successful referral rents the property. The total amount of the commission will depend on the duration of the lease referred, and will be divided into monthly payments for up to 6, 12 or 24 months depending on the specifics of that property and the lease duration.</p>
 
 			<?php
 				$pagination->print();

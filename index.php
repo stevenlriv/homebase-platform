@@ -58,6 +58,28 @@ switch ($request) {
         require_once __DIR__ . '/views/index.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/tour' :
+
+        if(empty($_GET['property']) || !is_numeric($_GET['property'])) {
+            header('Location: /');
+        }
+
+        $listing = get_listings ('one', $_GET['property']);
+
+        // We verify the listing exists
+        if(!$listing) {
+            header('Location: /');
+        }
+
+        $seo = array(
+            "title" => "Schedule A Tour",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/tour.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/tour.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/login' :
         if($user) {
             header('Location: /my-profile');
@@ -83,11 +105,6 @@ switch ($request) {
         
         if($_GET['type'] == 'landlords' || $_GET['type'] == 'listers' || $_GET['type'] == 'tenants') {
             $type = $_GET['type'];
-        }
-
-        //There are a couple of accounts that are not available at this moment: tenants
-        if($type == 'tenants'){
-            header('Location: /contact?inquiry=tenant');
         }
 
         $seo = array(

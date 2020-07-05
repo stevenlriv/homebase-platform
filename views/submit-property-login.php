@@ -151,7 +151,7 @@
 
 				<!-- Price -->
 				<div class="col-md-6">
-					<h5>Homebase Listing Rent <i class="tip" data-tip-content="This is the price your property will be listed at Homebase"></i></h5>
+					<h5>Homebase Listing Rent <i class="tip" data-tip-content="This is the price your property will be listed at Homebase. Currently is a <?php echo get_setting(26)*100; ?>% markup rounded up to the nearest 10."></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="monthly_house_homebase" value="" type="number" data-unit="USD">
 					</div>
@@ -173,7 +173,7 @@
 
 				<!-- Price -->
 				<div class="col-md-6">
-					<h5>Homebase Listing Deposit <i class="tip" data-tip-content="This is the deposit amount your property will be listed at Homebase"></i></h5>
+					<h5>Homebase Listing Deposit <i class="tip" data-tip-content="This is the deposit amount your property will be listed at Homebase. Currently is a <?php echo get_setting(26)*100; ?>% markup rounded up to the nearest 10."></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="deposit_house_homebase" value="" type="number" data-unit="USD">
 					</div>

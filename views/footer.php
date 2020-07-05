@@ -195,10 +195,10 @@ ga('send', 'pageview');
 		dropzone_js('dropzone-checkin', 'checkin-content', 'checkin-section', '/images-checkin.php?action=get-img', '/images-checkin.php');
 
 		// House Rent
-		calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase');
+		calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase', get_setting(26));
 
 		// House Deposit
-		calculate_homebase_listed_js('deposit_house_original', 'deposit_house_homebase');
+		calculate_homebase_listed_js('deposit_house_original', 'deposit_house_homebase', get_setting(26));
 	}
 ?>
 

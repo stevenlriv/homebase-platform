@@ -42,9 +42,11 @@
  }
 
  function booking_component($listing, $jquery_id) {
-    
-    if($listing['calendly_link'] != '') {
+	
+	// If there is a calendly link, show it
+	if($listing['calendly_link'] != '') {
 ?>
+
             <!-- Tour Widget -->
             <div class="widget">
                 <div id="booking-widget-anchor" class="boxed-widget booking-widget">
@@ -52,28 +54,43 @@
                 </div>
             </div>
             <!-- Tour Widget / End -->
-            <?php
-                }
-            ?>
 
+<?php
+	}
+	else {
+?>
+            <!-- Tour Widget -->
+            <div class="widget">
+				<form action="/contact" type="GET">
+					<input type="hidden" name="property" value="<?php echo $listing['id_listing']; ?>">
+                	<div id="booking-widget-anchor" class="boxed-widget booking-widget">
+						<button class="button book-now fullwidth margin-top-5">Schedule a Tour</button>
+                	</div>
+				</form>
+            </div>
+            <!-- Tour Widget / End -->
+<?php
+	}
+?>
             <!-- Booking Widget -->
+			<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
             <div class="widget">
 
                 <form action="/contact" type="GET">
 
-                <input type="hidden" name="property" value="<?php echo $listing['uri']; ?>">
+                <input type="hidden" name="property" value="<?php echo $listing['id_listing']; ?>">
 
                 <!-- Book Now -->
                 <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35 margin-bottom-35">
-                    <h3><i class="fa fa-calendar-check-o "></i> Rent This Property</h3>
+                    <!--<h3><i class="fa fa-calendar-check-o "></i> Rent This Property</h3>
                     <div class="row with-forms  margin-top-0">
 
-                        <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+                        
                         <div class="col-lg-12">
                             <input name="date" type="text" id="<?php echo $jquery_id; ?>" placeholder="Date" readonly="readonly">
                         </div>
 
-                    </div>
+                    </div>-->
                     
                     <!-- Book Now -->
                     <button class="button book-now fullwidth margin-top-5">Rent Now</button>
@@ -426,17 +443,24 @@ function calculate_homebase_listed_js($input_from, $input_to, $percentaje = 0.10
 	/*  Submit Property
 	/*--------------------------------------------------*/
 
+	function round_homebase_fee(house_price, percentage) {
+		var price = house_price * percentage;
+		price = Math.ceil(price / 10) * 10;
+        
+  		return price;
+	}
+
 	$('form input[name="<?php echo $input_to; ?>"]').prop("disabled", true);
 
 	// In case there is form data while editing or cache
 	var monthly_rent = parseInt($( 'form input[name="<?php echo $input_from; ?>"]' ).val(), 10);
-	var monthly_rent_homebase = monthly_rent + ((monthly_rent)*<?php echo $percentaje; ?>);
+	var monthly_rent_homebase = monthly_rent + (round_homebase_fee(monthly_rent, <?php echo $percentaje; ?>));
 	$('form input[name="<?php echo $input_to; ?>"]').attr('value', Math.trunc(monthly_rent_homebase));
 
 	// When the form input is updated;
 	$( 'form input[name="<?php echo $input_from; ?>"]' ).keyup(function() {
 		monthly_rent = parseInt($( 'form input[name="<?php echo $input_from; ?>"]' ).val(), 10);
-		monthly_rent_homebase = monthly_rent + ((monthly_rent)*<?php echo $percentaje; ?>);
+		monthly_rent_homebase = monthly_rent + (round_homebase_fee(monthly_rent, <?php echo $percentaje; ?>));
 
 		
 		$('form input[name="<?php echo $input_to; ?>"]').attr('value', Math.trunc(monthly_rent_homebase));

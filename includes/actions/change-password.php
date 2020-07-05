@@ -20,8 +20,8 @@
             $form_error = 'You must confirm your new password.';
         }
 
-        if ( strlen($_POST['password'])<12 ) {
-            $form_error = 'You password must be 12 characters or more.';
+        if ( strlen($_POST['password'])<8 ) {
+            $form_error = 'You password must be 8 characters or more.';
         }
 
         if(empty($_POST['password'])) {
