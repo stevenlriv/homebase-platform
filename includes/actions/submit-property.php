@@ -88,11 +88,13 @@
         }
 
         if(empty($_POST['checkin_access_code'])) {
-            $form_error = 'You must set the property access code.';
+            //$form_error = 'You must set the property access code.';
+            $_POST['checkin_access_code'] = '';
         }  
 
         if(empty($_POST['checkin_description'])) {
-            $form_error = 'You must explain the tenant how to get into the property using the access code.';
+            //$form_error = 'You must explain the tenant how to get into the property using the access code.';
+            $_POST['checkin_description'] = '';
         }  
 
         if (!empty($_POST['video_tour']) && !filter_var($_POST['video_tour'], FILTER_VALIDATE_URL)) {
@@ -108,7 +110,8 @@
         }    
 
         if(empty($_POST['check_required'])) {
-            $form_error = 'You must agree to our terms before adding or editing the listing.';
+           // $form_error = 'You must agree to our terms before adding or editing the listing.';
+           $_POST['check_required'] = '';
         }
 
         //Proccess the check ones

@@ -130,7 +130,8 @@
 						?>
 							
 							<span><?php echo $value['physical_address']; ?> </span>
-							<span class="table-property-price">$<?php echo $value['monthly_house']; ?> / monthly</span>
+							<span class="table-property-price" style="background: #274abb; color: #fff;">$<?php echo $value['monthly_house']; ?> / homebase markup</span>
+							<span class="table-property-price">$<?php echo $value['monthly_house_original']; ?> / your monthly ask</span>
 							
 							<!-- Space for bottom border -->
 							<span style="visibility: hidden;">space; space</span>

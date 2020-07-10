@@ -50,6 +50,8 @@
 
       tour.php
 
+      ask for drivers licence picture from the tenant
+      
          DATABSE TABLE
             -- fullname
             -- email
@@ -101,12 +103,6 @@
 
       ========
 
-      - Tenant Risk Mitigation
-         - Background check
-         - Credit Check
-         - Salary/Job verification (OPTIONAL)
-         - Risk Score will be assigned to the tenant depending on the above results
-
  5) PandaDocs API and Renting Infracstructure [WEEK 10-16]
     - PandaDocs API Integration with Platform {https://www.pandadoc.com/api/esignature-api/}
       - We will able to automated and standarize listing creation
@@ -131,6 +127,12 @@
       - If a listing have other types of data in the database, like lease payments, etc, it CANT be deleted by any person!!, so fix that
       - when user is renting verify of it is a referral to give credit to listers
 
+      - Tenant Risk Mitigation
+         - Background check
+         - Credit Check
+         - Salary/Job verification (OPTIONAL)
+         - Risk Score will be assigned to the tenant depending on the above results
+         
     - Landlords and Realtors
       - once an user rents landlords will receive an email if they decided to manually accept a tenant they have 12 hours to accept or reject the tenant, after that the tenant will be accepted by the system
       - The landlord can select auto-approve

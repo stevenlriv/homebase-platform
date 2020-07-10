@@ -69,7 +69,7 @@
 
 		<?php dropzone_box('Gallery', 'dropzone-listing', 'galery-content'); ?>
 
-		<?php dropzone_box('Access Images', 'dropzone-checkin', 'checkin-content', 'col-md-12', '/images-checkin.php'); ?>
+		<?php //dropzone_box('Access Images', 'dropzone-checkin', 'checkin-content', 'col-md-12', '/images-checkin.php'); ?>
 
 		<form method="post" enctype="multipart/form-data" class="form-cache" name="submit-property" id="<?php echo $form_cache_id; ?>">
 
@@ -151,23 +151,25 @@
 
 				<!-- Price -->
 				<div class="col-md-6">
-					<h5>Homebase Listing Rent <i class="tip" data-tip-content="This is the price your property will be listed at Homebase. Currently is a <?php echo get_setting(26)*100; ?>% markup rounded up to the nearest 10."></i></h5>
+					<h5>Deposit <i class="tip" data-tip-content="Property deposit"></i></h5>
 					<div class="select-input disabled-first-option">
-						<input name="monthly_house_homebase" value="" type="number" data-unit="USD">
+						<input name="deposit_house_original" value="<?php form_print_value($cache, $listing, 'deposit_house_original'); ?>" type="number" data-unit="USD">
 					</div>
 				</div>
 
 			</div>
 			<!-- Row / End -->
 
+			<?php
+			/*
+
 			<!-- Row -->
 			<div class="row with-forms">
-
 				<!-- Price -->
 				<div class="col-md-6">
-					<h5>Deposit <i class="tip" data-tip-content="Property deposit"></i></h5>
+					<h5>Homebase Listing Rent <i class="tip" data-tip-content="This is the price your property will be listed at Homebase. Currently is a <?php echo get_setting(26)*100; ?>% markup rounded up to the nearest 10."></i></h5>
 					<div class="select-input disabled-first-option">
-						<input name="deposit_house_original" value="<?php form_print_value($cache, $listing, 'deposit_house_original'); ?>" type="number" data-unit="USD">
+						<input name="monthly_house_homebase" value="" type="number" data-unit="USD">
 					</div>
 				</div>
 
@@ -181,11 +183,11 @@
 
 			</div>
 			<!-- Row / End -->
+			*/
+			?>
 
 		</div>
 		<!-- Section / End -->
-
-		<?php dropzone_form('galery-section'); ?>
 
 		<h3>Specifics</h3>
 		<div class="submit-section">
@@ -343,7 +345,11 @@
 		</div>
 		<!-- Section / End -->
 
+		<?php dropzone_form('galery-section'); ?>
+		
 		<!-- Section -->
+		<?php
+		/*
 		<h3>Virtual Details</h3>
 		<div class="submit-section">
 
@@ -383,6 +389,8 @@
 			</div>
 		</div>
 		<!-- Section / End -->
+		*/
+		?>
 
 		<div class="divider"></div>
 

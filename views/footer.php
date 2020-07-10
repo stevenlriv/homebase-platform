@@ -192,13 +192,13 @@ ga('send', 'pageview');
 		dropzone_js('dropzone-listing', 'galery-content', 'galery-section', '/images.php?action=get-img');
 
 		// Dropzone Listing Checkin Images
-		dropzone_js('dropzone-checkin', 'checkin-content', 'checkin-section', '/images-checkin.php?action=get-img', '/images-checkin.php');
+		//dropzone_js('dropzone-checkin', 'checkin-content', 'checkin-section', '/images-checkin.php?action=get-img', '/images-checkin.php');
 
 		// House Rent
-		calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase', get_setting(26));
+		//calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase', get_setting(26));
 
 		// House Deposit
-		calculate_homebase_listed_js('deposit_house_original', 'deposit_house_homebase', get_setting(26));
+		//calculate_homebase_listed_js('deposit_house_original', 'deposit_house_homebase', get_setting(26));
 	}
 ?>
 

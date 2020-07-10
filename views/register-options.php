@@ -37,12 +37,12 @@
 					<div class="icon-container">
 						<i class="im im-icon-Office"></i>
 						<div class="icon-links">
-							<a href="/register?type=landlords">Landlord Account</a>
+							<a href="/register?type=landlords">Real Estate Agent / Landlord Account</a>
 						</div>
 					</div>
 
-					<h3>Landlord</h3>
-					<p>Own 1 or more properties. Looking for help and automation.</p>
+					<h3>Real Estate Agent / Landlord</h3>
+					<p>Own or work with 1 or more properties. Looking for help and automation.</p>
 				</div>
 			</div>
 
