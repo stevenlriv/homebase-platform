@@ -9,7 +9,7 @@
 
 		if($listing) {
 			$subject = "Interested in renting out {$listing['listing_title']}";
-			$message = "Looking to rent the property located at {$listing['physical_address']}. The starting date of the rental agreement will be...";
+			$message = "Phone Number, Email, Lease Length, Move-in Date";
 		}
 	}
 ?>

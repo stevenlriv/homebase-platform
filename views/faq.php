@@ -41,83 +41,54 @@
 
 				<!-- Toggle 1 -->
 				<div class="toggle-wrap">
-					<span class="trigger "><a href="#">How do Homebase works?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger "><a href="#"> How often do I get paid?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>It's easy! Just find a home you're interested in from our marketplace. We'll run a background and credit check, then pack your personal effects, and show up at your new home and start living!</p>
+						<p> You'll receive rent payments every month within 48 hours.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 2 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> What cities are Homebase in?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> Do I get any reports or updates?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>We currently are in San Juan Puerto Rico, but have more locations coming soon.</p>
+						<p>Yes, all reports & notifications are sent via text and email to keep you in the loop. You can also access them through your account.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 3 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> What does home shared means?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> What kind of insurance do you provide?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>In our shared apartments, we offer you beautiful homes where you will share bathrooms, kitchens, living room (s) with other roommates.</p>
+						<p>We currently do not provide insurance, but are planning to provide property and liability insurance to every partner. This insurance will cover over $1m in value.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 4 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> How short or long can I stay?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> Who is responsible for maintenance?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Our minimum is 90 days, but is as long as you'd like!</p>
+						<p>Tenants can submit maintenance requests online. You'll be able to review and approve requests; we'll handle the rest. Depending on the cost of the task extra charges may apply.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 5 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> Can I tour a home before booking it?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> Do I have any control on who stays in my property?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Yes, you can do a self guided tour or watch one of our pre-recorded video tours.</p>
+						<p>You can set up tenant applications for automatic approval or manually review and approve them yourself.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 6 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> Do you run a background and credit check?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> How much do I pay?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Yes.</p>
+						<p>We charge a flat 8% monthly fee only when the property is rented. No upfront fees. No tenant placement fees.</p>
 					</div>
 				</div>
 
-				<!-- Toggle 7 -->
-				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> Will I be charged immediately?<i class="sl sl-icon-plus"></i></a></span>
-					<div class="toggle-container">
-						<p>We will not reserve your home until you've paid the deposit and first month's rent.</p>
-					</div>
 				</div>
 
-				<!-- Toggle 8 -->
-				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> Do I need to set up utilities?<i class="sl sl-icon-plus"></i></a></span>
-					<div class="toggle-container">
-						<p>It depends on the house you're renting, as a general rule, yes!</p>
-					</div>
-				</div>
-
-				<!-- Toggle 9 -->
-				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> What's your pet policy?<i class="sl sl-icon-plus"></i></a></span>
-					<div class="toggle-container">
-						<p>It depends on the house you're renting, as a general rule, no! Sorry about that.</p>
-					</div>
-				</div>
-
-				<!-- Toggle 10 -->
-				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> Can I rent my home out on Airbnb?<i class="sl sl-icon-plus"></i></a></span>
-					<div class="toggle-container">
-						<p>No, our properties can't be rented out by members.</p>
-					</div>
-				</div>
 			</div>
 			<!-- Toggles Container / End -->
 		</div>

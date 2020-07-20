@@ -12,6 +12,29 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	 * @since      File available since 1.0.0
 	 */
 
+	use \ParagonIE\Halite\{
+		KeyFactory,
+		HiddenString,
+		Symmetric\Crypto as Symmetric
+	};
+
+	function text_encrypt($text) {
+		$key = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
+		$text = new HiddenString($text);
+
+		$cipher = Symmetric::encrypt($text, $key);
+
+		return $cipher;
+	}
+
+	function text_decrypt($cipher) {
+		$key = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
+
+		$text = Symmetric::decrypt($cipher, $key);
+
+		return $text;
+	}
+
 	function get_array_by_comma($string, $validate = '') {
 		$string = trim($string);
 		$array = explode(',', $string);

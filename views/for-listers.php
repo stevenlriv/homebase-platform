@@ -19,7 +19,7 @@
 					<h2>It has never been easier to make money from real estate.</h2>
 					<p>Just share our properties and get paid for each property you refer!</p>
 
-                    <h3>Starting at $100 per month for up to 8 months per property</h3>
+                    <h3>Starting at 3% per month for up to 8 months per property</h3>
 
 					<a href="/register?type=listers" class="button margin-top-25">Get Started</a>
 				</div>
@@ -40,7 +40,7 @@
 		    <!-- Headline -->
 		    <h3 class="headline with-border margin-top-45 margin-bottom-25">Its Easy To Work With Us</h3>
 
-		    <p>We believe that building wealth and income from real estate growth should be accessible to everyone. That’s why when you share our properties with the world, we’ll pay you a monthly referral commission for up to 8 months—every month. Best of all, there’s no limit to how many properties you can refer.</p>
+		    <p>When you share our properties with the world, we'll pay you a monthly referral fee for up to 8 months-every month. Best of all, there's no limit to how many properties you can refer.</p>
 
 		</div>
 	</div>
@@ -59,7 +59,7 @@
                         <p><b>Share your unique link.</b> You can share on your social media, with your friends, and on any other platform. Share as much as you want.</p>
                     </li>
 					<li>
-                        <p><b>Get Paid.</b> When someone rents a property using your unique link, you will get paid commission every month for up to 8 months.</p>
+                        <p><b>Get Paid.</b> When someone rents a property using your unique link, you will get paid 3% of rent every month for up to 8 months.</p>
                     </li>
 				</ol>
 			</div>
@@ -71,7 +71,7 @@
 
 		<div class="col-md-12">
 
-            <h3 class="headline margin-bottom-30 margin-top-40">Listers love us because all they have to do is share a link to earn commission.</h3>
+            <h3 class="headline margin-bottom-30 margin-top-40">All you have to do is share a link to earn money.</h3>
 
 			<!-- Toggles Container -->
 			<div class="style-2">
@@ -88,7 +88,7 @@
 				<div class="toggle-wrap">
 					<span class="trigger"><a href="#"> How much will I earn?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Commissions depend per listing and you will see how much you can earn per property in your dashboard.</p>
+						<p>When someone rents a property using your links, you'll receive 3% of that rent.</p>
 					</div>
 				</div>
 

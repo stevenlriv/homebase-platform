@@ -181,8 +181,8 @@
 						<i class="im im-icon-Idea"></i>
 					</div>
 
-					<h3>1. Take a tour</h3>
-					<p>Take a sneak peek with our online video tours or book an in-person self-tour.</p>
+					<h3>1. Schedule</h3>
+					<p>Pick a time and day and we'll send you a passcode with check-in instructions so you can tour the property by yourself.</p>
 				</div>
 			</div>
 
@@ -194,8 +194,8 @@
 						<i class="im im-icon-Mustache-6"></i>
 					</div>
 
-					<h3>2. Complete online application</h3>
-					<p>Fill in all of the required details so we can quickly approve you to rent the property.</p>
+					<h3>2. Apply</h3>
+					<p>If you like the property, shoot us an email using the Rent Now button on the listing and we'll send you a tenant screening application. It's free.</p>
 				</div>
 			</div>
 
@@ -207,8 +207,8 @@
 						<i class="im im-icon-Aerobics-2"></i>
 					</div>
 
-					<h3>3. Sign lease & pay rent</h3>
-					<p>Sign your lease online and pay your first month's rent and security deposit.</p>
+					<h3>3. Move-in</h3>
+					<p>Once you qualify, we'll send you a rental agreement for you to sign and pay-all online.</p>
 				</div>
 			</div>
 

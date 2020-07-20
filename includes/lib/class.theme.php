@@ -62,7 +62,7 @@
             <!-- Tour Widget -->
             <div class="widget">
 				<form action="/contact" type="GET">
-					<input type="hidden" name="property" value="<?php echo $listing['id_listing']; ?>">
+					<input type="hidden" name="property" value="<?php echo $listing['uri']; ?>">
                 	<div id="booking-widget-anchor" class="boxed-widget booking-widget">
 						<button class="button book-now fullwidth margin-top-5">Schedule a Tour</button>
                 	</div>
@@ -78,7 +78,7 @@
 
                 <form action="/contact" type="GET">
 
-                <input type="hidden" name="property" value="<?php echo $listing['id_listing']; ?>">
+                <input type="hidden" name="property" value="<?php echo $listing['uri']; ?>">
 
                 <!-- Book Now -->
                 <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35 margin-bottom-35">
