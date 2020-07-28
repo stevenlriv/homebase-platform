@@ -20,31 +20,31 @@ if($request != '/find-a-homebase') {
 			<div class="col-md-5 col-sm-6">
 				<img class="footer-logo" src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/homebase-logo-2.png" alt="Homebase">
 				<br><br>
-				<p>Homebase is a marketplace where you can find your next home. It's easy, just take a tour and sign your lease, all online and in a few minutes.</p>
+				<p>Homebase ofrece la experiencia de alquiler con la que siempre has soñado. Encuentre su próxima casa o inquilino más rápido con nuestra plataforma digital de administración de propiedades.</p>
 			</div>
 
 			<div class="col-md-4 col-sm-6 ">
-				<h4>Helpful Links</h4>
+				<h4>Más información</h4>
 				<ul class="footer-links">
-					<li><a href="/find-a-homebase">Search Homes</a></li>
-                    <li><a href="/list-your-home">List Your Home</a></li>
-					<li><a href="/make-money">Make Money</a></li>
+					<li><a href="/find-a-homebase">Buscar casas</a></li>
+                    <li><a href="/list-your-home">¿Por qué añadir su propiedad?</a></li>
+					<!--<li><a href="/make-money">Make Money</a></li>-->
 					<li><a href="https://blog.renthomebase.com">Blog</a></li>
+					<li><a href="/contact">Contáctanos</a></li>
 				</ul>
 
 				<ul class="footer-links">
-					<li><a href="/faq">FAQ</a></li>
-				    <li><a href="/contact">Contact</a></li>
-					<li><a href="/privacy">Privacy Policy</a></li>
-                    <li><a href="/terms">Terms of Service</a></li>
+					<li><a href="/faq">Pregúntas Frecuentes</a></li>
+					<li><a href="/privacy">Política de Privacidad</a></li>
+                    <li><a href="/terms">Terminos de Servicio</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>		
 
 			<div class="col-md-3  col-sm-12">
-				<h4>Contact Us</h4>
+				<h4>Contáctanos</h4>
 				<div class="text-widget">
-					E-Mail:<span> <a href="mailto:<?php _setting(1); ?>"><?php _setting(1); ?></a> </span><br>
+					Correo electrónico:<span> <a href="mailto:<?php _setting(1); ?>"><?php _setting(1); ?></a> </span><br>
 				</div>
 
 				<ul class="social-icons margin-top-20">

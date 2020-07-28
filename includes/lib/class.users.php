@@ -19,7 +19,12 @@
 	function is_admin() {
 		global $user;
 
-		if( !$user || $user['type'] == "super_admin" || $user['type'] == "admin" ) {
+		// There is no user data
+		if( empty($user)) {
+			return false;
+		}
+
+		if( $user['type'] == "super_admin" || $user['type'] == "admin" ) {
 			return true;
 		}
 

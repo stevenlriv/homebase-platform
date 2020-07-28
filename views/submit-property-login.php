@@ -349,7 +349,8 @@
 		
 		<!-- Section -->
 		<?php
-		/*
+			if(is_admin()) {
+		?>
 		<h3>Virtual Details</h3>
 		<div class="submit-section">
 
@@ -389,7 +390,8 @@
 			</div>
 		</div>
 		<!-- Section / End -->
-		*/
+		<?php
+			}
 		?>
 
 		<div class="divider"></div>

@@ -118,9 +118,9 @@
 				<nav id="navigation" class="style-1" style="visibility: <?php echo $visibility; ?>">
 					<ul id="responsive">
 
-						<li><a <?php if($request == '/find-a-homebase' || !empty($listing)) echo 'class="current"'; ?> href="/find-a-homebase">Search Homes</a></li>
+						<li><a <?php if($request == '/find-a-homebase' || !empty($listing)) echo 'class="current"'; ?> href="/find-a-homebase">Buscar Casas</a></li>
 
-						<li><a <?php if($request == '/list-your-home') echo 'class="current"'; ?> href="/list-your-home">List Your Home</a></li>
+						<li><a <?php if($request == '/list-your-home') echo 'class="current"'; ?> href="/list-your-home">¿Por qué añadir su propiedad?</a></li>
 
 					</ul>
 				</nav>
@@ -142,25 +142,25 @@
 
 					<!-- User Menu -->
 					<div class="user-menu">
-						<div class="user-name"><span><img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt=""></span><?php if(!empty($name)) { echo 'Hi, '.$name.'!'; } else { echo 'Hi, cool user!'; }; ?></div>
+						<div class="user-name"><span><img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt=""></span><?php if(!empty($name)) { echo 'Hola, '.$name.'!'; } else { echo 'Hola!'; }; ?></div>
 						<ul>
-							<li><a href="/my-profile"><i class="sl sl-icon-user"></i> My Profile</a></li>
+							<li><a href="/my-profile"><i class="sl sl-icon-user"></i> Mi Perfil</a></li>
 
 							<li><a href="/my-properties"><i class="sl sl-icon-docs"></i>
 								<?php
 									if($user['type'] == 'tenants') {
-										echo 'My Property';
+										echo 'Mis Propiedades';
 									}
 									elseif($user['type'] == 'listers') {
-										echo 'Properties';
+										echo 'Propiedades';
 									}
 									else {
-										echo 'My Properties';
+										echo 'Mis Propiedades';
 									}
 								?>
 							</a></li>
 							 
-							<li><a href="/logout"><i class="sl sl-icon-power"></i> Log Out</a></li>
+							<li><a href="/logout"><i class="sl sl-icon-power"></i> Salir </a></li>
 						</ul>
 					</div>
 
@@ -169,7 +169,7 @@
 						else {
 					?>
 
-					<a href="/login" class="sign-in"><i class="fa fa-user"></i> Log In </a>
+					<a href="/login" class="sign-in"><i class="fa fa-user"></i> Entrar </a>
 
 					<?php
 						}
@@ -178,17 +178,17 @@
 					<?php
 						//If the user is logged in, Hide from tenants and listers
 						if(!empty($user) && $user['type'] != 'tenants' && $user['type'] != 'listers') {
-							echo '<a href="/submit-property" class="button border">Submit Property</a>';
+							echo '<a href="/submit-property" class="button border">A&ntilde;ade Propiedad</a>';
 						}
 						elseif(!empty($user) && $user['type'] == 'listers') {
-							echo '<a href="/my-properties" class="button border">Share Links</a>';
+							echo '<a href="/my-properties" class="button border">Compartir Enlaces</a>';
 						}
 						else {
 							if($request == '/make-money') {
-								echo '<a href="/register?type=listers" class="button border">Register</a>';
+								echo '<a href="/register?type=listers" class="button border">Regístrate</a>';
 							}
 							else {
-								echo '<a href="/register" class="button border">Register</a>';
+								echo '<a href="/register" class="button border">Regístrate</a>';
 							}
 						}
 					?>
