@@ -4,12 +4,12 @@
 	if ( isset($_POST['submit']) ) {
 
 		if(empty($_POST['password'])) {
-			$form_error = 'You must enter your password.';
+			$form_error = 'Debe de ingresar su contraseña.';
 		}
 
 		//Form Verification
 		if(!is_email($_POST['email'])) {
-			$form_error = 'You have enter an invalid e-mail address, try again.';
+			$form_error = 'El correo electrónico ingresado no es válido, favor de intentar nuevamente.';
 		}
 
 		//Try to log in
@@ -18,7 +18,7 @@
 				header("Refresh:0");
 			}
 			else {
-				$form_error = 'We were not able to log you in with the details provided. Please try again.';
+				$form_error = 'Hubo un error, favor de intentarlo nuevamente.';
 			}
 		}
 	}

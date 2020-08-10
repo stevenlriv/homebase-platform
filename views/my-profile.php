@@ -9,13 +9,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>My Profile</h2>
+				<h2>Mi Perfil</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>My Profile</li>
+						<li><a href="#">Inicio</a></li>
+						<li>Mi Perfil</li>
 					</ul>
 				</nav>
 
@@ -56,43 +56,43 @@
 							}
 
 							if($cache && are_messages_empty()) {
-								$form_info = 'Press the "Save Changes" button below to save your information.';
+								$form_info = 'Presione el botón "Guardar cambios" a continuación para guardar su información.';
 							}
 
 							// Bank Account Information Message
 							// Do not show message to tenants or realtors
 							if(are_messages_empty() && $user['type'] != 'tenants' && $user['type'] != 'realtors' && !is_admin()) {
 								if($user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
-									$form_info = 'Remember to set up your bank information under financial settings.';
+									$form_info = 'Recuerde configurar su información bancaria en la configuración financiera.';
 								}
 							}
 
 							show_message($form_success, $form_error, $form_info);
 						?>
 
-						<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
+						<h4 class="margin-top-0 margin-bottom-30">Mi Cuenta</h4>
 
-						<label>Full Name</label>
+						<label>Nombre Completo</label>
 						<input name="fullname" value="<?php form_print_value($cache, $user, 'fullname'); ?>" type="text">
 
-						<label>Phone</label>
+						<label>Teléfono</label>
 						<input name="phone_number" value="<?php form_print_value($cache, $user, 'phone_number'); ?>" type="text">
 
 						<label>Email</label>
 						<input name="email" value="<?php form_print_value($cache, $user, 'email'); ?>" type="text">
 
 
-						<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
+						<h4 class="margin-top-50 margin-bottom-25">Sobre Mi</h4>
 						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php form_print_value($cache, $user, 'profile_bio'); ?></textarea>
 				
-						<label>Country</label>
+						<label>País</label>
 						<input name="country" value="<?php form_print_value($cache, $user, 'country'); ?>" type="text">
 
 						<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin</h4>
 
 						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">
 
-						<button name="submit" class="button margin-top-20 margin-bottom-20">Save Changes</button>
+						<button name="submit" class="button margin-top-20 margin-bottom-20">Guardar Cambios</button>
 					</form>
 				</div>
 

@@ -24,10 +24,10 @@
 				</div>
 
 				<div class="property-pricing">
-					<div class="property-price">$<?php echo $listing['monthly_house']; ?> / monthly</div>
+					<div class="property-price">$<?php echo $listing['monthly_house']; ?> / mensual</div>
 					<?php
 						if($listing['monthly_per_room'] != 0 && $listing['number_rooms']>1) {
-							echo '<div class="sub-price">$'.$listing['monthly_per_room'].' / per room</div>';
+							echo '<div class="sub-price">$'.$listing['monthly_per_room'].' / por habitación</div>';
 						}
 					?>
 				</div>
@@ -75,23 +75,23 @@
 				<!-- Main Features -->
 				<ul class="property-main-features">
 					<li>Area <span><?php echo $listing['square_feet']; ?> sq ft</span></li>
-					<li>Bedrooms <span><?php echo $listing['number_rooms']; ?></span></li>
-					<li>Bathrooms <span><?php echo $listing['number_bathroom']; ?></span></li>
-					<li>Available <span><?php print_available_message('date', $listing['available']); ?></span></li>
+					<li>Cuartos <span><?php echo $listing['number_rooms']; ?></span></li>
+					<li>Baños <span><?php echo $listing['number_bathroom']; ?></span></li>
+					<li>Diponibilidad <span><?php print_available_message('date', $listing['available']); ?></span></li>
 				</ul>
 
 				<!-- Description -->
-				<h3 class="desc-headline">Description</h3>
+				<h3 class="desc-headline">Descripción</h3>
 				<div class="show-more">
 					<p>
 						<?php echo $listing['listing_description']; ?>
 					</p>
 
-					<a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
+					<a href="#" class="show-more-button">Mostrar más <i class="fa fa-angle-down"></i></a>
 				</div>
 
 				<!-- Features -->
-				<h3 class="desc-headline">Features</h3>
+				<h3 class="desc-headline">Incluye</h3>
 				<ul class="property-features checkboxes margin-top-0">
 					<?php if($listing['electricity']) echo '<li>Electricity Included</li>'; ?>
 					<?php if($listing['water']) echo '<li>Water Included</li>'; ?>
@@ -113,7 +113,7 @@
 					if($listing['video_tour'] != '') {
 				?>
 				<!-- Video -->
-				<h3 class="desc-headline no-border">Video Tour</h3>
+				<h3 class="desc-headline no-border">Tour de video</h3>
 				<div class="responsive-iframe">
 					<iframe width="560" height="315" src="<?php echo $listing['video_tour']; ?>" frameborder="0" allowfullscreen></iframe>
 				</div>
@@ -125,7 +125,7 @@
 					if($listing['latitude'] != '' && $listing['longitude'] != '') {
 				?>
 				<!-- Location -->
-				<h3 class="desc-headline no-border" id="location">Location</h3>
+				<h3 class="desc-headline no-border" id="location">Ubicación</h3>
 				<div id="propertyMap-container">
 					<div id="propertyMap" data-latitude="<?php echo $listing['latitude']; ?>" data-longitude="<?php echo $listing['longitude']; ?>"></div>
 					<a href="#" id="streetView">Street View</a>
@@ -150,7 +150,7 @@
 					if(count($query_related_listings) >= 1) {
 				?>
 					<!-- Similar Listings Container -->
-					<h3 class="desc-headline no-border margin-bottom-35 margin-top-60">Similar Properties</h3>
+					<h3 class="desc-headline no-border margin-bottom-35 margin-top-60">Propiedades Similares</h3>
 
 				<?php
 					}
@@ -180,7 +180,7 @@
 							</div>
 
 							<div class="listing-img-content">
-								<span class="listing-price">$<?php echo $value['monthly_house']; ?> <i>monthly</i></span>
+								<span class="listing-price">$<?php echo $value['monthly_house']; ?> <i>mensual</i></span>
 								<span class="like-icon"></span>
 							</div>
 
@@ -198,13 +198,13 @@
 									<?php echo $value['physical_address']; ?>
 								</a>
 
-								<a href="/<?php echo $value['uri']; ?>" class="details button border">Details</a>
+								<a href="/<?php echo $value['uri']; ?>" class="details button border">Detalles</a>
 							</div>
 
 							<ul class="listing-details">
 								<li><?php echo $value['square_feet']; ?> sq ft</li>
-								<li><?php echo $value['number_rooms']; ?> Bedrooms</li>
-								<li><?php echo $value['number_bathroom']; ?> Bathrooms</li>
+								<li><?php echo $value['number_rooms']; ?> Cuartos</li>
+								<li><?php echo $value['number_bathroom']; ?> Baños</li>
 							</ul>
 
 							<div class="listing-footer">

@@ -29,12 +29,12 @@
 			<?php
 				if(!empty($listing)) {
 			?>
-				<h2><i class="fa fa-edit"></i> <a href="/<?php echo $listing['uri']; ?>" target="_blank">Edit Property - <?php echo $listing['listing_title']; ?></a> </h2>
+				<h2><i class="fa fa-edit"></i> <a href="/<?php echo $listing['uri']; ?>" target="_blank">Edita Propiedad - <?php echo $listing['listing_title']; ?></a> </h2>
 			<?php
 				}
 				else {
 			?>
-				<h2><i class="fa fa-plus-circle"></i> Add Property</h2>
+				<h2><i class="fa fa-plus-circle"></i> Añadir propiedad</h2>
 			<?php
 				}			
 			?>
@@ -57,10 +57,10 @@
 		<?php
 			if($cache && are_messages_empty() || $cache_img && are_messages_empty()) {
 				if(!empty($listing)) {
-					$form_info = 'It looks like you have some pending changes. Press the "Save Changes" button below to save your changes.';
+					$form_info = 'Parece que tienes algunos cambios pendientes. Presiona el botón "Guardar cambios" a continuación para guardar tus cambios.';
 				}
 				else {
-					$form_info = 'It looks like you have a draft listing. Press the "Add New" button below to add your new property.';
+					$form_info = 'Parece que tienes una lista de borradores. Presione el botón "Agregar nuevo" abajo para agregar su nueva propiedad.';
 				}
 			}
 
@@ -74,12 +74,12 @@
 		<form method="post" enctype="multipart/form-data" class="form-cache" name="submit-property" id="<?php echo $form_cache_id; ?>">
 
 		<!-- Section -->
-		<h3>Basic Information</h3>
+		<h3>Información Básica</h3>
 		<div class="submit-section">
 
 			<!-- Title -->
 			<div class="form">
-				<h5>Property Title <i class="tip" data-tip-content="Type clean title that will also contains an unique feature of your property (e.g. renovated, air contidioned). Limit of 40 characters. Do not make titles like 2 bed/1 bath, bed and bath are always indicated when we show the listings."></i></h5>
+				<h5>Título de la propiedad <i class="tip" data-tip-content="Escriba el título limpio que también contiene una característica única de su propiedad (por ejemplo, renovada, con aire acondicionado). Límite de 40 caracteres. No haga títulos como 2 cama/1 baño, cama y baño siempre se indican cuando mostramos los listados."></i></h5>
 				<input name="listing_title" class="search-field" type="text" value="<?php form_print_value($cache, $listing, 'listing_title'); ?>" maxlength="40"/>
 			</div>
 
@@ -88,17 +88,17 @@
 
 				<!-- Type -->
 				<div class="col-md-6">
-					<h5>Type</h5>
+					<h5>Tipo</h5>
 					<select name="type" class="chosen-select-no-single">
-						<option label="Select an Option"></option>		
-						<option <?php if(form_get_value($cache, $listing, 'type') == 'apartment') echo 'selected="selected"' ?> value="apartment">Apartment</option>
-						<option <?php if(form_get_value($cache, $listing, 'type') == 'house') echo 'selected="selected"' ?> value="house">House</option>
+						<option label="Seleccione una opción"></option>		
+						<option <?php if(form_get_value($cache, $listing, 'type') == 'apartment') echo 'selected="selected"' ?> value="apartment">Apartamento</option>
+						<option <?php if(form_get_value($cache, $listing, 'type') == 'house') echo 'selected="selected"' ?> value="house">Casa</option>
 					</select>
 				</div>
 
 				<!-- Area -->
 				<div class="col-md-6">
-					<h5>Area <i class="tip" data-tip-content="Property size in square feet"></i></h5>
+					<h5>Area <i class="tip" data-tip-content="El tamaño de la propiedad en pies cuadrados"></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="square_feet" value="<?php form_print_value($cache, $listing, 'square_feet'); ?>" type="number" data-unit="Sq Ft">
 					</div>
@@ -111,9 +111,9 @@
 
 				<!-- Beds -->
 				<div class="col-md-6">
-					<h5>Bedrooms</h5>
+					<h5>Cuartos</h5>
 					<select name="number_rooms" class="chosen-select-no-single">
-						<option label="Select an Option"></option>	
+						<option label="Seleccione una opción"></option>	
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 1) echo 'selected="selected"' ?> value="1">1</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 2) echo 'selected="selected"' ?> value="2">2</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 3) echo 'selected="selected"' ?> value="3">3</option>
@@ -124,9 +124,9 @@
 
 				<!-- Baths -->
 				<div class="col-md-6">
-					<h5>Bathrooms</h5>
+					<h5>Baños</h5>
 					<select name="number_bathroom" class="chosen-select-no-single">
-						<option label="Select an Option"></option>	
+						<option label="Seleccione una opción"></option>	
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 1) echo 'selected="selected"' ?> value="1">1</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 2) echo 'selected="selected"' ?> value="2">2</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 3) echo 'selected="selected"' ?> value="3">3</option>
@@ -143,7 +143,7 @@
 
 				<!-- Price -->
 				<div class="col-md-6">
-					<h5>Monthly Rent <i class="tip" data-tip-content="Monthly rent for the property"></i></h5>
+					<h5>Renta Mensual <i class="tip" data-tip-content="El alquiler mensual de la propiedad"></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="monthly_house_original" value="<?php form_print_value($cache, $listing, 'monthly_house_original'); //we always get the original value ?>" type="number" data-unit="USD">
 					</div>
@@ -151,7 +151,7 @@
 
 				<!-- Price -->
 				<div class="col-md-6">
-					<h5>Deposit <i class="tip" data-tip-content="Property deposit"></i></h5>
+					<h5>Deposito <i class="tip" data-tip-content="Depósito de propiedad"></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="deposit_house_original" value="<?php form_print_value($cache, $listing, 'deposit_house_original'); ?>" type="number" data-unit="USD">
 					</div>
@@ -189,7 +189,7 @@
 		</div>
 		<!-- Section / End -->
 
-		<h3>Specifics</h3>
+		<h3>Específicas</h3>
 		<div class="submit-section">
 
 			<!-- Row -->
@@ -197,12 +197,12 @@
 
 				<!-- Address -->
 				<div class="col-md-12">
-					<h5>Full Postal Address <i>(optional)</i> <i class="tip" data-tip-content="Is the property can receive mail, add the full postal address image including country, state and postal code. It will only be show to the user once he signs the lease."></i></h5>
+					<h5>Dirección postal completa <i>(opcional)</i> <i class="tip" data-tip-content="Si la propiedad puede recibir correo, agregue la imagen de la dirección postal completa incluyendo el país, estado y código postal. Sólo se mostrará al usuario una vez que firme el contrato de arrendamiento."></i></h5>
 					<input name="postal_address" type="text" value="<?php form_print_value($cache, $listing, 'postal_address'); ?>">
 				</div>
 
 				<div class="col-md-12">
-					<h5>Availability <i class="tip" data-tip-content="When is the property available to start being rented"></i></h5>
+					<h5>Disponibilidad <i class="tip" data-tip-content="¿Cuándo está disponible la propiedad para empezar a ser alquilada?"></i></h5>
 					<input name="available" type="text" id="date-picker-property-form" placeholder="Date" value="<?php 
 						// More info on the bug read "views/footer.php" and "lib/class.theme.php"
 						$cache_bug_js_fix = true; 
@@ -227,17 +227,17 @@
 				<div class="col-md-12">
 
 				<!-- Checkboxes -->
-				<h5 class="margin-top-30">Whats included? <i class="tip" data-tip-content="Select everything thats included in the property"></i></h5>
+				<h5 class="margin-top-30">¿Qué está incluido? <i class="tip" data-tip-content="Seleccione todo lo que está incluido en la propiedad"></i></h5>
 				<div class="checkboxes in-row margin-bottom-20">
 
 					<input name="electricity" type="checkbox" id="check-1" <?php if(form_get_value($cache, $listing, 'electricity') == '1') echo 'checked' ?> value="1">
-					<label for="check-1">Electricity</label>
+					<label for="check-1">Electricidad</label>
 
 					<input name="water" type="checkbox" id="check-2" <?php if(form_get_value($cache, $listing, 'water') == '1') echo 'checked' ?> value="1">
-					<label for="check-2">Water</label>
+					<label for="check-2">Agua</label>
 
 					<input name="furnished" type="checkbox" id="check-3" <?php if(form_get_value($cache, $listing, 'furnished') == '1') echo 'checked' ?> value="1">
-					<label for="check-3">Furnished</label>
+					<label for="check-3">Amueblado</label>
 
 					<input name="parking" type="checkbox" id="check-4" <?php if(form_get_value($cache, $listing, 'parking') == '1') echo 'checked' ?> value="1">
 					<label for="check-4">Parking</label>	
@@ -246,7 +246,7 @@
 					<label for="check-5">Wifi</label>
 
 					<input name="alarm" type="checkbox" id="check-6" <?php if(form_get_value($cache, $listing, 'alarm') == '1') echo 'checked' ?> value="1">
-					<label for="check-6">Alarm</label>
+					<label for="check-6">Alarma</label>
 
 					<input name="laundry_room" type="checkbox" id="check-7" <?php if(form_get_value($cache, $listing, 'laundry_room') == '1') echo 'checked' ?> value="1">
 					<label for="check-7">Laundry Room</label>
@@ -256,19 +256,19 @@
 				<div class="checkboxes in-row margin-bottom-20">
 		
 					<input name="air_conditioning" type="checkbox" id="check-8" <?php if(form_get_value($cache, $listing, 'air_conditioning') == '1') echo 'checked' ?> value="1">
-					<label for="check-8">Air Conditioning</label>
+					<label for="check-8">Aire Acondicionado</label>
 
 					<input name="gym" type="checkbox" id="check-9" <?php if(form_get_value($cache, $listing, 'gym') == '1') echo 'checked' ?> value="1">
 					<label for="check-9">Gym</label>
 
 					<input name="swimming_pool" type="checkbox" id="check-10" <?php if(form_get_value($cache, $listing, 'swimming_pool') == '1') echo 'checked' ?> value="1">
-					<label for="check-10">Swimming Pool</label>
+					<label for="check-10">Piscina</label>
 
 					<input name="pets" type="checkbox" id="check-11" <?php if(form_get_value($cache, $listing, 'pets') == '1') echo 'checked' ?> value="1">
-					<label for="check-11">Pets Allowed?</label>
+					<label for="check-11">Macotas Permitidad?</label>
 
 					<input name="smoking" type="checkbox" id="check-12" <?php if(form_get_value($cache, $listing, 'smoking') == '1') echo 'checked' ?> value="1">
-					<label for="check-12">Smoking Allowed?</label>
+					<label for="check-12">Fumar permitido?</label>
 		
 				</div>
 				<!-- Checkboxes / End -->
@@ -280,7 +280,7 @@
 		<!-- Section / End -->
 
 		<!-- Section -->
-		<h3>Location</h3>
+		<h3>Ubicación</h3>
 		<div class="submit-section">
 
 			<!-- Row -->
@@ -288,31 +288,31 @@
 
 				<!-- Address -->
 				<div class="col-md-12">
-					<h5>Physical Address</h5>
+					<h5>Dirección física</h5>
 					<input name="physical_address" type="text" value="<?php form_print_value($cache, $listing, 'physical_address'); ?>">
 				</div>
 
 				<!-- Country -->
 				<div class="col-md-6">
-					<h5>Country</h5>
+					<h5>País</h5>
 					<input name="country" type="text" value="<?php form_print_value($cache, $listing, 'country'); ?>">
 				</div>
 
 				<!-- State -->
 				<div class="col-md-6" id="state">
-					<h5>State</h5>
+					<h5>Estado</h5>
 					<input name="state" type="text" value="<?php form_print_value($cache, $listing, 'state'); ?>">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
-					<h5>City</h5>
+					<h5>Ciudad</h5>
 					<input name="city" type="text" value="<?php form_print_value($cache, $listing, 'city'); ?>">
 				</div>
 
 				<!-- Zip-Code -->
 				<div class="col-md-6">
-					<h5>Zipcode</h5>
+					<h5>Código Postal</h5>
 					<input name="zipcode" type="text" value="<?php form_print_value($cache, $listing, 'zipcode'); ?>">
 				</div>
 
@@ -323,7 +323,7 @@
 		<!-- Section / End -->
 
 		<!-- Section -->
-		<h3>Detailed Information</h3>
+		<h3>Información detallada</h3>
 		<div class="submit-section">
 
 			<!-- Row -->
@@ -331,12 +331,12 @@
 
 				<!-- Description -->
 				<div class="col-md-12">
-					<h5>Description <i class="tip" data-tip-content="Sell your property, describe how it looks like and what they could get"></i></h5>
+					<h5>Descripción <i class="tip" data-tip-content="Venda su propiedad, describa cómo se ve y qué podrían obtener"></i></h5>
 					<textarea name="listing_description" class="WYSIWYG" cols="40" rows="3" id="summary" spellcheck="true"><?php form_print_value($cache, $listing, 'listing_description'); ?></textarea>
 				</div>
 
 				<div class="col-md-12">
-					<h5>Search Keywords <i class="tip" data-tip-content="Add keywords separated by comma, that you think a tenant would search an example would be a restaurant or mural name near the property. Limit 100 characters."></i></h5>
+					<h5>Palabras cláves para busquedas <i class="tip" data-tip-content="Añada palabras clave separadas por coma, que crea que un inquilino buscaría un ejemplo sería el nombre de un restaurante o un mural cerca de la propiedad. Limite 100 caracteres."></i></h5>
 					<input name="keywords" id="keywords" type="text" value="<?php form_print_value($cache, $listing, 'keywords'); ?>" maxlength="100">
 				</div>
 
@@ -396,7 +396,7 @@
 
 		<div class="divider"></div>
 
-		<button name="submit" class="button margin-top-10 margin-bottom-20 preview"> <?php if(!empty($listing)) { echo 'Save Changes'; } else { echo 'Add New'; } ?> <i class="fa fa-arrow-circle-right"></i></button>
+		<button name="submit" class="button margin-top-10 margin-bottom-20 preview"> <?php if(!empty($listing)) { echo 'Guardar Cambios'; } else { echo 'Añadir Nueva'; } ?> <i class="fa fa-arrow-circle-right"></i></button>
 
 		</form>
 		</div>

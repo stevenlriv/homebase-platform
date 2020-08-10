@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2><i class="fa fa-plus-circle"></i> Add Property</h2>
+				<h2><i class="fa fa-plus-circle"></i> Añadir Propiedad</h2>
 
 			</div>
 		</div>

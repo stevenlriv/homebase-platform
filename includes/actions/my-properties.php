@@ -8,10 +8,10 @@
 
         if(user_has_access_listing($listing) && $listing['status']!='inactive') {
             if(update_visibilty($listing['id_listing'], 'hide')) {
-                $form_success = 'The property was hidden successfully.';
+                $form_success = 'La propiedad fue ocultada exitosamente.';
             }
             else {
-                $form_error = 'There was an error hidding the listing, please try again.';
+                $form_error = 'Hubo un error a ocultar la propiedad, favor de intentarlo nuevamente.';
             }
         }
     }
@@ -23,10 +23,10 @@
 
         if(user_has_access_listing($listing) && $listing['status']!='active') {
             if(update_visibilty($listing['id_listing'], 'show')) {
-                $form_success = 'The property was enabled successfully.';
+                $form_success = 'La propiedad fue activada correctamente.';
             }
             else {
-                $form_error = 'There was an error enabling the property, please try again.';
+                $form_error = 'Hubo un error, activando la propiedad, favor de intentarlo nuevamente.';
             }
         }
     }
@@ -39,10 +39,10 @@
 
         if($listing['status']=='pending') {
             if(update_visibilty($listing['id_listing'], 'approve')) {
-                $form_success = 'The property was approved successfully.';
+                $form_success = 'La propiedad fue aprobada exitosamente.';
             }
             else {
-                $form_error = 'There was an error approving the property, please try again.';
+                $form_error = 'Hubo un error aprobando la propedad, favor de intentarlo nuevamente.';
             }
         }
     }
@@ -57,7 +57,7 @@
 
         if(user_has_access_listing($listing)) {
             if(delete_listing($listing['id_listing'])) {
-                $form_success = 'The property was deleted successfully.';
+                $form_success = 'La propiedad fue borrada exitosamente.';
 
                 //We now procced to delete every image
                 foreach($images_array as $id => $value) {
@@ -65,7 +65,7 @@
                 }
             }
             else {
-                $form_error = 'There was an error deleting the property, please try again.';
+                $form_error = 'Hubo un error al borrar la propiedad, favor de intentarlo nuevamente.';
             }
         }
     }

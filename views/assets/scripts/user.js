@@ -26,9 +26,9 @@
 	
 			// Specify validation error messages
             messages: {
-                fullname: "Please enter your full name",
-                phone_number: "Please enter your phone number",
-                email: "Please enter a valid email address"
+                fullname: "Por favor, introduzca su nombre completo",
+                phone_number: "Por favor, introduzca su número de teléfono",
+                email: "Por favor, introduzca una dirección de correo electrónico válida"
             },
 
             // Make sure the form is submitted to the destination defined
@@ -64,15 +64,15 @@
 			// Specify validation error messages
             messages: {
                 old: {
-                    required: "Please enter your current password",
+                    required: "Por favor, introduzca su contraseña actual",
                 },
                 password: {
-                    required: "Please enter your new password",
-                    minlength: "Your password must be at least 8 characters long"
+                    required: "Por favor, introduzca su nueva contraseña",
+                    minlength: "Su contraseña debe tener al menos 8 caracteres de longitud"
                 },
                 confirm: {
-                    required: "Please confirm your new password",
-                    minlength: "Your password must be at least 8 characters long"
+                    required: "Por favor, confirme su nueva contraseña",
+                    minlength: "Su contraseña debe tener al menos 8 caracteres de longitud"
                 },
             },
 
@@ -102,11 +102,11 @@
 	
 			// Specify validation error messages
             messages: {
-                bank_name: "Please enter your bank name",
-                bank_sole_owner: "Please enter your bank account sole owner name",
-                bank_routing_number: "Please enter your bank routing number",
-                bank_account_number: "Please enter your bank account number",
-                bank_confirm_account_number: "Please enter your bank account number here too.",
+                bank_name: "Por favor, introduzca el nombre de su banco",
+                bank_sole_owner: "Por favor, introduzca el nombre del único propietario de su cuenta bancaria",
+                bank_routing_number: "Por favor, introduzca su número de ruta bancaria",
+                bank_account_number: "Por favor, introduzca su número de cuenta bancaria",
+                bank_confirm_account_number: "Por favor, introduzca su número de cuenta bancaria aquí también.",
             },
 
             // Make sure the form is submitted to the destination defined
@@ -160,58 +160,58 @@
 			// Specify validation error messages
             messages: {
                 listing_title: {
-                    required: "You must enter a title for your property listing.",
-                    maxlength: "You listing title must be 40 characters or less."
+                    required: "Debe introducir un título para su lista de propiedades.",
+                    maxlength: "El título de la lista debe tener 40 caracteres o menos."
                 },
                 type: {
-                    required: "You must select a type for your property.",
+                    required: "Debe seleccionar un tipo para su propiedad.",
                 },
                 square_feet: {
-                    required: "You must set the property square feet.",
+                    required: "Debes poner los pies cuadrados de la propiedad.",
                 },
                 number_rooms: {
-                    required: "You must select the number of rooms for your property.",
+                    required: "Debe seleccionar el número de habitaciones de su propiedad.",
                 },
                 number_bathroom: {
-                    required: "You must select the number of bathrooms for your property.",
+                    required: "Debe seleccionar el número de baños de su propiedad.",
                 },
                 monthly_house_original: {
-                    required: "You must set the monthly rent.",
+                    required: "Debes fijar la renta mensual.",
                 },
                 deposit_house_original: {
-                    required: "You must set the property required security deposit.",
+                    required: "Debe establecer el depósito de seguridad requerido para la propiedad.",
                 },
                 physical_address: {
-                    required: "You must set the property physical address.",
+                    required: "Debe establecer la dirección física de la propiedad.",
                 },
                 country: {
-                    required: "You must enter the country where your property is located.",
+                    required: "Debe entrar en el país donde se encuentra su propiedad.",
                 },
                 state: {
-                    required: "You must enter the state where your property is located. If there are no states, just re-enter your country name.",
+                    required: "Debe entrar en el estado donde se encuentra su propiedad. Si no hay estados, sólo tiene que volver a introducir el nombre de su país.",
                 },
                 city: {
-                    required: "You must enter the city where your property is located.",
+                    required: "Debe entrar en la ciudad donde se encuentra su propiedad.",
                 },
                 zipcode: {
-                    required: "You must set the property zip code.",
+                    required: "Debes establecer el código postal de la propiedad.",
                 },
                 listing_description: {
-                    required: "You must set the property listing description.",
-                    minlength: "You description must be at least 100 characters or more.",
-                    maxlength: "You description must be 2000 characters or less.",
+                    required: "Debe establecer la descripción del listado de propiedades.",
+                    minlength: "Su descripción debe ser de al menos 100 caracteres o más.",
+                    maxlength: "Su descripción debe ser de 2000 caracteres o menos.",
                 },
                 keywords: {
-                    maxlength: "You keywords must be 100 characters or less."
+                    maxlength: "Sus palabras clave deben tener 100 caracteres o menos."
                 },
                 checkin_access_code: {
-                    required: "You must set the property access code.",
+                    required: "Debes establecer el código de acceso a la propiedad.",
                 },
                 checkin_description: {
-                    required: "You must explain the tenant how to get into the property using the access code.",
+                    required: "Debe explicarle al inquilino cómo entrar en la propiedad usando el código de acceso.",
                 },
                 check_required: {
-                    required: "You must agree to our terms before adding or editing the listing.",
+                    required: "Debe aceptar nuestros términos antes de agregar o editar el listado.",
                 },
             },
 
@@ -234,10 +234,10 @@
 		    var a_href = a_href.replace("#", ""); //remove it
 
 		    //Content
-		    var title = 'Share the link below';
-		    var content = 'Its simple, share the link to prospect tenants and if they rent with us you get paid!';
+		    var title = 'Comparte el siguiente enlace';
+		    var content = 'Es simple, comparte el enlace con los posibles inquilinos y si alquilan con nosotros te pagan!';
 
-		    var code = '<form><div class="input-group"><input type="text" class="form-control" value="' + a_href +'" placeholder="Your unique url" id="copy-input" disabled></div></form>';
+		    var code = '<form><div class="input-group"><input type="text" class="form-control" value="' + a_href +'" placeholder="Su enlace unico" id="copy-input" disabled></div></form>';
 
 		    //Generate the popup
 		    $.magnificPopup.open({
@@ -260,8 +260,8 @@
 		    var confirm_url = '/my-properties' + a_href;
 
 		    //Content
-		    var title = 'Are you sure?';
-		    var content = 'This will approve the listing on the platform and search engines. Tenants will be able to rent it.';
+		    var title = '¿Está seguro?';
+		    var content = 'Esto aprobará el listado en la plataforma y los motores de búsqueda. Los inquilinos podrán alquilarlo.';
 
 		    //Generate the popup
 		    new_action_popup(title, content, cancel_url, confirm_url);
@@ -279,8 +279,8 @@
 		    var confirm_url = '/my-properties' + a_href;
 
 		    //Content
-		    var title = 'Are you sure?';
-		    var content = 'This will hide your listing from the platform and search engines. No one will be able to see it or rent it.';
+		    var title = '¿Está seguro?';
+		    var content = 'Esto esconderá su listado de la plataforma y los motores de búsqueda. Nadie podrá verlo o alquilarlo.';
 
 		    //Generate the popup
 		    new_action_popup(title, content, cancel_url, confirm_url);
@@ -298,8 +298,8 @@
 		    var confirm_url = '/my-properties' + a_href;
 
 		    //Content
-		    var title = 'Are you sure?';
-		    var content = 'This will list your listing to the platform and search engines will be able to see it. Tenants on the platform will be able to see it and rent it.';
+		    var title = '¿Está seguro?';
+		    var content = 'Esto listará su listado a la plataforma y los motores de búsqueda podrán verlo. Los inquilinos de la plataforma podrán verla y alquilarla.';
 
 		    //Generate the popup
 		    new_action_popup(title, content, cancel_url, confirm_url);
@@ -317,8 +317,8 @@
 		    var confirm_url = '/my-properties' + a_href;
 
 		    //Content
-		    var title = 'Are you sure?';
-		    var content = 'This will permanently delete your listing from the platform and no one will be able to see them or rent it. There is no going back from this action.';
+		    var title = '¿Está seguro?';
+		    var content = 'Esto eliminará permanentemente su listado de la plataforma y nadie podrá verlos o alquilarlos. No hay vuelta atrás de esta acción.';
 
 		    //Generate the popup
 		    new_action_popup(title, content, cancel_url, confirm_url);

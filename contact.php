@@ -40,7 +40,7 @@ $error = '';
 ////////////////////////
 // Name field is required
 if(empty($name)) {
-	$error = 'You must enter your name.';
+	$error = 'Debes introducir tu nombre.';
 }
 ////////////////////////
 
@@ -48,9 +48,9 @@ if(empty($name)) {
 ////////////////////////
 // Email field is required
 if(empty($email)) {
-	$error = 'Please enter a valid email address.';
+	$error = 'Por favor, introduzca una dirección de correo electrónico válida.';
 } else if(!is_email($email)) {
-	$error = 'You have enter an invalid e-mail address, try again.';
+	$error = 'Ha introducido una dirección de correo electrónico inválida, inténtelo de nuevo.';
 }
 ////////////////////////
 
@@ -58,7 +58,7 @@ if(empty($email)) {
 ////////////////////////
 // Subject field is required
 if(empty($subject)) {
-	$error = 'Please enter a subject.';
+	$error = 'Por favor, introduzca un tema.';
 }
 ////////////////////////
 
@@ -66,14 +66,14 @@ if(empty($subject)) {
 ////////////////////////
 // Comments field is required
 if(empty($comments)) {
-	$error = 'Please enter your message.';
+	$error = 'Por favor, introduzca su mensaje.';
 }
 ////////////////////////
 
 ////////////////////////
 // Bot Detection Field
 if(!empty($important)) {
-	$error = 'Please try again later.';
+	$error = 'Por favor, inténtelo de nuevo más tarde.';
 }
 ////////////////////////
 
@@ -109,12 +109,12 @@ if (!empty($error)) {
  $msg = $e_person . $e_content . $e_reply;
 
  if( support_email($name, $email, $e_subject, $msg)) {
-	 //The file custom.js is using the keyword "submitted" on the message text to let know js that the message was successfully sent and close the form
+	 //The file custom.js is using the keyword "submitted" or "enviado" on the message text to let know js that the message was successfully sent and close the form
 	 //If you intent on changing it, remember to also change it on /views/assets/scripts/custom.js for proper functioning
-	 echo "<div class='contact-sent'>Thank you <strong>$name</strong>, your message has been submitted to us.</div>";
+	 echo "<div class='contact-sent'>Gracias <strong>$name</strong>, su mensaje fue enviado.</div>";
  } 
  else {
-	 echo "<div class='notification error'>An error occurred while sending the message. Please try again later, or contact us by email.</div>";
+	 echo "<div class='notification error'>Se produjo un error al enviar el mensaje. Por favor, inténtelo de nuevo más tarde, o póngase en contacto con nosotros por correo electrónico.</div>";
  }
 
  ///////////////////////////////////////////////////////////////////////////

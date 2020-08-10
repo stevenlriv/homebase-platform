@@ -113,7 +113,7 @@
 							</div>
 
 							<div class="listing-img-content">
-								<span class="listing-price">$<?php echo $value['monthly_house']; ?> <i>monthly</i></span>
+								<span class="listing-price">$<?php echo $value['monthly_house']; ?> <i>mensual</i></span>
 							</div>
 
 							<div class="listing-carousel">

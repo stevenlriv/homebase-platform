@@ -29,7 +29,7 @@
 
 	if($big_info && $type == 'notice' ) {
 		echo '<div class="notification notice large margin-bottom-55">';
-			echo '<h4>Quick Notice!</h4>';
+			echo '<h4>¡Aviso!/h4>';
 			echo '<p>'.$message.'</p>';
 		echo '</div>';
 	}
@@ -50,7 +50,7 @@
             <!-- Tour Widget -->
             <div class="widget">
                 <div id="booking-widget-anchor" class="boxed-widget booking-widget">
-                    <a href="<?php echo $listing['calendly_link']; ?>" target="_blank" class="button book-now fullwidth margin-top-5">Schedule a Tour</a>
+                    <a href="<?php echo $listing['calendly_link']; ?>" target="_blank" class="button book-now fullwidth margin-top-5">Programar una Cita</a>
                 </div>
             </div>
             <!-- Tour Widget / End -->
@@ -64,7 +64,7 @@
 				<form action="/contact" type="GET">
 					<input type="hidden" name="property" value="<?php echo $listing['uri']; ?>">
                 	<div id="booking-widget-anchor" class="boxed-widget booking-widget">
-						<button class="button book-now fullwidth margin-top-5">Schedule a Tour</button>
+						<button class="button book-now fullwidth margin-top-5">Programar una Cita</button>
                 	</div>
 				</form>
             </div>
@@ -93,7 +93,7 @@
                     </div>-->
                     
                     <!-- Book Now -->
-                    <button class="button book-now fullwidth margin-top-5">Rent Now</button>
+                    <button class="button book-now fullwidth margin-top-5">Aquile Ahora</button>
 
                 </div>
                 <!-- Book Now / End -->
@@ -212,9 +212,9 @@ function sidebar_component() {
 				<div class="my-account-nav-container">
 					
 					<ul class="my-account-nav">
-						<li class="sub-nav-title">Manage Account</li>
-						<li><a href="/my-profile" <?php if($request == '/my-profile') echo 'class="current"'; ?>><i class="sl sl-icon-user"></i> My Profile</a></li>
-						<li><a href="/change-password" <?php if($request == '/change-password') echo 'class="current"'; ?>><i class="sl sl-icon-lock"></i> Change Password</a></li>
+						<li class="sub-nav-title">Manejar Cuenta</li>
+						<li><a href="/my-profile" <?php if($request == '/my-profile') echo 'class="current"'; ?>><i class="sl sl-icon-user"></i> Perfil</a></li>
+						<li><a href="/change-password" <?php if($request == '/change-password') echo 'class="current"'; ?>><i class="sl sl-icon-lock"></i> Cambiar Contraseña</a></li>
 					</ul>
 
                     <?php
@@ -223,8 +223,8 @@ function sidebar_component() {
                     ?>
 
 					<ul class="my-account-nav">
-						<li class="sub-nav-title">Your Property</li>
-						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> My Property</a></li>
+						<li class="sub-nav-title">Propiedades</li>
+						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> Su Propiedad</a></li>
 						<!--<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
                         <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Lease</a></li>-->
 					</ul>
@@ -237,15 +237,15 @@ function sidebar_component() {
 					?>
 
 					<ul class="my-account-nav">
-						<li class="sub-nav-title">Properties</li>
-						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> All Properties</a></li>
+						<li class="sub-nav-title">Propiedades</li>
+						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> Todas las propiedades</a></li>
 					</ul>
 
 					<ul class="my-account-nav">
-						<li class="sub-nav-title">Manage Financials</li>
+						<li class="sub-nav-title">Finanzas</li>
 						<!--<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
                         <li><a href="#" <?php if($request == '/people-referred') echo 'class="current"'; ?>><i class="sl sl-icon-people"></i> People Referred</a></li>-->
-                        <li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
+                        <li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Información</a></li>
 					</ul>
 					<?php
 						}
@@ -254,13 +254,13 @@ function sidebar_component() {
                         else {
                     ?>
 					<ul class="my-account-nav">
-						<li class="sub-nav-title">Manage Properties</li>
-						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> My Properties</a></li>
-						<li><a href="/submit-property"><i class="sl sl-icon-action-redo"></i> Submit New Property</a></li>
+						<li class="sub-nav-title">Propiedades</li>
+						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> Sus Propiedades</a></li>
+						<li><a href="/submit-property"><i class="sl sl-icon-action-redo"></i> Añadir una nueva propiedad</a></li>
 					</ul>
 
 					<ul class="my-account-nav">
-						<li class="sub-nav-title">Manage Financials</li>
+						<li class="sub-nav-title">Finanzas</li>
 						<!--<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
                         <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>-->
 
@@ -268,7 +268,7 @@ function sidebar_component() {
 							// Do not show to admins or realtors
 							if(!is_admin() && $user['type'] != 'realtors') {
 						?>
-                        	<li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Settings</a></li>
+                        	<li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Información</a></li>
 						<?php
 							}
 						?>
@@ -278,7 +278,7 @@ function sidebar_component() {
                     ?>
 
 					<ul class="my-account-nav">
-						<li><a href="/logout"><i class="sl sl-icon-power"></i> Log Out</a></li>
+						<li><a href="/logout"><i class="sl sl-icon-power"></i> Salir</a></li>
 					</ul>
 
 				</div>
@@ -323,7 +323,7 @@ function full_search_form($type = '', $extra = '') {
 
 								<!-- Main Search Input -->
 								<div class="col-fs-6">
-									<input type="text" placeholder="Enter address e.g. street, city or state" value="<?php if(!empty($_SESSION['search-location'])) echo sanitize_xss($_SESSION['search-location']); ?>" name="location"/>
+									<input type="text" placeholder="Introduzca la dirección, calle, ciudad o estado." value="<?php if(!empty($_SESSION['search-location'])) echo sanitize_xss($_SESSION['search-location']); ?>" name="location"/>
 								</div>
 
 								<!-- Status -->
@@ -340,7 +340,7 @@ function full_search_form($type = '', $extra = '') {
 							<!-- Row With Forms / End -->
 
 							<!-- Search Button -->
-							<button class="button fs-map-btn">Search</button>
+							<button class="button fs-map-btn">Buscar</button>
 
 							<!-- More Search Options -->
 							<a href="#" class="more-search-options-trigger margin-top-20" data-open-title="More Options" data-close-title="Less Options"></a>
@@ -353,17 +353,17 @@ function full_search_form($type = '', $extra = '') {
 
 										<!-- Age of Home -->
 										<div class="col-fs-3">
-										    <select name="type" data-placeholder="Type (Any)" class="chosen-select-no-single">
-												<option value="">Type (Any)</option>
-                                                <option <?php if(!empty($_SESSION['search-type']) && $_SESSION['search-type'] == 'house') echo 'selected="selected"' ?> value="house">House</option>
-											    <option <?php if(!empty($_SESSION['search-type']) && $_SESSION['search-type'] == 'apartment') echo 'selected="selected"' ?> value="apartment">Apartment</option>
+										    <select name="type" data-placeholder="Tipo (Cualquiera)" class="chosen-select-no-single">
+												<option value="">Tipo (Cualquiera)</option>
+                                                <option <?php if(!empty($_SESSION['search-type']) && $_SESSION['search-type'] == 'house') echo 'selected="selected"' ?> value="house">Casa</option>
+											    <option <?php if(!empty($_SESSION['search-type']) && $_SESSION['search-type'] == 'apartment') echo 'selected="selected"' ?> value="apartment">Apartamento</option>
 										    </select>
 										</div>
 
 										<!-- Rooms Area -->
 										<div class="col-fs-3">
-											<select name="bedroom" data-placeholder="Bedrooms (Any)" class="chosen-select-no-single" >
-												<option value="">Bedrooms (Any)</option>
+											<select name="bedroom" data-placeholder="Dormitorios (Cualquiera)" class="chosen-select-no-single" >
+												<option value="">Dormitorios (Cualquiera)</option>
 												<option <?php if(!empty($_SESSION['search-bedroom']) && $_SESSION['search-bedroom'] == '1') echo 'selected="selected"' ?>>1</option>
 												<option <?php if(!empty($_SESSION['search-bedroom']) && $_SESSION['search-bedroom'] == '2') echo 'selected="selected"' ?>>2</option>
 												<option <?php if(!empty($_SESSION['search-bedroom']) && $_SESSION['search-bedroom'] == '3') echo 'selected="selected"' ?>>3</option>
@@ -374,8 +374,8 @@ function full_search_form($type = '', $extra = '') {
 
 										<!-- Max Area -->
 										<div class="col-fs-3">
-											<select name="bathroom" data-placeholder="Bathrooms (Any)" class="chosen-select-no-single" >
-												<option value="">Bathrooms (Any)</option>	
+											<select name="bathroom" data-placeholder="Baños (Cualquiera)" class="chosen-select-no-single" >
+												<option value="">Baños (Cualquiera)</option>	
 												<option <?php if(!empty($_SESSION['search-bathroom']) && $_SESSION['search-bathroom'] == '1') echo 'selected="selected"' ?>>1</option>
 												<option <?php if(!empty($_SESSION['search-bathroom']) && $_SESSION['search-bathroom'] == '2') echo 'selected="selected"' ?>>2</option>
 												<option <?php if(!empty($_SESSION['search-bathroom']) && $_SESSION['search-bathroom'] == '3') echo 'selected="selected"' ?>>3</option>
@@ -385,8 +385,8 @@ function full_search_form($type = '', $extra = '') {
 										</div>
 
 										<div class="col-fs-3">
-                                            <select name="maxprice" data-placeholder="Max Price (None)" class="chosen-select-no-single">	
-                                                <option value="">Max Price (None)</option>
+                                            <select name="maxprice" data-placeholder="Precio Máximo (Ninguno)" class="chosen-select-no-single">	
+                                                <option value="">Precio Máximo (Ninguno)</option>
                                                 <option <?php if(!empty($_SESSION['search-maxprice']) && $_SESSION['search-maxprice'] == '500') echo 'selected="selected"' ?>>500</option>	
 											    <option <?php if(!empty($_SESSION['search-maxprice']) && $_SESSION['search-maxprice'] == '1000') echo 'selected="selected"' ?>>1000</option>
 											    <option <?php if(!empty($_SESSION['search-maxprice']) && $_SESSION['search-maxprice'] == '2000') echo 'selected="selected"' ?>>2000</option>	
@@ -403,14 +403,14 @@ function full_search_form($type = '', $extra = '') {
 										<!-- Status -->
 										<div class="col-fs-3">
 										    <select name="status" data-placeholder="Status (Any)" class="chosen-select-no-single">
-												<option value="">Prop. Status (Any)</option>
-                                                <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'active') echo 'selected="selected"' ?> value="active">Active</option>
-											    <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'inactive') echo 'selected="selected"' ?> value="inactive">Hidden</option>
+												<option value="">Estado de la propiedad</option>
+                                                <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'active') echo 'selected="selected"' ?> value="active">Activa</option>
+											    <option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'inactive') echo 'selected="selected"' ?> value="inactive">Inactiva</option>
 
 												<?php
 													if(is_admin()) {
 												?>
-												<option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'pending') echo 'selected="selected"' ?> value="pending">Pending</option>
+												<option <?php if(!empty($_SESSION['search-status']) && $_SESSION['search-status'] == 'pending') echo 'selected="selected"' ?> value="pending">Pendiente de Aprobación</option>
 												<?php
 													}
 												?>
@@ -479,12 +479,12 @@ function print_profile_image_form($id_input, $id_submit) {
 			<img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt="">
 			<div class="change-photo-btn">
 				<div class="photoUpload">
-					<span><i class="fa fa-upload"></i> Upload Photo</span>
+					<span><i class="fa fa-upload"></i> Subir Foto</span>
 					<input type="file" id="<?php echo $id_input; ?>" name="profile_image" class="upload" />
 				</div>
 			</div>
 		</div>
-		<button name="submit-image" id="<?php echo $id_submit; ?>" style="display: none;" class="button margin-top-20 margin-bottom-20">Upload Image</button>
+		<button name="submit-image" id="<?php echo $id_submit; ?>" style="display: none;" class="button margin-top-20 margin-bottom-20">Subir Imagen</button>
 	</form>
 <?php
 }

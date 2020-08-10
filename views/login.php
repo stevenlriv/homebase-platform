@@ -8,13 +8,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Log In</h2>
+				<h2>Ingresar</h2>
 				
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Log In</li>
+						<li><a href="#">Inicio</a></li>
+						<li>Ingresar</li>
 					</ul>
 				</nav>
 
@@ -51,7 +51,7 @@
 					</p>
 
 					<p class="form-row form-row-wide">
-						<label for="password">Password:
+						<label for="password">Contraseña:
 							<input class="input-text" type="password" name="password" id="password" />
 						</label>
 					</p>
@@ -61,13 +61,13 @@
 					</p>
 
 					<p class="lost_password">
-						<a href="/register">Create an account</a>
+						<a href="/register">Crear una cuenta</a>
 					</p>
 
 					<br />
 					
 					<p class="lost_password">
-						<a href="/reset-password">Forgot Password?</a>
+						<a href="/reset-password">¿Olvidó la contraseña?</a>
 					</p>
 					
 				</form>

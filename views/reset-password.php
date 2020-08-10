@@ -8,13 +8,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Reset Password</h2>
+				<h2>Restablecer la contraseña</h2>
 				
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Reset Password</li>
+						<li><a href="#">Inicio</a></li>
+						<li>Restablecer la contraseña</li>
 					</ul>
 				</nav>
 
@@ -50,21 +50,21 @@
 						if(empty($form_success) && empty($form_error)) {
 				?>
 					<div class="notification notice closeable">
-						<p>You might enter your new password now. Password must contain a minimum of 8 characters.</p>
+						<p>Puede introducir su nueva contraseña ahora. La contraseña debe contener un mínimo de 8 caracteres.</p>
 					</div>
 				<?php
 						}
 				?>
 
 					<p class="form-row form-row-wide">
-						<label for="username">New Password:
+						<label for="username">Contraseña Nueva:
 							<i class="im im-icon-Lock-User"></i>
 							<input type="password" class="input-text" name="password" id="password" value="" required="required" />
 						</label>
 					</p>
 
 					<p class="form-row form-row-wide">
-						<label for="username">Confirm Password:
+						<label for="username">Confirmar Contraseña:
 							<i class="im im-icon-Repeat-3"></i>
 							<input type="password" class="input-text" name="confirm" id="confirm" value="" required="required" />
 						</label>
@@ -85,7 +85,7 @@
 				?>
 
 					<p class="form-row">
-						<input type="submit" class="button border margin-top-10" name="submit" value="Reset Password" />
+						<input type="submit" class="button border margin-top-10" name="submit" value="Restablecer la contraseña" />
 					</p>
 					
 				</form>

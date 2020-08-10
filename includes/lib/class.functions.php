@@ -19,7 +19,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	};
 
 	function text_encrypt($text) {
-		$key = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
+		$key  = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
 		$text = new HiddenString($text);
 
 		$cipher = Symmetric::encrypt($text, $key);
@@ -28,7 +28,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	}
 
 	function text_decrypt($cipher) {
-		$key = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
+		$key  = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
 
 		$text = Symmetric::decrypt($cipher, $key);
 

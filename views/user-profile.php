@@ -18,8 +18,8 @@
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>User Profiles</li>
+						<li><a href="#">Inicio</a></li>
+						<li>Perfil de Usuario</li>
 					</ul>
 				</nav>
 
@@ -49,7 +49,7 @@
                         <?php
                             if(is_admin()) {
                         ?>
-                            <span>Account status: <?php echo $view_user['status']; ?></span>
+                            <span>Estado de cuenta: <?php echo $view_user['status']; ?></span>
                         <?php
                             }
                         ?>
@@ -103,13 +103,13 @@
 
 		<div class="col-lg-12 col-md-12">
 
-			<h4 class="headline">User Listings</h4>
+			<h4 class="headline">Unidades del Usuario</h4>
 
             <?php
 			    if($total_results == 0 && !isset($_GET)) {
 		    ?>
 			    <div class="col-md-8">
-				    <h3>The user currently don't have properties in the platform.</h3>
+				    <h3>El usuario no tiene actualmente propiedades en la plataforma.</h3>
 			    </div>
 
 		    <?php
@@ -140,11 +140,11 @@
 							        	echo '<span class="featured">Featured</span>';
 							    	}
 								?>
-								<span>For Rent</span>
+								<span>En Alquiler</span>
 							</div>
 
 							<div class="listing-img-content">
-								<span class="listing-price">$<?php echo $value['monthly_house']; ?> <i>monthly</i></span>
+								<span class="listing-price">$<?php echo $value['monthly_house']; ?> <i>mensual</i></span>
 								<!--<span class="like-icon"></span>-->
 							</div>
 
@@ -171,13 +171,13 @@
 									<?php echo $value['physical_address']; ?>
 								</a>
 
-								<a href="/<?php echo $value['uri']; ?>" class="details button border" target="_blank">Details</a>
+								<a href="/<?php echo $value['uri']; ?>" class="details button border" target="_blank">Detalles</a>
 							</div>
 
 							<ul class="listing-details">
 								<li><?php echo $value['square_feet']; ?> sq ft</li>
-								<li><?php echo $value['number_rooms']; ?> Bedrooms</li>
-								<li><?php echo $value['number_bathroom']; ?> Bathrooms</li>
+								<li><?php echo $value['number_rooms']; ?> Cuartos</li>
+								<li><?php echo $value['number_bathroom']; ?> Baños</li>
 							</ul>
 
 							<div class="listing-footer">

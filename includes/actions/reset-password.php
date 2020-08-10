@@ -42,42 +42,42 @@
         if($approved_to_reset) {
 
             if(empty($_POST['password'])) {
-                $form_error = 'You must enter your password.';
+                $form_error = 'Debe ingresar su contraseña.';
             }
 
             if(empty($_POST['password'])) {
             }
 
             if ( strlen($_POST['password'])<8 ) {
-                $form_error = 'You password must be 8 characters or more.';
+                $form_error = 'Su contraseña debe tener in mínimo de 8 caracteres.';
             }
 
             if(empty($_POST['confirm'])) {
-                $form_error = 'You must confirm your password.';
+                $form_error = 'Debe confirmar su contraseña.';
             }
 
             if($_POST['password']!=$_POST['confirm']) {
-                $form_error = 'Your passwords does not match, please enter them again.';
+                $form_error = 'Su contraseñas no coinciden, favor de ingresarlas nuevamente.';
             }
 
             if(empty($form_error)) { 
                 if(update_user_table('password', $user_details['id_user'], $_POST['password'])) {
                     update_user_table('code', $user_details['id_user'], '');
-                    $form_success = 'Great, your password has been updated.';
+                    $form_success = 'Bien! Su contraseña fue actualizada correctamente.';
 
                     //Auto log-in them
                     login_user($user_details['email'], $_POST['password']);
                     header("Refresh:1");
                 }
                 else {
-                    $form_error = 'An error occurred while updating your password, please try again again.';
+                    $form_error = 'Hubo un error al actualizar su contraseña, favor de intentarlo nuevamente.';
                 }
             }
         }
         else {
 
 		    if(!is_email($_POST['email'])) {
-			    $form_error = 'You have enter an invalid e-mail address, try again.';
+			    $form_error = 'El correo electrónico ingresado no es válido, favor de intentar nuevamente.';
 		    }
 
 		    if(empty($form_error)) { 
@@ -104,7 +104,7 @@
                 }
 
 			    //Don't give any details to a hacker or other person, just a general message
-                $form_success = 'If the details provided are linked to an existing account, you will be receiving an email in the next 5 minutes (check in your SPAM folder). If not, just contact us and we will help you out.';
+                $form_success = 'Si el email ingresado pertenece a una cuenta, estará recibiendo un correo electrónico en los próximos 5 minutos (verificar su SPAM folder). Si no lo recibe, contáctanos.';
             }
         }
 	}

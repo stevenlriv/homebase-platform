@@ -51,13 +51,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>My Properties</h2>
+				<h2>Mis Propiedades</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>My Properties</li>
+						<li><a href="#">Inicio</a></li>
+						<li>Mis Propiedades</li>
 					</ul>
 				</nav>
 
@@ -78,7 +78,7 @@
 			if($total_results == 0 && !isset($_GET)) {
 		?>
 			<div class="col-md-8">
-				<h3>You currently don't have properties in our platform, add your first property today.</h3>
+				<h3>Actualmente no tiene propiedades en nuestra plataforma, añada su primera propiedad hoy.</h3>
 			</div>
 
 		<?php
@@ -89,13 +89,13 @@
         <div class="col-md-8 margin-bottom-55">
 			<?php
 				if($pending_results>0 && are_messages_empty()) {
-					$form_info = 'There are '.$pending_results.' listings pending approval.';
+					$form_info = 'Hay '.$pending_results.' propiedades pendientes para ser aprobadas.';
 				}
 
 				show_message($form_success, $form_error, $form_info);
 			?>
 
-            <h4 class="search-title">Search Your Properties</h4>
+            <h4 class="search-title">Busque en sus propiedades</h4>
             <?php full_search_form('my-properties'); ?>
         </div>
 
@@ -104,8 +104,8 @@
 			<table class="manage-table responsive-table">
 
 				<tr>
-					<th><i class="fa fa-file-text"></i> Property</th>
-					<th class="expire-date"><i class="fa fa-calendar"></i> Occupancy</th>
+					<th><i class="fa fa-file-text"></i> Propiedad</th>
+					<th class="expire-date"><i class="fa fa-calendar"></i> Ocupación</th>
 					<th></th>
 				</tr>
 
@@ -130,8 +130,8 @@
 						?>
 							
 							<span><?php echo $value['physical_address']; ?> </span>
-							<span class="table-property-price" style="background: #274abb; color: #fff;">$<?php echo $value['monthly_house']; ?> / homebase markup</span>
-							<span class="table-property-price">$<?php echo $value['monthly_house_original']; ?> / your monthly ask</span>
+							<span class="table-property-price" style="background: #274abb; color: #fff;">$<?php echo $value['monthly_house']; ?> / renta en homebase</span>
+							<span class="table-property-price">$<?php echo $value['monthly_house_original']; ?> / su renta mensual</span>
 							
 							<!-- Space for bottom border -->
 							<span style="visibility: hidden;">space; space</span>
@@ -139,7 +139,7 @@
 					</td>
 					<td class="expire-date"><?php print_available_message('admin', $value['available']); ?></td>
 					<td class="action">
-						<a href="/edit-property?q=<?php echo $value['uri']; ?>"><i class="fa fa-pencil"></i> Edit</a>
+						<a href="/edit-property?q=<?php echo $value['uri']; ?>"><i class="fa fa-pencil"></i> Editar</a>
                         <?php
 
 							//Urls
@@ -153,22 +153,22 @@
 
 							//Show the user profile only to admins
 							if( is_admin() ) {
-								echo '<a href="'.$user_url.'" target="_blank"><i class="fa fa-user"></i> View User</a>';
+								echo '<a href="'.$user_url.'" target="_blank"><i class="fa fa-user"></i> Ver Usuario</a>';
 							}
 
 							if( is_admin() && $value['status']=='pending') {
-								echo '<a href="'.$approve_url.'" class="open-ap-pp"><i class="fa fa-thumbs-up"></i> Approve</a>';
+								echo '<a href="'.$approve_url.'" class="open-ap-pp"><i class="fa fa-thumbs-up"></i> Aprobar</a>';
 							}
 							else {
                             	if($value['status']=='inactive') {
-                                	echo '<a href="'.$show_url.'" class="open-sw-pp"><i class="fa fa-eye"></i> Show</a>';
+                                	echo '<a href="'.$show_url.'" class="open-sw-pp"><i class="fa fa-eye"></i> Mostrar</a>';
                             	}
                             	else {
-                                	echo '<a href="'.$hide_url.'" class="open-hd-pp"><i class="fa fa-eye-slash"></i> Hide</a>';
+                                	echo '<a href="'.$hide_url.'" class="open-hd-pp"><i class="fa fa-eye-slash"></i> Esconder</a>';
 								}
 							}
 						?>
-						<a href="<?php echo $delete_url; ?>" class="delete open-dl-pp"><i class="fa fa-remove"></i> Delete</a>
+						<a href="<?php echo $delete_url; ?>" class="delete open-dl-pp"><i class="fa fa-remove"></i> Borrar</a>
 					</td>
 				</tr>
 				<?php

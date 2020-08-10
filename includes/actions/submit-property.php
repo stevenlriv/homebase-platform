@@ -16,67 +16,67 @@
 	if ( isset($_POST['submit']) ) {
 
         if(empty($listing) && get_unique_uri(array( 'title' => $_POST['listing_title'], 'city' => $_POST['city'], 'state' => $_POST['state'], 'country' => $_POST['country']), true)) {
-            $form_error = 'You will need to change your property title, because there is an existing property with the same title';
+            $form_error = 'Tendrá que cambiar su título de propiedad, porque hay una propiedad existente con el mismo título';
         }
 
         if(empty($_POST['listing_title'])) {
-            $form_error = 'You must enter a title for your property listing.';
+            $form_error = 'Debe introducir un título para su lista de propiedades.';
         }
 
         if ( strlen($_POST['listing_title'])>40 ) {
-            $form_error = 'You listing title must be 40 characters or less.';
+            $form_error = 'El título de la lista debe tener 40 caracteres o menos.';
         }
         
         if(empty($_POST['type'])) {
-            $form_error = 'You must select a type for your property.';
+            $form_error = 'Debe seleccionar un tipo para su propiedad.';
         }
         
         if(empty($_POST['number_rooms'])) {
-            $form_error = 'You must select the number of rooms for your property.';
+            $form_error = 'Debe seleccionar el número de habitaciones de su propiedad.';
         }
         
         if(empty($_POST['number_bathroom'])) {
-            $form_error = 'You must select the number of bathrooms for your property.';
+            $form_error = 'Debe seleccionar el número de baños de su propiedad.';
         }
         
         if(empty($_POST['monthly_house_original'])) {
-            $form_error = 'You must set the monthly rent.';
+            $form_error = 'Debes fijar la renta mensual.';
         }
    
         if(empty($_POST['deposit_house_original'])) {
-            $form_error = 'You must set the property required security deposit.';
+            $form_error = 'Debe establecer el depósito de seguridad requerido para la propiedad.';
         }
 
         if(empty($_POST['square_feet'])) {
-            $form_error = 'You must set the property square feet.';
+            $form_error = 'Debes poner los pies cuadrados de la propiedad.';
         }
         
         if(empty($_POST['available'])) {
-            $form_error = 'You must set the property availability date.';
+            $form_error = 'Debe fijar la fecha de disponibilidad de la propiedad.';
         }     
     
         if(empty($_POST['physical_address'])) {
-            $form_error = 'You must set the property physical address.';
+            $form_error = 'Debe establecer la dirección física de la propiedad.';
         }     
         
         if(empty($_POST['country'])) {
-            $form_error = 'You must enter the country where your property is located.';
+            $form_error = 'Debe entrar en el país donde se encuentra su propiedad.';
         }
 
         if(empty($_POST['state'])) {
-            $form_error = 'You must enter the state where your property is located.';
+            $form_error = 'Debe entrar en el estado donde se encuentra su propiedad.';
         }
 
         if(empty($_POST['city'])) {
-            $form_error = 'You must enter the city where your property is located.';
+            $form_error = 'Debe entrar en la ciudad donde se encuentra su propiedad.';
         }
         
         if(empty($_POST['zipcode'])) {
-            $form_error = 'You must set the property zip code.';
+            $form_error = 'Debes establecer el código postal de la propiedad.';
         }    
         
         if(empty($_POST['listing_description'])) {
-            $form_error = 'You must set the property listing description.';
+            $form_error = 'Debe establecer la descripción del listado de propiedades.';
         }  
         
         if(empty($_POST['keywords'])) {
@@ -84,7 +84,7 @@
         }    
 
         if ( strlen($_POST['keywords'])>100 ) {
-            $form_error = 'You keywords must be 100 characters or less.';
+            $form_error = 'Sus palabras clave deben tener 100 caracteres o menos.';
         }
 
         if(empty($_POST['checkin_access_code'])) {
@@ -98,7 +98,7 @@
         }  
 
         if (!empty($_POST['video_tour']) && !filter_var($_POST['video_tour'], FILTER_VALIDATE_URL)) {
-            $form_error = 'You must use a valid video tour link.';
+            $form_error = 'Debes usar un enlace válido para el tour de video.';
         }
 
         if(empty($_POST['postal_address'])) {
@@ -144,7 +144,7 @@
 
         else {
             $listing_images = '';
-            $form_error = 'Your listing is required to have at least 1 image.';
+            $form_error = 'Se requiere que su lista tenga al menos una imagen.';
         }
 
         //Verify if there are checkin images available
@@ -206,7 +206,7 @@
                     //header("Refresh:1");
                 }
                 else {
-                    $form_error = 'An error occurred while updating your listing, please try again.';
+                    $form_error = 'Se ha producido un error al actualizar tu lista, por favor inténtalo de nuevo.';
                 }
             }
             // add a new listing
@@ -223,7 +223,7 @@
                         delete_cache($_SESSION['CACHE_IMG_CHECKIN']);
                 }
                 else {
-                    $form_error = 'An error occurred while adding your listing, please try again.';
+                    $form_error = 'Se ha producido un error al añadir tu lista, por favor inténtalo de nuevo.';
                 }
             }
         }

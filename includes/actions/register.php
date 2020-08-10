@@ -5,36 +5,36 @@
 
         //Verify if the email address is already in use
 		if(get_user_by_email($_POST['email'])) {
-			$form_error = 'That email address is already in use.';
+			$form_error = 'Esa dirección de correo electrónico ya está en uso.';
 		}
 
-        if ( strlen($_POST['password'])<12 ) {
-            $form_error = 'You password must be 12 characters or more.';
+        if ( strlen($_POST['password'])<8 ) {
+            $form_error = 'Tu contraseña debe tener 8 caracteres o más.';
         }
 
         if(empty($_POST['password'])) {
-            $form_error = 'You must enter your new password.';
+            $form_error = 'Debes introducir tu nueva contraseña.';
         }
 
 		if(!is_email($_POST['email'])) {
-			$form_error = 'You have enter an invalid e-mail address, try again.';
+			$form_error = 'Ha introducido una dirección de correo electrónico inválida, inténtelo de nuevo.';
         }
         
         if(empty($_POST['phone_number'])) {
-            $form_error = 'You must enter your phone number.';
+            $form_error = 'Debes introducir tu número de teléfono.';
         }
 
         if(empty($_POST['fullname'])) {
-            $form_error = 'You must enter your full name.';
+            $form_error = 'Debes introducir tu nombre completo.';
         }
 
         if(empty($_POST['check_required'])) {
-            $form_error = 'You must agree to our terms of service and read our privacy policy.';
+            $form_error = 'Debe aceptar nuestros términos de servicio y leer nuestra política de privacidad.';
         }
 
         if(empty($form_error)) { 
             if(new_user($_POST['fullname'], $_POST['email'], $_POST['phone_number'], $_POST['password'])) {
-                $form_success = 'Great, your account has been created.';
+                $form_success = 'Genial, tu cuenta ha sido creada.';
 
                 // Account confirmation
                 if(get_setting(24) == 'true') {
@@ -56,7 +56,7 @@
                 header("Refresh:1");
             }
             else {
-                $form_error = 'An error occurred while updating your account, please try again, or contact us.';
+                $form_error = 'Se ha producido un error al actualizar su cuenta, por favor inténtelo de nuevo, o póngase en contacto con nosotros.';
             }
         }
 

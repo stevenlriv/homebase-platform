@@ -8,14 +8,14 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Sorry, the page you requested is unavailable.</h2>
-                <span>But we gathered some resources for you below</span>
+				<h2>Lo siento, la página que solicitó no está disponible.</h2>
+                <span>Pero hemos reunido algunos recursos para usted a continuación</span>
 				
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="/">Home</a></li>
-						<li>Page not found</li>
+						<li><a href="/">Inicio</a></li>
+						<li>Página no encontrada</li>
 					</ul>
 				</nav>
 
@@ -28,7 +28,7 @@
 <section class="fullwidth margin-top-105" data-background-color="#ffffff">
 
 	<!-- Box Headline -->
-	<h3 class="headline-box">What are you looking for?</h3>
+	<h3 class="headline-box">¿Qué estás buscando?</h3>
 	
 	<!-- Content -->
 	<div class="container">
@@ -41,12 +41,12 @@
 					<div class="icon-container">
 						<i class="im im-icon-Home-2"></i>
 						<div class="icon-links">
-							<a href="/find-a-homebase?type=house">For Rent</a>
+							<a href="/find-a-homebase?type=house">Para Alquilar</a>
 						</div>
 					</div>
 
-					<h3>Houses</h3>
-					<p>More space and privacy, easier to split rent with others.</p>
+					<h3>Casas</h3>
+					<p>Más espacio y privacidad, más fácil de dividir el alquiler con otros.</p>
 				</div>
 			</div>
 
@@ -57,12 +57,12 @@
 					<div class="icon-container">
 						<i class="im im-icon-Office"></i>
 						<div class="icon-links">
-							<a href="/find-a-homebase?type=apartment">For Rent</a>
+							<a href="/find-a-homebase?type=apartment">Para Alquilar</a>
 						</div>
 					</div>
 
-					<h3>Apartments</h3>
-					<p>Less maintenance, and well located. Lots of places walking distance.</p>
+					<h3>Apartamentos</h3>
+					<p>Menos mantenimiento, y bien ubicado. Muchos lugares a poca distancia.</p>
 				</div>
 			</div>
 

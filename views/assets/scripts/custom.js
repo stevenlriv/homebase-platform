@@ -25,8 +25,8 @@ $(document).ready(function(){
 	
 		// Specify validation error messages
         messages: {
-			email: "Please enter a valid email address",
-			password: "Please enter your password",
+			email: "Por favor, introduzca una dirección de correo electrónico válida",
+			password: "Por favor, introduzca su contraseña",
         },
 
         // Make sure the form is submitted to the destination defined
@@ -62,12 +62,12 @@ $(document).ready(function(){
 	
 		// Specify validation error messages
         messages: {
-            fullname: "Please enter your full name",
-			email: "Please enter a valid email address",
-            phone_number: "Please enter your phone number",
+            fullname: "Por favor, introduzca su nombre completo",
+			email: "Por favor, introduzca una dirección de correo electrónico válida",
+            phone_number: "Por favor, introduzca su número de teléfono",
 			password: {
-				required: "Please enter your new password",
-				minlength: "Your password must be at least 8 characters long"
+				required: "Por favor, introduzca su nueva contraseña",
+				minlength: "Su contraseña debe tener al menos 8 caracteres de longitud"
 			},
         },
 
@@ -1336,7 +1336,7 @@ $(document).ready(function(){
                 $('#contact-message').slideDown();
                 $('#contactform img.loader').fadeOut('slow',function(){$(this).remove()});
                 // $('#contactform #submit').removeAttr('disabled');
-                if(data.match('submitted') != null) { $('#contactform').slideUp('slow'); }
+                if(data.match('enviado') != null) { $('#contactform').slideUp('slow'); }
 
             }
         );

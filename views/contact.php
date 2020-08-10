@@ -31,11 +31,11 @@
 		<!-- Contact Details -->
 		<div class="col-md-4 margin-bottom-35">
 
-			<h4 class="headline margin-bottom-30">Find Us There</h4>
+			<h4 class="headline margin-bottom-30">Encuéntranos allí</h4>
 
 			<!-- Contact Details -->
 			<div class="sidebar-textbox">
-				<p>We’re available to help and answer any questions you may have.</p>
+				<p>Estamos disponibles para ayudar y responder a cualquier pregunta que pueda tener.</p>
 
 				<ul class="contact-details">
 					<li><i class="im im-icon-Envelope"></i> <strong>E-Mail:</strong> <span><a href="mailto:<?php _setting(1); ?>"><?php _setting(1); ?></a></span></li>
@@ -50,7 +50,7 @@
 		<div class="col-md-8">
 
 			<section id="contact">
-				<h4 class="headline margin-bottom-35">Contact Form</h4>
+				<h4 class="headline margin-bottom-35">Formulario de contacto</h4>
 
 				<div id="contact-message"></div> 
 
@@ -64,7 +64,7 @@
 										echo '<input name="name" type="hidden" id="name" value="'.$user['fullname'].'" />';
 									}
 									else {
-										echo '<input name="name" type="text" id="name" placeholder="Your Name" />';
+										echo '<input name="name" type="text" id="name" placeholder="Su Nombre" />';
 									}
 								?>
 							</div>
@@ -77,7 +77,7 @@
 										echo '<input name="email" type="hidden" id="email" value="'.$user['email'].'" />';
 									}
 									else {
-										echo '<input name="email" type="email" id="email" placeholder="Email Address" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />';
+										echo '<input name="email" type="email" id="email" placeholder="Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />';
 									}
 								?>
 							</div>
@@ -85,7 +85,7 @@
 					</div>
 
 					<div>
-						<input name="subject" type="<?php if(!empty($listing)) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Subject" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
+						<input name="subject" type="<?php if(!empty($listing)) { echo "hidden"; } else { echo "text"; } ?>" id="subject" placeholder="Asunto" <?php if(!empty($subject)) echo 'value="'.$subject.'"'; ?> />
 					</div>
 
 					<?php
@@ -93,19 +93,19 @@
 						if(!empty($listing) && !get_referral_cookie()) {
 					?>
 					<div>
-						<input name="person" type="text" id="person" placeholder="Did any one recommended you the property?" value="" />
+						<input name="person" type="text" id="person" placeholder="¿Alguien le recomendó la propiedad?" value="" />
 					</div>
 					<?php
 						}
 					?>
 
 					<div>
-						<textarea name="comments" cols="40" rows="3" id="comments" placeholder="Message" spellcheck="true"><?php if(!empty($message)) echo $message; ?></textarea>
+						<textarea name="comments" cols="40" rows="3" id="comments" placeholder="Mensaje" spellcheck="true"><?php if(!empty($message)) echo $message; ?></textarea>
 					</div>
 
 					<input name="important" class="mfp-hide" type="text" id="important" placeholder="" value="" />
 
-					<input type="submit" class="submit button" id="submit" value="Submit Message" />
+					<input type="submit" class="submit button" id="submit" value="Enviar Mensaje" />
 
 					</form>
 			</section>

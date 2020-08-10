@@ -42,7 +42,7 @@ if(get_setting(23) == 'true' && $user && $request != '/upgrade') {
 switch ($request) {
     case '/' :
         $seo = array(
-            "description" => "Homebase is a marketplace where you can find your next home. It's easy, just take a tour and sign your lease, all online and in a few minutes.",
+            "description" => "Homebase es un mercado donde puedes encontrar tu próximo hogar. Es fácil, sólo haz un recorrido y firma tu contrato de arrendamiento, todo en línea y en unos pocos minutos.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -51,7 +51,7 @@ switch ($request) {
         break;
     case '' :
         $seo = array(
-            "description" => "Homebase is a marketplace where you can find your next home. It's easy, just take a tour and sign your lease, all online and in a few minutes.",
+            "description" => "Homebase es un mercado donde puedes encontrar tu próximo hogar. Es fácil, sólo haz un recorrido y firma tu contrato de arrendamiento, todo en línea y en unos pocos minutos.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -72,7 +72,7 @@ switch ($request) {
         }
 
         $seo = array(
-            "title" => "Schedule A Tour",
+            "title" => "Programe una Cita",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/tour.php';
@@ -85,7 +85,7 @@ switch ($request) {
             header('Location: /my-profile');
         }
         $seo = array(
-            "title" => "Login",
+            "title" => "Ingresa en",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/login.php';
@@ -108,7 +108,7 @@ switch ($request) {
         }
 
         $seo = array(
-            "title" => "Register",
+            "title" => "Registrarse",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/register.php';
@@ -121,7 +121,7 @@ switch ($request) {
             header('Location: /my-profile');
         }
         $seo = array(
-            "title" => "Reset Password",
+            "title" => "Restablecer la contraseña",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/reset-password.php';
@@ -131,7 +131,7 @@ switch ($request) {
         break;
     case '/confirm' :
         $seo = array(
-            "title" => "Account Confirmation",
+            "title" => "Confirmación de la cuenta",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/confirm-account.php';
@@ -145,7 +145,7 @@ switch ($request) {
         }
 
         $seo = array(
-            "title" => "Platform Upgrade",
+            "title" => "Actualización de la plataforma",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -158,7 +158,7 @@ switch ($request) {
         }
 
         $seo = array(
-            "title" => "My Profile",
+            "title" => "Mi perfil",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/my-profile.php';
@@ -174,7 +174,7 @@ switch ($request) {
             header('Location: /');
         }
         $seo = array(
-            "title" => "Use profile",
+            "title" => "Usar el perfil",
             "request" => $request,
         );
         
@@ -190,7 +190,7 @@ switch ($request) {
             header('Location: /');
         }
         $seo = array(
-            "title" => "Financial Settings",
+            "title" => "Ajustes financieros",
             "request" => $request,
         );
 
@@ -204,7 +204,7 @@ switch ($request) {
             header('Location: /');
         }
         $seo = array(
-            "title" => "My Properties",
+            "title" => "Mis propiedades",
             "request" => $request,
         );
 
@@ -245,7 +245,7 @@ switch ($request) {
             header('Location: /');
         }
         $seo = array(
-            "title" => "Change Password",
+            "title" => "Cambiar la contraseña",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/change-password.php';
@@ -273,7 +273,7 @@ switch ($request) {
         }
 
         $seo = array(
-            "title" => "Edit Property",
+            "title" => "Editar la propiedad",
             "description" => "",
             "request" => $request,
         );
@@ -289,7 +289,7 @@ switch ($request) {
         }
 
         $seo = array(
-            "title" => "Add a New Property",
+            "title" => "Añadir una nueva propiedad",
             "description" => "",
             "request" => $request,
         );
@@ -309,8 +309,8 @@ switch ($request) {
         break;
     case '/find-a-homebase' :
         $seo = array(
-            "title" => "Search For a House",
-            "description" => "Easily find your next home. Just take a tour and sign your lease, all online and in a few minutes.",
+            "title" => "Buscar una casa",
+            "description" => "Encontrar fácilmente su próximo hogar. Sólo haga un recorrido y firme su contrato de arrendamiento, todo en línea y en unos pocos minutos.",
             "request" => $request,
         );
         require_once __DIR__ . '/includes/actions/listing-search.php';
@@ -320,8 +320,8 @@ switch ($request) {
         break;
     case '/make-money' :
         $seo = array(
-            "title" => "Make Money",
-            "description" => "It has never been easier to make money with real estate. Cero investment and all online.",
+            "title" => "Ganar dinero",
+            "description" => "Nunca ha sido más fácil hacer dinero con los bienes raíces. Cero inversión y todo en línea.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -330,8 +330,8 @@ switch ($request) {
         break;
     case '/list-your-home' :
         $seo = array(
-            "title" => "For Landlords",
-            "description" => "A marketplace where everything it's easy and done for you, just add your house and get it rented quickly, all online.",
+            "title" => "Para los propietarios",
+            "description" => "Un mercado en el que todo es fácil y está hecho para ti, sólo tienes que añadir tu casa y alquilarla rápidamente, todo en línea.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -340,7 +340,7 @@ switch ($request) {
         break;
     case '/privacy' :
         $seo = array(
-            "title" => "Privacy Policy",
+            "title" => "Política de privacidad",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -349,7 +349,7 @@ switch ($request) {
         break;
     case '/terms' :
         $seo = array(
-            "title" => "Terms of Service",
+            "title" => "Condiciones de servicio",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -358,8 +358,8 @@ switch ($request) {
         break;
     case '/faq' :
         $seo = array(
-            "title" => "Frequently Asked Questions",
-            "description" => "We gathered some of the most frequent questions about Homebase and our answers to them.",
+            "title" => "Preguntas frecuentes",
+            "description" => "Hemos reunido algunas de las preguntas más frecuentes sobre Homebase y nuestras respuestas a ellas.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';
@@ -368,8 +368,8 @@ switch ($request) {
         break;
     case '/contact' :
         $seo = array(
-            "title" => "Contact us",
-            "description" => "We’re available to help and answer any questions you may have.",
+            "title" => "Contáctanos",
+            "description" => "Estamos disponibles para ayudar y responder a cualquier pregunta que pueda tener.",
             "request" => $request,
         );
         require_once __DIR__ . '/views/header.php';

@@ -9,13 +9,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Change Password</h2>
+				<h2>Cambiar Contraseña</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Change Password</li>
+						<li><a href="#">Inicio</a></li>
+						<li>Cambiar Contraseña</li>
 					</ul>
 				</nav>
 
@@ -38,7 +38,7 @@
 			<div class="row hidden-md hidden-lg">
 				<div class="col-md-6 margin-bottom-30">
 					<div class="notification notice">
-						<p>Your password should be at least 12 characters long</p>
+						<p>Su contraseña debe tener al menos 12 caracteres de longitud</p>
 					</div>
 				</div>
 			</div>
@@ -51,16 +51,16 @@
 							show_message($form_success, $form_error, $form_info);
 						?>
 
-						<label>Current Password</label>
+						<label>Contraseña Actual</label>
 						<input type="password" name="old">
 
-						<label>New Password</label>
+						<label>Nueva Contraseña</label>
 						<input type="password" name="password">
 
-						<label>Confirm New Password</label>
+						<label>Confirmar Nueva Contraseña</label>
 						<input type="password" id="confirm" name="confirm">
 
-						<button type="submit" name="submit" class="button border margin-top-10">Save Changes</button>
+						<button type="submit" name="submit" class="button border margin-top-10">Guardar Cambios</button>
 					</form>
 				</div>
 
@@ -70,7 +70,7 @@
 				<div class="hidden-xs hidden-sm">
 					<div class="col-md-6">
 						<div class="notification notice">
-							<p>Your password should be at least 12 characters long</p>
+							<p>Su contraseña debe tener al menos 12 caracteres de longitud</p>
 						</div>
 					</div>
 				</div>

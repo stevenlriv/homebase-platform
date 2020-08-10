@@ -40,7 +40,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
             $("#<?php echo $dropzone_id; ?>").dropzone({
 		        acceptedFiles: "image/*",
-		        dictDefaultMessage: "<i class='sl sl-icon-plus'></i> Click here or drop files to upload",
+		        dictDefaultMessage: "<i class='sl sl-icon-plus'></i> Haga clic aquí o arrastre las fotos para subirlas",
 		        init: function () {		
 			        var th = this; //to access this "global" inside functions
 			
@@ -164,14 +164,14 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     }
 
     function dropzone_box($name, $dropzone_id, $jquery_id, $design = 'submit-section', $post_url = '/images.php') {
-		$form_info = 'While uploading multiple images at the same time, they might disappear for a bit. Is better to upload them one by one or in pairs. To delete an image, click on it or hover and then press the Remove file link.';
+		$form_info = 'Mientras suben varias imágenes al mismo tiempo, podrían desaparecer por un tiempo. Es mejor subirlas una por una o en parejas. Para eliminar una imagen, haga clic en ella o pase el puntero del ratón y luego pulse el enlace Eliminar archivo.';
     ?>
 		<div id="<?php echo $jquery_id; ?>">
 
 			<?php
 				if($design == 'submit-section') {
 			?>
-				<h3><?php echo $name; ?> <i class="tip" data-tip-content="Removing an image is a permanent action"></i> </h3>
+				<h3><?php echo $name; ?> <i class="tip" data-tip-content="La eliminación de una imagen es una acción permanente"></i> </h3>
 				<br />
 				<?php show_message('', '', $form_info); ?>
 				<div class="submit-section">
@@ -183,7 +183,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 				else {
 			?>
 				<div class="col-md-12">
-					<h5><?php echo $name; ?> <i class="tip" data-tip-content="Removing an image is a permanent action"></i> </h5>
+					<h5><?php echo $name; ?> <i class="tip" data-tip-content="La eliminación de una imagen es una acción permanente"></i> </h5>
 					<br />
 					<?php show_message('', '', $form_info); ?>
 					<form action="<?php echo $post_url; ?>" class="dropzone" id="<?php echo $dropzone_id; ?>"></form>

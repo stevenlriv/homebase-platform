@@ -16,7 +16,7 @@
 
 			<div class="row">
 				<div class="col-lg-6 col-sm-8">
-					<h2>Alquile su propiedad un 80% más rápido</h2>
+					<h2>Alquila su propiedad más rápido</h2>
 
 					<a href="/register?type=landlords" class="button margin-top-25">Empezar</a>
 				</div>
@@ -38,8 +38,8 @@
 	<!-- Icon Box -->
 	<div class="icon-box-1 alternative">
 
-		<h3>¿Por qué añadir tu propiedad en Homebase?</h3>
-		<p>Independientemente del tipo de propiedad o habitación que tenga disponible, alquilar a los inquilinos es sencillo y seguro con Homebase. Controlas por completo el horario, los precios, los requisitos de los inquilinos y los términos del contrato de arrendamiento.</p>
+		<h3>Razones para convertirte en propietario de Homebase</h3>
+		<p>No importa qué tipo de propiedad o habitación estés alquilando, rentar con Homebase resulta sencillo y seguro. Controlas por completo los precios, los requisitos de la verificación de antecedentes y reporte de crédito, los términos del contrato de arrendamiento, y de cómo interactúas con los inquilinos.</p>
 	</div>
 </div>
 
@@ -48,7 +48,7 @@
 	<div class="icon-box-1 alternative">
 
 		<h3>Cuentas con nuestro apoyo</h3>
-		<p>Para garantizar la seguridad de tu alojamiento y tus pertenencias, requerimos un documento de identificación oficial al inquilino como requisito para una cita. También nos encargamos de cualificar a los inquilinos y le enviamos a usted los resultados de la verificación de antecedentes y crédito antes de proceder con el contrato de arrendamiento.</p>
+		<p>Para garantizar la seguridad de tu propiedad, nos encargamos de cualificar a los inquilinos y le enviamos a usted los resultados de la verificación de antecedentes y crédito antes de proceder con el contrato de arrendamiento.</p>
 	</div>
 </div>
 
@@ -60,7 +60,7 @@
 	<div class="row">
 
 <div class="col-md-12">
-	<h3 class="headline centered margin-bottom-35 margin-top-10">Tres pasos para alquilar su propiedad</h3>
+	<h3 class="headline centered margin-bottom-35 margin-top-10">Tres pasos para llenar su propiedad</h3>
 </div>
 
 <div class="col-md-4">
@@ -72,7 +72,7 @@
 		</div>
 
 		<h3>Añade tu propiedad</h3>
-		<p>Listar la propiedad sin tener que pagar nada por registrarte: puedes listar desde una casa compartida hasta una propiedad entera y todo lo demás.</p>
+		<p>Publica tu propiedad sin cargos de registro: Cuando usted publica en Homebase, automáticamente se publica en Clasificados Online, Facebook Marketplace, y Zillow.</p>
 	</div>
 </div>
 
@@ -84,7 +84,7 @@
 			2
 		</div>
 
-		<h3>Decide cómo quieres alquiler</h3>
+		<h3>Decide cómo quieres alquilar</h3>
 		<p>Establezca sus propios requisitos, precios y términos. Te ayudaremos en todo lo que necesites.</p>
 	</div>
 </div>
@@ -170,7 +170,7 @@
 					</div>
 
 					<h3>Ahorro de tiempo</h3>
-					<p>Libere su agenda con los Auto-Tours.</p>
+					<p>Deje de preocuparse por mostrar su propiedad. Nos encargaremos de eso por ti.</p>
 				</div>
 			</div>
 
@@ -196,7 +196,7 @@
 					</div>
 
 					<h3>Fácil de usar</h3>
-					<p>Deje que nos encarguemos de los inconvenientes de cobrar el alquiler.</p>
+					<p>El pago de renta se deposita automáticamente en su cuenta cada mes y los retrasos se facturan automáticamente a su inquilino.</p>
 				</div>
 			</div>
 
@@ -213,15 +213,15 @@
 	<div class="row">
 
 <div class="col-md-12">
-	<h3 class="headline centered margin-bottom-35 margin-top-10">Proceso de pago sencillo</h3>
+	<h3 class="headline centered margin-bottom-35 margin-top-10">Proceso de pago sencillos</h3>
 </div>
 
 <div class="col-md-4">
 	<!-- Icon Box -->
 	<div class="icon-box-1 alternative">
 
-		<h3>Tú decides lo que cobras</h3>
-		<p>Siempre puedes establecer los precios e identificar cualquier cargo extra por limpieza o retraso.</p>
+		<h3>Cobra lo que quieras</h3>
+		<p>Siempre puedes elegir tu precio incluso configurar cargos extra por limpieza o retraso.</p>
 	</div>
 </div>
 
@@ -230,7 +230,7 @@
 	<div class="icon-box-1 alternative">
 
 		<h3>Paga tarifas reducidas</h3>
-		<p>Registrarse es totalmente gratuito. Homebase cobra una cuota mensual del 5% siempre que tenga un inquilino, la cual es una de las tarifas más bajas del mercado.</p>
+		<p>Registrarte es totalmente gratuito. Homebase suele aplicar una comisión fija del 5% a cada pago de renta que reciben los propietarios, que es una de las tarifas más bajas del mercado.</p>
 	</div>
 </div>
 
@@ -239,7 +239,7 @@
 	<div class="icon-box-1 alternative">
 
 		<h3>Recibe el dinero rápido</h3>
-		<p>El alquiler se paga en línea y se deposita el dinero a su cuenta dentro de 3 días laborables por depósito directo.</p>
+		<p>Firma contratos digitalmente desde tu teléfono o computadora. Una vez que el inquilino realice el primer pago de renta, se le cobra automáticamente cada mes. El pago se transfiere a tu cuenta por depósito directo dentro de 3 días laborales.</p>
 	</div>
 </div>
 
@@ -256,25 +256,25 @@
 
 				<!-- Toggle 1 -->
 				<div class="toggle-wrap">
-					<span class="trigger "><a href="#">¿Qué tan rápido pueden llenar mi propiedad?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger "><a href="#">¿Qué tan rápido pueden alquilar mi propiedad? <i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>En promedio, rentamos las propiedades listadas en RentHomebase.com 80% más rápido que el "promedio de la industria de real estate". ¿Cómo? Tan pronto como su propiedad sea añadida, la publicaremos en ClasificadosOnline, Facebook Marketplace, Zillow, y otros lugares de marketing relevante al país donde vive. Esto significa que tienes 3-8 veces más gente viendo cada propiedad sin ningún trabajo extra. </p>
+						<p>Cuando usted publica su propiedad en Homebase, automáticamente se publica en Clasificados Online, Facebook Marketplace, Zillow, y HotPads. Esto resulta en que su propiedad sea alquilada hasta un 80% más rápido de lo normal.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 2 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#">¿Cuánto cuesta añadir una propiedad?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#">¿Cuánto cuesta publicar una propiedad?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Registrarse es totalmente gratuito. Nosotros cobramos una cuota mensual del 5% siempre que tenga un inquilino. ¡No nos pagan a menos que la propiedad esté rentada!</p>
+						<p>Registrarte y anunciar tu propiedad en Homebase es completamente gratis. Cuando se alquila tu propiedad, te cobraremos una tarifa por servicio de Homebase para los propietarios (la cual generalmente es del 5%), destinada a ayudar a cubrir los gastos operativos de la empresa.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 3 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> ¿Qué es el Auto-Tour?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> ¿Qué son las visitas de propiedad autoguiadas?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Ahorre horas en los recorridos de la propiedad con nuestra tecnología de Auto-Tour. Es muy fácil. Sólo comparta el código de su "lock box" y las fechas y horas en que los inquilinos interesados pueden visitar la propiedad. Luego siéntese y relájese. Recibirá una notificación por mensaje de texto cuando se programe un tour. Nos encargaremos de todas las comunicaciones con los inquilinos, la programación, verificación del documento de identificación oficial, y el seguimiento.</p>
+						<p>Los inquilinos interesados en ver su propiedad pueden programar visitas durante el día sin que usted tenga que mostrarla. Ellos podrán acceder a la propiedad en cualquier momento a partir de las horas de visitas que usted haya establecido, mediante unas llaves en una caja de seguridad. Tú recibes una notificación por mensaje de texto cuando se programa la visita y Homebase se encarga de verificar la licencia e identificación de los visitantes antes de dar acceso la propiedad.</p>
 					</div>
 				</div>
 
@@ -290,15 +290,15 @@
 				<div class="toggle-wrap">
 					<span class="trigger"><a href="#"> ¿Qué es una suscripción de alquiler y cómo me pagan?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>Deje que nos encargamos de los inconvenientes de cobrar el alquiler. Tan pronto como se firme un contrato, establecemos una suscripción de alquiler usando la información de pago inicial de su inquilino. Dependiendo de la fecha de la firma del contrato, cobramos el alquiler automáticamente el 1 o el 15 de cada mes y luego depositamos los fondos en tu cuenta dentro de 3 días hábiles.</p>
+						<p>El pago de la renta se realizará en el momento en que el inquilino firma y somete el contrato de alquiler. Dependiendo de la fecha de la firma del contrato, el pago de la renta se cobra automáticamente el 1 o el 15 de cada mes y luego se depositan los fondos en su cuenta dentro de 3 días laborales por depósito directo. Así no tienes que preocuparte de cobrar el pago de renta.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 6 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> ¿Qué pasa cuando se termina un contrato de arrendamiento? <i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> ¿Qué pasa llegada la finalización del contrato de arrendamiento?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>El tiempo es dinero cuando eres un propietario profesional, así que queremos reducir la cantidad de tiempo que tu propiedad está vacía. Le notificaremos 30 días antes de que termine el contrato, mientras podemos hacer "Pre-Listing" y obtener ofertas anticipadas de su propiedad antes de que su actual inquilino se vaya.</p>
+						<p>El sistema automáticamente le pide al inquilino que renueve o confirme su ida 45 días antes de la fecha de finalización del contrato de arrendamiento. Mientras tanto, la publicación de su propiedad se anuncia con 30 días de anticipación para obtener ofertas y crear demanda antes de que el actual inquilino se vaya.</p>
 					</div>
 				</div>
 

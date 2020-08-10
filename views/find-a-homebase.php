@@ -25,8 +25,8 @@
 		    <!-- Map Navigation -->
 			<a href="#" id="geoLocation" title="Your location"></a>
 			<ul id="mapnav-buttons" class="top">
-			    <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
-			    <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+			    <li><a href="#" id="prevpoint" title="Previous point on map">Anterior</a></li>
+			    <li><a href="#" id="nextpoint" title="Next point on mp">Siguiente</a></li>
 			</ul>
 		</div>
 
@@ -43,7 +43,7 @@
 					<div class="col-md-12">
 
 						<!-- Title -->
-						<h4 class="search-title">Find Your Home</h4>
+						<h4 class="search-title">Encontrar Una Casa</h4>
 
 						<?php full_search_form(); ?>
    
@@ -58,7 +58,7 @@
 
 				<div class="col-md-6">
 					<!-- Showing Results -->
-					<p class="showing-results"><?php echo $total_results; ?> Results Found </p>
+					<p class="showing-results"><?php echo $total_results; ?> Resultados Encontrados </p>
 				</div>
 
 				<div class="col-md-6">
@@ -103,7 +103,7 @@
 						</div>
 
 						<div class="listing-img-content">
-							<span class="listing-price">$<?php echo $value['monthly_house']; ?>  <i>monthly</i></span>
+							<span class="listing-price">$<?php echo $value['monthly_house']; ?>  <i>mensual</i></span>
 						</div>
 
                         <div class="listing-carousel">
@@ -121,13 +121,13 @@
 								<?php echo $value['physical_address']; ?>
 							</a>
 
-							<a href="/<?php echo $value['uri']; ?>" class="details button border">Details</a>
+							<a href="/<?php echo $value['uri']; ?>" class="details button border">Detalles</a>
 						</div>
 
 						<ul class="listing-details">
 							<li><?php echo $value['square_feet']; ?> sq ft</li>
-							<li><?php echo $value['number_rooms']; ?> Bedrooms</li>
-							<li><?php echo $value['number_bathroom']; ?> Bathrooms</li>
+							<li><?php echo $value['number_rooms']; ?> Cuartos</li>
+							<li><?php echo $value['number_bathroom']; ?> Baños</li>
 						</ul>
 
 						<div class="listing-footer">
