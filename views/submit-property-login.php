@@ -119,6 +119,9 @@
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 3) echo 'selected="selected"' ?> value="3">3</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 4) echo 'selected="selected"' ?> value="4">4</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 5) echo 'selected="selected"' ?> value="5">5</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 6) echo 'selected="selected"' ?> value="6">6</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 7) echo 'selected="selected"' ?> value="7">7</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_rooms') == 8) echo 'selected="selected"' ?> value="8">8</option>
 					</select>
 				</div>
 
@@ -128,10 +131,15 @@
 					<select name="number_bathroom" class="chosen-select-no-single">
 						<option label="Seleccione una opción"></option>	
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 1) echo 'selected="selected"' ?> value="1">1</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 1.5) echo 'selected="selected"' ?> value="1.5">1.5</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 2) echo 'selected="selected"' ?> value="2">2</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 2.5) echo 'selected="selected"' ?> value="2.5">2.5</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 3) echo 'selected="selected"' ?> value="3">3</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 3.5) echo 'selected="selected"' ?> value="3.5">3.5</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 4) echo 'selected="selected"' ?> value="4">4</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 4.5) echo 'selected="selected"' ?> value="4.5">4.5</option>
 						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 5) echo 'selected="selected"' ?> value="5">5</option>
+						<option <?php if(form_get_value($cache, $listing, 'number_bathroom') == 5.5) echo 'selected="selected"' ?> value="5.5">5.5</option>
 					</select>
 				</div>
 

@@ -216,3 +216,161 @@
 
 </section>
 <!-- Fullwidth Section / End -->
+
+<!-- Fullwidth Section -->
+<section class="fullwidth margin-top-105" data-background-color="#fff">
+
+	<!-- Box Headline -->
+	<h3 class="headline-box">Puedes contar con nosotros</h3>
+	
+	<!-- Content -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3 col-sm-6">
+				<!-- Icon Box -->
+				<div class="icon-box-1">
+
+					<div class="icon-container">
+						<i class="im im-icon-Checked-User"></i>
+					</div>
+
+					<h3>Confianza</h3>
+					<p>Le proveemos un reporte con la verificación de antecedentes y crédito del inquilino.</p>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<!-- Icon Box -->
+				<div class="icon-box-1">
+
+					<div class="icon-container">
+						<i class="im im-icon-Over-Time"></i>
+					</div>
+
+					<h3>Ahorro de tiempo</h3>
+					<p>Deje de preocuparse por mostrar su propiedad. Nos encargaremos de eso por ti.</p>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<!-- Icon Box -->
+				<div class="icon-box-1">
+
+					<div class="icon-container">
+						<i class="im im-icon-Cloud-Email"></i>
+					</div>
+
+					<h3>Remoto</h3>
+					<p>Convierte su contrato de alquiler preferido en uno digital o usa el nuestro.</p>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<!-- Icon Box -->
+				<div class="icon-box-1">
+
+					<div class="icon-container">
+						<i class="im im-icon-Money-2"></i>
+					</div>
+
+					<h3>Fácil de usar</h3>
+					<p>El pago de renta se deposita automáticamente en su cuenta cada mes y los retrasos se facturan automáticamente a su inquilino.</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<!-- Fullwidth Section / End -->
+
+<!-- Fullwidth Section -->
+<section class="fullwidth margin-top-105" data-background-color="#fff">
+
+	<!-- Box Headline -->
+	<div class="col-md-12">
+			    <h3 class="headline centered margin-bottom-35 margin-top-10">¿Cómo funciona?</h3>
+		    </div>
+	
+	<!-- Content -->
+	<div class="container">
+		<div class="row">
+
+	<!-- Toggles Container -->
+	<div class="style-2">
+
+		<!-- Toggle 1 -->
+		<div class="toggle-wrap">
+			<span class="trigger "><a href="#">¿Cuánto cuesta publicar una propiedad? <i class="sl sl-icon-plus"></i></a></span>
+			<div class="toggle-container">
+				<p>Cobramos una cuota mensual del 5% además del alquiler, que cubre todos los gastos de transacción del alquiler, los servicios de gestión de la propiedad digital, y el acceso a Homebase Cashback.</p>
+			</div>
+		</div>
+
+		<!-- Toggle 2 -->
+		<div class="toggle-wrap">
+			<span class="trigger"><a href="#">¿Qué es Homebase Cashback?<i class="sl sl-icon-plus"></i></a></span>
+			<div class="toggle-container">
+				<p>Cada mes ponemos el 1,5% de tu alquiler en una cuenta de ahorros. Cuando te mudes, te daremos acceso a esta cuenta de ahorros. Puedes hacer una de tres cosas con el dinero de la cuenta:
+(a) cobrarlo para ti mismo,
+(b) donarlo a la caridad de su elección, o
+(c) usarlo para la próxima propiedad que alquile en Homebase
+
+Si elige hacer lo (b) o (c) con sus ahorros, le igualaremos dólar por dólar y DOBLAREMOS la cantidad! 💰
+</p>
+			</div>
+		</div>
+
+		<!-- Toggle 3 -->
+		<div class="toggle-wrap">
+			<span class="trigger"><a href="#"> ¿Cómo funciona el Depósito Seguro?<i class="sl sl-icon-plus"></i></a></span>
+			<div class="toggle-container">
+				<p>Su depósito se mantiene en una cuenta de garantía de la Homebase. Esta es una cuenta separada que no se toca hasta que te mudes. Mientras no ocurra ningún daño a la propiedad durante su residencia, el depósito le será devuelto dentro de los 5 días de haberse mudado.</p>
+			</div>
+		</div>
+
+		<!-- Toggle 4 -->
+		<div class="toggle-wrap">
+			<span class="trigger"><a href="#"> ¿Cómo puedo ver una propiedad antes de alquilarla?<i class="sl sl-icon-plus"></i></a></span>
+			<div class="toggle-container">
+				<p>Los inquilinos interesados en ver su propiedad pueden programar visitas durante el día sin que usted tenga que mostrarla. Ellos podrán acceder a la propiedad en cualquier momento a partir de las horas de visitas que usted haya establecido, mediante unas llaves en una caja de seguridad. Tú recibes una notificación por mensaje de texto cuando se programa la visita y Homebase se encarga de verificar la licencia e identificación de los visitantes antes de dar acceso la propiedad.</p>
+			</div>
+		</div>
+
+		<!-- Toggle 5 -->
+		<div class="toggle-wrap">
+			<span class="trigger"><a href="#"> ¿Cómo funcionan los contratos digitales?<i class="sl sl-icon-plus"></i></a></span>
+			<div class="toggle-container">
+				<p>El alquiler se paga automáticamente usando el método de pago que usted estableció cuando firmó el contrato de arrendamiento. Es como una subscripción a Netflix; ¡ponla y olvídala!</p>
+			</div>
+		</div>
+
+		<!-- Toggle 6 -->
+		<div class="toggle-wrap">
+			<span class="trigger"><a href="#"> ¿Qué es una suscripción de alquiler y cómo me pagan?<i class="sl sl-icon-plus"></i></a></span>
+			<div class="toggle-container">
+				<p>Estará conectado con un Homebase Agent durante el proceso de arrendamiento. Esta persona estará a su disposición para ayudarle en cualquier momento que tenga una pregunta o problema durante toda la duración del contrato de arrendamiento. 
+
+Cualquier gasto relacionado con el mantenimiento y las reparaciones que caigan dentro de los deberes del Propietario o del Agente serán pagados por el Propietario o el Agent—no por ti. Puede encontrar la lista de mantenimiento y reparaciones que el Propietario es responsable en su Contrato de Arrendamiento. En caso de que necesite una reparación, le indicaremos la dirección correcta o le ayudaremos a encontrar el proveedor de servicios adecuado.
+</p>
+			</div>
+		</div>
+
+		<!-- Toggle 5 -->
+		<div class="toggle-wrap">
+			<span class="trigger"><a href="#"> ¿Qué pasa llegada la finalización del contrato de arrendamiento?<i class="sl sl-icon-plus"></i></a></span>
+			<div class="toggle-container">
+				<p>Sabemos que mudarse puede ser estresante, ¡así que estamos aquí para ayudar! Nos pondremos en contacto 30 días antes de que termine su contrato de alquiler para comenzar el proceso de mudanza. 
+
+Recuerde, su depósito de seguridad se mantiene seguro con el Depósito Seguro, por lo que la cantidad total le será devuelta dentro de los 5 días de su salida, siempre y cuando no se produzcan daños durante su residencia. Si es necesario hacer alguna reparación, nos coordinaremos con el propietario y los proveedores de servicios en su nombre para garantizar una experiencia de salida sin problemas y agradable.</p>
+			</div>
+		</div>
+
+	</div>
+	<!-- Toggles Container / End -->
+
+
+		</div>
+	</div>
+</section>
+<!-- Fullwidth Section / End -->

@@ -130,8 +130,8 @@
 						?>
 							
 							<span><?php echo $value['physical_address']; ?> </span>
-							<span class="table-property-price" style="background: #274abb; color: #fff;">$<?php echo $value['monthly_house']; ?> / renta en homebase</span>
-							<span class="table-property-price">$<?php echo $value['monthly_house_original']; ?> / su renta mensual</span>
+							<span class="table-property-price" style="background: #274abb; color: #fff;">$<?php echo $value['monthly_house']; ?> / listado en homebase</span>
+							<span class="table-property-price">$<?php echo $value['monthly_house_original']; ?> / su depósito mensual</span>
 							
 							<!-- Space for bottom border -->
 							<span style="visibility: hidden;">space; space</span>
