@@ -168,9 +168,6 @@
 			</div>
 			<!-- Row / End -->
 
-			<?php
-			/*
-
 			<!-- Row -->
 			<div class="row with-forms">
 				<!-- Price -->
@@ -191,8 +188,6 @@
 
 			</div>
 			<!-- Row / End -->
-			*/
-			?>
 
 		</div>
 		<!-- Section / End -->
@@ -389,13 +384,19 @@
 					<input name="video_tour" type="text" value="<?php form_print_value($cache, $listing, 'video_tour'); ?>">
 				</div>
 
+				<!-- Email -->
+				<div class="col-md-12">
+					<h5>Calendly Link <i>(optional)</i> <i class="tip" data-tip-content="Calendly link so users can schedule their appoinments"></i></h5>
+					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>">
+				</div>
+
 			</div>
 			<!-- Row / End -->
 
-			<div class="checkboxes in-row margin-bottom-20 margin-top-10">
+			<!--<div class="checkboxes in-row margin-bottom-20 margin-top-10">
 				<input id="check-30" type="checkbox" name="check_required">
 				<label for="check-30">I certify that this property can be accessed with the details provided above. I understand that if this property is not able to be accessed remotely, my account can be penalized and I will not be able to list on Homebase anymore. <i style="color: red;">*required</i></label>
-			</div>
+			</div>-->
 		</div>
 		<!-- Section / End -->
 		<?php

@@ -27,9 +27,9 @@
 
                 <div>
 				<ul class="contact-details">
-					<li><i class="im im-icon-Clock"></i> <strong>Duration</strong> <span>15 minutes</span></li>
-					<li><i class="im im-icon-Map-Marker"></i> <strong>Location</strong> <span><a href="https://maps.google.com/maps?q=<?php echo $listing['physical_address']; ?>" class="listing-address popup-gmaps"><?php echo $listing['physical_address']; ?></a></span></li>
-                    <li><i class="im im-icon-Landscape"></i> <strong>Local Time Zone</strong> <span><a href="https://maps.google.com/maps?q=<?php echo $listing['physical_address']; ?>" class="listing-address popup-gmaps"><?php echo $listing['physical_address']; ?></a></span></li>
+					<li><i class="im im-icon-Clock"></i> <strong>Duración</strong> <span>15 minutos</span></li>
+					<li><i class="im im-icon-Map-Marker"></i> <strong>Ubicación</strong> <span><a href="https://maps.google.com/maps?q=<?php echo $listing['physical_address']; ?>" class="listing-address popup-gmaps"><?php echo $listing['physical_address']; ?></a></span></li>
+                    <!--<li><i class="im im-icon-Landscape"></i> <strong>Local Time Zone</strong> <span><a href="https://maps.google.com/maps?q=<?php echo $listing['physical_address']; ?>" class="listing-address popup-gmaps"><?php echo $listing['physical_address']; ?></a></span></li>-->
 				</ul>
                 </div>
 			</div>
@@ -40,15 +40,15 @@
 		<div class="col-md-8">
 
 			<section id="contact">
-				<h4 class="headline margin-bottom-35">Fill Out The Form To Schedule A Tour</h4>
+				<h4 class="headline margin-bottom-35">Selecione la hora y el día para coordinar su cita</h4>
 
                 <?php
 					if(are_messages_empty()) {
                         if($user) {
-                            $form_info = 'Hi, '.$user['fullname'].'. You will receive the instructions as a text message.';
+                            $form_info = 'Hola, '.$user['fullname'].'. Recibirá un mensaje de texto con las instrucciones.';
                         }
                         else {
-                            $form_info = 'You will receive the instructions as a text message.';
+                            $form_info = 'Recibirá un mensaje de texto con las instrucciones.';
                         }
                     }
                     
@@ -57,73 +57,8 @@
 
                     <br />
 
-					<form method="post" autocomplete="on">
+					<div id="bookingjs"></div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<div>
-								<?php
-									if($user) {
-										echo '<input name="name" type="hidden" id="name" value="'.$user['fullname'].'" />';
-									}
-									else {
-                                        echo '<label for="username">Full Name </label>';
-										echo '<input name="name" type="text" id="name" placeholder="Your Full Name" />';
-									}
-								?>
-							</div>
-						</div>
-
-						<div class="col-md-6">
-							<div>
-								<?php
-									if($user) {
-										echo '<input name="phone_number" type="hidden" id="phone_number" value="'.$user['phone_number'].'" />';
-									}
-									else {
-                                        echo '<label for="username">Phone Number </label>';
-										echo '<input name="phone_number" type="text" id="phone_number" placeholder="Your Phone Number" />';
-									}
-								?>
-							</div>
-						</div>
-					</div>
-
-                    <br />
-
-                    <div>
-                        <?php
-						    if($user) {
-							    echo '<input name="email" type="hidden" id="email" value="'.$user['email'].'" />';
-							}
-							else {
-                                echo '<label for="username">Email</label>';
-								echo '<input name="email" type="text" id="email" placeholder="Your Email" />';
-							}
-						?>
-                    </div>
-
-                    <div>
-                        <label for="username">Drivers Licence Number</label>
-						<input name="driver" type="text" id="driver" placeholder="Your Drivers License Number" />
-                    </div>
-
-                    <br />
-
-					<div>
-                        <label for="username">Select Date & Time </label> <br />
-                        <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
-					</div>
-
-                    <div>
-                    </div>
-
-					<input name="property" type="hidden" id="property" value="<?php echo $listing['id_property']; ?>" />
-
-                    <br />
-					<input type="submit" class="submit button" id="submit" value="Schedule Tour" />
-
-					</form>
 			</section>
 		</div>
 		<!-- Contact Form / End -->

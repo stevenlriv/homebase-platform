@@ -44,7 +44,8 @@
         }
    
         if(empty($_POST['deposit_house_original'])) {
-            $form_error = 'Debe establecer el depósito de seguridad requerido para la propiedad.';
+            //$form_error = 'Debe establecer el depósito de seguridad requerido para la propiedad.';
+            $_POST['deposit_house_original'] = 0;
         }
 
         if(empty($_POST['square_feet'])) {
@@ -178,7 +179,12 @@
         //Not in use currently
         $monthly_per_room = 0;
         $deposit_per_room = 0;
-        if(!empty($listing['calendly_link'])) {
+
+        // Calendly Link
+        if(!empty($_POST['calendly_link'])) {
+            $calendly_link = $_POST['calendly_link'];
+        }
+        elseif(!empty($listing['calendly_link'])) {
             $calendly_link = $listing['calendly_link'];
         }
         else {

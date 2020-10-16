@@ -124,7 +124,7 @@
 				<div class="col-lg-6 col-sm-8">
 					<h2>Homebase es como Airbnb para alquileres a largo plazo.</h2>
 
-					<p>Alquile su propiedad un 80% más rápido con nuestro marketing digital, contratos digitales y suscripciones de alquiler.</p>
+					<p>Alquile su propiedad un 60% más rápido con nuestro marketing digital, contratos digitales y suscripciones de alquiler.</p>
 
 					<a href="/register?type=landlords" class="button margin-top-25">Empezar</a>
 				</div>

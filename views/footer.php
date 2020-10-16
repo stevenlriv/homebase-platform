@@ -18,7 +18,7 @@ if($request != '/find-a-homebase') {
     <div class="container">
 		<div class="row">
 			<div class="col-md-5 col-sm-6">
-				<img class="footer-logo" src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/homebase-logo-2.png" alt="Homebase">
+				<img class="footer-logo" src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/119061091_319778406137542_8080179303594147033_o.png" alt="Homebase">
 				<br><br>
 				<p>Homebase ofrece la experiencia de alquiler con la que siempre has soñado. Encuentre su próxima casa o inquilino más rápido con nuestra plataforma digital de administración de propiedades.</p>
 			</div>
@@ -101,6 +101,16 @@ ga('send', 'pageview');
 <script type="text/javascript" src="/views/assets/scripts/tooltips.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/masonry.min.js"></script>
 <script type="text/javascript" src="/views/assets/scripts/custom.js"></script>
+
+<!-- Time Kit -->
+<script type="text/javascript" src="//cdn.timekit.io/booking-js/v2/booking.min.js" defer></script>
+<script>
+  window.timekitBookingConfig = {
+    app_key: 'test_widget_key_QIQztxaoo9IJMwgH3v3fKToiX1GJl9AU',
+    project_id: 'a6179340-2d5b-4041-bd5f-f7e933e945a0'
+    // optional configuration here.. (read more under: configuration)
+  };
+</script>
 
 <!-- Forms validations -->
 <script type="text/javascript" src="/views/assets/scripts/jquery.validate.min.js"></script>
@@ -214,10 +224,10 @@ ga('send', 'pageview');
 		//dropzone_js('dropzone-checkin', 'checkin-content', 'checkin-section', '/images-checkin.php?action=get-img', '/images-checkin.php');
 
 		// House Rent
-		//calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase', get_setting(26));
+		calculate_homebase_listed_js('monthly_house_original', 'monthly_house_homebase', get_setting(26));
 
 		// House Deposit
-		//calculate_homebase_listed_js('deposit_house_original', 'deposit_house_homebase', get_setting(26));
+		calculate_homebase_listed_js('deposit_house_original', 'deposit_house_homebase', get_setting(26));
 	}
 ?>
 

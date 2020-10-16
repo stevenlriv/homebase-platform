@@ -18,7 +18,7 @@
 					<span>
 						<a href="#location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
-							<?php echo $listing['physical_address']; ?>
+							<?php echo $listing['city']; ?>
 						</a>
 					</span>
 				</div>
@@ -195,7 +195,7 @@
 								<h4><a href="/<?php echo $value['uri']; ?>"><?php echo $value['listing_title']; ?></a></h4>
 								<a href="https://maps.google.com/maps?q=<?php echo $value['physical_address']; ?>" class="listing-address popup-gmaps">
 									<i class="fa fa-map-marker"></i>
-									<?php echo $value['physical_address']; ?>
+									<?php echo $listing['city']; ?>
 								</a>
 
 								<a href="/<?php echo $value['uri']; ?>" class="details button border">Detalles</a>

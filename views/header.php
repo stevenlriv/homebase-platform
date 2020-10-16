@@ -29,6 +29,8 @@
 
 <!-- FAVICON
 ================================================== -->
+<?php
+/*
 <link rel="apple-touch-icon" sizes="180x180" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/favicon-16x16.png">
@@ -37,6 +39,17 @@
 <link rel="shortcut icon" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/favicon.ico">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+*/
+?>
+<link rel="apple-touch-icon" sizes="180x180" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon-new/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon-new/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon-new/favicon-16x16.png">
+<link rel="manifest" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon-new/site.webmanifest">
+<link rel="mask-icon" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon-new/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon-new/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/favicon-new/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 
 </head>
@@ -90,7 +103,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="/"><img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/homebase-logo-2.png" alt="Homebase"></a>
+					<a href="/"><img src="https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/119061091_319778406137542_8080179303594147033_o.png" alt="Homebase"></a>
 				</div>
 
 

@@ -29,7 +29,7 @@
 
 	if($big_info && $type == 'notice' ) {
 		echo '<div class="notification notice large margin-bottom-55">';
-			echo '<h4>¡Aviso!/h4>';
+			echo '<h4>¡Aviso!</h4>';
 			echo '<p>'.$message.'</p>';
 		echo '</div>';
 	}

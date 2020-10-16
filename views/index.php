@@ -236,7 +236,7 @@
 					</div>
 
 					<h3>Confianza</h3>
-					<p>Le proveemos un reporte con la verificación de antecedentes y crédito del inquilino.</p>
+					<p>No vuelvas a pelearte por el depósito de seguridad con nuestra solución de "Depósito Seguro".</p>
 				</div>
 			</div>
 
@@ -249,7 +249,7 @@
 					</div>
 
 					<h3>Ahorro de tiempo</h3>
-					<p>Deje de preocuparse por mostrar su propiedad. Nos encargaremos de eso por ti.</p>
+					<p>Visite las propiedades de forma segura y en su horario con Self-Tour.</p>
 				</div>
 			</div>
 
@@ -262,7 +262,7 @@
 					</div>
 
 					<h3>Remoto</h3>
-					<p>Convierte su contrato de alquiler preferido en uno digital o usa el nuestro.</p>
+					<p>Alquile desde la comodidad de su teléfono con nuestro contrato de alquiler digital.</p>
 				</div>
 			</div>
 
@@ -275,7 +275,7 @@
 					</div>
 
 					<h3>Fácil de usar</h3>
-					<p>El pago de renta se deposita automáticamente en su cuenta cada mes y los retrasos se facturan automáticamente a su inquilino.</p>
+					<p>No se preocupe por las fechas de vencimiento y las cuotas atrasadas. El alquiler se paga automáticamente con una suscripción mensual.</p>
 				</div>
 			</div>
 
@@ -289,7 +289,7 @@
 
 	<!-- Box Headline -->
 	<div class="col-md-12">
-			    <h3 class="headline centered margin-bottom-35 margin-top-10">¿Cómo funciona?</h3>
+			    <h3 class="headline centered margin-bottom-35 margin-top-10">Preguntas frecuentes</h3>
 		    </div>
 	
 	<!-- Content -->
@@ -298,14 +298,6 @@
 
 	<!-- Toggles Container -->
 	<div class="style-2">
-
-		<!-- Toggle 1 -->
-		<div class="toggle-wrap">
-			<span class="trigger "><a href="#">¿Cuánto cuesta publicar una propiedad? <i class="sl sl-icon-plus"></i></a></span>
-			<div class="toggle-container">
-				<p>Cobramos una cuota mensual del 5% además del alquiler, que cubre todos los gastos de transacción del alquiler, los servicios de gestión de la propiedad digital, y el acceso a Homebase Cashback.</p>
-			</div>
-		</div>
 
 		<!-- Toggle 2 -->
 		<div class="toggle-wrap">
@@ -333,7 +325,7 @@ Si elige hacer lo (b) o (c) con sus ahorros, le igualaremos dólar por dólar y 
 		<div class="toggle-wrap">
 			<span class="trigger"><a href="#"> ¿Cómo puedo ver una propiedad antes de alquilarla?<i class="sl sl-icon-plus"></i></a></span>
 			<div class="toggle-container">
-				<p>Los inquilinos interesados en ver su propiedad pueden programar visitas durante el día sin que usted tenga que mostrarla. Ellos podrán acceder a la propiedad en cualquier momento a partir de las horas de visitas que usted haya establecido, mediante unas llaves en una caja de seguridad. Tú recibes una notificación por mensaje de texto cuando se programa la visita y Homebase se encarga de verificar la licencia e identificación de los visitantes antes de dar acceso la propiedad.</p>
+				<p>Simplemente haga clic en el botón Programar un tour en el listado que desee, luego seleccione una fecha y hora que le sea conveniente. Recibirá un mensaje de texto de confirmación y una solicitud para verificar su identificación emitida por el gobierno, junto con recordatorios y los siguientes pasos a medida que se acerque la hora de su tour.</p>
 			</div>
 		</div>
 
@@ -347,11 +339,11 @@ Si elige hacer lo (b) o (c) con sus ahorros, le igualaremos dólar por dólar y 
 
 		<!-- Toggle 6 -->
 		<div class="toggle-wrap">
-			<span class="trigger"><a href="#"> ¿Qué es una suscripción de alquiler y cómo me pagan?<i class="sl sl-icon-plus"></i></a></span>
+			<span class="trigger"><a href="#"> ¿Con quién me pongo en contacto si tengo un problema?<i class="sl sl-icon-plus"></i></a></span>
 			<div class="toggle-container">
 				<p>Estará conectado con un Homebase Agent durante el proceso de arrendamiento. Esta persona estará a su disposición para ayudarle en cualquier momento que tenga una pregunta o problema durante toda la duración del contrato de arrendamiento. 
 
-Cualquier gasto relacionado con el mantenimiento y las reparaciones que caigan dentro de los deberes del Propietario o del Agente serán pagados por el Propietario o el Agent—no por ti. Puede encontrar la lista de mantenimiento y reparaciones que el Propietario es responsable en su Contrato de Arrendamiento. En caso de que necesite una reparación, le indicaremos la dirección correcta o le ayudaremos a encontrar el proveedor de servicios adecuado.
+Cualquier gasto relacionado con el mantenimiento y las reparaciones que caigan dentro de los deberes del Propietario o del Agente serán pagados por el Propietario o el Agent—no por ti. Puede encontrar la lista de mantenimiento y reparaciones que el Propietario es responsable en su Contrato de Arrendamiento. En caso de que necesite una reparación, le ayudaremos a encontrar el proveedor de servicios adecuado.
 </p>
 			</div>
 		</div>
