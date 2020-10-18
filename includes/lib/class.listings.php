@@ -21,7 +21,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		//If ends on 5 and up it will always round up
 		//In the case that is below 4 we will just add 5 to be able to round it up
 			//We split the decimals from inter to verifi and add up more
-			if(substr_count($price, '.') > 0) {
+			if(substr_count($price, '.') >= 0) {
 				//Lets get the last number and 
 				$pieces = explode('.', $price); //int = [0], decimals = [1]
 
@@ -33,7 +33,9 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 					$price = $price + 5;
 				}
 			}
-		return round($price, -1);
+		$price = round($price, -1);
+		//echo $price."----------";
+		return $price;
 	}
 
 	function is_on_listing_creation_page() {

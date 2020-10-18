@@ -354,7 +354,7 @@
 		<?php
 			if(is_admin()) {
 		?>
-		<h3>Virtual Details</h3>
+		<h3>Virtual Details <span style="color: red;">(only admins)</span></h3>
 		<div class="submit-section">
 
 			<!-- Row -->
@@ -362,21 +362,21 @@
 
 				<!-- Name -->
 				<div class="col-md-12">
-					<?php show_message('', '', 'A property access code is a simple way to allow for remote access to potential tenants. We call this "self-guided tours" and this is how you will be able to handle more properties and tenants request. It usually means the code to a lockbox near your house or the code of a pin pad in your front door. For more information about this, contact us at <a href="mailto:'.get_setting(1).'" style="color: red !important;">'.get_setting(1).'</a>.'); ?>
+					<?php //show_message('', '', 'A property access code is a simple way to allow for remote access to potential tenants. We call this "self-guided tours" and this is how you will be able to handle more properties and tenants request. It usually means the code to a lockbox near your house or the code of a pin pad in your front door. For more information about this, contact us at <a href="mailto:'.get_setting(1).'" style="color: red !important;">'.get_setting(1).'</a>.'); ?>
 				</div>
 
-				<div class="col-md-12">
+				<!--<div class="col-md-12">
 					<h5>Property Access Code <i class="tip" data-tip-content="Access code so the tenant can enter when doing a non-guided tour"></i></h5>
 					<input name="checkin_access_code" type="text" value="<?php form_print_value($cache, $listing, 'checkin_access_code'); ?>">
-				</div>
+				</div>-->
 
 				<!-- Description -->
-				<div class="col-md-12">
+				<!--<div class="col-md-12">
 					<h5>Access Description <i class="tip" data-tip-content="A brief description on what the potential tenant should do when they get to the property, to be able to perform a self-guided tour."></i></h5>
 					<textarea name="checkin_description" class="WYSIWYG" cols="40" rows="3" id="checkin_description" maxlength="2000" spellcheck="true"><?php form_print_value($cache, $listing, 'checkin_description'); ?></textarea>
-				</div>
+				</div>-->
 
-				<?php dropzone_form('checkin-section'); ?>
+				<?php //dropzone_form('checkin-section'); ?>
 
 				<!-- Email -->
 				<div class="col-md-12">

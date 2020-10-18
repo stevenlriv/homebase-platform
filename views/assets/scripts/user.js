@@ -149,12 +149,12 @@
                 keywords: {
                     maxlength: 100
                 }, 
-                checkin_access_code: "required",
-                checkin_description: "required",
-                check_required: {
-                    required: true,
-                    url: true
-                },             
+                //checkin_access_code: "required",
+                //checkin_description: "required",
+                //check_required: {
+                    //required: true,
+                    //url: true
+                //},             
     	    },
 	
 			// Specify validation error messages
