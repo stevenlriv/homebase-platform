@@ -63,7 +63,7 @@
 							// Do not show message to tenants or realtors
 							if(are_messages_empty() && $user['type'] != 'tenants' && $user['type'] != 'realtors' && !is_admin()) {
 								if($user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
-									$form_info = 'Recuerde configurar su información bancaria en la configuración financiera.';
+									$form_info = 'Recuerde configurar su información bancaria en la configuración financiera, para de esta forma poder recibir pagos.';
 								}
 							}
 
@@ -75,22 +75,43 @@
 						<label>Nombre Completo</label>
 						<input name="fullname" value="<?php form_print_value($cache, $user, 'fullname'); ?>" type="text">
 
+							<!--
+						<label>Primer Nombre</label>
+						<input name="firstname" value="<?php form_print_value($cache, $user, 'firstname'); ?>" type="text">
+
+						<label>Apellidos</label>
+						<input name="lastname" value="<?php form_print_value($cache, $user, 'lastname'); ?>" type="text">-->
+
+						<label>Número de licencia de conducir</label>
+						<input name="driver_license" value="<?php form_print_value($cache, $user, 'driver_license'); ?>" type="number">
+
 						<label>Teléfono</label>
 						<input name="phone_number" value="<?php form_print_value($cache, $user, 'phone_number'); ?>" type="text">
 
 						<label>Email</label>
 						<input name="email" value="<?php form_print_value($cache, $user, 'email'); ?>" type="text">
 
-
-						<h4 class="margin-top-50 margin-bottom-25">Sobre Mi</h4>
-						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php form_print_value($cache, $user, 'profile_bio'); ?></textarea>
+						<!--<h4 class="margin-top-50 margin-bottom-25">Sobre Mi</h4>
+						<textarea name="profile_bio" id="about" cols="30" rows="10"><?php form_print_value($cache, $user, 'profile_bio'); ?></textarea>-->
 				
+						<label>Dirección de Residencia</label>
+						<input name="fs_address" value="<?php form_print_value($cache, $user, 'fs_address'); ?>" type="text">
+
+						<label>Ciudad</label>
+						<input name="city" value="<?php form_print_value($cache, $user, 'city'); ?>" type="text">
+
+						<label>Estado (de no vivir en un estado use el nombre de su país)</label>
+						<input name="fs_state" value="<?php form_print_value($cache, $user, 'fs_state'); ?>" type="text">
+
+						<label>Código Postal</label>
+						<input name="postal_code" value="<?php form_print_value($cache, $user, 'postal_code'); ?>" type="text">
+
 						<label>País</label>
 						<input name="country" value="<?php form_print_value($cache, $user, 'country'); ?>" type="text">
 
-						<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin</h4>
+						<!--<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin (opcional)</h4>
 
-						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">
+						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">-->
 
 						<button name="submit" class="button margin-top-20 margin-bottom-20">Guardar Cambios</button>
 					</form>

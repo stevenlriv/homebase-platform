@@ -102,6 +102,10 @@
             $form_error = 'Debes usar un enlace válido para el tour de video.';
         }
 
+        if (!empty($_POST['rent_link']) && !filter_var($_POST['rent_link'], FILTER_VALIDATE_URL)) {
+            $form_error = 'Debes usar un enlace válido para el enlace de alquilar ahora.';
+        }
+
         if(empty($_POST['postal_address'])) {
             $_POST['postal_address'] = '';
         }    
@@ -180,8 +184,8 @@
         $monthly_per_room = 0;
         $deposit_per_room = 0;
 
-        // Calendly Link
-        if(!empty($_POST['calendly_link'])) {
+        // Calendly Link; admin stuff added for $_POST protection
+        if(!empty($_POST['calendly_link']) && is_admin()) {
             $calendly_link = $_POST['calendly_link'];
         }
         elseif(!empty($listing['calendly_link'])) {
@@ -189,6 +193,28 @@
         }
         else {
             $calendly_link = '';
+        }
+
+        // Rent Link
+        if(!empty($_POST['rent_link']) && is_admin()) {
+            $rent_link = $_POST['rent_link'];
+        }
+        elseif(!empty($listing['rent_link'])) {
+            $rent_link = $listing['rent_link'];
+        }
+        else {
+            $rent_link = '';
+        }
+
+        // PandaDoc Id
+        if(!empty($_POST['pandadoc_template_id']) && is_admin()) {
+            $pandadoc_template_id = $_POST['pandadoc_template_id'];
+        }
+        elseif(!empty($listing['pandadoc_template_id'])) {
+            $pandadoc_template_id = $listing['pandadoc_template_id'];
+        }
+        else {
+            $pandadoc_template_id = get_setting(28);
         }
 
         //In use
@@ -201,7 +227,7 @@
                 if(update_listing ( $listing['id_listing'], $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
                     $_POST['number_bathroom'], $_POST['square_feet'], $_POST['physical_address'], $postal_address, $latitude, $longitude, $_POST['listing_title'], $_POST['listing_description'], $listing_images, $_POST['video_tour'],
                     $calendly_link, $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
-                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city']) ) {
+                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city'], $rent_link, $pandadoc_template_id) ) {
                     $form_success = 'Great, your property was updated.';
 
                     // Delete cache
@@ -220,7 +246,7 @@
                 if(new_listing ( $_POST['type'], $_POST['available'], $_POST['zipcode'], $_POST['keywords'], $_POST['monthly_house_original'], $monthly_per_room, $_POST['deposit_house_original'], $deposit_per_room, $_POST['number_rooms'],
                     $_POST['number_bathroom'], $_POST['square_feet'], $_POST['physical_address'], $postal_address, $latitude, $longitude, $_POST['listing_title'], $_POST['listing_description'], $listing_images, $_POST['video_tour'],
                     $calendly_link, $checkin_images, $checkin_description, $_POST['air_conditioning'], $_POST['electricity'], $_POST['furnished'], $_POST['parking'], $_POST['pets'], $_POST['smoking'], $_POST['water'], $_POST['wifi'], 
-                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city']) ) {
+                    $_POST['laundry_room'], $_POST['gym'], $_POST['alarm'], $_POST['swimming_pool'], $_POST['checkin_access_code'], $_POST['country'], $_POST['state'], $_POST['city'], $rent_link, $pandadoc_template_id) ) {
                     $form_success = 'Great, your property was added.';
 
                     // Delete Cache

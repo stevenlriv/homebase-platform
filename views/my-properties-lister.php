@@ -5,8 +5,8 @@
 	array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "status", "command" => "=", "value" => "active"));
 
 	// Hide houses that are already rented from lister
-	//$qdate = strtotime(date("m/d/Y"));
-	//array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "available", "command" => "<=", "value" => $qdate));
+	$qdate = strtotime(date("m/d/Y"));
+	array_push($query, array("type" => "CHR", "condition" => "AND", "loose" => false, "table" => "available", "command" => "<=", "value" => $qdate));
 
     //Lets get the query results
 	$total_results = get_listings('count', $query);
@@ -21,13 +21,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>All Properties</h2>
+				<h2>Todas Las Propiedades</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>All Properties</li>
+						<li><a href="#">Inicio</a></li>
+						<li>Todas Las Propiedades</li>
 					</ul>
 				</nav>
 
@@ -48,7 +48,7 @@
 			if($total_results == 0 && !isset($_GET)) {
 		?>
 			<div class="col-md-8">
-				<h3>Currently there are no properties available to market in our platform.</h3>
+				<h3>Actualmente no hay propiedades disponibles para comercializar en nuestra plataforma.</h3>
 			</div>
 
 		<?php
@@ -61,7 +61,7 @@
 				show_message($form_success, $form_error, $form_info);
 			?>
 
-            <h4 class="search-title">Search Properties</h4>
+            <h4 class="search-title">Busca Propiedades</h4>
             <?php full_search_form('my-properties'); ?>
         </div>
 
@@ -70,8 +70,8 @@
 			<table class="manage-table responsive-table">
 
 				<tr>
-					<th><i class="fa fa-file-text"></i> Property</th>
-					<th class="expire-date"><i class="fa fa-calendar"></i> Available</th>
+					<th><i class="fa fa-file-text"></i> Propiedad</th>
+					<th class="expire-date"><i class="fa fa-calendar"></i> Disponibilidad</th>
 					<th></th>
 				</tr>
 
@@ -107,8 +107,12 @@
 								$earn_from = $lister_commision*2;
 								$earn_up_to = $lister_commision*8;
 
+								//Basic earning per house rented
+								$basic_commision_house_lister = get_setting(30);
+
 							?>
-							<span class="table-property-price">Earn from $<?php echo $earn_from; ?> up to $<?php echo $earn_up_to; ?> **</span>
+							<!--<span class="table-property-price">Earn from $<?php echo $earn_from; ?> up to $<?php echo $earn_up_to; ?> **</span>-->
+							<span class="table-property-price">Gana $<?php echo $basic_commision_house_lister; ?> al rentarla **</span>
 						</div>
 					</td>
 					<td class="expire-date"><?php print_available_message('date', $value['available']); ?></td>
@@ -117,7 +121,7 @@
 							//Modify new url, so javascript object can get it '#' will be removed by javascript on the other end
 							$unique_link = '#'.get_domain().'/'.$value['uri'].'?ref='.$user['id_user_referral'];
 						?>
-						<a href="<?php echo $unique_link; ?>" class="open-ul-pp"><i class="fa fa-link"></i> Get Unique Link</a>
+						<a href="<?php echo $unique_link; ?>" class="open-ul-pp"><i class="fa fa-link"></i> Obtén Link &Uacute;nico</a>
 					</td>
 				</tr>
 				<?php
@@ -127,7 +131,7 @@
 			</table>
 
 			<br />
-			<p>** You can earn up to that amount by promoting this property, but you will only be paid a commission by the link clicks that converts, meaning that a successful referral rents the property. The total amount of the commission will depend on the duration of the lease referred, and will be divided into monthly payments for up to 6, 12 or 24 months depending on the specifics of that property and the lease duration.</p>
+			<p>** Puedes ganar hasta esa cantidad promocionando esta propiedad, pero sólo se te pagará una comisión por los clics del enlace que se convierta, lo que significa que un referido exitoso alquila la propiedad.</p>
 
 			<?php
 				$pagination->print();

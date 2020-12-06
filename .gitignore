@@ -5,3 +5,4 @@ vendor/
 *.key
 */configuration.php
 configuration.php
+test-enviroment-codes.php

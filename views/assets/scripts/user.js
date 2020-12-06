@@ -14,21 +14,32 @@
       		    // The key name on the left side is the name attribute
       		    // of an input field. Validation rules are defined
       		    // on the right side
-      		    fullname: "required",
+				fullname: "required",
+				driver_license: "required",
       		    phone_number: "required",
       		    email: {
         		    required: true,
         		    // Specify that email should be validated
         		    // by the built-in "email" rule
         		    email: true
-      		    },
+				},
+				fs_address: "required",
+				city: "required",
+				fs_state: "required",
+				postal_code: "required"
+				  
     	    },
 	
 			// Specify validation error messages
             messages: {
-                fullname: "Por favor, introduzca su nombre completo",
+				fullname: "Por favor, introduzca su nombre completo",
+				driver_license: "Por favor, introduzca el número de su licencia de conducir",
                 phone_number: "Por favor, introduzca su número de teléfono",
-                email: "Por favor, introduzca una dirección de correo electrónico válida"
+				email: "Por favor, introduzca una dirección de correo electrónico válida",
+				fs_address: "Por favor, introduzca una dirección la dirección donde reside",
+				city: "Por favor, introduzca el nombre de la ciudad en la que reside",
+				fs_state: "Por favor, introduzca el estado en el cual reside",
+				postal_code: "Por favor, introduzca el código postal de donde reside"
             },
 
             // Make sure the form is submitted to the destination defined
@@ -248,6 +259,30 @@
 		    });
 	    });
 
+	    //Open Assign popup
+	    $( ".open-aa-pp" ).click(function() {
+
+		    //get url
+		    var a_href = $(this).attr('href');
+		    var a_href = a_href.replace("#", "?");
+		
+		    //define url
+		    var listing_uri = a_href;
+
+		    //Content
+		    var title = 'Ingresa el id del usuario';
+		    var content = 'El id del usuario la puedes conseguir realizando una buqueda con el nombre del mismo. Este es un proceso irréversible, una vez se asigna una propiedad, ya no puede volver a ser asignada a otra persona.';
+
+		    //Generate the popup
+			
+		    $.magnificPopup.open({
+			    items: {
+				    src: '<div id="small-dialog" class="zoom-anim-dialog"><button title="Close" type="button" style="color: #000;" class="mfp-close"></button><h2>' + title + '</h2><p>' + content + '</p><p><form type="GET"><label>Id del usuario</label><input type="number" name="id_user"><input type="hidden" name="assign" value="' + listing_uri + '"><input type="hidden" name="confirm" value="true"><button type="submit" class="button">Asignar</button></form></div>', // can be a HTML string, jQuery object, or CSS selector
+				    type: 'inline'
+			    }
+		    });	
+		});
+		
 	    //Open Approval popup
 	    $( ".open-ap-pp" ).click(function() {
 
@@ -324,6 +359,52 @@
 		    new_action_popup(title, content, cancel_url, confirm_url);
 	    });
 
+        /*----------------------------------------------------*/
+	    /* User Actions Popup
+        /*----------------------------------------------------*/
+
+	    //Open activate user popup
+	    $( ".open-us-pp" ).click(function() {
+
+		    //get url
+		    var a_href = $(this).attr('href');
+		    var a_href = a_href.replace("#", "?");
+		
+		    //define url
+		    var cancel_url = '#';
+		    var confirm_url = '/all-users' + a_href;
+
+		    //Content
+		    var title = '¿Está seguro?';
+		    var content = 'Esto habilitará la cuenta del usuario.';
+
+		    //Generate the popup
+		    new_action_popup(title, content, cancel_url, confirm_url);
+        });
+
+	    //Open Hide user popup
+	    $( ".open-uh-pp" ).click(function() {
+
+		    //get url
+		    var a_href = $(this).attr('href');
+		    var a_href = a_href.replace("#", "?");
+		
+		    //define url
+		    var cancel_url = '#';
+		    var confirm_url = '/all-users' + a_href;
+
+		    //Content
+		    var title = '¿Está seguro?';
+		    var content = 'Esto inhabilitará la cuenta del usuario y ya no podrá entrar a la misma.';
+
+		    //Generate the popup
+		    new_action_popup(title, content, cancel_url, confirm_url);
+	    });
+        
+	    /*----------------------------------------------------*/
+	    /* Default Popup Functions
+        /*----------------------------------------------------*/
+        
 	    //Close popup
 	    $( ".close-pp" ).click(function() {
 		    $.magnificPopup.close(); 

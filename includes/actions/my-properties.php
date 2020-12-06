@@ -69,4 +69,21 @@
             }
         }
     }
+
+    ////////////////// ASSIGN ////////////////// 
+    
+    if(!empty($_GET['id_user']) && get_user_by_id($_GET['id_user']) && !empty($_GET['assign']) && !empty($_GET['confirm']) && $_GET['confirm'] == 'true' && is_uri($_GET['assign'], true)) {
+        $listing = is_uri($_GET['assign'], true);
+
+        //We only allow admins to assign users to properties
+        //Only update if the user property id is an admin
+        if(is_admin() && is_admin_by_id($listing['id_user'])) {
+            if(update_user_id($listing['id_listing'], $_GET['id_user'])) {
+                $form_success = 'La propiedad fue asignada correctamente.';
+            }
+            else {
+                $form_error = 'Hubo un error, al asignar la propiedad, favor de intentarlo nuevamente.';
+            }
+        }
+    }
 ?>

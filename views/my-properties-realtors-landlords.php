@@ -151,9 +151,18 @@
 							$show_url = '#p='.$pagination->get_page().'&show='.$value['uri'].'&confirm=true&'.$url;
 							$hide_url = '#p='.$pagination->get_page().'&hide='.$value['uri'].'&confirm=true&'.$url;
 
+							////////////////////////////////////////////////////////////////////////////////////////////////////
+
+							$assign_listing_uri = '#'.$value['uri'];
+
 							//Show the user profile only to admins
 							if( is_admin() ) {
 								echo '<a href="'.$user_url.'" target="_blank"><i class="fa fa-user"></i> Ver Usuario</a>';
+
+								//Only allow property switch if the property is currently hold by an admin or super_admin
+								if(is_admin_by_id($value['id_user'])) {
+									echo '<a href="'.$assign_listing_uri.'" class="open-aa-pp"><i class="fa fa-users"></i> Asignar a Usuario</a>';
+								}
 							}
 
 							if( is_admin() && $value['status']=='pending') {

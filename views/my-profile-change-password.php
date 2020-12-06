@@ -38,7 +38,7 @@
 			<div class="row hidden-md hidden-lg">
 				<div class="col-md-6 margin-bottom-30">
 					<div class="notification notice">
-						<p>Su contraseña debe tener al menos 12 caracteres de longitud</p>
+						<p>Su contraseña debe tener al menos 8 caracteres de longitud</p>
 					</div>
 				</div>
 			</div>
@@ -70,7 +70,7 @@
 				<div class="hidden-xs hidden-sm">
 					<div class="col-md-6">
 						<div class="notification notice">
-							<p>Su contraseña debe tener al menos 12 caracteres de longitud</p>
+							<p>Su contraseña debe tener al menos 8 caracteres de longitud</p>
 						</div>
 					</div>
 				</div>

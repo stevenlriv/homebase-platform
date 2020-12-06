@@ -71,15 +71,27 @@
             <!-- Tour Widget / End -->
 <?php
 	}
-?>
+
+	// If there is a rent link, show it
+	if($listing['rent_link'] != '') {
+		?>
+					<!-- Tour Widget -->
+					<div class="widget">
+						<div id="booking-widget-anchor" class="boxed-widget booking-widget">
+							<a href="<?php echo $listing['rent_link']; ?>" target="_blank" class="button book-now fullwidth margin-top-5">Aquile Ahora</a>
+						</div>
+					</div>
+					<!-- Tour Widget / End -->
+		
+		<?php
+			}
+			else {
+		?>
             <!-- Booking Widget -->
 			<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
             <div class="widget">
-
                 <form action="/contact" type="GET">
-
                 <input type="hidden" name="property" value="<?php echo $listing['uri']; ?>">
-
                 <!-- Book Now -->
                 <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35 margin-bottom-35">
                     <!--<h3><i class="fa fa-calendar-check-o "></i> Rent This Property</h3>
@@ -91,20 +103,15 @@
                         </div>
 
                     </div>-->
-                    
                     <!-- Book Now -->
                     <button class="button book-now fullwidth margin-top-5">Aquile Ahora</button>
-
                 </div>
                 <!-- Book Now / End -->
-
                 </form>
-
-
             </div>
             <!-- Booking Widget / End -->
-
-<?php
+		<?php
+			}
 }
 
 	function booking_component_js($listing, $jquery_id, $cache = '') {
@@ -252,19 +259,48 @@ function sidebar_component() {
 
 						//Realtor/Landlord/Admin Menus
                         else {
+
+							// Users Menu for admins
+							if(is_admin()) {
+					?>
+							<ul class="my-account-nav">
+								<li class="sub-nav-title">Usuarios</li>
+	
+								<li><a href="/all-users"><i class="sl sl-icon-people"></i> Todos los usuarios</a></li>
+							</ul>
+					<?php
+							}
                     ?>
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Propiedades</li>
-						<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> Sus Propiedades</a></li>
+						<?php
+							if(is_admin()) {
+						?>
+							<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> Todas las propiedades</a></li>
+						<?php
+							}
+							else {
+						?>
+							<li><a href="/my-properties" <?php if($request == '/my-properties') echo 'class="current"'; ?>><i class="sl sl-icon-docs"></i> Sus Propiedades</a></li>
+						<?php
+							}
+						?>
 						<li><a href="/submit-property"><i class="sl sl-icon-action-redo"></i> Añadir una nueva propiedad</a></li>
 					</ul>
 
+
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Finanzas</li>
-						<!--<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
-                        <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>-->
 
 						<?php
+							if(is_admin()) {
+						?>
+						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
+                        <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>
+
+						<?php
+							}
+
 							// Do not show to admins or realtors
 							if(!is_admin() && $user['type'] != 'realtors') {
 						?>
@@ -362,8 +398,8 @@ function full_search_form($type = '', $extra = '') {
 
 										<!-- Rooms Area -->
 										<div class="col-fs-3">
-											<select name="bedroom" data-placeholder="Dormitorios (Cualquiera)" class="chosen-select-no-single" >
-												<option value="">Dormitorios (Cualquiera)</option>
+											<select name="bedroom" data-placeholder="Dormitorios (1-5)" class="chosen-select-no-single" >
+												<option value="">Dormitorios (1-5)</option>
 												<option <?php if(!empty($_SESSION['search-bedroom']) && $_SESSION['search-bedroom'] == '1') echo 'selected="selected"' ?>>1</option>
 												<option <?php if(!empty($_SESSION['search-bedroom']) && $_SESSION['search-bedroom'] == '2') echo 'selected="selected"' ?>>2</option>
 												<option <?php if(!empty($_SESSION['search-bedroom']) && $_SESSION['search-bedroom'] == '3') echo 'selected="selected"' ?>>3</option>
@@ -374,8 +410,8 @@ function full_search_form($type = '', $extra = '') {
 
 										<!-- Max Area -->
 										<div class="col-fs-3">
-											<select name="bathroom" data-placeholder="Baños (Cualquiera)" class="chosen-select-no-single" >
-												<option value="">Baños (Cualquiera)</option>	
+											<select name="bathroom" data-placeholder="Baños (1-5)" class="chosen-select-no-single" >
+												<option value="">Baños (1-5)</option>	
 												<option <?php if(!empty($_SESSION['search-bathroom']) && $_SESSION['search-bathroom'] == '1') echo 'selected="selected"' ?>>1</option>
 												<option <?php if(!empty($_SESSION['search-bathroom']) && $_SESSION['search-bathroom'] == '2') echo 'selected="selected"' ?>>2</option>
 												<option <?php if(!empty($_SESSION['search-bathroom']) && $_SESSION['search-bathroom'] == '3') echo 'selected="selected"' ?>>3</option>
@@ -385,8 +421,8 @@ function full_search_form($type = '', $extra = '') {
 										</div>
 
 										<div class="col-fs-3">
-                                            <select name="maxprice" data-placeholder="Precio Máximo (Ninguno)" class="chosen-select-no-single">	
-                                                <option value="">Precio Máximo (Ninguno)</option>
+                                            <select name="maxprice" data-placeholder="Precio Máximo" class="chosen-select-no-single">	
+                                                <option value="">Precio Máximo</option>
                                                 <option <?php if(!empty($_SESSION['search-maxprice']) && $_SESSION['search-maxprice'] == '500') echo 'selected="selected"' ?>>500</option>	
 											    <option <?php if(!empty($_SESSION['search-maxprice']) && $_SESSION['search-maxprice'] == '1000') echo 'selected="selected"' ?>>1000</option>
 											    <option <?php if(!empty($_SESSION['search-maxprice']) && $_SESSION['search-maxprice'] == '2000') echo 'selected="selected"' ?>>2000</option>	
@@ -435,6 +471,43 @@ function full_search_form($type = '', $extra = '') {
 <?php
 }
 
+function user_search_form($type = '', $extra = '') {
+	global $user;
+	
+
+		$action = '/all-users';
+
+?>
+
+<!-- Form -->
+<form action="<?php echo $action; ?>" type="GET">
+                        
+						<div class="main-search-box no-shadow">
+
+							<!-- Row With Forms -->
+							<div class="row with-forms">
+
+								<!-- Main Search Input -->
+								<div class="col-fs-9">
+									<input type="text" placeholder="Introduzca su nombre, email, número de teléfono o país." value="<?php if(!empty($_SESSION['user-query'])) echo sanitize_xss($_SESSION['user-query']); ?>" name="user-query"/>
+								</div>
+
+								<!-- Status -->
+								<div class="col-fs-3">
+									<!-- Search Button -->
+									<button class="button fs-map-btn">Buscar</button>
+								</div>
+
+							</div>
+							<!-- Row With Forms / End -->
+
+						</div>
+						<!-- Box / End -->
+                        </form>
+
+<?php
+}
+
 function calculate_homebase_listed_js($input_from, $input_to, $percentaje = 0.10) {
 ?>
 
@@ -455,6 +528,7 @@ function calculate_homebase_listed_js($input_from, $input_to, $percentaje = 0.10
 	// In case there is form data while editing or cache
 	var monthly_rent = parseInt($( 'form input[name="<?php echo $input_from; ?>"]' ).val(), 10);
 	var monthly_rent_homebase = monthly_rent + (round_homebase_fee(monthly_rent, <?php echo $percentaje; ?>));
+	
 	$('form input[name="<?php echo $input_to; ?>"]').attr('value', Math.trunc(monthly_rent_homebase));
 
 	// When the form input is updated;
@@ -470,18 +544,32 @@ function calculate_homebase_listed_js($input_from, $input_to, $percentaje = 0.10
 <?php
 }
 
-function print_profile_image_form($id_input, $id_submit) {
+//$v_user if false we will get the user data from $user var if true, we will get the user data from view_user
+//this is used mainly for admin-edit-profile.php
+function print_profile_image_form($id_input, $id_submit, $v_user = false) {
 	global $user;
+
+	if($v_user) {
+		global $view_user;
+		$user = $view_user;
+	}
 ?>
 	<form method="post" enctype="multipart/form-data">
 		<!-- Avatar -->
 		<div class="edit-profile-photo">
 			<img src="<?php if(!empty($user['profile_image'])) { echo $user['profile_image']; } else { echo 'https://renthomebase.nyc3.digitaloceanspaces.com/general/theme/images/agent-03.jpg'; }; ?>" alt="">
 			<div class="change-photo-btn">
+			<?php
+				//dont shoe edit button if an admin is editting an user, only users can change their images
+				if(!$v_user) {
+			?>
 				<div class="photoUpload">
 					<span><i class="fa fa-upload"></i> Subir Foto</span>
 					<input type="file" id="<?php echo $id_input; ?>" name="profile_image" class="upload" />
 				</div>
+			<?php
+				}
+			?>
 			</div>
 		</div>
 		<button name="submit-image" id="<?php echo $id_submit; ?>" style="display: none;" class="button margin-top-20 margin-bottom-20">Subir Imagen</button>

@@ -185,5 +185,5 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
         }
 
         return $base_url;
-    }
+	}
 ?>

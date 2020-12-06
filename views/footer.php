@@ -28,12 +28,12 @@ if($request != '/find-a-homebase') {
 				<ul class="footer-links">
 					<li><a href="/find-a-homebase">Buscar casas</a></li>
                     <li><a href="/list-your-home">¿Por qué añadir su propiedad?</a></li>
-					<!--<li><a href="/make-money">Make Money</a></li>-->
+					<li><a href="/make-money">Gana Dinero</a></li>
 					<li><a href="https://blog.renthomebase.com">Blog</a></li>
-					<li><a href="/contact">Contáctanos</a></li>
 				</ul>
 
 				<ul class="footer-links">
+					<li><a href="/contact">Contáctanos</a></li>
 					<li><a href="/faq">Pregúntas Frecuentes</a></li>
 					<li><a href="/privacy">Política de Privacidad</a></li>
                     <li><a href="/terms">Terminos de Servicio</a></li>

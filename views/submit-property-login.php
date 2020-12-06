@@ -67,7 +67,7 @@
 			show_message($form_success, $form_error, $form_info, true);
 		?>
 
-		<?php dropzone_box('Gallery', 'dropzone-listing', 'galery-content'); ?>
+		<?php dropzone_box('Fotos', 'dropzone-listing', 'galery-content'); ?>
 
 		<?php //dropzone_box('Access Images', 'dropzone-checkin', 'checkin-content', 'col-md-12', '/images-checkin.php'); ?>
 
@@ -159,7 +159,7 @@
 
 				<!-- Price -->
 				<div class="col-md-6">
-					<h5>Deposito <i class="tip" data-tip-content="Depósito de propiedad"></i></h5>
+					<h5>Deposito de Seguridad <i class="tip" data-tip-content="Depósito de propiedad. Puede ser $0 si desea."></i></h5>
 					<div class="select-input disabled-first-option">
 						<input name="deposit_house_original" value="<?php form_print_value($cache, $listing, 'deposit_house_original'); ?>" type="number" data-unit="USD">
 					</div>
@@ -354,7 +354,7 @@
 		<?php
 			if(is_admin()) {
 		?>
-		<h3>Virtual Details <span style="color: red;">(only admins)</span></h3>
+		<h3><span style="color: red;">Admin Settings</span></h3>
 		<div class="submit-section">
 
 			<!-- Row -->
@@ -380,16 +380,27 @@
 
 				<!-- Email -->
 				<div class="col-md-12">
-					<h5>Video Tour <i>(optional)</i> <i class="tip" data-tip-content="Youtube video link where people can see a video tour of the property"></i></h5>
+					<h5>Programar una Cita Link <i>(optional)</i> </h5>
+					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>">
+				</div>
+
+				<!-- Email -->
+				<div class="col-md-12">
+					<h5>Alquile Ahora Link <i>(optional)</i> </h5>
+					<input name="rent_link" type="text" value="<?php form_print_value($cache, $listing, 'rent_link'); ?>">
+				</div>
+
+				<!-- Email -->
+				<div class="col-md-12">
+					<h5>Video Tour Link <i>(optional)</i> </h5>
 					<input name="video_tour" type="text" value="<?php form_print_value($cache, $listing, 'video_tour'); ?>">
 				</div>
 
 				<!-- Email -->
 				<div class="col-md-12">
-					<h5>Calendly Link <i>(optional)</i> <i class="tip" data-tip-content="Calendly link so users can schedule their appoinments"></i></h5>
-					<input name="calendly_link" type="text" value="<?php form_print_value($cache, $listing, 'calendly_link'); ?>">
+					<h5>PandaDoc Template Id <i class="tip" data-tip-content="The listing will always have the standard doc id, but if there is a customer that wants a custom one, it can be done."></i></h5>
+					<input name="pandadoc_template_id" type="text" value="<?php if(form_get_value($cache, $listing, 'pandadoc_template_id')!='') { form_print_value($cache, $listing, 'pandadoc_template_id'); } else { echo get_setting(28); }; ?>">
 				</div>
-
 			</div>
 			<!-- Row / End -->
 

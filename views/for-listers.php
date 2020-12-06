@@ -16,12 +16,12 @@
 
 			<div class="row">
 				<div class="col-lg-6 col-sm-8">
-					<h2>It has never been easier to make money from real estate.</h2>
-					<p>Just share our properties and get paid for each property you refer!</p>
+					<h2>Nunca ha sido más fácil hacer dinero en bienes raíces.</h2>
+					<p>¡Sólo comparta nuestras propiedades y reciba el pago por cada propiedad que refiera!</p>
 
-                    <h3>Starting at 3% per month for up to 8 months per property</h3>
+                    <h3>Gane $<?php echo get_setting(30); ?> por cada propiedad</h3>
 
-					<a href="/register?type=listers" class="button margin-top-25">Get Started</a>
+					<a href="/register?type=listers" class="button margin-top-25">Regístrate</a>
 				</div>
 			</div>
 
@@ -38,9 +38,9 @@
     <div class="row">
 		<div class="col-md-12">
 		    <!-- Headline -->
-		    <h3 class="headline with-border margin-top-45 margin-bottom-25">Its Easy To Work With Us</h3>
+		    <h3 class="headline with-border margin-top-45 margin-bottom-25">Es fácil trabajar con nosotros</h3>
 
-		    <p>When you share our properties with the world, we'll pay you a monthly referral fee for up to 8 months-every month. Best of all, there's no limit to how many properties you can refer.</p>
+		    <p>Cuando comparta nuestras propiedades con el mundo, le pagaremos una "finder fee" de $<?php echo get_setting(30); ?> por propiedad. Lo mejor de todo es que no hay límite en la cantidad de propiedades que puede referir.</p>
 
 		</div>
 	</div>
@@ -48,18 +48,18 @@
 	<div class="row">
 
 		<div class="col-md-12">
-			<h4 class="headline margin-bottom-30 margin-top-40">How does it works?</h4>
+			<h4 class="headline margin-bottom-30 margin-top-40">¿Cómo funciona?</h4>
 
 			<div class="numbered color filled">
 				<ol>
 					<li>
-                        <p><b>Sign up for an account.</b> You will get access to all of our properties and we will provide you with a unique link for every property.</p>
+                        <p><b>Regístrese para obtener una cuenta.</b> Tendrá acceso a todas nuestras propiedades y le proporcionaremos un enlace único para cada propiedad.</p>
                     </li>
 					<li>
-                        <p><b>Share your unique link.</b> You can share on your social media, with your friends, and on any other platform. Share as much as you want.</p>
+                        <p><b>Comparte tu enlace único.</b> Puedes compartir el enlace en tus redes sociales, con tus amigos y en cualquier otra plataforma. Comparte todo lo que quieras.</p>
                     </li>
 					<li>
-                        <p><b>Get Paid.</b> When someone rents a property using your unique link, you will get paid 3% of rent every month for up to 8 months.</p>
+                        <p><b>Recibe tu dinero.</b> Cuando alguien alquila una propiedad usando su enlace único, se le pagará un "finder fee" de $<?php echo get_setting(30); ?>.</p>
                     </li>
 				</ol>
 			</div>
@@ -71,32 +71,32 @@
 
 		<div class="col-md-12">
 
-            <h3 class="headline margin-bottom-30 margin-top-40">All you have to do is share a link to earn money.</h3>
+            <h3 class="headline margin-bottom-30 margin-top-40">Todo lo que tienes que hacer es compartir un enlace para ganar dinero.</h3>
 
 			<!-- Toggles Container -->
 			<div class="style-2">
 
 				<!-- Toggle 1 -->
 				<div class="toggle-wrap">
-					<span class="trigger "><a href="#">How often do I get paid?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger "><a href="#">¿Con qué frecuencia me pagan?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>We pay out on a monthly basis before the 5th of the month. All payments are made online.</p>
+						<p>Pagamos mensualmente antes del día 5 del mes. Todos los pagos se hacen en línea.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 2 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> How much will I earn?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> ¿Cuánto ganaré?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>When someone rents a property using your links, you'll receive 3% of that rent.</p>
+						<p>Cuando alguien alquila una propiedad usando su enlace único, se le pagará un "finder fee" de $<?php echo get_setting(30); ?>.</p>
 					</div>
 				</div>
 
 				<!-- Toggle 3 -->
 				<div class="toggle-wrap">
-					<span class="trigger"><a href="#"> Is there a limit to how much I can earn?<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger"><a href="#"> ¿Hay un límite de cuánto puedo ganar?<i class="sl sl-icon-plus"></i></a></span>
 					<div class="toggle-container">
-						<p>No, there is no limit. Just keep sharing your links and referring tenants. You can create a recurring income for your self using our platform.</p>
+						<p>No, no hay límite. Sólo sigue compartiendo tus enlaces y refiriendo a los inquilinos. Puedes crear un ingreso recurrente para ti mismo usando nuestra plataforma.</p>
 					</div>
 				</div>
 

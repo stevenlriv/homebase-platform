@@ -47,10 +47,13 @@
 
 									<!-- Property Type -->
 									<div class="col-md-4">
-										<select name="type" data-placeholder="Type" class="chosen-select-no-single">
-											<option value="">Tipo (Cualquiera)</option>
-                                            <option value="house">Casa</option>
-											<option value="apartment">Apartamento</option>
+										<select name="bedroom" data-placeholder="Dormitorios (1-5)" class="chosen-select-no-single">
+											<option value="">Dormitorios (1-5)</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
 										</select>
 									</div>
                                     

@@ -58,28 +58,6 @@ switch ($request) {
         require_once __DIR__ . '/views/index.php';
         require_once __DIR__ . '/views/footer.php';
         break;
-    case '/tour' :
-
-        if(empty($_GET['property']) || !is_numeric($_GET['property'])) {
-            header('Location: /');
-        }
-
-        $listing = get_listings ('one', $_GET['property']);
-
-        // We verify the listing exists
-        if(!$listing) {
-            header('Location: /');
-        }
-
-        $seo = array(
-            "title" => "Programe una Cita",
-            "request" => $request,
-        );
-        require_once __DIR__ . '/includes/actions/tour.php';
-        require_once __DIR__ . '/views/header.php';
-        require_once __DIR__ . '/views/tour.php';
-        require_once __DIR__ . '/views/footer.php';
-        break;
     case '/login' :
         if($user) {
             header('Location: /my-profile');
@@ -183,10 +161,26 @@ switch ($request) {
         require_once __DIR__ . '/views/user-profile.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/edit-user' :
+        // Only allow admins to edit users
+        $view_user = get_user_by_id($_GET['id']);
+
+        if(!$user || !is_admin() || !$view_user) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Editar el usuario",
+            "request" => $request,
+        );
+        
+        require_once __DIR__ . '/includes/actions/admin-edit-profile.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/admin-edit-profile.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/financial-settings' :
-        // Don't allow tenants to edit bank information, their payments are managed with PandaDocs
         // Also don't allow admins or realtors, because they will be able to setup their bank info per lease
-        if(!$user || $user['type'] == 'tenants' || $user['type'] == 'realtors' || is_admin()) {
+        if(!$user || $user['type'] == 'realtors' || is_admin()) {
             header('Location: /');
         }
         $seo = array(
@@ -216,6 +210,21 @@ switch ($request) {
         require_once __DIR__ . '/includes/actions/listing-search.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/my-properties.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/all-users' :
+        if(!is_admin()) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Todos los usuarios",
+            "request" => $request,
+        );
+
+        require_once __DIR__ . '/includes/actions/all-users.php';
+        require_once __DIR__ . '/includes/actions/all-users-search.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/all-users.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/draft' :

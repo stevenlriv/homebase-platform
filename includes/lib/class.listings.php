@@ -209,6 +209,20 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		return false;
 	}
 
+	function update_user_id($id_listing, $id_user) {
+		global $db;
+		
+		$q = $db->prepare ( "UPDATE xvls_listings SET id_user = ? WHERE id_listing = ?" );
+		$q->bind_param ( 'ii', $id_user, $id_listing );		
+	
+		if ( $q->execute() ) {
+			return true;
+		}
+		$q->close();
+	
+		return false;
+	}
+
 	function delete_listing($id_listing) {
 		global $db;
 
@@ -225,7 +239,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	function update_listing ( $id_listing, $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 						$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 						$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi, 
-						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code, $country, $state, $city) {
+						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code, $country, $state, $city, $rent_link, $pandadoc_template_id) {
 		global $db;
 
 		//URI CANT BE CHANGED AFTER IT IS CREATED
@@ -248,12 +262,12 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		$q = $db->prepare ( "UPDATE xvls_listings SET `type` = ?, available = ?, country = ?, `state` = ?, city = ?, zipcode = ?, keywords = ?, monthly_house = ?, monthly_house_original = ?, monthly_per_room = ?, deposit_house = ?, deposit_house_original = ?, deposit_per_room = ?, number_rooms = ?,
 											number_bathroom = ?, square_feet = ?, physical_address = ?, postal_address = ?, latitude = ?, longitude = ?, listing_title = ?, listing_description = ?, listing_images = ?, video_tour = ?,
 											calendly_link = ?, checkin_access_code = ?, checkin_images = ?, checkin_description = ?, air_conditioning = ?, electricity = ?, furnished = ?, parking = ?, pets = ?, smoking = ?, water = ?, wifi = ?,
-											laundry_room = ?, gym = ?, alarm = ?, swimming_pool = ? WHERE id_listing = ?" );
+											laundry_room = ?, gym = ?, alarm = ?, swimming_pool = ?, rent_link = ?, pandadoc_template_id = ? WHERE id_listing = ?" );
 									
-		$q->bind_param ( 'ssssssssssssssssssssssssssssssssssssssssi', $type, $available, $country, $state, $city, $zipcode, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'ssssssssssssssssssssssssssssssssssssssssssi', $type, $available, $country, $state, $city, $zipcode, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_access_code, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
-										$laundry_room, $gym, $alarm, $swimming_pool, $id_listing);
+										$laundry_room, $gym, $alarm, $swimming_pool, $rent_link, $pandadoc_template_id, $id_listing);
 
 		if ( $q->execute() ) {
 			return true;
@@ -267,7 +281,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	function new_listing ( $type, $available, $zipcode, $keywords, $monthly_house, $monthly_per_room, $deposit_house, $deposit_per_room, $number_rooms,
 						$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 						$calendly_link, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi, 
-						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code, $country, $state, $city) {
+						$laundry_room, $gym, $alarm, $swimming_pool, $checkin_access_code, $country, $state, $city, $rent_link, $pandadoc_template_id) {
 		global $db;
 
 		// Listing status on publish
@@ -298,13 +312,13 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		$q = $db->prepare ( "INSERT INTO xvls_listings (id_user, `status`, `type`, available, country, `state`, city, zipcode, uri, keywords, monthly_house, monthly_house_original, monthly_per_room, deposit_house, deposit_house_original, deposit_per_room, number_rooms,
 											number_bathroom, square_feet, physical_address, postal_address, latitude, longitude, listing_title, listing_description, listing_images, video_tour,
 											calendly_link, checkin_access_code, checkin_images, checkin_description, air_conditioning, electricity, furnished, parking, pets, smoking, water, wifi,
-											laundry_room, gym, alarm, swimming_pool)
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+											laundry_room, gym, alarm, swimming_pool, rent_link, pandadoc_template_id)
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 									
-		$q->bind_param ( 'issssssssssssssssssssssssssssssssssssssssss', $id_user, $status, $type, $available, $country, $state, $city, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
+		$q->bind_param ( 'issssssssssssssssssssssssssssssssssssssssssss', $id_user, $status, $type, $available, $country, $state, $city, $zipcode, $uri, $keywords, $monthly_house, $original_rent_cost, $monthly_per_room, $deposit_house, $deposit_house_original, $deposit_per_room, $number_rooms,
 										$number_bathroom, $square_feet, $physical_address, $postal_address, $latitude, $longitude, $listing_title, $listing_description, $listing_images, $video_tour,
 										$calendly_link, $checkin_access_code, $checkin_images, $checkin_description, $air_conditioning, $electricity, $furnished, $parking, $pets, $smoking, $water, $wifi,
-										$laundry_room, $gym, $alarm, $swimming_pool);
+										$laundry_room, $gym, $alarm, $swimming_pool, $rent_link, $pandadoc_template_id);
 
 		if ( $q->execute() ) {
 			// Send Email of Approval

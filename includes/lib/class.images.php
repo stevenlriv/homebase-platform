@@ -5,8 +5,15 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
     use League\Flysystem\AwsS3v3\AwsS3Adapter;
     use League\Flysystem\Filesystem;
 
-    function profile_image($file) {
+    //$v_user if false we will get the user data from $user var if true, we will get the user data from view_user
+    //this is used mainly for admin-edit-profile.php
+    function profile_image($file, $v_user = false) {
         global $user;
+
+        if($v_user) {
+            global $view_user;
+            $user = $view_user;
+        }
 
         $filesystem = get_filesystem();
         $img_dir = get_img_path($file, 'profile');

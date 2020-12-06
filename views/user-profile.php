@@ -57,6 +57,47 @@
 
 					<p><?php echo $view_user['profile_bio']; ?></p>
 
+					<b><p>Información Personal</p></b>
+
+					<ul class="agent-contact-details">
+						<?php
+							if($view_user['driver_license']!='') echo '<li>Número de Licencia de Conducir: '.$view_user['driver_license'].'</li>';
+
+							if($view_user['fs_address']!='') echo '<li>Dirección de Residencia: '.$view_user['fs_address'].'</li>';
+
+							if($view_user['city']!='') echo '<li>Ciudad: '.$view_user['city'].'</li>';
+
+							if($view_user['fs_state']!='') echo '<li>Estado: '.$view_user['fs_state'].'</li>';
+
+							if($view_user['postal_code']!='') echo '<li>Código Postal: '.$view_user['postal_code'].'</li>';
+
+							if($view_user['country']!='') echo '<li>País: '.$view_user['country'].'</li>';
+						?>
+					</ul>
+
+					<br />
+
+					<?php 
+						if($view_user['bank_account_number']!='' && $view_user['bank_routing_number']!= '') {
+					?>
+
+					<b><p>Información Bancaria</p></b>
+
+					<ul class="agent-contact-details">
+						<li>Nombre del Banco: <?php echo $view_user['bank_name']; ?></li>
+						<li>Nombre del Sole Owner: <?php echo $view_user['bank_sole_owner']; ?></li>
+						<li>Número de Ruta: <?php echo $view_user['bank_routing_number']; ?></li>
+						<li>Número de Cuenta: <?php echo $view_user['bank_account_number']; ?></li>
+					</ul>
+
+					<br />
+
+					<?php
+						}
+					?>
+
+					<b><p>Información De Contacto</p></b>
+
 					<ul class="agent-contact-details">
 						<li><i class="sl sl-icon-call-in"></i><a href="tel:<?php echo $view_user['phone_number']; ?>"><?php echo $view_user['phone_number']; ?></a></li>
 						<li><i class="fa fa-envelope-o "></i><a href="mailto:<?php echo $view_user['email']; ?>"><?php echo $view_user['email']; ?></a></li>
@@ -81,8 +122,8 @@
 </div>
 
 <?php
-    //Show properties if is a landlord or realtor
-    if($view_user['type'] == 'realtors' || $view_user['type'] == 'landlords') {
+    //Show properties if its not a tenant or lister
+    if($view_user['type'] != 'tenants' || $view_user['type'] == 'listers') {
 
         //Show only this user properties
         array_push($query, array("type" => "INT", "condition" => "AND", "loose" => false, "table" => "id_user", "command" => "=", "value" => $view_user['id_user']));

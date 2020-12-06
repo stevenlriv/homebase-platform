@@ -15,6 +15,7 @@
 	require_once ( dirname(__FILE__).'/lib/class.pagination.php' );
 	require_once ( dirname(__FILE__).'/lib/class.images.php' );
 	require_once ( dirname(__FILE__).'/lib/class.dropzone.php' );
+	require_once ( dirname(__FILE__).'/lib/class.pandadoc.php' );
 
 	// Don't show any error on production enviroment
 	if(is_production_enviroment()) { ini_set('display_errors','off'); }
