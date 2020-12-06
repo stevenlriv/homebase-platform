@@ -56,7 +56,7 @@
                 header("Refresh:1");
             }
             else {
-                $form_error = 'Se ha producido un error al actualizar su cuenta, por favor inténtelo de nuevo, o póngase en contacto con nosotros.';
+                $form_error = 'Se ha producido un error al crear su cuenta, por favor inténtelo de nuevo, o póngase en contacto con nosotros.';
             }
         }
 

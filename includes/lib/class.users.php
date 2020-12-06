@@ -280,11 +280,18 @@
 		$bank_account_number = '';
 		$user_time_zone = '';
 		$cookies_track = '';
+		$firstname = '';
+		$lastname = '';
+		$driver_license = '';
+		$fs_address = '';
+		$city = ''; 
+		$fs_state = '';
+		$postal_code = '';
 
-		$q = $db->prepare ( "INSERT INTO xvls_users (id_user_referral, `status`, `type`, fullname, email, phone_number, birthdate, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
+		$q = $db->prepare ( "INSERT INTO xvls_users (id_user_referral, `status`, `type`, fullname, email, phone_number, birthdate, firstname, lastname, driver_license, fs_address, city, fs_state, postal_code, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
 													bank_name, bank_sole_owner, bank_routing_number, bank_account_number, user_time_zone, cookies_track) 
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
-		$q->bind_param ( 'sssssssssssssssssss', $id_user_referral, $status, $type, $fullname, $email, $phone_number, $birthdate, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+		$q->bind_param ( 'ssssssssssssssssssssssssss', $id_user_referral, $status, $type, $fullname, $email, $phone_number, $birthdate, $firstname, $lastname, $driver_license, $fs_address, $city, $fs_state, $postal_code, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
 	
 		if ( $q->execute() ) {
 			return true;
