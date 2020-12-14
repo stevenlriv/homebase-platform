@@ -6,3 +6,5 @@ vendor/
 */configuration.php
 configuration.php
 test-enviroment-codes.php
+next-task.md
+twilio.env

@@ -81,6 +81,17 @@
 						<label>País</label>
 						<input name="country" value="<?php echo $view_user['country']; ?>" type="text">
 
+						<label>Lenguaje de Preferencia</label>
+						<select name="preferred_lang">
+							<?php
+								foreach(return_supported_languages() as $id => $value) {
+									echo '<option value="'.$value['code'].'"';
+									if($value['code']==$view_user['preferred_lang']) echo ' selected';
+									echo '>'.$value['name'].'</option>';
+								}
+							?>
+						</select>
+
 						<button name="submit" class="button margin-top-20 margin-bottom-20">Guardar Cambios</button>
 					</form>
 				</div>

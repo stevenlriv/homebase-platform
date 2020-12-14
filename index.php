@@ -212,6 +212,19 @@ switch ($request) {
         require_once __DIR__ . '/views/my-properties.php';
         require_once __DIR__ . '/views/footer.php';
         break;
+    case '/payments' :
+        if(!$user) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Pagos",
+            "request" => $request,
+        );
+        
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/payments.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
     case '/all-users' :
         if(!is_admin()) {
             header('Location: /');
@@ -225,6 +238,20 @@ switch ($request) {
         require_once __DIR__ . '/includes/actions/all-users-search.php';
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/all-users.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/new-user' :
+        if(!is_admin()) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Añade nuevo usuario",
+            "request" => $request,
+        );
+
+        require_once __DIR__ . '/includes/actions/new-user.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/new-user.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     case '/draft' :
@@ -383,6 +410,19 @@ switch ($request) {
         );
         require_once __DIR__ . '/views/header.php';
         require_once __DIR__ . '/views/contact.php';
+        require_once __DIR__ . '/views/footer.php';
+        break;
+    case '/text-messages' :
+        if(!is_admin()) {
+            header('Location: /');
+        }
+        $seo = array(
+            "title" => "Send Text Message",
+            "request" => $request,
+        );
+        require_once __DIR__ . '/includes/actions/text-message.php';
+        require_once __DIR__ . '/views/header.php';
+        require_once __DIR__ . '/views/text-message.php';
         require_once __DIR__ . '/views/footer.php';
         break;
     default:

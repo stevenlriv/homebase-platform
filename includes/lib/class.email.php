@@ -19,6 +19,44 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\SMTP;
 
+	function send_notification_user_account_password($to_email, $fullname, $password, $type) {
+
+        $type = rtrim($type, 's');
+        $to_name = $fullname;
+
+        $link = get_domain()."/login";
+
+		$message = "Hi <b>$fullname</b>!<br /><br />";
+		$message = $message."Because you have an active lease with Homebase as an $type an user account was generated for you. Your email is <b>$to_email</b> and your password is <b>$password</b>. <a href='$link'>Log in</a> so you can view your data and change your password.<br /><br />";	
+		
+		$subject = "An account has been created for you";
+		$from_email = 'no-reply@'.get_host();
+		
+		if ( send_email(get_setting(12), $from_email, $to_email, $to_name, $subject, $message) ) {
+			return true;
+		}
+		
+		return false;
+    }
+
+	function send_notification_user_bank_information($to_email) {
+        global $user;
+
+        $to_name = 'Admin';
+
+		$message = "Hi <b>$to_name</b>!<br /><br />";
+		$message = $message."An user with the name <b>".$user['fullname']."</b> and email ".$user['email']." updated its banking information, make the pertinent changes with the ACH transfers details.<br /><br />";	
+		
+		$subject = "An user updated their bank account information";
+		$from_email = 'no-reply@'.get_host();
+		
+		if ( send_email(get_setting(12), $from_email, $to_email, $to_name, $subject, $message) ) {
+			return true;
+		}
+		
+		return false;
+    }
+
 	function send_pending_listing_email($to_email) {
         $to_name = 'Admin';
         $link = get_domain()."/my-properties?status=pending";

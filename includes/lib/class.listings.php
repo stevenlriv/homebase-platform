@@ -62,9 +62,11 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 	}
 
 	function print_available_message($type, $available_date) {
+		//#lease-link
+		//get the last lease link so the landlord can see the property
 		if($available_date > strtotime(date("m/d/Y"))) {
 			if($type == 'admin')
-				echo "<a href='#lease-link'>until ".date("m/d/Y", $available_date)."</a>";
+				echo "<a href='#lease-link'>hasta ".date("m/d/Y", $available_date)."</a>";
 			elseif($type == 'date')
 				echo "on ".date("m/d/Y", $available_date);
 			elseif($type == 'status')
@@ -76,7 +78,7 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		}
 		else {
 			if($type == 'admin')
-				echo "none";
+				echo "no ocupada";
 			elseif($type == 'date')
 				echo "Hoy";
 			elseif($type == 'status')

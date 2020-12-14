@@ -130,6 +130,11 @@
 						?>
 							
 							<span><?php echo $value['physical_address']; ?> </span>
+							<?php
+								if(is_admin()) {
+									echo '<span><b>Property Id: '.$value['id_listing'].'</b></span>';
+								}
+							?>
 							<span class="table-property-price" style="background: #274abb; color: #fff;">$<?php echo $value['monthly_house']; ?> / listado en homebase</span>
 							<span class="table-property-price">$<?php echo $value['monthly_house_original']; ?> / su depósito mensual</span>
 							

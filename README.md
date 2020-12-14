@@ -14,7 +14,11 @@
     - If installation file has not been deleted, on your terminal run
         - php -r "unlink('/includes/install.php');"
  5) Export database details to server mysql database
- 6) You're done!
+ 6) Twillio Enviroment
+    - echo "export TWILIO_ACCOUNT_SID='ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'" > twilio.env
+    - echo "export TWILIO_AUTH_TOKEN='your_auth_token'" >> twilio.env
+    - source ./twilio.env
+ 7) You're done!
 
 ## UPGRADE
  1) Enable upgrade mode on the Super Admin panel or in the database directly
@@ -70,3 +74,6 @@
         6) Lease
             - id_user_listing  = id owner of the listing and/or property
             - id_user_tenant = id user that rented the property
+
+
+

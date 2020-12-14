@@ -7,7 +7,11 @@
     else {
 
         //Before showing the user the ability to add a property, required them their information and bank account number
-        if($user['driver_license']=='' || $user['fs_address']=='' || $user['city']=='' || $user['fs_state']=='' || $user['postal_code']=='' || $user['country']=='' || $user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
+        //Don't requiere admins to edit their information
+        if(is_admin()) {
+            require_once('submit-property-login.php');
+        }
+        elseif($user['driver_license']=='' || $user['fs_address']=='' || $user['city']=='' || $user['fs_state']=='' || $user['postal_code']=='' || $user['country']=='' || $user['bank_name']=='' || $user['bank_sole_owner']=='' || $user['bank_routing_number']=='' || $user['bank_account_number']=='') {
             require_once('submit-property-login-user-information.php');
         }
         else {

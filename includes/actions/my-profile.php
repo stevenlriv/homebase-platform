@@ -74,7 +74,7 @@
         }
 
         if(empty($form_error)) { 
-            if(update_profile($user['id_user'], $_POST['fullname'], $_POST['phone_number'], $_POST['email'], $_POST['profile_bio'], $_POST['profile_linkedIn'], $_POST['country'], $_POST['driver_license'], $_POST['fs_address'], $_POST['city'], $_POST['fs_state'], $_POST['postal_code'])) {
+            if(update_profile($user['id_user'], $_POST['fullname'], $_POST['phone_number'], $_POST['email'], $_POST['profile_bio'], $_POST['profile_linkedIn'], $_POST['country'], $_POST['driver_license'], $_POST['fs_address'], $_POST['city'], $_POST['fs_state'], $_POST['postal_code'], $_POST['preferred_lang'])) {
                 $form_success = 'Bien, su perfil fue actualizado exitosamente.';
                 delete_cache($cache_id);
                 header("Refresh:1");

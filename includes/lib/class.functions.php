@@ -18,6 +18,13 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 		Symmetric\Crypto as Symmetric
 	};
 
+	function return_supported_languages() {
+		return array( 
+						0 => array('code' => 'en_US', 'name' => 'English'), 
+						1 => array('code' => 'es_US', 'name' => 'Español')
+					);
+	}
+
 	function text_encrypt($text) {
 		$key  = KeyFactory::importEncryptionKey(new HiddenString(GNKEY));
 		$text = new HiddenString($text);
@@ -37,10 +44,18 @@ if ( !defined('SCRIP_LOAD') ) { die ( header('Location: /not-found') ); }
 
 	function get_array_by_comma($string, $validate = '') {
 		$string = trim($string);
-		$array = explode(',', $string);
+
+		//we first verify if there is more than one email checking for ","
+		if(substr_count($string, ',') == 0) {
+			$array = array(0 => $string);
+		}
+		else {
+			$array = explode(',', $string);
+		}
+
 		$array_return = array();
 
-		if(count($array)>1) {
+		if(count($array)>=1) {
 			foreach ( $array as $id => $value ) {
 				$value = trim($value);
 

@@ -266,7 +266,8 @@ function sidebar_component() {
 							<ul class="my-account-nav">
 								<li class="sub-nav-title">Usuarios</li>
 	
-								<li><a href="/all-users"><i class="sl sl-icon-people"></i> Todos los usuarios</a></li>
+								<li><a href="/all-users" <?php if($request == '/all-users') echo 'class="current"'; ?>><i class="sl sl-icon-people"></i> Todos los usuarios</a></li>
+								<li><a href="/new-user" <?php if($request == '/new-user') echo 'class="current"'; ?>><i class="sl sl-icon-action-redo"></i> Añadir un nuevo usuario</a></li>
 							</ul>
 					<?php
 							}
@@ -289,27 +290,28 @@ function sidebar_component() {
 					</ul>
 
 
+					<?php
+							if(!is_admin()) {
+					?>
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Finanzas</li>
-
-						<?php
-							if(is_admin()) {
-						?>
-						<li><a href="#" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Payments</a></li>
-                        <li><a href="#" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Leases</a></li>
-
-						<?php
-							}
-
-							// Do not show to admins or realtors
-							if(!is_admin() && $user['type'] != 'realtors') {
-						?>
-                        	<li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Información</a></li>
-						<?php
-							}
-						?>
+						<li><a href="/payments" <?php if($request == '/payments') echo 'class="current"'; ?>><i class="sl sl-icon-credit-card"></i> Pagos</a></li>
+                        <li><a href="/leases" <?php if($request == '/leases') echo 'class="current"'; ?>><i class="sl sl-icon-briefcase"></i> Contratos</a></li>
+                        <li><a href="/financial-settings" <?php if($request == '/financial-settings') echo 'class="current"'; ?>><i class="sl sl-icon-settings"></i> Información Bancaria</a></li>
 					</ul>
+
                     <?php
+							}
+
+							if(is_admin()) {
+					?>
+					<ul class="my-account-nav">
+						<li class="sub-nav-title">Herramientas</li>
+						<li><a href="/text-messages" <?php if($request == '/text-messages') echo 'class="current"'; ?>><i class="sl sl-icon-speech"></i> Send Text Messages</a></li>
+					</ul>
+
+                    <?php
+							}
                         }
                     ?>
 

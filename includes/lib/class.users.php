@@ -148,7 +148,7 @@
 
 	//$v_user if false we will get the user data from $user var if true, we will get the user data from view_user
 	//this is used mainly for actions/admin-edit-profile.php
-	function update_profile($id_user, $fullname, $phone_number, $email, $profile_bio, $profile_linkedin, $country, $driver_license, $address, $city, $state, $postal_code, $v_user = false) {
+	function update_profile($id_user, $fullname, $phone_number, $email, $profile_bio, $profile_linkedin, $country, $driver_license, $address, $city, $state, $postal_code, $preferred_lang, $v_user = false) {
 		global $db, $user;
 
 		if($v_user) {
@@ -178,8 +178,8 @@
 			new_cookie ( 'USMP', $email.'|'.$password_hash, $expire );
 		}
 		
-		$q = $db->prepare ( "UPDATE xvls_users SET fullname = ?, phone_number = ?, driver_license = ?, fs_address = ?, city = ?, fs_state = ?, postal_code = ?, country = ?, email = ?, profile_bio = ?, profile_linkedin = ? WHERE id_user = ?" );
-		$q->bind_param ( 'sssssssssssi', $fullname, $phone_number, $driver_license, $address, $city, $state, $postal_code, $country, $email, $profile_bio, $profile_linkedin, $id_user );		
+		$q = $db->prepare ( "UPDATE xvls_users SET fullname = ?, phone_number = ?, driver_license = ?, fs_address = ?, city = ?, fs_state = ?, postal_code = ?, country = ?, email = ?, profile_bio = ?, profile_linkedin = ?, preferred_lang = ? WHERE id_user = ?" );
+		$q->bind_param ( 'ssssssssssssi', $fullname, $phone_number, $driver_license, $address, $city, $state, $postal_code, $country, $email, $profile_bio, $profile_linkedin, $preferred_lang, $id_user );		
 	
 		if ( $q->execute() ) {
 			return true;
@@ -196,6 +196,16 @@
 		$q->bind_param ( 'ssssi', $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $id_user );		
 	
 		if ( $q->execute() ) {
+
+			// Send Email of Notification
+			if(get_setting(31)=='true') {
+				$emails = get_array_by_comma(get_setting(22), 'email');
+
+				foreach($emails as $id => $value) {
+					send_notification_user_bank_information($value);
+				}
+			}
+			
 			return true;
 		}
 		$q->close();
@@ -236,7 +246,7 @@
 		return false;		
 	}
 
-	function new_user($fullname, $email, $phone_number, $password) {
+	function new_user($fullname, $email, $phone_number, $password, $country = '', $driver_license = '', $fs_address = '', $city = '', $fs_state = '', $postal_code = '', $preferred_lang = 'en_EN', $bank_name = '', $bank_sole_owner = '', $bank_routing_number = '', $bank_account_number = '') {
 		global $db, $type;
 
 		// Lower case email
@@ -269,29 +279,19 @@
 
 		//Not in use
 		$birthdate = '';
-		$country = '';
 		$code = '';
 		$profile_image = '';
 		$profile_bio = '';
 		$profile_linkedIn = '';
-		$bank_name = '';
-		$bank_sole_owner = '';
-		$bank_routing_number = '';
-		$bank_account_number = '';
 		$user_time_zone = '';
 		$cookies_track = '';
 		$firstname = '';
 		$lastname = '';
-		$driver_license = '';
-		$fs_address = '';
-		$city = ''; 
-		$fs_state = '';
-		$postal_code = '';
 
 		$q = $db->prepare ( "INSERT INTO xvls_users (id_user_referral, `status`, `type`, fullname, email, phone_number, birthdate, firstname, lastname, driver_license, fs_address, city, fs_state, postal_code, country, `password`, code, profile_image, profile_bio, profile_linkedIn,
-													bank_name, bank_sole_owner, bank_routing_number, bank_account_number, user_time_zone, cookies_track) 
-							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
-		$q->bind_param ( 'ssssssssssssssssssssssssss', $id_user_referral, $status, $type, $fullname, $email, $phone_number, $birthdate, $firstname, $lastname, $driver_license, $fs_address, $city, $fs_state, $postal_code, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track );		
+													bank_name, bank_sole_owner, bank_routing_number, bank_account_number, user_time_zone, cookies_track, preferred_lang) 
+							VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+		$q->bind_param ( 'sssssssssssssssssssssssssss', $id_user_referral, $status, $type, $fullname, $email, $phone_number, $birthdate, $firstname, $lastname, $driver_license, $fs_address, $city, $fs_state, $postal_code, $country, $password, $code, $profile_image, $profile_bio, $profile_linkedIn, $bank_name, $bank_sole_owner, $bank_routing_number, $bank_account_number, $user_time_zone, $cookies_track, $preferred_lang );		
 	
 		if ( $q->execute() ) {
 			return true;

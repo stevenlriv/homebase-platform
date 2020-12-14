@@ -109,6 +109,17 @@
 						<label>País</label>
 						<input name="country" value="<?php form_print_value($cache, $user, 'country'); ?>" type="text">
 
+						<label>Lenguaje de Preferencia</label>
+						<select name="preferred_lang">
+							<?php
+								foreach(return_supported_languages() as $id => $value) {
+									echo '<option value="'.$value['code'].'"';
+									if($value['code']==$user['preferred_lang']) echo ' selected';
+									echo '>'.$value['name'].'</option>';
+								}
+							?>
+						</select>
+
 						<!--<h4 class="margin-top-50 margin-bottom-25"><i class="fa fa-linkedin"></i> Linkedin (opcional)</h4>
 
 						<input name="profile_linkedIn" value="<?php form_print_value($cache, $user, 'profile_linkedIn'); ?>" type="text">-->
